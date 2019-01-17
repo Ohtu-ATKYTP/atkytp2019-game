@@ -15,6 +15,12 @@ Definition of Done
 * Tyyli noudattaa sovittuja käytänteitä
 
 
+Web stack
+=========
+* React
+* Node.js
+* MongoDB
+
 Development stack
 =================
 * Unity (> 2018.3.1)
@@ -22,7 +28,6 @@ Development stack
 * JDK
 * (Optional) Visual Studio & Visual Studio Tools for Unity
   * Linuxilla fiksuin ilmainen valinta voi olla Visual Studio
-
 
 Koodityylistä
 =============
