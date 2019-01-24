@@ -5,7 +5,7 @@ Linkkejä
 ========
 
 * [Google drive](https://drive.google.com/drive/folders/1JT9nCbR4lm_Qcn-oC6PgQjtbroR85eQQ)
-* [High score -backend] (https://github.com/Ohtu-ATKYTP/atkytp2019-game-web)
+* [High score -backend](https://github.com/Ohtu-ATKYTP/atkytp2019-game-web)
 
 
 
