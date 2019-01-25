@@ -12,16 +12,16 @@ public class WebServiceScript : MonoBehaviour {
   }
 
   //Use this method to fetch highscores
-  public void getHighscores() {
-    StartCoroutine(getHighscoresText());
+  public void GetHighscores() {
+    StartCoroutine(GetHighscoresText());
   }
 
   //Use this method to add new users
-  public void registerUser(string name, string token, string installationId) {
-    StartCoroutine(sendUser(name, token, installationId));
+  public void RegisterUser(string name, string token, string installationId) {
+    StartCoroutine(SendUser(name, token, installationId));
   }
 
-  private IEnumerator getHighscoresText() {
+  private IEnumerator GetHighscoresText() {
     UnityWebRequest req = UnityWebRequest.Get(baseUrl);
     yield return req.SendWebRequest();
 
@@ -38,9 +38,9 @@ public class WebServiceScript : MonoBehaviour {
     }
   }
 
-  private IEnumerator sendUser(string name, string token, string installationId) {
+  private IEnumerator SendUser(string name, string token, string installationId) {
     UnityWebRequest req = new UnityWebRequest(baseUrl, "POST");
-    string jsonUser = jsonifyUser(name, token, installationId, 0);
+    string jsonUser = JsonifyUser(name, token, installationId, 0);
     Debug.Log(jsonUser);
     byte[] bodyRaw = Encoding.UTF8.GetBytes(jsonUser);
 
@@ -53,7 +53,7 @@ public class WebServiceScript : MonoBehaviour {
     Debug.Log("Status code: " + req.responseCode);
   }
 
-  private string jsonifyUser(string name, string token, string installationId, int score) {
+  private string JsonifyUser(string name, string token, string installationId, int score) {
     User u = new User();
     u.name = name;
     u.token = token;
