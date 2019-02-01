@@ -8,22 +8,33 @@ public class GameManager : MonoBehaviour
     public int gamesStartIndex;
     public int gamesEndIndex;
     public Scene endGameScene;
-    private int score;
     private int lives;
-    private int lastGame;
+    private string lastGame;
+    private string game;
+    private string[] scenes = {"FirstGame", "SecondGame"};
+    private string mainmenuScreen = "MainMenu";
+    private string endGameScreen = "MainMenu";
+     private DataController dataController;
 
-    public void startGame()
-    {
-        lastGame = -1;
-        score = 0;
-        lives = 3;
-        nextGame(0, false);
+    private void Start() {
+        this.dataController = FindObjectOfType<DataController>();
+        SceneManager.LoadScene(this.mainmenuScreen, LoadSceneMode.Additive);
+        this.game = this.mainmenuScreen;
+        this.lastGame = "";
+        this.lives = 3;
     }
 
-    public void nextGame(int gameScore, bool fail)
+    private void Update() {
+        if (dataController.GetRoundEndStatus()) {
+            prepareNextGame();
+            
+        }
+    }
+
+    public void nextGame(bool win)
     {
-        score += gameScore;
-        if (fail) lives--;
+        if (!win) lives--;
+
         if (lives == 0)
         {
             endGame();
@@ -36,17 +47,34 @@ public class GameManager : MonoBehaviour
 
     private void getRandomGame()
     {
-        int game = Random.Range(gamesStartIndex, gamesEndIndex);
+        if (game != null) {
+            lastGame = game;
+        }
+        game = this.scenes[Random.Range(0, this.scenes.Length)];
         while(game == lastGame)
         {
-            game = Random.Range(gamesStartIndex, gamesEndIndex);
+            game = this.scenes[Random.Range(0, this.scenes.Length)];
         }
-        SceneManager.SetActiveScene(SceneManager.GetSceneByBuildIndex(game));
+        SceneManager.LoadScene(game, LoadSceneMode.Additive);
     }
 
-    private void endGame()
+    private void endGame() //When the game is lost -- hävisit pelin
     {
-        Debug.Log(score);
-        SceneManager.SetActiveScene(endGameScene);
+        SceneManager.UnloadSceneAsync(this.game);
+        SceneManager.LoadScene(endGameScreen, LoadSceneMode.Additive);
+        resetGameVariables();
+    }
+
+    private void resetGameVariables() {
+        this.game = "MainMenu";
+        this.lives = 3;
+        dataController.ResetScore();
+         dataController.SetWinStatus(true);
+    }
+
+    private void prepareNextGame() {
+        dataController.SetRoundEndStatus(false);
+        SceneManager.UnloadSceneAsync(this.game);
+        nextGame(dataController.GetWinStatus());
     }
 }

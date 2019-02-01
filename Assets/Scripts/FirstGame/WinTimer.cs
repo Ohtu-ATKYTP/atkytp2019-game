@@ -9,32 +9,31 @@ public class WinTimer : MonoBehaviour
     // Start is called before the first frame update
     private float timer;
     public Scrollbar timerSlider;
-
+    private DataController dataController;
+    private bool timerEnded = false;
     void Start()
     {
-        this.timer = 10.0f;
-        Debug.Log(this.timer.ToString());
+        this.timer = 2.0f;
         timerSlider.value = this.timer;
-
-
-        
-        
+        dataController = FindObjectOfType<DataController>();
     }
 
     // Update is called once per frame
     void Update()
     {
         this.timer -= Time.deltaTime;
-        timerSlider.value = this.timer /10;
-        if (this.timer <= 0.0f) {
-            timerEnded();
+        timerSlider.value = this.timer /2;
+        if (this.timer <= 0.0f && this.timerEnded == false) {
+            this.timerEnded = true;
+            timerEnd();
         }
 
 
     }
 
-    private void timerEnded() {
-
+    private void timerEnd() {
+        dataController.SetWinStatus(false);
+        dataController.SetRoundEndStatus(true);
     }
 
 

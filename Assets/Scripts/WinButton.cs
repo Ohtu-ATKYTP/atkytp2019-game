@@ -6,11 +6,18 @@ using UnityEngine;
 
 public class WinButton : MonoBehaviour
 {
+    private DataController dataController;
+    private void Start() {
+        dataController = FindObjectOfType<DataController>();
+    }
     // Start is called before the first frame update
-    public void LoadLevelMenu(string level)
+    public void EndMinigame()
     {
-        level = filterOdd(level);
-        SceneManager.LoadScene(level);
+        //level = filterOdd(level);
+        //SceneManager.LoadScene(level);
+        dataController.SetRoundEndStatus(true);
+        dataController.SetWinStatus(true);
+        dataController.AddCurrentScore(10);
     }
 
     private string filterOdd(string str) {
