@@ -16,7 +16,7 @@ public class GameManager : MonoBehaviour
 
     private void Start() {
         dataController = FindObjectOfType<DataController>();
-        startGame();    
+        SceneManager.LoadScene("MainMenu", LoadSceneMode.Additive);
     }
 
     private void Update() {
