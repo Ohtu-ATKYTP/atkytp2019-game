@@ -8,22 +8,34 @@ public class GameManager : MonoBehaviour
     public int gamesStartIndex;
     public int gamesEndIndex;
     public Scene endGameScene;
-    private int score;
     private int lives;
-    private int lastGame;
+    private string lastGame;
+    private string game;
+    private string[] scenes = {"MainMenu", "FirstGame"};
+     private DataController dataController;
+
+    private void Start() {
+        dataController = FindObjectOfType<DataController>();
+        startGame();    
+    }
+
+    private void Update() {
+        if (dataController.GetRoundEndStatus()) {
+            dataController.SetRoundEndStatus(false);
+            nextGame(dataController.GetWinStatus());
+        }
+    }
 
     public void startGame()
     {
-        lastGame = -1;
-        score = 0;
+        lastGame = "";
         lives = 3;
-        nextGame(0, false);
+        nextGame(true);
     }
 
-    public void nextGame(int gameScore, bool fail)
+    public void nextGame(bool win)
     {
-        score += gameScore;
-        if (fail) lives--;
+        if (!win) lives--;
         if (lives == 0)
         {
             endGame();
@@ -36,17 +48,20 @@ public class GameManager : MonoBehaviour
 
     private void getRandomGame()
     {
-        int game = Random.Range(gamesStartIndex, gamesEndIndex);
+        if (game != null) {
+            lastGame = game;
+        }
+        game = this.scenes[Random.Range(0, this.scenes.Length)];
         while(game == lastGame)
         {
-            game = Random.Range(gamesStartIndex, gamesEndIndex);
+            game = this.scenes[Random.Range(0, this.scenes.Length)];
         }
-        SceneManager.SetActiveScene(SceneManager.GetSceneByBuildIndex(game));
+        SceneManager.LoadScene(game, LoadSceneMode.Additive);
     }
 
     private void endGame()
     {
-        Debug.Log(score);
-        SceneManager.SetActiveScene(endGameScene);
+
+        Debug.Log("HÄVISIT PELIN!");
     }
 }
