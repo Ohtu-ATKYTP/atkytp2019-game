@@ -11,7 +11,7 @@ public class WebServiceScript : MonoBehaviour {
   public string highscores;
 
   void Start() {
-    GetHighscores();
+    GetHighscores();    
   }
 
 
@@ -62,10 +62,11 @@ public class WebServiceScript : MonoBehaviour {
     HighScore h = JsonUtility.FromJson<HighScore>(jsonUser);
     Debug.Log("Username: " + h.user);
     
+    PlayerPrefs.SetString("_id", h._id);
     PlayerPrefs.SetString("username", h.user);
     PlayerPrefs.SetString("token", h.token);
     PlayerPrefs.SetInt("highScore", h.score);
-
+    
     Debug.Log("------\nSaatu data:" + jsonUser);
     Debug.Log("Status code: " + req.responseCode);
   }
@@ -78,8 +79,10 @@ public class WebServiceScript : MonoBehaviour {
     req.uploadHandler = (UploadHandler) new UploadHandlerRaw(bodyRaw);
     req.downloadHandler = (DownloadHandler) new DownloadHandlerBuffer();
     req.SetRequestHeader("Content-Type", "application/json");
-
     yield return req.Send();
+    
+    // Store updated score also locally
+    // (PlayerPrefs)
 
 
 
