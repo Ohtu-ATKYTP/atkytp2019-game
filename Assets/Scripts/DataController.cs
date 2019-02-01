@@ -12,9 +12,8 @@ public class DataController : MonoBehaviour
     private bool winStatus;
 
 
-    private string gameDataFileName = "data.json";
 
-        void Start()
+    void Start()
     {
         DontDestroyOnLoad(gameObject);
         this.currentScore = 0;
