@@ -79,7 +79,6 @@ public class WebServiceScript : MonoBehaviour {
         // should we account for the possibility of not existing?
         string id = PlayerPrefs.GetString("_id");
         string url = baseUrl + "/" + id;
-        Debug.Log("Url: " + url);
         UnityWebRequest req = new UnityWebRequest(url, "PUT");
         string jsonHighScore = "{ \"score\": " + score + "}";
         byte[] bodyRaw = Encoding.UTF8.GetBytes(jsonHighScore);
@@ -87,18 +86,10 @@ public class WebServiceScript : MonoBehaviour {
         req.uploadHandler = (UploadHandler)new UploadHandlerRaw(bodyRaw);
         req.downloadHandler = (DownloadHandler)new DownloadHandlerBuffer();
         req.SetRequestHeader("Content-Type", "application/json");
-        Debug.Log("Jesperin veikkaus");
         yield return req.SendWebRequest();
-
-       
-        Debug.Log("Error? " + req.error);
-        Debug.Log("Status code: " + req.responseCode);
 
         HighScore h = JsonUtility.FromJson<HighScore>(req.downloadHandler.text);
         PlayerPrefs.SetInt("highScore", h.score);
-        Debug.Log("Returned object waS: " + h);
-
-        Debug.Log("Status code: " + req.responseCode);
     }
     // This really has no relation to WebService...
     // Relocate to own file / class? 
