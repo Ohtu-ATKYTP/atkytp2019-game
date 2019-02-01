@@ -26,16 +26,13 @@ public class GameManager : MonoBehaviour
 
     private void Update() {
         if (dataController.GetRoundEndStatus()) {
-            dataController.SetRoundEndStatus(false);
-            SceneManager.UnloadSceneAsync(this.game);
-            nextGame(dataController.GetWinStatus());
+            prepareNextGame();
             
         }
     }
 
     public void nextGame(bool win)
     {
-        Debug.Log("Lives: " + lives);
         if (!win) lives--;
 
         if (lives == 0)
@@ -61,14 +58,23 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(game, LoadSceneMode.Additive);
     }
 
-    private void endGame()
+    private void endGame() //When the game is lost -- hävisit pelin
     {
         SceneManager.UnloadSceneAsync(this.game);
         SceneManager.LoadScene(endGameScreen, LoadSceneMode.Additive);
+        resetGameVariables();
+    }
+
+    private void resetGameVariables() {
         this.game = "MainMenu";
         this.lives = 3;
         dataController.ResetScore();
-        dataController.SetWinStatus(true);
-        Debug.Log("HÄVISIT PELIN!");
+         dataController.SetWinStatus(true);
+    }
+
+    private void prepareNextGame() {
+        dataController.SetRoundEndStatus(false);
+        SceneManager.UnloadSceneAsync(this.game);
+        nextGame(dataController.GetWinStatus());
     }
 }
