@@ -11,18 +11,19 @@ public class GameManager : MonoBehaviour
     private int lives;
     private string lastGame;
     private string game;
-    private string[] scenes = {"MainMenu", "FirstGame"};
+    private string[] scenes = {"FirstGame", "SecondGame"};
      private DataController dataController;
 
     private void Start() {
         dataController = FindObjectOfType<DataController>();
-        startGame();    
+        SceneManager.LoadScene("MainMenu", LoadSceneMode.Additive);
     }
 
     private void Update() {
         if (dataController.GetRoundEndStatus()) {
             dataController.SetRoundEndStatus(false);
             nextGame(dataController.GetWinStatus());
+            SceneManager.UnloadSceneAsync(this.game);
         }
     }
 

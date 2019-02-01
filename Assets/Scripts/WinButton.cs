@@ -18,6 +18,7 @@ public class WinButton : MonoBehaviour
         dataController.SetRoundEndStatus(true);
         int randint = UnityEngine.Random.Range(0,2);
         dataController.SetWintStatus(randint == 1);
+        dataController.AddCurrentScore(10);
     }
 
     private string filterOdd(string str) {
