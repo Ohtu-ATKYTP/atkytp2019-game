@@ -21,9 +21,16 @@ public class WebServiceScript : MonoBehaviour {
     }
 
 
+    public void GetHighscores(System.Action<string> callback) {
+        StartCoroutine(GetHighscoresText(callback));
+    }
+
     //Use this method to fetch highscores
     public void GetHighscores() {
-        StartCoroutine(GetHighscoresText());
+        StartCoroutine(GetHighscoresText(res => {
+               //at this point res == highscores
+              Debug.Log(res);
+            }));
     }
 
     //Use this method to add new users
@@ -36,7 +43,7 @@ public class WebServiceScript : MonoBehaviour {
         StartCoroutine(SendScore(score));
     }
 
-    private IEnumerator GetHighscoresText() {
+    private IEnumerator GetHighscoresText(System.Action<string> callback) {
         UnityWebRequest req = UnityWebRequest.Get(baseUrl);
         yield return req.SendWebRequest();
 
@@ -44,12 +51,13 @@ public class WebServiceScript : MonoBehaviour {
             Debug.Log(req.error);
         } else {
             // Show results as text
-            Debug.Log(req.downloadHandler.text);
             highscores = req.downloadHandler.text;
 
             // Or retrieve results as binary data
             byte[] results = req.downloadHandler.data;
+
         }
+        callback(highscores);
     }
 
     private IEnumerator SendUser(string user, string token) {
@@ -112,11 +120,4 @@ public class WebServiceScript : MonoBehaviour {
         return JsonUtility.ToJson(h);
     }
 
-    [System.Serializable]
-    private class HighScore {
-        public string _id;
-        public string user;
-        public string token;
-        public int score;
-    }
 }
