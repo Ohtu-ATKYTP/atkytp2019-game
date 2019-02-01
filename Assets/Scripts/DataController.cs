@@ -19,6 +19,7 @@ public class DataController : MonoBehaviour
         DontDestroyOnLoad(gameObject);
         this.currentScore = 0;
         this.roundEndStatus = false;
+        this.winStatus = true;
 
 
     }
@@ -28,7 +29,11 @@ public class DataController : MonoBehaviour
         return this.winStatus;
     }
 
-    public void SetWintStatus(bool win) {
+    public void ResetScore() {
+        this.currentScore = 0;
+    }
+
+    public void SetWinStatus(bool win) {
         this.winStatus = win;
     }
 

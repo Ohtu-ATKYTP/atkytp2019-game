@@ -12,31 +12,32 @@ public class GameManager : MonoBehaviour
     private string lastGame;
     private string game;
     private string[] scenes = {"FirstGame", "SecondGame"};
+    private string mainmenuScreen = "MainMenu";
+    private string endGameScreen = "MainMenu";
      private DataController dataController;
 
     private void Start() {
-        dataController = FindObjectOfType<DataController>();
-        SceneManager.LoadScene("MainMenu", LoadSceneMode.Additive);
+        this.dataController = FindObjectOfType<DataController>();
+        SceneManager.LoadScene(this.mainmenuScreen, LoadSceneMode.Additive);
+        this.game = this.mainmenuScreen;
+        this.lastGame = "";
+        this.lives = 3;
     }
 
     private void Update() {
         if (dataController.GetRoundEndStatus()) {
             dataController.SetRoundEndStatus(false);
-            nextGame(dataController.GetWinStatus());
             SceneManager.UnloadSceneAsync(this.game);
+            nextGame(dataController.GetWinStatus());
+            
         }
-    }
-
-    public void startGame()
-    {
-        lastGame = "";
-        lives = 3;
-        nextGame(true);
     }
 
     public void nextGame(bool win)
     {
+        Debug.Log("Lives: " + lives);
         if (!win) lives--;
+
         if (lives == 0)
         {
             endGame();
@@ -62,7 +63,12 @@ public class GameManager : MonoBehaviour
 
     private void endGame()
     {
-
+        SceneManager.UnloadSceneAsync(this.game);
+        SceneManager.LoadScene(endGameScreen, LoadSceneMode.Additive);
+        this.game = "MainMenu";
+        this.lives = 3;
+        dataController.ResetScore();
+        dataController.SetWinStatus(true);
         Debug.Log("HÄVISIT PELIN!");
     }
 }

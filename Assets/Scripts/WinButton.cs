@@ -11,13 +11,12 @@ public class WinButton : MonoBehaviour
         dataController = FindObjectOfType<DataController>();
     }
     // Start is called before the first frame update
-    public void LoadLevelMenu(string level)
+    public void EndMinigame()
     {
         //level = filterOdd(level);
         //SceneManager.LoadScene(level);
         dataController.SetRoundEndStatus(true);
-        int randint = UnityEngine.Random.Range(0,2);
-        dataController.SetWintStatus(randint == 1);
+        dataController.SetWinStatus(true);
         dataController.AddCurrentScore(10);
     }
 
