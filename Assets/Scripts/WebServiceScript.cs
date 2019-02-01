@@ -12,6 +12,12 @@ public class WebServiceScript : MonoBehaviour {
 
     void Start() {
         GetHighscores();
+        /*
+         * If you want to see that updating high score on server works, uncomment
+        if (PlayerPrefs.HasKey("highScore")) {
+            StartCoroutine(SendScore(69));
+        }
+        */
     }
 
 
@@ -70,20 +76,27 @@ public class WebServiceScript : MonoBehaviour {
     }
 
     private IEnumerator SendScore(int score) {
-         // should we account for the possibility of not existing?
+        // should we account for the possibility of not existing?
         string id = PlayerPrefs.GetString("_id");
-
-        UnityWebRequest req = new UnityWebRequest($"{baseUrl}/{id}", "PUT");
+        string url = baseUrl + "/" + id;
+        Debug.Log("Url: " + url);
+        UnityWebRequest req = new UnityWebRequest(url, "PUT");
         string jsonHighScore = "{ \"score\": " + score + "}";
         byte[] bodyRaw = Encoding.UTF8.GetBytes(jsonHighScore);
 
         req.uploadHandler = (UploadHandler)new UploadHandlerRaw(bodyRaw);
         req.downloadHandler = (DownloadHandler)new DownloadHandlerBuffer();
         req.SetRequestHeader("Content-Type", "application/json");
-        yield return req.Send();
+        Debug.Log("Jesperin veikkaus");
+        yield return req.SendWebRequest();
+
+       
+        Debug.Log("Error? " + req.error);
+        Debug.Log("Status code: " + req.responseCode);
 
         HighScore h = JsonUtility.FromJson<HighScore>(req.downloadHandler.text);
         PlayerPrefs.SetInt("highScore", h.score);
+        Debug.Log("Returned object waS: " + h);
 
         Debug.Log("Status code: " + req.responseCode);
     }
