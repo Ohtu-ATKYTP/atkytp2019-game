@@ -12,31 +12,29 @@ public class GameManager : MonoBehaviour
     private string lastGame;
     private string game;
     private string[] scenes = {"FirstGame", "SecondGame"};
+    private string mainmenuScreen = "MainMenu";
+    private string endGameScreen = "MainMenu";
      private DataController dataController;
 
     private void Start() {
-        dataController = FindObjectOfType<DataController>();
-        SceneManager.LoadScene("MainMenu", LoadSceneMode.Additive);
+        this.dataController = FindObjectOfType<DataController>();
+        SceneManager.LoadScene(this.mainmenuScreen, LoadSceneMode.Additive);
+        this.game = this.mainmenuScreen;
+        this.lastGame = "";
+        this.lives = 3;
     }
 
     private void Update() {
         if (dataController.GetRoundEndStatus()) {
-            dataController.SetRoundEndStatus(false);
-            nextGame(dataController.GetWinStatus());
-            SceneManager.UnloadSceneAsync(this.game);
+            prepareNextGame();
+            
         }
-    }
-
-    public void startGame()
-    {
-        lastGame = "";
-        lives = 3;
-        nextGame(true);
     }
 
     public void nextGame(bool win)
     {
         if (!win) lives--;
+
         if (lives == 0)
         {
             endGame();
@@ -60,9 +58,23 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(game, LoadSceneMode.Additive);
     }
 
-    private void endGame()
+    private void endGame() //When the game is lost -- hävisit pelin
     {
+        SceneManager.UnloadSceneAsync(this.game);
+        SceneManager.LoadScene(endGameScreen, LoadSceneMode.Additive);
+        resetGameVariables();
+    }
 
-        Debug.Log("HÄVISIT PELIN!");
+    private void resetGameVariables() {
+        this.game = "MainMenu";
+        this.lives = 3;
+        dataController.ResetScore();
+         dataController.SetWinStatus(true);
+    }
+
+    private void prepareNextGame() {
+        dataController.SetRoundEndStatus(false);
+        SceneManager.UnloadSceneAsync(this.game);
+        nextGame(dataController.GetWinStatus());
     }
 }

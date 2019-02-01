@@ -12,13 +12,13 @@ public class DataController : MonoBehaviour
     private bool winStatus;
 
 
-    private string gameDataFileName = "data.json";
 
-        void Start()
+    void Start()
     {
         DontDestroyOnLoad(gameObject);
         this.currentScore = 0;
         this.roundEndStatus = false;
+        this.winStatus = true;
 
 
     }
@@ -28,7 +28,11 @@ public class DataController : MonoBehaviour
         return this.winStatus;
     }
 
-    public void SetWintStatus(bool win) {
+    public void ResetScore() {
+        this.currentScore = 0;
+    }
+
+    public void SetWinStatus(bool win) {
         this.winStatus = win;
     }
 
