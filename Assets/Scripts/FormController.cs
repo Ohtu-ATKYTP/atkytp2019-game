@@ -13,9 +13,8 @@ public class FormController : MonoBehaviour
     public void SendFormData(){
         string userName = GameObject.Find("Username Input").transform.Find("Text").GetComponent<Text>().text;
         string token = GameObject.Find("Token Input").transform.Find("Text").GetComponent<Text>().text;
-        string installationId = Random.Range(0, 100000).ToString();
-        webScript.RegisterUser(userName, token, installationId); 
-        Debug.Log("user: " + userName + ", token: " + token + ", installation: " + installationId);
+        webScript.RegisterUser(userName, token); 
+        Debug.Log("user: " + userName + ", token: " + token);
         }
 
 
