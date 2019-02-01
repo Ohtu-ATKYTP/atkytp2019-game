@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.4465785, g: 0.49641252, b: 0.574817, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311912, g: 0.3807398, b: 0.3587271, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1825,6 +1825,17 @@ MonoBehaviour:
           m_StringArgument: High Score Screen
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1342180101}
+        m_MethodName: FetchUpdatedHighScores
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &1335575258
@@ -1876,6 +1887,7 @@ GameObject:
   - component: {fileID: 1342180099}
   - component: {fileID: 1342180098}
   - component: {fileID: 1342180097}
+  - component: {fileID: 1342180101}
   m_Layer: 5
   m_Name: High Score Screen
   m_TagString: Untagged
@@ -1969,6 +1981,19 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &1342180101
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1342180096}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9cee680cff97e8f4788f61530779fc9b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  webScript: {fileID: 1195981963}
 --- !u!1 &1342959340
 GameObject:
   m_ObjectHideFlags: 0
