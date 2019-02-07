@@ -48,7 +48,7 @@ public class WebServiceScript : MonoBehaviour {
         }
 
     private IEnumerator GetHighscoresText(System.Action<string> callback) {
-        UnityWebRequest req = UnityWebRequest.Get(baseUrl);
+        UnityWebRequest req = UnityWebRequest.Get(baseUrl + "/top");
         yield return req.SendWebRequest();
 
         if (req.isNetworkError || req.isHttpError) {
