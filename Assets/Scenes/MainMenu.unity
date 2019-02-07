@@ -177,7 +177,7 @@ Canvas:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 65540278}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_RenderMode: 0
   m_Camera: {fileID: 0}
@@ -936,33 +936,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1.5
-  m_Text: '100
-
-    90
-
-    80
-
-    70
-
-    60
-
-    50
-
-    40
-
-    30
-
-    20
-
-    10
-
-    .
-
-    .
-
-    .
-
-    1'
+  m_Text: 
 --- !u!222 &642440216
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2773,7 +2747,7 @@ Canvas:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1798732109}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_RenderMode: 0
   m_Camera: {fileID: 0}
@@ -3167,33 +3141,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1.5
-  m_Text: '1 Aaaaaa
-
-    2 Bbbbbbbb
-
-    3 Cccccc
-
-    4 Dddddddd
-
-    5 Eeeeee
-
-    6 Fffffff
-
-    7 Ggggggggg
-
-    8 Hh
-
-    9 Iiiiiiiiiiiiiii
-
-    10 Jjjjjjj
-
-    .
-
-    .
-
-    .
-
-    322 You'
+  m_Text: 
 --- !u!222 &2083006419
 CanvasRenderer:
   m_ObjectHideFlags: 0

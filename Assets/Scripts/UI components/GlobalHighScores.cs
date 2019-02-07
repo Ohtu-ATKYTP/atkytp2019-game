@@ -7,6 +7,7 @@ public class GlobalHighScores : MonoBehaviour {
     [SerializeField] private WebServiceScript webScript;
     private Text usernames; 
     private Text scores;
+    private string jsonScores;
 
 
 
@@ -20,13 +21,12 @@ public class GlobalHighScores : MonoBehaviour {
                     scores = texComp;
                 }
             }
-
-
+            StartCoroutine(ShowLoadingMessage());
     }
 
     // This should be called from the button that activates the high score screen
     public void FetchUpdatedHighScores(){
-            string jsonScores = "";
+            jsonScores = "";
         // callback as parameter; ultimately the coroutine that retrieves data from server
         // will call this with the retrieved data as parameter
             webScript.GetHighscores((scores) => {
@@ -49,10 +49,19 @@ public class GlobalHighScores : MonoBehaviour {
             
 
          usernames.text = usernameInfo;
-          scores.text = scoreInfo;
+         scores.text = scoreInfo;
          
 
         }
+
+
+    private IEnumerator ShowLoadingMessage(){
+            yield return new WaitForSeconds(1);
+            if(jsonScores.Length == 0){ 
+                usernames.text = "Loading...";
+            }
+
+    }
 
 
 }
