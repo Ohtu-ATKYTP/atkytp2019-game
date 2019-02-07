@@ -10,6 +10,7 @@ public class HighScoreManager : MonoBehaviour {
 
     void Start() {
         webService = FindObjectOfType<WebServiceScript>();
+
         if (!PlayerPrefs.HasKey("syncedHS")) {
             PlayerPrefs.SetInt("syncedHS", 1);
         }
