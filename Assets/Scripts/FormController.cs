@@ -5,7 +5,11 @@ using UnityEngine.UI;
 
 public class FormController : MonoBehaviour
 {
-    [SerializeField] private WebServiceScript webScript;  
+    private WebServiceScript webScript;
+
+     void Start() {
+        webScript = FindObjectOfType<WebServiceScript>();
+    }
 
     public void SendFormData(){
         string userName = GameObject.Find("Username Input").transform.Find("Text").GetComponent<Text>().text;

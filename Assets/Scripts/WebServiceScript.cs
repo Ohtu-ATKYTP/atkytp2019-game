@@ -28,8 +28,6 @@ public class WebServiceScript : MonoBehaviour {
     //Use this method to fetch highscores
     public void GetHighscores() {
         StartCoroutine(GetHighscoresText(res => {
-               //at this point res == highscores
-              Debug.Log(res);
             }));
     }
 
@@ -38,13 +36,19 @@ public class WebServiceScript : MonoBehaviour {
         StartCoroutine(SendUser(user, token));
     }
 
+
+    // Overload method, ugly 
     //Use this method to send a highscore to the server
     public void SendHighscore(int score) {
-        StartCoroutine(SendScore(score));
+        StartCoroutine(SendScore(score, (response) => { }));
     }
 
+    public void SendHighscore(int score, System.Action<bool> callback){
+            StartCoroutine(SendScore(score, callback));
+        }
+
     private IEnumerator GetHighscoresText(System.Action<string> callback) {
-        UnityWebRequest req = UnityWebRequest.Get(baseUrl);
+        UnityWebRequest req = UnityWebRequest.Get(baseUrl + "/top");
         yield return req.SendWebRequest();
 
         if (req.isNetworkError || req.isHttpError) {
@@ -83,7 +87,7 @@ public class WebServiceScript : MonoBehaviour {
         Debug.Log("Status code: " + req.responseCode);
     }
 
-    private IEnumerator SendScore(int score) {
+    private IEnumerator SendScore(int score,  System.Action<bool> callback) {
         // should we account for the possibility of not existing?
         string id = PlayerPrefs.GetString("_id");
         string url = baseUrl + "/" + id;
@@ -96,17 +100,18 @@ public class WebServiceScript : MonoBehaviour {
         req.SetRequestHeader("Content-Type", "application/json");
         yield return req.SendWebRequest();
 
-        HighScore h = JsonUtility.FromJson<HighScore>(req.downloadHandler.text);
-        PlayerPrefs.SetInt("highScore", h.score);
+        
+        if(req.isNetworkError){ 
+                callback(false);            
+         } else {
+            HighScore h = JsonUtility.FromJson<HighScore>(req.downloadHandler.text);
+            //alempi lienee toivottavaa poistaa
+            PlayerPrefs.SetInt("highScore", h.score);
+            callback(true);
+        }
+            
     }
-    // This really has no relation to WebService...
-    // Relocate to own file / class? 
-    private void storeHighscoreDataLocally(HighScore h) {
-        PlayerPrefs.SetString("_id", h._id);
-        PlayerPrefs.SetString("username", h.user);
-        PlayerPrefs.SetString("token", h.token);
-        PlayerPrefs.SetInt("highScore", h.score);
-    }
+
 
     private string JsonifyUser(string user, string token) {
         return JsonifyUser(user, token, 0);
