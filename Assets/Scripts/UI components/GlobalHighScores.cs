@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class GlobalHighScores : MonoBehaviour {
-    [SerializeField] private WebServiceScript webScript;
+    private WebServiceScript webScript;
     private Text usernames; 
     private Text scores;
     private string jsonScores;
@@ -12,6 +12,7 @@ public class GlobalHighScores : MonoBehaviour {
 
 
      void Start() {
+       webScript = FindObjectOfType<WebServiceScript>();
        Text[] textComponents = GetComponentsInChildren<Text>();
        for(int i = 0; i < textComponents.Length; i++){
                 Text texComp = textComponents[i];
@@ -57,7 +58,7 @@ public class GlobalHighScores : MonoBehaviour {
 
     private IEnumerator ShowLoadingMessage(){
             yield return new WaitForSeconds(1);
-            if(jsonScores.Length == 0){ 
+            if(jsonScores == null || jsonScores.Length == 0){ 
                 usernames.text = "Loading...";
             }
 

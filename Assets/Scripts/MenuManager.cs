@@ -17,6 +17,7 @@ public class MenuManager : MonoBehaviour {
         canvases[2] = highScoreCanvas; 
         canvases[3] = settingsCanvas; 
         setUpMenus();
+        //HSmanager.sync()
     }
     private void setUpMenus() {
         foreach(Canvas c in canvases) {
