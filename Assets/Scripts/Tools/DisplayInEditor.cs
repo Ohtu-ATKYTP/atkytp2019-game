@@ -11,9 +11,6 @@ public class DisplayInEditor : MonoBehaviour {
     private Vector3 rightBottom;
     private Vector3 rightTop;
 
-    void Start() {
-
-    }
 
     private void initializePoints(){
         
@@ -23,12 +20,12 @@ public class DisplayInEditor : MonoBehaviour {
         rightBottom = new Vector3(rightTop.x, leftBottom.y, 0);
       }
 
-    void OnDrawGizmos() {
-        if(!isInitialized){
-            initializePoints();
-            isInitialized = true;
-         }
+    private void OnBeforeTransformParentChanged() {
+        initializePoints();
+    }
 
+    void OnDrawGizmos() {
+        initializePoints();
 
 
         Gizmos.color = Color.cyan;
