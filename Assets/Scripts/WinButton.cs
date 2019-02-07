@@ -15,9 +15,7 @@ public class WinButton : MonoBehaviour
     {
         //level = filterOdd(level);
         //SceneManager.LoadScene(level);
-        dataController.SetRoundEndStatus(true);
-        dataController.SetWinStatus(true);
-        dataController.AddCurrentScore(10);
+        dataController.MinigameEnd(true, 10);
     }
 
     private string filterOdd(string str) {

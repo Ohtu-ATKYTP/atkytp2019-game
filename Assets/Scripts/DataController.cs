@@ -23,6 +23,12 @@ public class DataController : MonoBehaviour
 
     }
 
+    public void MinigameEnd(bool win, int score) {
+        this.SetWinStatus(win);
+        this.AddCurrentScore(score);
+        this.SetRoundEndStatus(true);
+    }
+
 
     public bool GetWinStatus() {
         return this.winStatus;
