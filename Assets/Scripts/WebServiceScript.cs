@@ -76,8 +76,7 @@ public class WebServiceScript : MonoBehaviour {
 
         jsonUser = req.downloadHandler.text;
         HighScore h = JsonUtility.FromJson<HighScore>(jsonUser);
-        Debug.Log("Username: " + h.user);
-
+        
         PlayerPrefs.SetString("_id", h._id);
         PlayerPrefs.SetString("username", h.user);
         PlayerPrefs.SetString("token", h.token);
