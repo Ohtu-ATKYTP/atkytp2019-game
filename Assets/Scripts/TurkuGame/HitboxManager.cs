@@ -5,10 +5,10 @@ using UnityEngine;
 public class HitboxManager : MonoBehaviour { 
 
     private Hitbox[] hitboxes;
-    
+    public TurkuAnimation turkuAnimation;
     void Start()
     {
-        hitboxes = new Hitbox[transform.GetChildCount()];
+        hitboxes = new Hitbox[transform.childCount];
         int i = 0;
         foreach (Transform child in transform)
         {
@@ -20,7 +20,10 @@ public class HitboxManager : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(this.active() + " / " + this.maxAmount());
+        if (this.active()/this.maxAmount() > 0.4)
+        {
+            this.win();
+        }
     }
 
     private int active()
@@ -36,5 +39,11 @@ public class HitboxManager : MonoBehaviour {
     private int maxAmount()
     {
         return this.hitboxes.Length;
+    }
+
+    private void win()
+    {
+        turkuAnimation.StartAnimation();
+        Debug.Log("VOITIT PELIN!");
     }
 }
