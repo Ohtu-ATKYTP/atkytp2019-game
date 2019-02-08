@@ -32,8 +32,7 @@ public class WinTimer : MonoBehaviour
     }
 
     private void timerEnd() {
-        dataController.SetWinStatus(false);
-        dataController.SetRoundEndStatus(true);
+        dataController.MinigameEnd(false, 0);
     }
 
 
