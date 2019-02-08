@@ -6,6 +6,8 @@ public class HitboxManager : MonoBehaviour {
 
     private Hitbox[] hitboxes;
     public TurkuAnimation turkuAnimation;
+    public TurkuManager manager;
+    private bool gameOver = false;
     void Start()
     {
         hitboxes = new Hitbox[transform.childCount];
@@ -20,13 +22,14 @@ public class HitboxManager : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-        if (this.active()/this.maxAmount() > 0.4)
+        if (this.Active()/this.MaxAmount() > 0.4 && !gameOver)
         {
-            this.win();
+            this.gameOver = true;
+            this.Win();
         }
     }
 
-    private int active()
+    private int Active()
     {
         int i = 0;
         foreach(Hitbox h in this.hitboxes)
@@ -36,14 +39,21 @@ public class HitboxManager : MonoBehaviour {
         return i;
     }
 
-    private int maxAmount()
+    private int MaxAmount()
     {
         return this.hitboxes.Length;
     }
 
-    private void win()
+    private void Win()
+    {
+        StartCoroutine(EndGame());
+        Debug.Log("VOITIT PELIN!");
+    }
+
+    IEnumerator EndGame()
     {
         turkuAnimation.StartAnimation();
-        Debug.Log("VOITIT PELIN!");
+        yield return new WaitForSecondsRealtime(3);
+        manager.EndMinigame(true);
     }
 }
