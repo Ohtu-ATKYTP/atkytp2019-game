@@ -5,11 +5,13 @@ using UnityEngine;
 public class DisplayInEditor : MonoBehaviour {
     public Color drawColor = Color.cyan;
     public Camera camera;
+    public bool drawGizmos = true; 
     private bool isInitialized = false; 
     private Vector3 leftBottom;
     private Vector3 leftTop;
     private Vector3 rightBottom;
     private Vector3 rightTop;
+
 
 
     private void initializePoints(){
@@ -25,6 +27,9 @@ public class DisplayInEditor : MonoBehaviour {
     }
 
     void OnDrawGizmos() {
+        if(!drawGizmos){
+            return;
+        }
         initializePoints();
 
 
