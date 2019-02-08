@@ -1,7 +1,7 @@
 # Minigamecycle managing
 Minigame cycle managing is done in GameManager.cs which uses DataController.cs. Datacontroller is do-not-destroy-on-load object so every class can use its methods (singleton).
 
-## How to user the manager in minigames
+## How to use the manager in minigames
 When you make your minigame you need the datacontroller:
 ```C#
 private DataController dataController;
