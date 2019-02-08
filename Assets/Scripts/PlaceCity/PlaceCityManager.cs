@@ -49,9 +49,14 @@ public class PlaceCityManager : MonoBehaviour {
 
 
     private void activateOnlyCurrentSceneCamera() {
+        activateOnlyCamera("PlaceCityCamera");
+
+    }
+
+    private void activateOnlyCamera(string cameraName) {
         Camera[] cameras = FindObjectsOfType<Camera>();
         for (int i = 0; i < cameras.Length; i++) {
-            if (cameras[i].name != "PlaceCityCamera") {
+            if (cameras[i].name != cameraName) {
                 cameras[i].enabled = false;
             } else {
                 cameras[i].enabled = true;
@@ -129,6 +134,8 @@ public class PlaceCityManager : MonoBehaviour {
         }
 
         yield return new WaitForSeconds(delayAfterMinigameEndsInSeconds);
+        //varmaan hyvä idea lopulta (jos SceneManagerCamera renderöi jotain pelien välissä)
+        //activateOnlyCamera("SceneManagerCamera");
         dataController.MinigameEnd(win, win ? 10 : 0);
     }
 }
