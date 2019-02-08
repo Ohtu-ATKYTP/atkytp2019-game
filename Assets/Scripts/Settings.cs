@@ -14,6 +14,7 @@ public class Settings : MonoBehaviour {
         string info = "Username: "+ PlayerPrefs.GetString("username")+"\n";
         info += "Token: " + PlayerPrefs.GetString("token") + "\n";
         info += "HighScore: " + PlayerPrefs.GetInt("highScore") + "\n";
+        info += "Registered: " + ((PlayerPrefs.GetInt("registered") == 1) ? "yes" : "no");
 
         playerInfo.text = info;
     }

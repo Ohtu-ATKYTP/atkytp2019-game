@@ -14,15 +14,20 @@ public class HighScoreManager : MonoBehaviour {
         if (!PlayerPrefs.HasKey("syncedHS")) {
             PlayerPrefs.SetInt("syncedHS", 1);
         }
-        if (PlayerPrefs.GetInt("syncedHS") == 0) {
-            StartSync();
+        if(!PlayerPrefs.HasKey("highScore")){ 
+            PlayerPrefs.SetInt("highScore", 0);  
+          }
+        if (PlayerPrefs.GetInt("registered") == 1 && PlayerPrefs.GetInt("syncedHS") == 0) {
+                StartSync();           
         }
     }
 
    
 
     public void StartSync(){
+        if(PlayerPrefs.GetInt("registered") == 1){
             StartCoroutine(Sync());
+            }
         }
 
 
@@ -30,8 +35,6 @@ public class HighScoreManager : MonoBehaviour {
         bool success = false;
         int score = PlayerPrefs.GetInt("highScore");
         while(!success){
-            Debug.Log("Yritetään lähettää score " + score);
-            Debug.Log("Onko webservice?" + (webService != null));
             webService.SendHighscore(score, (result) => {
                    success = result;
                    });  

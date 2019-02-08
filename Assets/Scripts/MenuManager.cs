@@ -23,10 +23,11 @@ public class MenuManager : MonoBehaviour {
         foreach(Canvas c in canvases) {
             c.enabled = false;
         }
-        if(PlayerPrefs.HasKey("_id")){ 
+        if(PlayerPrefs.HasKey("registered")){ 
             mainMenuCanvas.enabled = true;      
         } else {
             registrationCanvas.enabled = true;
+            PlayerPrefs.SetInt("registered", 0);
         }
     }
 
