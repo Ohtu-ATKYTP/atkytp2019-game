@@ -32,15 +32,8 @@ public class WebServiceScript : MonoBehaviour {
     }
 
     //Use this method to add new users
-    public void RegisterUser(string user, string token) {
-        StartCoroutine(SendUser(user, token));
-    }
-
-
-    // Overload method, ugly 
-    //Use this method to send a highscore to the server
-    public void SendHighscore(int score) {
-        StartCoroutine(SendScore(score, (response) => { }));
+    public void RegisterUser(string user, string token, System.Action<bool, bool, string> callback) {
+        StartCoroutine(SendUser(user, token, callback));
     }
 
     public void SendHighscore(int score, System.Action<bool> callback){
@@ -64,7 +57,7 @@ public class WebServiceScript : MonoBehaviour {
         callback(highscores);
     }
 
-    private IEnumerator SendUser(string user, string token) {
+    private IEnumerator SendUser(string user, string token, System.Action<bool, bool, string> callback) {
         UnityWebRequest req = new UnityWebRequest(baseUrl, "POST");
         string jsonUser = JsonifyUser(user, token, 0);
         byte[] bodyRaw = Encoding.UTF8.GetBytes(jsonUser);
@@ -72,8 +65,15 @@ public class WebServiceScript : MonoBehaviour {
         req.downloadHandler = (DownloadHandler)new DownloadHandlerBuffer();
         req.SetRequestHeader("Content-Type", "application/json");
 
-        yield return req.Send();
+        yield return req.SendWebRequest();
 
+
+
+        if(req.isHttpError){ 
+            callback(true, false, req.downloadHandler.text);
+        } else if(req.isNetworkError){ 
+            callback(false, false, "");
+        } else {  
         jsonUser = req.downloadHandler.text;
         HighScore h = JsonUtility.FromJson<HighScore>(jsonUser);
         
@@ -81,7 +81,8 @@ public class WebServiceScript : MonoBehaviour {
         PlayerPrefs.SetString("username", h.user);
         PlayerPrefs.SetString("token", h.token);
         PlayerPrefs.SetInt("highScore", h.score);
-
+        callback(true, true, "");
+        }
         Debug.Log("------\nSaatu data:" + jsonUser);
         Debug.Log("Status code: " + req.responseCode);
     }
