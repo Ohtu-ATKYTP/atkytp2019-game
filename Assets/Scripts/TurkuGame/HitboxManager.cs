@@ -7,6 +7,7 @@ public class HitboxManager : MonoBehaviour {
     private Hitbox[] hitboxes;
     public TurkuAnimation turkuAnimation;
     public TurkuManager manager;
+    public int difficulty;
     private bool gameOver = false;
     void Start()
     {
@@ -19,10 +20,9 @@ public class HitboxManager : MonoBehaviour {
         }
     }
 
-    // Update is called once per frame
     void Update()
     {
-        if (this.Active()/this.MaxAmount() > 0.4 && !gameOver)
+        if (this.Active() > Mathf.Min(40,difficulty) && !gameOver)
         {
             this.gameOver = true;
             this.Win();

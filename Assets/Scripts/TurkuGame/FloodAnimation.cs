@@ -37,7 +37,7 @@ public class FloodAnimation : MonoBehaviour
 
     IEnumerator StartBubbles()
     {
-        yield return new WaitForSecondsRealtime(2);
+        yield return new WaitForSecondsRealtime(3);
         var m = bubbles.emission;
         m.enabled = true;
     }

@@ -12,7 +12,7 @@ public class TurkuManager : MonoBehaviour
         dataController = FindObjectOfType<DataController>();
         StartCoroutine(Lose());
     }
-    // Start is called before the first frame update
+
     public void EndMinigame(bool win)
     {
         dataController.SetRoundEndStatus(true);
