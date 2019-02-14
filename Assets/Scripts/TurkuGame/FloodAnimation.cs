@@ -6,6 +6,8 @@ public class FloodAnimation : MonoBehaviour
 {
     public Transform flood;
     public ParticleSystem bubbles;
+    public GameObject pointer;
+    public GameObject topSprite;
     private Vector3 direction = new Vector3(0, 1, 0);
     private bool started = false;
 
@@ -18,6 +20,8 @@ public class FloodAnimation : MonoBehaviour
     public void StartAnimation()
     {
         this.started = true;
+        this.pointer.SetActive(false);
+        this.topSprite.SetActive(false);
         StartCoroutine(StartBubbles());
     }
 

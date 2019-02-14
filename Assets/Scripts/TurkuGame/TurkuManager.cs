@@ -6,7 +6,6 @@ using UnityEngine.UI;
 public class TurkuManager : MonoBehaviour
 {
     public FloodAnimation flood;
-    public Text t;
     private DataController dataController;
     private void Start()
     {
@@ -24,7 +23,6 @@ public class TurkuManager : MonoBehaviour
     IEnumerator Lose()
     {
         yield return new WaitForSecondsRealtime(10);
-        t.enabled = false;
         flood.StartAnimation();
         yield return new WaitForSecondsRealtime(4);
         EndMinigame(false);
