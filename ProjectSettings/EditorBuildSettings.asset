@@ -20,4 +20,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/TurkuGame.unity
     guid: 624f23f7b5b04d347b1ffbe4938ada1b
+  - enabled: 1
+    path: Assets/Scenes/PlaceCity.unity
+    guid: a05118a1e411fdb4d9dd85e8253a8e24
   m_configObjects: {}

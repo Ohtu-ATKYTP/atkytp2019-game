@@ -21,9 +21,14 @@ public class WebServiceScript : MonoBehaviour {
     }
 
 
+    public void GetHighscores(System.Action<string> callback) {
+        StartCoroutine(GetHighscoresText(callback));
+    }
+
     //Use this method to fetch highscores
     public void GetHighscores() {
-        StartCoroutine(GetHighscoresText());
+        StartCoroutine(GetHighscoresText(res => {
+            }));
     }
 
     //Use this method to add new users
@@ -31,25 +36,32 @@ public class WebServiceScript : MonoBehaviour {
         StartCoroutine(SendUser(user, token));
     }
 
+
+    // Overload method, ugly 
     //Use this method to send a highscore to the server
     public void SendHighscore(int score) {
-        StartCoroutine(SendScore(score));
+        StartCoroutine(SendScore(score, (response) => { }));
     }
 
-    private IEnumerator GetHighscoresText() {
-        UnityWebRequest req = UnityWebRequest.Get(baseUrl);
+    public void SendHighscore(int score, System.Action<bool> callback){
+            StartCoroutine(SendScore(score, callback));
+        }
+
+    private IEnumerator GetHighscoresText(System.Action<string> callback) {
+        UnityWebRequest req = UnityWebRequest.Get(baseUrl + "/top");
         yield return req.SendWebRequest();
 
         if (req.isNetworkError || req.isHttpError) {
             Debug.Log(req.error);
         } else {
             // Show results as text
-            Debug.Log(req.downloadHandler.text);
             highscores = req.downloadHandler.text;
 
             // Or retrieve results as binary data
             byte[] results = req.downloadHandler.data;
+
         }
+        callback(highscores);
     }
 
     private IEnumerator SendUser(string user, string token) {
@@ -64,8 +76,7 @@ public class WebServiceScript : MonoBehaviour {
 
         jsonUser = req.downloadHandler.text;
         HighScore h = JsonUtility.FromJson<HighScore>(jsonUser);
-        Debug.Log("Username: " + h.user);
-
+        
         PlayerPrefs.SetString("_id", h._id);
         PlayerPrefs.SetString("username", h.user);
         PlayerPrefs.SetString("token", h.token);
@@ -75,7 +86,7 @@ public class WebServiceScript : MonoBehaviour {
         Debug.Log("Status code: " + req.responseCode);
     }
 
-    private IEnumerator SendScore(int score) {
+    private IEnumerator SendScore(int score,  System.Action<bool> callback) {
         // should we account for the possibility of not existing?
         string id = PlayerPrefs.GetString("_id");
         string url = baseUrl + "/" + id;
@@ -88,17 +99,18 @@ public class WebServiceScript : MonoBehaviour {
         req.SetRequestHeader("Content-Type", "application/json");
         yield return req.SendWebRequest();
 
-        HighScore h = JsonUtility.FromJson<HighScore>(req.downloadHandler.text);
-        PlayerPrefs.SetInt("highScore", h.score);
+        
+        if(req.isNetworkError){ 
+                callback(false);            
+         } else {
+            HighScore h = JsonUtility.FromJson<HighScore>(req.downloadHandler.text);
+            //alempi lienee toivottavaa poistaa
+            PlayerPrefs.SetInt("highScore", h.score);
+            callback(true);
+        }
+            
     }
-    // This really has no relation to WebService...
-    // Relocate to own file / class? 
-    private void storeHighscoreDataLocally(HighScore h) {
-        PlayerPrefs.SetString("_id", h._id);
-        PlayerPrefs.SetString("username", h.user);
-        PlayerPrefs.SetString("token", h.token);
-        PlayerPrefs.SetInt("highScore", h.score);
-    }
+
 
     private string JsonifyUser(string user, string token) {
         return JsonifyUser(user, token, 0);
@@ -112,11 +124,4 @@ public class WebServiceScript : MonoBehaviour {
         return JsonUtility.ToJson(h);
     }
 
-    [System.Serializable]
-    private class HighScore {
-        public string _id;
-        public string user;
-        public string token;
-        public int score;
-    }
 }
