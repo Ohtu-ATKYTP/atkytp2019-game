@@ -1,5 +1,7 @@
 # PlayerPrefs
 
+**HUOM:** Playerprefsien poisto tietokoneelta löytyy unityn sivuilta alla olevasta linkistä
+
 Pelaajan tiedot ja joitain apumuuttujia tallennetaan kännykkään 
 [unityn playerprefs](https://docs.unity3d.com/ScriptReference/PlayerPrefs.html) luokalla. Tärkeät metodit ovat:
  - PlayerPrefs.HasKey("avain"): tarkastaa onko jotain tietoa olemassa. Käytetään jossain if-logiikoissa hyödyksi.
