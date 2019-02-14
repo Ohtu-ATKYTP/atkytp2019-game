@@ -14,6 +14,7 @@ public class PotentiallyHiddenButton : MonoBehaviour
 
     void Update()
     {
-        GetComponent<Button>().enabled = isVisible;
+        isVisible = PlayerPrefs.GetInt("registered") == 0 ? true: false;
+        gameObject.SetActive(isVisible);
     }
 }
