@@ -9,7 +9,7 @@ public class PotentiallyHiddenButton : MonoBehaviour
 
     void Start()
     {
-        isVisible = PlayerPrefs.GetInt("registered") == 0 ? true: false;
+        
     }
 
     void Update()
