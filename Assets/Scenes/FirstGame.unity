@@ -511,8 +511,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92de2e395cba42585b1fd6651fa70ab1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  seconds: 2
-  timerSlider: {fileID: 1017533559}
+  seconds: 0
+  timerSlider: {fileID: 0}
 --- !u!114 &1017533559
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1159,8 +1159,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75c88100962bbafaab5f4254b41fec51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  seconds: 0
-  timerSlider: {fileID: 0}
+  seconds: 3
+  timerSlider: {fileID: 2020094637}
 --- !u!1 &2083070575
 GameObject:
   m_ObjectHideFlags: 0
