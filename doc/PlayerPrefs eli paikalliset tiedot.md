@@ -23,7 +23,6 @@ HighScoreManager.Sync() yrittää päivittää pelaajan Highscorea niin kauan ku
 ykköseksi (eli highscore on "synkassa"). "SyncedHS" tarkastetaan myös aina kun appsi käynnistyy.
 
 
-(EI VIELÄ MASTERISSA, JOTAIN ONGELMIA)
 Toinen apumuuttuja on nimeltään **"registered"** (0 tai 1). Muuttuja kertoo onko pelaaja rekisteröitynyt serverille vai ei. Muuttujalla
 päätetään ohjelmassa erilaisia asioita:
  - Näytetäänkö pelaajalle alussa rekisteröintiruutu vai ei.
