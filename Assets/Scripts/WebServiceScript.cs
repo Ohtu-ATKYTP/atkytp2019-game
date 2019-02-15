@@ -38,7 +38,7 @@ public class WebServiceScript : MonoBehaviour {
 
     public void SendHighscore(int score, System.Action<bool> callback){
             StartCoroutine(SendScore(score, callback));
-        }
+    }
 
     private IEnumerator GetHighscoresText(System.Action<string> callback) {
         UnityWebRequest req = UnityWebRequest.Get(baseUrl + "/top");
@@ -113,17 +113,50 @@ public class WebServiceScript : MonoBehaviour {
             
     }
 
+    public void GetRank()
+    {
+        StartCoroutine(GetRankCOR());
+    }
+
+    public IEnumerator GetRankCOR() {
+
+        string id = PlayerPrefs.GetString("_id");
+        string url = baseUrl + "/" + id;
+
+        UnityWebRequest req = UnityWebRequest.Get(url);
+
+        yield return req.SendWebRequest();
+
+        if (req.isNetworkError || req.isHttpError)
+        {
+            Debug.Log(req.error);
+        }
+        
+        else
+        {
+            HighScore h = JsonUtility.FromJson<HighScore>(req.downloadHandler.text);
+            PlayerPrefs.SetInt("rank", h.rank);
+        }
+    }
+
 
     private string JsonifyUser(string user, string token) {
         return JsonifyUser(user, token, 0);
     }
 
-    private string JsonifyUser(string user, string token, int score) {
+    private string JsonifyUser(string user, string token, int score)
+    {
+        return JsonifyUser(user, token, 0, 0);
+    }
+
+    private string JsonifyUser(string user, string token, int score, int rank) {
         HighScore h = new HighScore();
         h.user = user;
         h.token = token;
         h.score = score;
+        h.rank = rank;
         return JsonUtility.ToJson(h);
     }
+
 
 }
