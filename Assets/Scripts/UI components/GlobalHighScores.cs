@@ -65,7 +65,7 @@ public class GlobalHighScores : MonoBehaviour {
         string scoreInfo = "";
 
         for (int i = 0; i < highScores.Length; i++) {
-            usernameInfo += highScores[i].user + "\n";
+            usernameInfo += i+1 + ". " + highScores[i].user + "\n";
             scoreInfo += highScores[i].score + "\n";
         }
 
