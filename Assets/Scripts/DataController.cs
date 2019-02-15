@@ -10,17 +10,23 @@ public class DataController : MonoBehaviour
     private int currentScore;
     private bool roundEndStatus;
     private bool winStatus;
+    private int lives;
+    private readonly int MAX_LIVES = 3;
 
 
 
     void Start()
     {
         DontDestroyOnLoad(gameObject);
+        Init();
+
+    }
+
+    public void Init() {
         this.currentScore = 0;
         this.roundEndStatus = false;
         this.winStatus = true;
-
-
+        this.lives = MAX_LIVES;
     }
 
     public void MinigameEnd(bool win, int score) {
@@ -29,6 +35,17 @@ public class DataController : MonoBehaviour
         this.SetRoundEndStatus(true);
     }
 
+    public void TakeLife() {
+        this.lives--;
+    }
+
+    public int GetLives() {
+        return this.lives;
+    }
+
+    public void ResetLives() {
+        this.lives = 3;
+    }
 
     public bool GetWinStatus() {
         return this.winStatus;

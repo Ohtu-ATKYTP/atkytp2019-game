@@ -10,8 +10,11 @@ public class TimeProgress : MonoBehaviour
     public int seconds;
     private float timer;
     public Slider timerSlider;
+
+    public UnityEngine.Events.UnityEvent TimerReadyMethods;
     private DataController dataController;
     private bool timerEnded = false;
+
     void Start()
     {
         this.timer = (float) seconds;
@@ -33,7 +36,7 @@ public class TimeProgress : MonoBehaviour
     }
 
     private void timerEnd() {
-        dataController.MinigameEnd(false, 0);
+        TimerReadyMethods.Invoke();
     }
 
 
