@@ -81,6 +81,7 @@ public class WebServiceScript : MonoBehaviour {
         PlayerPrefs.SetString("username", h.user);
         PlayerPrefs.SetString("token", h.token);
         PlayerPrefs.SetInt("highScore", h.score);
+        PlayerPrefs.SetInt("syncedHS", 1);
         callback(true, true, "");
         }
         Debug.Log("------\nSaatu data:" + jsonUser);
