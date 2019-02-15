@@ -28,3 +28,6 @@ päätetään ohjelmassa erilaisia asioita:
  - Näytetäänkö pelaajalle alussa rekisteröintiruutu vai ei.
  - Yritetäänkö paikallista highscorea päivittää (Jos ei rekisteröitynyt niin ei kannata)
  - Estää uudelleen rekisteröitymisen
+ 
+ (vielä omassa branchissä)
+ Uusi tulokas on **rank** muuttuja. Se tallettaa pelaajan rankin (joka tällä hetkellä päivitetään servulta 1min välein).
