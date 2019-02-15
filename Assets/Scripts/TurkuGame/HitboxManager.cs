@@ -5,10 +5,9 @@ using UnityEngine;
 public class HitboxManager : MonoBehaviour { 
 
     private Hitbox[] hitboxes;
-    public TurkuAnimation turkuAnimation;
     public TurkuManager manager;
-    public int difficulty;
-    private bool gameOver = false;
+    
+    // Collect all hitboxes into an array
     void Start()
     {
         hitboxes = new Hitbox[transform.childCount];
@@ -20,16 +19,8 @@ public class HitboxManager : MonoBehaviour {
         }
     }
 
-    void Update()
-    {
-        if (this.Active() > Mathf.Min(40,difficulty) && !gameOver)
-        {
-            this.gameOver = true;
-            this.Win();
-        }
-    }
-
-    private int Active()
+    // How many hitboxes have been hovered over
+    public int Active()
     {
         int i = 0;
         foreach(Hitbox h in this.hitboxes)
@@ -39,21 +30,9 @@ public class HitboxManager : MonoBehaviour {
         return i;
     }
 
-    private int MaxAmount()
+    // How many hitboxes are there
+    public int HitboxCount()
     {
         return this.hitboxes.Length;
-    }
-
-    private void Win()
-    {
-        StartCoroutine(EndGame());
-        Debug.Log("VOITIT PELIN!");
-    }
-
-    IEnumerator EndGame()
-    {
-        turkuAnimation.StartAnimation();
-        yield return new WaitForSecondsRealtime(3);
-        manager.EndMinigame(true);
     }
 }
