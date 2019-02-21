@@ -5,6 +5,12 @@ using System.IO;                                                        // The S
 
 public class DataController : MonoBehaviour 
 {
+	public enum Status {
+		WAIT,
+		MAIN_MENU,
+		MINIGAME,
+		BETWEEN
+	}
     private RoundData[] allRoundData;
 
     private int currentScore;
@@ -14,12 +20,13 @@ public class DataController : MonoBehaviour
     private readonly int MAX_LIVES = 3;
 	private bool betweenGameScreenShown;
 	private bool readyForNextGame;
+	private int lastReceivedScore;
+	private Status status;
 
     void Start()
     {
         DontDestroyOnLoad(gameObject);
         Init();
-
     }
 
     public void Init() {
@@ -29,17 +36,21 @@ public class DataController : MonoBehaviour
         this.lives = MAX_LIVES;
 		this.betweenGameScreenShown = true;
 		this.readyForNextGame = false;
+		this.status = Status.WAIT;
+		this.lastReceivedScore = 0;
     }
 
     public void MinigameEnd(bool win, int score) {
         this.SetWinStatus(win);
         this.AddCurrentScore(score);
         this.SetRoundEndStatus(true);
+		this.status = Status.BETWEEN;
     }
 
 	public void BetweenScreenEnd() {
 		this.betweenGameScreenShown = true;
 		this.readyForNextGame = true;
+		this.status = Status.MINIGAME;
 	}
 
 	public bool GetBetweenGameShown() {
@@ -83,6 +94,7 @@ public class DataController : MonoBehaviour
     }
 
     public void AddCurrentScore(int score) {
+		this.lastReceivedScore = score;
         this.currentScore += score;
     }
 
@@ -98,7 +110,15 @@ public class DataController : MonoBehaviour
 		this.readyForNextGame = status;
 	}
 
+	public Status GetStatus() {
+		return this.status;
+	}
 
-	private enum Status {
+	public void SetStatus(Status newStatus) {
+		this.status = newStatus;
+	}
+
+	public int GetLastReceivedScore() {
+		return this.lastReceivedScore;
 	}
 }

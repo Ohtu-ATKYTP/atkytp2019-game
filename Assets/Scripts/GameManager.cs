@@ -7,7 +7,6 @@ public class GameManager : MonoBehaviour {
     public int gamesStartIndex;
     public int gamesEndIndex;
     public Scene endGameScene;
-	public float betweenGameWaitTime;
 
     private string lastGame;
     private string game;
@@ -28,13 +27,24 @@ public class GameManager : MonoBehaviour {
     }
 
     private void Update() {
-        if (dataController.GetReadyStatus()) {
+        if (dataController.GetStatus() == DataController.Status.MINIGAME) {
+			Debug.Log("starting new minigame");
             prepareNextGame();
-        } else if (!dataController.GetBetweenGameShown() && dataController.GetRoundEndStatus()) {
-			ExecuteBetweenGameScene();
+        } else if (dataController.GetStatus() == DataController.Status.BETWEEN) {
+			//Execute between screen scene
+			Debug.Log("going to between screen");
+			ExecuteBetweenScreen();
+		} else if (dataController.GetStatus() == DataController.Status.MAIN_MENU) {
+			//Go to main menu
 		}
-		
     }
+
+	private void ExecuteBetweenScreen() {
+		dataController.SetStatus(DataController.Status.WAIT);
+		SceneManager.UnloadSceneAsync(this.game);
+		this.game = "BetweenGameScreen";
+        SceneManager.LoadScene(this.game, LoadSceneMode.Additive);
+	}
 
     public void nextGame(bool win) {
         if (!win) dataController.TakeLife();
@@ -45,14 +55,8 @@ public class GameManager : MonoBehaviour {
             getRandomGame();
         }
 
+        // kutsutaan datacontroller
     }
-
-	private void ExecuteBetweenGameScene() {
-		SceneManager.UnloadSceneAsync(this.game);
-		dataController.SetBetweenGameShown(true);
-		this.game = "BetweenGameScreen";
-		SceneManager.LoadScene(this.game, LoadSceneMode.Additive);
-	}
 
     private void getRandomGame() {
         if (game != null) {
@@ -62,6 +66,7 @@ public class GameManager : MonoBehaviour {
         while (game == lastGame) {
             game = this.scenes[Random.Range(0, this.scenes.Length)];
         }
+		Debug.Log("Loading scene " + this.game);
         SceneManager.LoadScene(game, LoadSceneMode.Additive);
     }
 
@@ -84,9 +89,7 @@ public class GameManager : MonoBehaviour {
     }
 
     private void prepareNextGame() {
-		dataController.SetReadyStatus(false);
-        dataController.SetRoundEndStatus(false);
-		dataController.SetBetweenGameShown(false);
+		dataController.SetStatus(DataController.Status.WAIT);
         SceneManager.UnloadSceneAsync(this.game);
         nextGame(dataController.GetWinStatus());
     }
