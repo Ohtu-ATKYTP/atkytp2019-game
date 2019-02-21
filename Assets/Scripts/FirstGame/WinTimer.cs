@@ -7,13 +7,14 @@ using UnityEngine;
 public class WinTimer : MonoBehaviour
 {
     // Start is called before the first frame update
+    public int seconds;
     private float timer;
     public Scrollbar timerSlider;
     private DataController dataController;
     private bool timerEnded = false;
     void Start()
     {
-        this.timer = 2.0f;
+        this.timer = (float) seconds;
         timerSlider.value = this.timer;
         dataController = FindObjectOfType<DataController>();
     }
@@ -22,7 +23,7 @@ public class WinTimer : MonoBehaviour
     void Update()
     {
         this.timer -= Time.deltaTime;
-        timerSlider.value = this.timer /2;
+        timerSlider.value = this.timer /seconds;
         if (this.timer <= 0.0f && this.timerEnded == false) {
             this.timerEnded = true;
             timerEnd();

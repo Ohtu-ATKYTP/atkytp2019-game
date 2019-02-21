@@ -8,5 +8,4 @@ public class UpdatableHighscore : MonoBehaviour
         int score = (PlayerPrefs.HasKey("highScore")) ?  PlayerPrefs.GetInt("highScore") : 0;
         scoreText.text = "High score: " + score;
     }
-
 }

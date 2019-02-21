@@ -18,6 +18,10 @@ public class WinButton : MonoBehaviour
         dataController.MinigameEnd(true, 10);
     }
 
+    public void LoseMinigame() {
+        dataController.MinigameEnd(false, 0);
+    }
+
     private string filterOdd(string str) {
         char[] arr = str.ToCharArray();
 

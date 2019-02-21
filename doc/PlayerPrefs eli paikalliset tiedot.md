@@ -1,5 +1,7 @@
 # PlayerPrefs
 
+**HUOM:** Playerprefsien poisto tietokoneelta löytyy unityn sivuilta alla olevasta linkistä
+
 Pelaajan tiedot ja joitain apumuuttujia tallennetaan kännykkään 
 [unityn playerprefs](https://docs.unity3d.com/ScriptReference/PlayerPrefs.html) luokalla. Tärkeät metodit ovat:
  - PlayerPrefs.HasKey("avain"): tarkastaa onko jotain tietoa olemassa. Käytetään jossain if-logiikoissa hyödyksi.
@@ -21,9 +23,11 @@ HighScoreManager.Sync() yrittää päivittää pelaajan Highscorea niin kauan ku
 ykköseksi (eli highscore on "synkassa"). "SyncedHS" tarkastetaan myös aina kun appsi käynnistyy.
 
 
-(EI VIELÄ MASTERISSA, JOTAIN ONGELMIA)
 Toinen apumuuttuja on nimeltään **"registered"** (0 tai 1). Muuttuja kertoo onko pelaaja rekisteröitynyt serverille vai ei. Muuttujalla
 päätetään ohjelmassa erilaisia asioita:
  - Näytetäänkö pelaajalle alussa rekisteröintiruutu vai ei.
  - Yritetäänkö paikallista highscorea päivittää (Jos ei rekisteröitynyt niin ei kannata)
  - Estää uudelleen rekisteröitymisen
+ 
+ (vielä omassa branchissä)
+ Uusi tulokas on **rank** muuttuja. Se tallettaa pelaajan rankin (joka tällä hetkellä päivitetään servulta 1min välein).

@@ -123,6 +123,14 @@ public class PlaceCityManager : MonoBehaviour {
         }
     }
 
+    public void winMinigame(){ 
+            StartCoroutine(EndMinigame(true));
+        }
+
+    public void loseMinigame(){ 
+            StartCoroutine(EndMinigame(false));
+        }
+
 
     private IEnumerator EndMinigame(bool win) {
 
