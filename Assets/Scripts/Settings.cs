@@ -21,7 +21,8 @@ public class Settings : MonoBehaviour {
         info += "Token: " + PlayerPrefs.GetString("token") + "\n";
         info += "HighScore: " + PlayerPrefs.GetInt("highScore") + "\n";
         info += "HS Synced: " + ((PlayerPrefs.GetInt("syncedHS") == 1) ? "yes" : "no") + "\n";
-        info += "Registered: " + ((PlayerPrefs.GetInt("registered") == 1) ? "yes" : "no");
+        info += "Registered: " + ((PlayerPrefs.GetInt("registered") == 1) ? "yes" : "no")+ "\n";
+        info += "Rank: " + PlayerPrefs.GetInt("rank") + "\n";
 
         playerInfo.text = info;
     }

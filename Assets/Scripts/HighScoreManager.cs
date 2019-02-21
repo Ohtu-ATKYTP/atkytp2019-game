@@ -34,10 +34,13 @@ public class HighScoreManager : MonoBehaviour {
     private IEnumerator Sync() {
         bool success = false;
         int score = PlayerPrefs.GetInt("highScore");
+
+        
         while(!success){
             webService.SendHighscore(score, (result) => {
                    success = result;
-                   });  
+                   });
+            yield return new WaitForSecondsRealtime(2);
             if(!success){
                     yield return new WaitForSeconds(attemptTimeDelay);
             }
