@@ -14,6 +14,7 @@ public class PlayButton : MonoBehaviour
     public void StartGame()
     {
         dataController.SetRoundEndStatus(true);
+		dataController.SetReadyStatus(true);
         Debug.Log("Win status set true");
     }
 

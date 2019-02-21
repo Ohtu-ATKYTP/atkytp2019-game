@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour {
     public int gamesStartIndex;
     public int gamesEndIndex;
     public Scene endGameScene;
+	public float betweenGameWaitTime;
 
     private string lastGame;
     private string game;
@@ -27,10 +28,12 @@ public class GameManager : MonoBehaviour {
     }
 
     private void Update() {
-        if (dataController.GetRoundEndStatus()) {
+        if (dataController.GetReadyStatus()) {
             prepareNextGame();
-
-        }
+        } else if (!dataController.GetBetweenGameShown() && dataController.GetRoundEndStatus()) {
+			ExecuteBetweenGameScene();
+		}
+		
     }
 
     public void nextGame(bool win) {
@@ -42,8 +45,14 @@ public class GameManager : MonoBehaviour {
             getRandomGame();
         }
 
-        // kutsutaan datacontroller
     }
+
+	private void ExecuteBetweenGameScene() {
+		SceneManager.UnloadSceneAsync(this.game);
+		dataController.SetBetweenGameShown(true);
+		this.game = "BetweenGameScreen";
+		SceneManager.LoadScene(this.game, LoadSceneMode.Additive);
+	}
 
     private void getRandomGame() {
         if (game != null) {
@@ -75,7 +84,9 @@ public class GameManager : MonoBehaviour {
     }
 
     private void prepareNextGame() {
+		dataController.SetReadyStatus(false);
         dataController.SetRoundEndStatus(false);
+		dataController.SetBetweenGameShown(false);
         SceneManager.UnloadSceneAsync(this.game);
         nextGame(dataController.GetWinStatus());
     }

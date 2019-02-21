@@ -12,8 +12,8 @@ public class DataController : MonoBehaviour
     private bool winStatus;
     private int lives;
     private readonly int MAX_LIVES = 3;
-
-
+	private bool betweenGameScreenShown;
+	private bool readyForNextGame;
 
     void Start()
     {
@@ -27,6 +27,8 @@ public class DataController : MonoBehaviour
         this.roundEndStatus = false;
         this.winStatus = true;
         this.lives = MAX_LIVES;
+		this.betweenGameScreenShown = true;
+		this.readyForNextGame = false;
     }
 
     public void MinigameEnd(bool win, int score) {
@@ -34,6 +36,19 @@ public class DataController : MonoBehaviour
         this.AddCurrentScore(score);
         this.SetRoundEndStatus(true);
     }
+
+	public void BetweenScreenEnd() {
+		this.betweenGameScreenShown = true;
+		this.readyForNextGame = true;
+	}
+
+	public bool GetBetweenGameShown() {
+		return this.betweenGameScreenShown;
+	}
+
+	public void SetBetweenGameShown(bool shown) {
+		this.betweenGameScreenShown = shown;
+	}
 
     public void TakeLife() {
         this.lives--;
@@ -71,8 +86,16 @@ public class DataController : MonoBehaviour
         this.currentScore += score;
     }
 
-    public void SetRoundEndStatus(bool win) {
-        this.roundEndStatus = win;
+    public void SetRoundEndStatus(bool status) {
+        this.roundEndStatus = status;
     }
+
+	public bool GetReadyStatus() {
+		return this.readyForNextGame;
+	}
+
+	public void SetReadyStatus(bool status) {
+		this.readyForNextGame = status;
+	}
 
 }
