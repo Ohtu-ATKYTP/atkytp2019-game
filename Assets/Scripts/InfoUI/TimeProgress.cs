@@ -4,18 +4,21 @@ using UnityEngine.UI;
 using System.Timers;    
 using UnityEngine;
 
-public class WinTimer : MonoBehaviour
+public class TimeProgress : MonoBehaviour
 {
     // Start is called before the first frame update
     public int seconds;
     private float timer;
-    public Scrollbar timerSlider;
+    public Slider timerSlider;
+
+    public UnityEngine.Events.UnityEvent TimerReadyMethods;
     private DataController dataController;
     private bool timerEnded = false;
+
     void Start()
     {
         this.timer = (float) seconds;
-        timerSlider.value = this.timer;
+        timerSlider.value = 1f;
         dataController = FindObjectOfType<DataController>();
     }
 
@@ -33,8 +36,9 @@ public class WinTimer : MonoBehaviour
     }
 
     private void timerEnd() {
-        dataController.MinigameEnd(false, 0);
+        TimerReadyMethods.Invoke();
     }
+
 
 
 }

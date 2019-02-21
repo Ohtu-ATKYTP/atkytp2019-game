@@ -7,14 +7,16 @@ public class GameManager : MonoBehaviour {
     public int gamesStartIndex;
     public int gamesEndIndex;
     public Scene endGameScene;
-    private int lives;
+
     private string lastGame;
     private string game;
-    private string[] scenes = { "FirstGame", "SecondGame", "PlaceCity" };
+    private string[] scenes = { "FirstGame", "SecondGame", "PlaceCity", "TurkuGame" };
     private string mainmenuScreen = "MainMenu";
     private string endGameScreen = "MainMenu";
     private DataController dataController;
     private HighScoreManager HSManager;
+
+    
 
     private void Start() {
         this.dataController = FindObjectOfType<DataController>();
@@ -22,7 +24,6 @@ public class GameManager : MonoBehaviour {
         SceneManager.LoadScene(this.mainmenuScreen, LoadSceneMode.Additive);
         this.game = this.mainmenuScreen;
         this.lastGame = "";
-        this.lives = 3;
     }
 
     private void Update() {
@@ -33,9 +34,9 @@ public class GameManager : MonoBehaviour {
     }
 
     public void nextGame(bool win) {
-        if (!win) lives--;
+        if (!win) dataController.TakeLife();
 
-        if (lives == 0) {
+        if (dataController.GetLives() == 0) {
             endGame();
         } else {
             getRandomGame();
@@ -70,9 +71,7 @@ public class GameManager : MonoBehaviour {
 
     private void resetGameVariables() {
         this.game = "MainMenu";
-        this.lives = 3;
-        dataController.ResetScore();
-        dataController.SetWinStatus(true);
+        dataController.Init();
     }
 
     private void prepareNextGame() {

@@ -4,4 +4,5 @@ public class HighScore {
     public string user;
     public string token;
     public int score;
+    public int rank;
 }
