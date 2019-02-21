@@ -40,27 +40,8 @@ public class PlaceCityManager : MonoBehaviour {
         winText.enabled = false;
         loseText.enabled = false;
 
-        activateOnlyCurrentSceneCamera();
-        Debug.Log("Main kameran nimi: " + Camera.main.name);
-
     }
 
-
-    private void activateOnlyCurrentSceneCamera() {
-        activateOnlyCamera("PlaceCityCamera");
-
-    }
-
-    private void activateOnlyCamera(string cameraName) {
-        Camera[] cameras = FindObjectsOfType<Camera>();
-        for (int i = 0; i < cameras.Length; i++) {
-            if (cameras[i].name != cameraName) {
-                cameras[i].enabled = false;
-            } else {
-                cameras[i].enabled = true;
-            }
-        }
-    }
 
 
 

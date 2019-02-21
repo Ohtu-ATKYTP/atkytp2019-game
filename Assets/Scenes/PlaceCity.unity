@@ -909,6 +909,49 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scaleFactor: 15
   displayCollider: 1
+--- !u!1 &1263903919
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1263903921}
+  - component: {fileID: 1263903920}
+  m_Layer: 0
+  m_Name: InputController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1263903920
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1263903919}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26689ab59fb8fed45aa35816eb120492, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1263903921
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1263903919}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -6.590695, y: 12.031682, z: 76.73174}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1414937390
 GameObject:
   m_ObjectHideFlags: 0
@@ -1161,7 +1204,7 @@ PrefabInstance:
     - target: {fileID: 8137318998134975768, guid: fd4f367b34e98c924a4ec72280c273aa,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -640
       objectReference: {fileID: 0}
     - target: {fileID: 8137318998134975768, guid: fd4f367b34e98c924a4ec72280c273aa,
         type: 3}
@@ -1181,7 +1224,7 @@ PrefabInstance:
     - target: {fileID: 8137318998134975768, guid: fd4f367b34e98c924a4ec72280c273aa,
         type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8137318998134975768, guid: fd4f367b34e98c924a4ec72280c273aa,
         type: 3}
@@ -1191,7 +1234,7 @@ PrefabInstance:
     - target: {fileID: 8137318998134975768, guid: fd4f367b34e98c924a4ec72280c273aa,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8137318998134975768, guid: fd4f367b34e98c924a4ec72280c273aa,
         type: 3}
@@ -1258,6 +1301,7 @@ GameObject:
   - component: {fileID: 1943231070}
   - component: {fileID: 1943231069}
   - component: {fileID: 1943231072}
+  - component: {fileID: 1943231073}
   m_Layer: 0
   m_Name: PlaceCityCamera
   m_TagString: MainCamera
@@ -1344,6 +1388,18 @@ MonoBehaviour:
   drawColor: {r: 1, g: 0, b: 0.20123053, a: 1}
   camera: {fileID: 1943231070}
   drawGizmos: 1
+--- !u!114 &1943231073
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1943231068}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e33295226431223499ae0e57f3202e44, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1965133271
 GameObject:
   m_ObjectHideFlags: 0
