@@ -14,14 +14,12 @@ public class PlaceCityManager : MonoBehaviour {
     public Text winText;
     public Text loseText;
     private DataController dataController;
-    private bool allowTouching;
     private GameObject targetCity;
     private Dictionary<string, string> organisationsByCities;
 
 
 
     void Start() {
-        allowTouching = true;
         dataController = FindObjectOfType<DataController>();
         for (int i = 0; i < locations.Length; i++) {
             locations[i].GetComponent<CircleCollider2D>().radius = 2 * radius;
@@ -91,21 +89,9 @@ public class PlaceCityManager : MonoBehaviour {
         }
     }
 
-    void Update() {
-        if (!allowTouching) {
-            return;
-        }
-        if (Input.touchCount > 0) {
-            Touch touch = Input.GetTouch(0);
-            // z = distance from camera
-            Vector3 pos = new Vector3(touch.position.x, touch.position.y, 0);
 
-            pos = Camera.main.ScreenToWorldPoint(pos);
-            RaycastHit2D hit;
-            hit = Physics2D.Raycast(pos, Vector2.zero);
-            GameObject city = hit ? hit.collider.gameObject : null;
-
-            if (city != null) {
+    public void handleCityInteraction(GameObject city){ 
+        if (city != null) {
                 Debug.Log("HIT! " + city.name);
                 if (city == targetCity) {
                     StartCoroutine(EndMinigame(true));
@@ -119,9 +105,7 @@ public class PlaceCityManager : MonoBehaviour {
             }
 
             targetCity.GetComponent<InformationDisplayer>().DisplayOnMap();
-            allowTouching = false;
         }
-    }
 
     public void winMinigame(){ 
             StartCoroutine(EndMinigame(true));
