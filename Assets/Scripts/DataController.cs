@@ -98,4 +98,7 @@ public class DataController : MonoBehaviour
 		this.readyForNextGame = status;
 	}
 
+
+	private enum Status {
+	}
 }
