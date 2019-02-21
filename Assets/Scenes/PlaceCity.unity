@@ -151,8 +151,6 @@ MonoBehaviour:
   map: {fileID: 576472021}
   radius: 1
   delayAfterMinigameEndsInSeconds: 2
-  drawGizmos: 0
-  gizmoColor: {r: 0, g: 1, b: 1, a: 1}
   organisationText: {fileID: 611586466}
   winText: {fileID: 163711128}
   loseText: {fileID: 121240062}

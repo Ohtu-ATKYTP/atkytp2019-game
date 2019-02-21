@@ -8,8 +8,6 @@ public class PlaceCityManager : MonoBehaviour {
     public SpriteRenderer map;
     public float radius = 1f;
     public int delayAfterMinigameEndsInSeconds = 2;
-    public bool drawGizmos = true;
-    public Color gizmoColor = Color.cyan;
     public Text organisationText;
     public Text winText;
     public Text loseText;
@@ -54,47 +52,38 @@ public class PlaceCityManager : MonoBehaviour {
         }
     }
 
-    private void Initialize() {
-        Start();
-    }
 
-
-    void OnDrawGizmos() {
-        if (!drawGizmos) {
-            return;
-        }
-        Initialize();
-        for (int i = 0; i < locations.Length; i++) {
-            Vector3 v = locations[i].position;
-            Gizmos.DrawSphere(v, radius);
-        }
-    }
-
-
-    public void handleCityInteraction(GameObject city){ 
+    public void handleCityInteraction(GameObject city) {
         if (city != null) {
-                Debug.Log("HIT! " + city.name);
-                if (city == targetCity) {
-                    StartCoroutine(EndMinigame(true));
-                } else {
-                    StartCoroutine(EndMinigame(false));
-                }
-
+            if (city == targetCity) {
+                StartCoroutine(EndMinigame(true));
             } else {
-                Debug.Log("HÄVISIT PELIN");
                 StartCoroutine(EndMinigame(false));
             }
 
-            targetCity.GetComponent<InformationDisplayer>().DisplayOnMap();
-        }
-
-    public void winMinigame(){ 
-            StartCoroutine(EndMinigame(true));
-        }
-
-    public void loseMinigame(){ 
+        } else {
             StartCoroutine(EndMinigame(false));
         }
+
+        targetCity.GetComponent<InformationDisplayer>().DisplayOnMap();
+    }
+
+    public void winMinigame() {
+        StartCoroutine(EndMinigame(true));
+    }
+
+    public void loseMinigame() {
+        /*
+         * Check for the following situation:  
+         * player has clicked the correct city, but the timer runs out. Should the timer stop?
+         *
+         * 
+         */
+        if(winText.enabled){
+                return;
+        }
+        StartCoroutine(EndMinigame(false));
+    }
 
 
     private IEnumerator EndMinigame(bool win) {
