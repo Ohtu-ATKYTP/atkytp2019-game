@@ -39,4 +39,7 @@ public class LogoHaalariinLogic : MonoBehaviour {
             dataController.MinigameEnd (false, 10);
         }
     }
+    public void timesUp () {
+        dataController.MinigameEnd (false, 10);
+    }
 }
