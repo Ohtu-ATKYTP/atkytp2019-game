@@ -64,16 +64,44 @@ public class GlobalHighScores : MonoBehaviour {
         string usernameInfo = "";
         string scoreInfo = "";
 
-        for (int i = 0; i < highScores.Length; i++) {
+        string playerStyleOn = "<color=red><b>";
+        string playerStyleOff = "</b></color>";
+
+        bool isUserinTop10 = false;
+
+        for (int i = 0; i < 10; i++) {
+            
+            if(highScores[i].user == PlayerPrefs.GetString("username")){
+                isUserinTop10 = true;
+                int spot = i+1;
+                usernameInfo +=  playerStyleOn + spot + ". "+highScores[i].user + 
+                playerStyleOff + "\n";
+                
+                scoreInfo += playerStyleOn + highScores[i].score + 
+                playerStyleOff + "\n";
+            
+            }else{
             usernameInfo += i+1 + ". " + highScores[i].user + "\n";
             scoreInfo += highScores[i].score + "\n";
+            }
         }
 
-
+        if(!isUserinTop10){
+            
+            usernameInfo += "------------\n";
+            scoreInfo += "---\n";
+            
+            usernameInfo += playerStyleOn + PlayerPrefs.GetInt("rank") + ". " 
+            + PlayerPrefs.GetString("username") + playerStyleOff;
+            
+            scoreInfo += playerStyleOn + PlayerPrefs.GetInt("highScore")
+            + playerStyleOff;
+            
+        }
+        
         usernames.text = usernameInfo;
         scores.text = scoreInfo;
-
-
+    
     }
 
 

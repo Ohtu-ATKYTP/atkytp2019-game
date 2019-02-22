@@ -15,12 +15,11 @@ public class GameManager : MonoBehaviour {
     private string endGameScreen = "MainMenu";
     private DataController dataController;
     private HighScoreManager HSManager;
-
     
-
     private void Start() {
         this.dataController = FindObjectOfType<DataController>();
         this.HSManager = FindObjectOfType<HighScoreManager>();
+        
         SceneManager.LoadScene(this.mainmenuScreen, LoadSceneMode.Additive);
         this.game = this.mainmenuScreen;
         this.lastGame = "";
@@ -78,12 +77,14 @@ public class GameManager : MonoBehaviour {
             PlayerPrefs.SetInt("highScore", dataController.GetCurrentScore());
             PlayerPrefs.SetInt("syncedHS", 0);
             HSManager.StartSync();
+        
         }
         resetGameVariables();
 
     }
 
     private void resetGameVariables() {
+        Debug.Log("Päästin resetGameVariables");
         this.game = "MainMenu";
         dataController.Init();
     }
