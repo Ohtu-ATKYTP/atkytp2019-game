@@ -9,7 +9,6 @@ public class WebServiceScript : MonoBehaviour {
 
     [HideInInspector]
     public string highscores;
-
     void Start() {
         GetHighscores();
         /*
@@ -19,8 +18,6 @@ public class WebServiceScript : MonoBehaviour {
         }
         */
     }
-
-
     public void GetHighscores(System.Action<string> callback) {
         StartCoroutine(GetHighscoresText(callback));
     }
@@ -52,7 +49,6 @@ public class WebServiceScript : MonoBehaviour {
 
             // Or retrieve results as binary data
             byte[] results = req.downloadHandler.data;
-
         }
         callback(highscores);
     }
@@ -66,9 +62,7 @@ public class WebServiceScript : MonoBehaviour {
         req.SetRequestHeader("Content-Type", "application/json");
 
         yield return req.SendWebRequest();
-
-
-
+        
         if(req.isHttpError){ 
             callback(true, false, req.downloadHandler.text);
         } else if(req.isNetworkError){ 
@@ -110,11 +104,9 @@ public class WebServiceScript : MonoBehaviour {
             PlayerPrefs.SetInt("highScore", h.score);
             callback(true);
         }
-            
     }
 
-    public void GetRank()
-    {
+    public void GetRank() {
         StartCoroutine(GetRankCOR());
     }
 
@@ -127,13 +119,11 @@ public class WebServiceScript : MonoBehaviour {
 
         yield return req.SendWebRequest();
 
-        if (req.isNetworkError || req.isHttpError)
-        {
+        if (req.isNetworkError || req.isHttpError) {
             Debug.Log(req.error);
         }
         
-        else
-        {
+        else {
             HighScore h = JsonUtility.FromJson<HighScore>(req.downloadHandler.text);
             PlayerPrefs.SetInt("rank", h.rank);
         }
@@ -144,11 +134,9 @@ public class WebServiceScript : MonoBehaviour {
         return JsonifyUser(user, token, 0);
     }
 
-    private string JsonifyUser(string user, string token, int score)
-    {
+    private string JsonifyUser(string user, string token, int score) {
         return JsonifyUser(user, token, 0, 0);
     }
-
     private string JsonifyUser(string user, string token, int score, int rank) {
         HighScore h = new HighScore();
         h.user = user;
@@ -157,6 +145,4 @@ public class WebServiceScript : MonoBehaviour {
         h.rank = rank;
         return JsonUtility.ToJson(h);
     }
-
-
 }
