@@ -1,9 +1,17 @@
-﻿{
+{
     "name": "Tests",
+    "references": [],
     "optionalUnityReferences": [
         "TestAssemblies"
     ],
     "includePlatforms": [
+        "Android",
         "Editor"
-    ]
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": []
 }
