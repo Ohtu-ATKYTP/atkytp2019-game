@@ -43,7 +43,7 @@ public class PlaceCityManager : MonoBehaviour {
         loseText.enabled = false;
 
         activateOnlyCurrentSceneCamera();
-        Debug.Log("Main kameran nimi: " + Camera.main.name);
+        //Debug.Log("Main kameran nimi: " + Camera.main.name);
 
     }
 
