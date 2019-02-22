@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class Debugger : MonoBehaviour{
     private HighScoreManager HSManager;
-    private MyRank rankManager;
+    private RankManager rankManager;
 
     private void Start() {
-        this.rankManager = FindObjectOfType<MyRank>();
+        this.rankManager = FindObjectOfType<RankManager>();
         this.HSManager = FindObjectOfType<HighScoreManager>();
     }
     public void DeleteAllPlayerPrefs() {
