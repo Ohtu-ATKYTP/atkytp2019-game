@@ -68,22 +68,23 @@ public class GlobalHighScores : MonoBehaviour {
         string playerStyleOff = "</b></color>";
 
         bool isUserinTop10 = false;
-
-        for (int i = 0; i < 10; i++) {
+        int i = 0;
+        foreach (HighScore hs in highScores) {
             
-            if(highScores[i].user == PlayerPrefs.GetString("username")){
+            if(hs.user == PlayerPrefs.GetString("username")){
                 isUserinTop10 = true;
                 int spot = i+1;
-                usernameInfo +=  playerStyleOn + spot + ". "+highScores[i].user + 
+                usernameInfo +=  playerStyleOn + spot + ". "+hs.user + 
                 playerStyleOff + "\n";
                 
-                scoreInfo += playerStyleOn + highScores[i].score + 
+                scoreInfo += playerStyleOn + hs.score + 
                 playerStyleOff + "\n";
             
             }else{
-            usernameInfo += i+1 + ". " + highScores[i].user + "\n";
-            scoreInfo += highScores[i].score + "\n";
+            usernameInfo += i+1 + ". " + hs.user + "\n";
+            scoreInfo += hs.score + "\n";
             }
+            i++;
         }
 
         if(!isUserinTop10){
@@ -96,16 +97,10 @@ public class GlobalHighScores : MonoBehaviour {
             
             scoreInfo += playerStyleOn + PlayerPrefs.GetInt("highScore")
             + playerStyleOff;
-            
         }
-        
         usernames.text = usernameInfo;
         scores.text = scoreInfo;
-    
     }
-
-
-
 }
 
 
