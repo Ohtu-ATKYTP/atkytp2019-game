@@ -1,26 +1,23 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-public class FollowMouse : MonoBehaviour
-{
-    public ParticleSystem p;
+public class trail : MonoBehaviour
+{   
+    public TrailRenderer t;
+    TrailRenderer ct;
 
     void Update()
     {
-        var e = p.emission;
         if(!Input.GetMouseButton(0)){
-            e.enabled = false;
+            ct = Instantiate(t);
+            t.emitting = false;
+            Destroy(t);
+            t = ct;
         }else{
-            StartCoroutine(delay());
+            t.emitting = true;
             Vector3 pos = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition[0], Input.mousePosition[1], Camera.main.transform.position.z * -1));
             pos.z = 0;
             transform.position = pos;
         }
-    }
-
-    IEnumerator delay(){
-        yield return new WaitForSecondsRealtime(0.001f);
-        var e = p.emission;
-        e.enabled = true;
     }
 }
