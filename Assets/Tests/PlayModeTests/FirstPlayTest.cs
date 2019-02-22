@@ -6,19 +6,19 @@ using UnityEngine.TestTools;
 
 namespace Tests
 {
-    public class FirstTest
+    public class FirstPlayTest
     {
         // A Test behaves as an ordinary method
         [Test]
-        public void FirstTestSimplePasses()
+        public void FirstPlayTestSimplePasses()
         {
-            Assert.AreEqual(true, true);
+            Assert.IsFalse(false);
         }
 
         // A UnityTest behaves like a coroutine in Play Mode. In Edit Mode you can use
         // `yield return null;` to skip a frame.
         [UnityTest]
-        public IEnumerator FirstTestWithEnumeratorPasses()
+        public IEnumerator FirstPlayTestWithEnumeratorPasses()
         {
             // Use the Assert class to test conditions.
             // Use yield to skip a frame.

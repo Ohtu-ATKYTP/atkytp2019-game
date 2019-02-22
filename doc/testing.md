@@ -1,6 +1,10 @@
 # Testaus
 Testit löytyvät kansiosta Assets/Tests <br/>
-Lisää uusi testi `hiiren oikea -> create -> Testing -> C# Test Script`
+## Test Runner
+`Unity Test Runner`in saa auki `Window -> General -> Test Runner`
+
+## Uusi testi
+Lisää uusi testi `hiiren oikea -> create -> Testing -> C# Test Script` (varmista että olet oikeassa kansiossa riippuuen siitä teetkö `edit mode` vai `play mode` testiä)
 
 Unity luo koodin: (jos luot tiedoston itse vaikka komentoriviltä tästä on varmaan hyvä aloittaa)
 ```C#
@@ -40,8 +44,7 @@ namespace Tests
 >`yield return null;` to skip a frame.
 
 
-## Test Runner
-Testit suoritetaan `Unity Test Runner`issa jonka saa auki `Window -> General -> Test Runner`
+
 
 ## Edit mode testit
 Unityn manuaali sanoo seuraavaa: 
