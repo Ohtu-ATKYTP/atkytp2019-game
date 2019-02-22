@@ -18,6 +18,10 @@ public class MyRank : MonoBehaviour {
 
     private IEnumerator FetchAndDisplayRank(){
         while (true){
+            if(PlayerPrefs.GetInt("registered") == 0){
+                yield return new WaitForSecondsRealtime(60);
+                continue;
+            }
             rankText.text = "Rank: " + PlayerPrefs.GetInt("rank");
             webScript.GetRank();
             yield return new WaitForSecondsRealtime(60);

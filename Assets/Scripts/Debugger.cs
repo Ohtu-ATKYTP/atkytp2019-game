@@ -2,8 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Debugger : MonoBehaviour
-{
+public class Debugger : MonoBehaviour{
+    private HighScoreManager HSManager;
+
+    private void Start() {
+        
+    }
     public void DeleteAllPlayerPrefs()
     {
         PlayerPrefs.DeleteAll();
@@ -37,5 +41,21 @@ public class Debugger : MonoBehaviour
     public void DeleteRegistered()
     {
         PlayerPrefs.DeleteKey("registered");
+    }
+
+    public void increaseHighScore()
+    {
+        PlayerPrefs.SetInt("highScore", PlayerPrefs.GetInt("highScore")+10);
+        PlayerPrefs.SetInt("syncedHS", 0);
+        this.HSManager = FindObjectOfType<HighScoreManager>();
+        HSManager.StartSync();
+    }
+
+    public void decreaseHighScore()
+    {
+        PlayerPrefs.SetInt("highScore",PlayerPrefs.GetInt("highScore")-10);
+        PlayerPrefs.SetInt("syncedHS", 0);
+        this.HSManager = FindObjectOfType<HighScoreManager>();
+        HSManager.StartSync();
     }
 }
