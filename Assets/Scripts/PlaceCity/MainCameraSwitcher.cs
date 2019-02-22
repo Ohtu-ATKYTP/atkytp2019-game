@@ -12,7 +12,7 @@ using UnityEngine;
 public class MainCameraSwitcher : MonoBehaviour {
     private Camera initialMainCamera; 
 
-    void Start() {
+    void OnEnable() {
         initialMainCamera = Camera.main;
         activateOnlyCamera(GetComponent<Camera>());
     }
