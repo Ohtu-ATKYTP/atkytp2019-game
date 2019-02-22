@@ -65,7 +65,12 @@ public class GameManager : MonoBehaviour {
         if (PlayerPrefs.GetInt("highScore") < dataController.GetCurrentScore()) {
             PlayerPrefs.SetInt("highScore", dataController.GetCurrentScore());
             PlayerPrefs.SetInt("syncedHS", 0);
+
+            //Jos halutaan, että ajantasaiset näkyvät jossain loppuruudussa niin synkkaysta
+            //pitää odottaa. 
             HSManager.StartSync();
+            //Nyt rankin haku odottaa eka 3 sek että highscore ehditään lähettää
+            //Nämä voi muuttaa sillain että callback odottaa vahvistusta
             rankManager.AfterGameRank();
         
         }

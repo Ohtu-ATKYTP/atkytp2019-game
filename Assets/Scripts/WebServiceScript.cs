@@ -127,9 +127,8 @@ public class WebServiceScript : MonoBehaviour {
             HighScore h = JsonUtility.FromJson<HighScore>(req.downloadHandler.text);
             PlayerPrefs.SetInt("rank", h.rank);
         }
+        
     }
-
-
     private string JsonifyUser(string user, string token) {
         return JsonifyUser(user, token, 0);
     }

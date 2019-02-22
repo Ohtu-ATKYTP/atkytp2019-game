@@ -19,11 +19,13 @@ public class RankManager : MonoBehaviour {
     }
 
     public void AfterGameRank(){
+        
         StartCoroutine(AfterGameRankCOR());
     }
     private IEnumerator AfterGameRankCOR(){
+        yield return new WaitForSecondsRealtime(3);
         webScript.GetRank();
-        yield return new WaitForSeconds(1);
+        
     }
 
 }
