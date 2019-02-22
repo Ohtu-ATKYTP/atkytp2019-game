@@ -13,7 +13,9 @@ public class PlayButton : MonoBehaviour
     // Start is called before the first frame update
     public void StartGame()
     {
-        dataController.SetRoundEndStatus(true);
+		//dataController.SetRoundEndStatus(true);
+		//dataController.SetReadyStatus(true);
+		dataController.SetStatus(DataController.Status.MINIGAME);
         Debug.Log("Win status set true");
     }
 
