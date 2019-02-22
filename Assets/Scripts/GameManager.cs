@@ -15,10 +15,13 @@ public class GameManager : MonoBehaviour {
     private string endGameScreen = "MainMenu";
     private DataController dataController;
     private HighScoreManager HSManager;
+    private RankManager rankManager;
     
     private void Start() {
         this.dataController = FindObjectOfType<DataController>();
         this.HSManager = FindObjectOfType<HighScoreManager>();
+        this.rankManager = FindObjectOfType<RankManager>();
+
         
         SceneManager.LoadScene(this.mainmenuScreen, LoadSceneMode.Additive);
         this.game = this.mainmenuScreen;
@@ -62,7 +65,13 @@ public class GameManager : MonoBehaviour {
         if (PlayerPrefs.GetInt("highScore") < dataController.GetCurrentScore()) {
             PlayerPrefs.SetInt("highScore", dataController.GetCurrentScore());
             PlayerPrefs.SetInt("syncedHS", 0);
+
+            //Jos halutaan, että ajantasaiset näkyvät jossain loppuruudussa niin synkkaysta
+            //pitää odottaa. 
             HSManager.StartSync();
+            //Nyt rankin haku odottaa eka 3 sek että highscore ehditään lähettää
+            //Nämä voi muuttaa sillain että callback odottaa vahvistusta
+            rankManager.AfterGameRank();
         
         }
         resetGameVariables();
