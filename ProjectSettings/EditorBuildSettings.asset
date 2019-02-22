@@ -26,4 +26,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/BetweenGameScreen.unity
     guid: 31199e994df73baa080811712f92c52c
+  - enabled: 1
+    path: Assets/Scenes/LogoHaalariin.unity
+    guid: 52b7924d7febc448cb97b5820b102e51
   m_configObjects: {}
