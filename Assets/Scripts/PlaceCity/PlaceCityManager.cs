@@ -94,6 +94,8 @@ public class PlaceCityManager : MonoBehaviour {
         } else {
             loseText.enabled = true;
         }
+        TimeProgress timerScript = FindObjectOfType<TimeProgress>();
+        timerScript.StopTimerProgression();
 
         yield return new WaitForSeconds(delayAfterMinigameEndsInSeconds);
         //varmaan hyvä idea lopulta (jos SceneManagerCamera renderöi jotain pelien välissä)
