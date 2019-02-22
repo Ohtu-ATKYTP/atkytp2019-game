@@ -13,37 +13,35 @@ public class TurkuManager : MonoBehaviour {
 
     void Start() {
         dataController = FindObjectOfType<DataController>();
-        StartCoroutine(Lose());
     }
 
     void Update() {
         if (hitboxes.Active() > Mathf.Min(40, difficulty) && !gameOver) {
-            this.gameOver = true;
-            this.Win();
+            Win();
         }
     }
 
-    public void EndMinigame(bool win) {
-        dataController.SetRoundEndStatus(true);
-        dataController.SetWinStatus(win);
-        dataController.AddCurrentScore(10);
-    }
+	public void Lose() {
+		gameOver = true;
+		StartCoroutine(RunLoseAnimation());
+	}
 
-    IEnumerator Lose() {
-        yield return new WaitForSecondsRealtime(10);
+    IEnumerator RunLoseAnimation() {
         flood.StartAnimation();
         yield return new WaitForSecondsRealtime(4);
-        EndMinigame(false);
+        dataController.MinigameEnd(false, 0);
     }
 
-    private void Win() {
-        StartCoroutine(EndGame());
-        Debug.Log("VOITIT PELIN!");
-    }
+	private void Win() {
+		this.gameOver = true;
+		TimeProgress timerScript = FindObjectOfType<TimeProgress>();
+		timerScript.StopTimerProgression();
+        StartCoroutine(RunWinAnimation());
+	}
 
-    IEnumerator EndGame() {
+    IEnumerator RunWinAnimation() {
         turkuAnimation.StartAnimation();
         yield return new WaitForSecondsRealtime(3);
-        EndMinigame(true);
+        dataController.MinigameEnd(true, 10);
     }
 }
