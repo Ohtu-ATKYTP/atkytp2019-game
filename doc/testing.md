@@ -47,16 +47,46 @@ namespace Tests
 
 
 ## Edit mode testit
-Unityn manuaali sanoo seuraavaa: 
-
->Edit mode test scripts <br/>
->are defined by the file location you place them in. Valid locations:
->
->Project Editor folder
->
->Assembly Definition file that references test assemblies that are Editor-only
->
->Precompiled assemblies that are in the Project’s Editor folder
+Tehdään kansioon `Assets/Tests/PlayModeTests`
 
 ## Play mode testit
-Tehdään `Assets/Tests` kansioon. Varmista, että kyseisestä kansiosta löytyvässä `Tests.dll` tiedostossa on valittu haluamasi platformit. Jotta play mode testit voidaan suorittaa täytyy valittuna olla (myös) jokin muu kuin Editor
+Tehdään `Assets/Tests/PlayModeTests` kansioon. HUOM! .dll tiedostossa on oletuksena 
+
+# NUnit
+[Dokumentaatio](https://github.com/nunit/docs/wiki) <br/>
+
+Unit testit kirjoitetaan NUnit kirjaston avulla. Kun luot testisciprtin se importataan automaattisesti. NUnit vaikuttaa toimivan samaan tamaan kuin JUnit, mutta syntaksi eroaa hieman. Ainakin seuraavat komennot ovat olemassa ja hyödyllisiä:
+```C#
+Assert.AreEqual(Object A, Object B);
+Assert.IsTrue(bool x);
+Assert.IsFalse(bool x);
+```
+Jos haluat määritellä arvoja muuttujille ennen jokaista testiä käytä `SetUp`:
+```C#
+int x;
+[SetUp]
+public void SetUp() {
+    x = 5;
+}
+```
+Jos haluat tehdä jonkin clean upin joka testin jälkeen:
+```C#
+[TearDown]
+public void TearDown() {
+    //TearDown runs after every test
+}
+```
+Jos haluat tehdä jotain ennen kuin yhtäkään testiä suoritetaan ja vain kerran:
+```C#
+[TestFixtureSetUp]
+public void Init() {
+    //Init runs once before running test cases.
+}
+```
+Ja jos haluat tehdä clean upin kun kaikki testit on suoritetu:
+```C#
+[TestFixtureTearDown]
+public void CleanUp() {
+    //CleanUp runs once after all test cases are finished.
+}
+```
