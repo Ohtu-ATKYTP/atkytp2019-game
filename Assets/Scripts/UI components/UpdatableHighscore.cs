@@ -3,8 +3,14 @@ using UnityEngine.UI;
 
 public class UpdatableHighscore : MonoBehaviour
 {
+    private Text scoreText;
     private void Start() {
-        Text scoreText = GetComponent<Text>();
+        this.scoreText = GetComponent<Text>();
+        int score = (PlayerPrefs.HasKey("highScore")) ?  PlayerPrefs.GetInt("highScore") : 0;
+        scoreText.text = "High score: " + score;
+    }
+
+    private void Update() {
         int score = (PlayerPrefs.HasKey("highScore")) ?  PlayerPrefs.GetInt("highScore") : 0;
         scoreText.text = "High score: " + score;
     }

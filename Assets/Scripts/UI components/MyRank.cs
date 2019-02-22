@@ -10,10 +10,13 @@ public class MyRank : MonoBehaviour {
 
     void Start() {
         webScript = FindObjectOfType<WebServiceScript>();
-        rankText = GetComponent<Text>();
+        this.rankText = GetComponent<Text>();
         rankText.text = "Rank: ";
         StartCoroutine(FetchAndDisplayRank());
+    }
 
+    void Update() {
+        rankText.text = "Rank: " + PlayerPrefs.GetInt("rank");
     }
 
     private IEnumerator FetchAndDisplayRank(){
@@ -22,9 +25,18 @@ public class MyRank : MonoBehaviour {
                 yield return new WaitForSecondsRealtime(60);
                 continue;
             }
-            rankText.text = "Rank: " + PlayerPrefs.GetInt("rank");
             webScript.GetRank();
             yield return new WaitForSecondsRealtime(60);
         }
     }
+    public void AfterGameRank(){
+        StartCoroutine(AfterGameRankCOR());
+    }
+
+    private IEnumerator AfterGameRankCOR(){
+        webScript.GetRank();
+        yield return new WaitForSeconds(1);
+    }
+
+
 }
