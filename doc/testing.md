@@ -78,14 +78,14 @@ public void TearDown() {
 ```
 Jos haluat tehdä jotain ennen kuin yhtäkään testiä suoritetaan ja vain kerran:
 ```C#
-[TestFixtureSetUp]
+[OneTimeSetUp]
 public void Init() {
     //Init runs once before running test cases.
 }
 ```
 Ja jos haluat tehdä clean upin kun kaikki testit on suoritetu:
 ```C#
-[TestFixtureTearDown]
+[OneTimeTearDown]
 public void CleanUp() {
     //CleanUp runs once after all test cases are finished.
 }
