@@ -30,14 +30,14 @@ public class GameManager : MonoBehaviour {
 
     private void Update() {
         if (dataController.GetStatus() == DataController.Status.MINIGAME) {
-			Debug.Log("starting new minigame");
+			dataController.SetStatus(DataController.Status.WAIT);
             prepareNextGame();
         } else if (dataController.GetStatus() == DataController.Status.BETWEEN) {
 			//Execute between screen scene
 			Debug.Log("going to between screen");
 			ExecuteBetweenScreen();
 		} else if (dataController.GetStatus() == DataController.Status.MAIN_MENU) {
-			//Go to main menu
+			//Go to main menu (future implementation?)
 		}
     }
 
@@ -49,8 +49,6 @@ public class GameManager : MonoBehaviour {
 	}
 
     public void nextGame(bool win) {
-        if (!win) dataController.TakeLife();
-
         if (dataController.GetLives() == 0) {
             endGame();
         } else {
@@ -68,7 +66,7 @@ public class GameManager : MonoBehaviour {
         while (game == lastGame) {
             game = this.scenes[Random.Range(0, this.scenes.Length)];
         }
-		Debug.Log("Loading scene " + this.game);
+		Debug.Log("Loading scene " + this.game + " with status " + dataController.GetStatus());
         SceneManager.LoadScene(game, LoadSceneMode.Additive);
     }
 

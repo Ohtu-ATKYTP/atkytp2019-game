@@ -5,6 +5,7 @@ using System.IO;                                                        // The S
 
 public class DataController : MonoBehaviour 
 {
+	//The MAIN_MENU flag is as of yet unused, can be used in a future implementation
 	public enum Status {
 		WAIT,
 		MAIN_MENU,
@@ -14,12 +15,9 @@ public class DataController : MonoBehaviour
     private RoundData[] allRoundData;
 
     private int currentScore;
-    private bool roundEndStatus;
     private bool winStatus;
     private int lives;
     private readonly int MAX_LIVES = 3;
-	private bool betweenGameScreenShown;
-	private bool readyForNextGame;
 	private int lastReceivedScore;
 	private Status status;
 
@@ -31,34 +29,21 @@ public class DataController : MonoBehaviour
 
     public void Init() {
         this.currentScore = 0;
-        this.roundEndStatus = false;
         this.winStatus = true;
         this.lives = MAX_LIVES;
-		this.betweenGameScreenShown = true;
-		this.readyForNextGame = false;
 		this.status = Status.WAIT;
 		this.lastReceivedScore = 0;
     }
 
     public void MinigameEnd(bool win, int score) {
         this.SetWinStatus(win);
+		if (!win) this.lives--;
         this.AddCurrentScore(score);
-        this.SetRoundEndStatus(true);
 		this.status = Status.BETWEEN;
     }
 
 	public void BetweenScreenEnd() {
-		this.betweenGameScreenShown = true;
-		this.readyForNextGame = true;
 		this.status = Status.MINIGAME;
-	}
-
-	public bool GetBetweenGameShown() {
-		return this.betweenGameScreenShown;
-	}
-
-	public void SetBetweenGameShown(bool shown) {
-		this.betweenGameScreenShown = shown;
 	}
 
     public void TakeLife() {
@@ -89,26 +74,10 @@ public class DataController : MonoBehaviour
         return this.currentScore;
     }
 
-    public bool GetRoundEndStatus() {
-        return this.roundEndStatus;
-    }
-
-    public void AddCurrentScore(int score) {
+	public void AddCurrentScore(int score) {
 		this.lastReceivedScore = score;
         this.currentScore += score;
     }
-
-    public void SetRoundEndStatus(bool status) {
-        this.roundEndStatus = status;
-    }
-
-	public bool GetReadyStatus() {
-		return this.readyForNextGame;
-	}
-
-	public void SetReadyStatus(bool status) {
-		this.readyForNextGame = status;
-	}
 
 	public Status GetStatus() {
 		return this.status;

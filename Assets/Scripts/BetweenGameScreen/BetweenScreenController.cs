@@ -10,23 +10,26 @@ public class BetweenScreenController : MonoBehaviour
 	public Text prevScore;
 	public Text addScore;
 	public Text newScore;
+	public Text livesAmount;
+	private bool active;
 
     // Start is called before the first frame update
     void Start() {
+		active = true;
 		dataController = FindObjectOfType<DataController>();
         startTime = Time.time;
-		Debug.Log("lives" + dataController.GetLives());
 		prevScore.text = "" + (dataController.GetCurrentScore() - dataController.GetLastReceivedScore());
 		addScore.text = "" + dataController.GetLastReceivedScore();
 		newScore.text = "" + dataController.GetCurrentScore();
+		livesAmount.text = "" + dataController.GetLives();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Time.time - startTime > 3) {
+        if (Time.time - startTime > 3 && active) {
+			active = false;
 			dataController.BetweenScreenEnd();
 		}
-		
     }
 }
