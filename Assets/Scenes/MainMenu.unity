@@ -311,7 +311,7 @@ GameObject:
   - component: {fileID: 108597965}
   - component: {fileID: 108597964}
   m_Layer: 5
-  m_Name: DecreaseHS
+  m_Name: DecreaseHSButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1185,7 +1185,7 @@ GameObject:
   - component: {fileID: 377683240}
   - component: {fileID: 377683239}
   m_Layer: 5
-  m_Name: IncreaseHS
+  m_Name: IncreaseHSButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1962,7 +1962,7 @@ GameObject:
   - component: {fileID: 642440216}
   - component: {fileID: 642440215}
   m_Layer: 5
-  m_Name: Scores
+  m_Name: ScoresText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3020,7 +3020,7 @@ GameObject:
   - component: {fileID: 1069389362}
   - component: {fileID: 1069389361}
   m_Layer: 5
-  m_Name: Title
+  m_Name: TitleText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3178,7 +3178,7 @@ GameObject:
   - component: {fileID: 1142031313}
   - component: {fileID: 1142031312}
   m_Layer: 5
-  m_Name: TitleScore
+  m_Name: TitleScoreText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3449,12 +3449,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1195981962}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 686.45825, y: 286.5029, z: -1.3638788}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_Father: {fileID: 1798732113}
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1202589525
 GameObject:
@@ -4588,6 +4588,7 @@ GameObject:
   - component: {fileID: 1550171996}
   - component: {fileID: 1550172000}
   - component: {fileID: 1550172001}
+  - component: {fileID: 1550172002}
   m_Layer: 5
   m_Name: Settings Screen
   m_TagString: Untagged
@@ -4714,6 +4715,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attemptTimeDelay: 60
+--- !u!114 &1550172002
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1550171995}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1edcb2c6fe4abd34d909010cd910ff31, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1580318896
 GameObject:
   m_ObjectHideFlags: 0
@@ -4807,7 +4820,7 @@ GameObject:
   - component: {fileID: 1597301832}
   - component: {fileID: 1597301831}
   m_Layer: 5
-  m_Name: SyncHS
+  m_Name: SyncHSButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5643,6 +5656,7 @@ RectTransform:
   - {fileID: 1580318897}
   - {fileID: 576354009}
   - {fileID: 161030191}
+  - {fileID: 1195981965}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -6106,7 +6120,7 @@ GameObject:
   - component: {fileID: 1879791571}
   - component: {fileID: 1879791570}
   m_Layer: 5
-  m_Name: UpdateRank
+  m_Name: UpdateRankButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6686,7 +6700,7 @@ GameObject:
   - component: {fileID: 2065358237}
   - component: {fileID: 2065358236}
   m_Layer: 5
-  m_Name: TitlePlayers
+  m_Name: TitlePlayersText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6765,7 +6779,7 @@ GameObject:
   - component: {fileID: 2083006419}
   - component: {fileID: 2083006418}
   m_Layer: 5
-  m_Name: Players
+  m_Name: PlayersText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
