@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class MyRank : MonoBehaviour {
+public class OwnRankText : MonoBehaviour {
     private WebServiceScript webScript;
     private Text rankText;
     void Start() {

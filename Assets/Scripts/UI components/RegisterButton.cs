@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PotentiallyHiddenButton : MonoBehaviour
+public class RegisterButton : MonoBehaviour
 {
     private bool isVisible; 
 

@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-public class UpdatableHighscore : MonoBehaviour
+public class OwnHighScoreText : MonoBehaviour
 {
     private Text scoreText;
     private void Start() {

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311992, g: 0.38074034, b: 0.35872713, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311918, g: 0.3807398, b: 0.35872716, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -130,7 +130,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &65540279
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -755,7 +755,7 @@ GameObject:
   - component: {fileID: 238650999}
   - component: {fileID: 238650998}
   m_Layer: 5
-  m_Name: Play
+  m_Name: PlayButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1663,7 +1663,7 @@ GameObject:
   - component: {fileID: 500394506}
   - component: {fileID: 500394505}
   m_Layer: 5
-  m_Name: OwnHighestScore
+  m_Name: OwnHighScoreText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2738,7 +2738,7 @@ GameObject:
   - component: {fileID: 1029817718}
   - component: {fileID: 1029817721}
   m_Layer: 5
-  m_Name: Registration
+  m_Name: RegistrationButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3842,7 +3842,7 @@ GameObject:
   - component: {fileID: 1327607855}
   - component: {fileID: 1327607854}
   m_Layer: 5
-  m_Name: Text
+  m_Name: MainMenuText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3922,7 +3922,7 @@ GameObject:
   - component: {fileID: 1335575258}
   - component: {fileID: 1335575257}
   m_Layer: 5
-  m_Name: Highscore
+  m_Name: HighscoreButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5022,7 +5022,7 @@ GameObject:
   - component: {fileID: 1639127088}
   - component: {fileID: 1639127087}
   m_Layer: 5
-  m_Name: Token Input
+  m_Name: TokenInput
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5872,7 +5872,7 @@ GameObject:
   - component: {fileID: 1841693979}
   - component: {fileID: 1841693978}
   m_Layer: 5
-  m_Name: Username Input
+  m_Name: UsernameInput
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6013,7 +6013,7 @@ GameObject:
   - component: {fileID: 1843786703}
   - component: {fileID: 1843786702}
   m_Layer: 5
-  m_Name: MyRank
+  m_Name: OwnRankText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6050,7 +6050,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae4497ea615d0b945a2d0288c8f9d9bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  requestDelayInSeconds: 60
 --- !u!114 &1843786703
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6327,7 +6326,7 @@ GameObject:
   - component: {fileID: 1994908417}
   - component: {fileID: 1994908416}
   m_Layer: 5
-  m_Name: Settings
+  m_Name: SettingsButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
