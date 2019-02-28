@@ -13,13 +13,14 @@ public class DataController : MonoBehaviour
 		BETWEEN
 	}
     private RoundData[] allRoundData;
-
+	private readonly int DIFF_INCREASE_INTERVAL = 3;
     private int currentScore;
     private bool winStatus;
     private int lives;
     private readonly int MAX_LIVES = 3;
 	private int lastReceivedScore;
 	private Status status;
+	private int roundsCompleted;
 
     void Start()
     {
@@ -33,13 +34,21 @@ public class DataController : MonoBehaviour
         this.lives = MAX_LIVES;
 		this.status = Status.WAIT;
 		this.lastReceivedScore = 0;
+		this.roundsCompleted = 0;
     }
+
+	//Calculates and returns the current difficulty level. Difficulty increases every DIFF_INCREASE_INTERVAL levels.
+	//Difficulty range is 1 and upwards
+	public int GetDifficulty() {
+		return this.roundsCompleted / this.DIFF_INCREASE_INTERVAL + 1;
+	}
 
     public void MinigameEnd(bool win, int score) {
         this.SetWinStatus(win);
 		if (!win) this.lives--;
         this.AddCurrentScore(score);
 		this.status = Status.BETWEEN;
+		this.roundsCompleted++;
     }
 
 	public void BetweenScreenEnd() {
