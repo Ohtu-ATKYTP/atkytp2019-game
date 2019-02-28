@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class FormController : MonoBehaviour {
+public class RegisterButton : MonoBehaviour {
     public Text statusMessage;
     private WebServiceScript webScript;
 
