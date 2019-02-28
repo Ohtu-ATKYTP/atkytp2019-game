@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class HighScoreButton : MonoBehaviour {
+public class GlobalHighScores : MonoBehaviour {
     private WebServiceScript webScript;
     private Text usernames;
     private Text scores;
@@ -17,9 +17,9 @@ public class HighScoreButton : MonoBehaviour {
         Text[] textComponents = GetComponentsInChildren<Text>();
         for (int i = 0; i < textComponents.Length; i++) {
             Text texComp = textComponents[i];
-            if (texComp.name == "Players") {
+            if (texComp.name == "PlayersText") {
                 usernames = texComp;
-            } else if (texComp.name == "Scores") {
+            } else if (texComp.name == "ScoresText") {
                 scores = texComp;
             }
         }
