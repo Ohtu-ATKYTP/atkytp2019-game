@@ -437,7 +437,7 @@ GameObject:
   - component: {fileID: 1288971888}
   - component: {fileID: 1288971887}
   m_Layer: 0
-  m_Name: DataControllerObject
+  m_Name: DataController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -654,7 +654,7 @@ GameObject:
   - component: {fileID: 1987998211}
   - component: {fileID: 1987998210}
   m_Layer: 0
-  m_Name: SceneManagerObject
+  m_Name: GameManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -701,7 +701,7 @@ GameObject:
   - component: {fileID: 1997416833}
   - component: {fileID: 1997416832}
   m_Layer: 0
-  m_Name: WebManager
+  m_Name: WebService
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
