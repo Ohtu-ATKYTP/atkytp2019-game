@@ -17,8 +17,8 @@ public class FormController : MonoBehaviour {
             return;
          }
 
-        string userName = GameObject.Find("Username Input").transform.Find("Text").GetComponent<Text>().text;
-        string token = GameObject.Find("Token Input").transform.Find("Text").GetComponent<Text>().text;
+        string userName = GameObject.Find("UsernameInput").transform.Find("Text").GetComponent<Text>().text;
+        string token = GameObject.Find("TokenInput").transform.Find("Text").GetComponent<Text>().text;
         webScript.RegisterUser(userName, token, (connectionSuccess, serverSuccess, errorData) => {
 
             if(!connectionSuccess){ 
