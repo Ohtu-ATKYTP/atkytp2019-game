@@ -141,6 +141,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8bb8ac9368d59e74caaf50fa2d964dfc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  difficulty: 0
+  pointsForWinning: 10
 --- !u!4 &85307752
 Transform:
   m_ObjectHideFlags: 0
@@ -406,6 +408,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2373825414488131404, guid: 429ac7998153b6f43bf9d92cb21957bf,
+        type: 3}
+      propertyPath: TimerReadyMethods.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 85307751}
+    - target: {fileID: 2373825414488131404, guid: 429ac7998153b6f43bf9d92cb21957bf,
+        type: 3}
+      propertyPath: TimerReadyMethods.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnTimerEnd
       objectReference: {fileID: 0}
     - target: {fileID: 2373825414128706435, guid: 429ac7998153b6f43bf9d92cb21957bf,
         type: 3}
