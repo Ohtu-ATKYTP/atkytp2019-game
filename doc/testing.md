@@ -2,7 +2,8 @@
 Testit löytyvät kansiosta Assets/Tests <br/>
 
 ### Hyödyllisiä linkkejä
-https://blogs.unity3d.com/2014/07/28/unit-testing-at-the-speed-of-light-with-unity-test-tools/
+https://blogs.unity3d.com/2014/07/28/unit-testing-at-the-speed-of-light-with-unity-test-tools/  
+https://nsubstitute.github.io/ (mocking kirjasto)
 ## Test Runner
 `Unity Test Runner`in saa auki `Window -> General -> Test Runner`
 
@@ -58,12 +59,21 @@ Tehdään `Assets/Tests/PlayModeTests` kansioon. HUOM! .dll tiedostossa on oletu
 # NUnit
 [Dokumentaatio](https://github.com/nunit/docs/wiki) <br/>
 
-Unit testit kirjoitetaan NUnit kirjaston avulla. Kun luot testisciprtin se importataan automaattisesti. NUnit vaikuttaa toimivan samaan tamaan kuin JUnit, mutta syntaksi eroaa hieman. Ainakin seuraavat komennot ovat olemassa ja hyödyllisiä:
+Unit testit kirjoitetaan NUnit kirjaston avulla. Kun luot testisciprtin se importataan automaattisesti. NUnit vaikuttaa toimivan samaan tamaan kuin JUnit, mutta syntaksi eroaa hieman. Ainakin seuraavat komennot ovat olemassa ja hyödyllisiä:  
+`EDIT HUOM! Minulle selveisi että seuraavat ovat vanha tapa tehdä assertioneita! Ne kuitenkin toimivat yhä.`
 ```C#
 Assert.AreEqual(Object A, Object B);
 Assert.IsTrue(bool x);
 Assert.IsFalse(bool x);
 ```
+`Käytä mieluummin Assert.That() metodia! Lue lisää dokumentaatiosta!`
+```C#
+int[] array = new int[] { 1, 2, 3 };
+Assert.That(array, Has.Exactly(1).EqualTo(3));
+Assert.That(array, Has.Exactly(2).GreaterThan(1));
+Assert.That(array, Has.Exactly(3).LessThan(100));
+```
+---
 Jos haluat määritellä arvoja muuttujille ennen jokaista testiä käytä `SetUp`:
 ```C#
 int x;
@@ -94,7 +104,7 @@ public void CleanUp() {
 }
 ```
 ---
-## Test Doubles: Dummy, stub, spy, mock ja fake
+# Test Doubles: Dummy, stub, spy, mock ja fake
 Termistöä ([unity blog postauksen mukaan](https://blogs.unity3d.com/2014/07/28/unit-testing-at-the-speed-of-light-with-unity-test-tools/))
 
  Termi      | Selitys        
@@ -104,3 +114,10 @@ Termistöä ([unity blog postauksen mukaan](https://blogs.unity3d.com/2014/07/28
  Spy        | pitää kirjaa esim. funktiokutsuista
  Mock       | spy joka tarkistaa että oikeat funktiot on kutsuttu
  Fake       | sisältää logiikka ja emuloi oikeaa komponenttia
+
+ ## NSubstitute
+
+ Nämä test doublet (testikaksonen? :D) voi toki kirjoittaa itse omaksi luokakseen mutta voi olla mukavampaa käyttää mockaukseen suunniteltua testauskirjastoa (olette varmaan käyttäneet javavassa mockitoa). NSubstitute on unity test toolseissa mukana joten on loogista käyttää sitä.
+
+ ### Dummyn luominen NSubstitutella
+ 
