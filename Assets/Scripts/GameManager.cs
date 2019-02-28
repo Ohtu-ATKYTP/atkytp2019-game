@@ -44,6 +44,9 @@ public class GameManager : MonoBehaviour {
 	private void ExecuteBetweenScreen() {
 		dataController.SetStatus(DataController.Status.WAIT);
 		SceneManager.UnloadSceneAsync(this.game);
+		if (game != null) {
+            lastGame = game;
+        }
 		this.game = "BetweenGameScreen";
         SceneManager.LoadScene(this.game, LoadSceneMode.Additive);
 	}
@@ -59,9 +62,6 @@ public class GameManager : MonoBehaviour {
     }
 
     private void getRandomGame() {
-        if (game != null) {
-            lastGame = game;
-        }
         game = this.scenes[Random.Range(0, this.scenes.Length)];
         while (game == lastGame) {
             game = this.scenes[Random.Range(0, this.scenes.Length)];
