@@ -1,5 +1,8 @@
 # Testaus
 Testit löytyvät kansiosta Assets/Tests <br/>
+
+### Hyödyllisiä linkkejä
+https://blogs.unity3d.com/2014/07/28/unit-testing-at-the-speed-of-light-with-unity-test-tools/
 ## Test Runner
 `Unity Test Runner`in saa auki `Window -> General -> Test Runner`
 
@@ -90,3 +93,14 @@ public void CleanUp() {
     //CleanUp runs once after all test cases are finished.
 }
 ```
+---
+## Test Doubles: Dummy, stub, spy, mock ja fake
+Termistöä ([unity blog postauksen mukaan](https://blogs.unity3d.com/2014/07/28/unit-testing-at-the-speed-of-light-with-unity-test-tools/))
+
+ Termi      | Selitys        
+ ---------- | :-------        
+ Dummy      | palauttaa kaikesta null
+ Stub       | palauttaa staattista testidataa
+ Spy        | pitää kirjaa esim. funktiokutsuista
+ Mock       | spy joka tarkistaa että oikeat funktiot on kutsuttu
+ Fake       | sisältää logiikka ja emuloi oikeaa komponenttia
