@@ -419,6 +419,16 @@ PrefabInstance:
       propertyPath: TimerReadyMethods.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: OnTimerEnd
       objectReference: {fileID: 0}
+    - target: {fileID: 2373825413886070461, guid: 429ac7998153b6f43bf9d92cb21957bf,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2373825413886070461, guid: 429ac7998153b6f43bf9d92cb21957bf,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2373825414128706435, guid: 429ac7998153b6f43bf9d92cb21957bf,
         type: 3}
       propertyPath: m_AnchorMax.x
