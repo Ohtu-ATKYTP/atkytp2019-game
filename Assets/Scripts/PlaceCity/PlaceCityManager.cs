@@ -98,10 +98,7 @@ public class PlaceCityManager : MonoBehaviour {
         }
         TimeProgress timerScript = FindObjectOfType<TimeProgress>();
         timerScript.StopTimerProgression();
-
         yield return new WaitForSeconds(delayAfterMinigameEndsInSeconds);
-        //varmaan hyvä idea lopulta (jos SceneManagerCamera renderöi jotain pelien välissä)
-        //activateOnlyCamera("SceneManagerCamera");
         dataController.MinigameEnd(win, win ? 10 : 0);
     }
 }
