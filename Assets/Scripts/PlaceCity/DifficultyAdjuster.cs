@@ -6,6 +6,7 @@ public class DifficultyAdjuster : MonoBehaviour {
     public TimeProgress timer;
     // Used to determine the difficulty of the map sprite
     public SpriteManager spriteManager;
+    public float shortestPossibleTime = 1f;
 
 
 
@@ -27,7 +28,12 @@ public class DifficultyAdjuster : MonoBehaviour {
 
     }
 
-    private void TuneTime(int difficulty) { }
+    private void TuneTime(int difficulty) {
+        timer.seconds -= 43 ;
+        if (timer.seconds < shortestPossibleTime) {
+            timer.seconds = (int) shortestPossibleTime;
+        }
+    }
 
     private void TuneSprite(int difficulty) { }
 

@@ -36,7 +36,6 @@ public class SpriteManager : MonoBehaviour {
             if (!cityTransforms[i].gameObject.activeSelf) {
                 continue;
             }
-            Debug.Log(transform);
             Vector3 center = bounds.center;
             Vector3 additionVector = new Vector3(0, 0, cityTransforms[i].position.z);
             if (hor) {
@@ -48,7 +47,6 @@ public class SpriteManager : MonoBehaviour {
             }
 
             cityTransforms[i].position += additionVector;
-            Debug.Log(transform.position);
         }
 
 
