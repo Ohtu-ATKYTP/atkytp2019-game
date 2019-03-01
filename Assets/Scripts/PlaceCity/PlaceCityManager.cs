@@ -100,11 +100,8 @@ public class PlaceCityManager : MonoBehaviour {
 
         TimeProgress timerScript = FindObjectOfType<TimeProgress>();
         timerScript.StopTimerProgression();
-<<<<<<< HEAD
 
         targetCity.GetComponent<InformationDisplayer>().DisplayOnMap(statusColor);
-=======
->>>>>>> master
         yield return new WaitForSeconds(delayAfterMinigameEndsInSeconds);
         dataController.MinigameEnd(win, win ? 10 : 0);
     }
