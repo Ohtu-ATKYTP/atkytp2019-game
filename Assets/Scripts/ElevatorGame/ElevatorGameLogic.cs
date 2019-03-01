@@ -13,7 +13,6 @@ public class ElevatorGameLogic : MonoBehaviour {
     }
 
     public void AddDamage(){
-        Debug.Log("GOT DAMAGE");
         Damage += 1;
     }
 }
