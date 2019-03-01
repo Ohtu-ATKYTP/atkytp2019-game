@@ -10,11 +10,10 @@ public class PlaceCityManager : MonoBehaviour {
     public float radius = 1f;
     public int delayAfterMinigameEndsInSeconds = 2;
     public Text organisationText;
-    public Text winText;
-    public Text loseText;
     private DataController dataController;
     private GameObject targetCity;
     private Dictionary<string, string> organisationsByCities;
+    private bool gameIsOver = false;
 
 
 
@@ -45,12 +44,6 @@ public class PlaceCityManager : MonoBehaviour {
         targetCity = locations[((int)Random.Range(0f, 6f))].gameObject;
         this.SetOnlyCityActive(targetCity);
         organisationText.text = organisationsByCities[targetCity.name];
-        winText.enabled = false;
-        loseText.enabled = false;
-    }
-
-    private void AdjustDifficulty(int difficulty) {
-
     }
 
 
@@ -75,11 +68,10 @@ public class PlaceCityManager : MonoBehaviour {
             loseMinigame();
         }
 
-        targetCity.GetComponent<InformationDisplayer>().DisplayOnMap();
     }
 
     public void winMinigame() {
-        if (loseText.enabled) {
+        if (gameIsOver) {
             return;
         }
         StartCoroutine(EndMinigame(true));
@@ -90,9 +82,8 @@ public class PlaceCityManager : MonoBehaviour {
          * Check for the following situation:  
          * player has clicked the correct city, but the timer runs out. Should the timer stop?
          *
-         * 
          */
-        if (winText.enabled) {
+        if (gameIsOver) {
             return;
         }
         StartCoroutine(EndMinigame(false));
@@ -100,15 +91,17 @@ public class PlaceCityManager : MonoBehaviour {
 
 
     private IEnumerator EndMinigame(bool win) {
-        // jokin ilmoitus loppumisesta
-        if (win) {
-            winText.enabled = true;
-        } else {
-            loseText.enabled = true;
-        }
+
+        Color statusColor = win
+            ? Color.green
+            : Color.red;
+
+        gameIsOver = true;
+
         TimeProgress timerScript = FindObjectOfType<TimeProgress>();
         timerScript.StopTimerProgression();
 
+        targetCity.GetComponent<InformationDisplayer>().DisplayOnMap(statusColor);
         yield return new WaitForSeconds(delayAfterMinigameEndsInSeconds);
         //varmaan hyvä idea lopulta (jos SceneManagerCamera renderöi jotain pelien välissä)
         //activateOnlyCamera("SceneManagerCamera");

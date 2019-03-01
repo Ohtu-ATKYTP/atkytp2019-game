@@ -24,8 +24,11 @@ public class InformationDisplayer : MonoBehaviour {
 
     }
 
-    public void DisplayOnMap(){
-        spriteRenderer.enabled = true; 
+    
+
+    public void DisplayOnMap(Color color){
+        spriteRenderer.enabled = true;
+        spriteRenderer.color = color;
         this.transform.localScale += new Vector3(scaleFactor, scaleFactor, 0);
     }
 }
