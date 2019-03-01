@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class TimeProgress : MonoBehaviour {
     // Start is called before the first frame update
-    public int seconds;
+    public float seconds;
     private float timer;
     public Slider timerSlider;
 
@@ -15,7 +15,7 @@ public class TimeProgress : MonoBehaviour {
     private bool timerEnded = false;
 
     void Start() {
-        this.timer = (float)seconds;
+        this.timer = seconds;
         timerSlider.value = 1f;
         dataController = FindObjectOfType<DataController>();
     }
