@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311992, g: 0.38074034, b: 0.35872713, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311912, g: 0.3807398, b: 0.3587271, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -122,6 +122,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8837274}
   - component: {fileID: 8837273}
+  - component: {fileID: 8837275}
   m_Layer: 0
   m_Name: MinigameManager
   m_TagString: Untagged
@@ -154,6 +155,7 @@ MonoBehaviour:
   organisationText: {fileID: 611586466}
   winText: {fileID: 163711128}
   loseText: {fileID: 121240062}
+  difficulty: 3
 --- !u!4 &8837274
 Transform:
   m_ObjectHideFlags: 0
@@ -168,6 +170,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8837275
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8837272}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f537af95aaf7d654faa44c5b96802099, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &121240060
 GameObject:
   m_ObjectHideFlags: 0
@@ -1352,26 +1366,6 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 8137318996235115558, guid: fd4f367b34e98c924a4ec72280c273aa,
-        type: 3}
-      propertyPath: TimerReadyMethods.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 8837273}
-    - target: {fileID: 8137318996235115558, guid: fd4f367b34e98c924a4ec72280c273aa,
-        type: 3}
-      propertyPath: TimerReadyMethods.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: loseMinigame
-      objectReference: {fileID: 0}
-    - target: {fileID: 8137318997131688169, guid: fd4f367b34e98c924a4ec72280c273aa,
-        type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8137318997131688169, guid: fd4f367b34e98c924a4ec72280c273aa,
-        type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 8137318996235115556, guid: fd4f367b34e98c924a4ec72280c273aa,
         type: 3}
       propertyPath: m_AnchorMin.x
@@ -1402,15 +1396,35 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -20
       objectReference: {fileID: 0}
+    - target: {fileID: 8137318996672422549, guid: fd4f367b34e98c924a4ec72280c273aa,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -601
+      objectReference: {fileID: 0}
     - target: {fileID: 8137318997817694968, guid: fd4f367b34e98c924a4ec72280c273aa,
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -69.70001
       objectReference: {fileID: 0}
-    - target: {fileID: 8137318996672422549, guid: fd4f367b34e98c924a4ec72280c273aa,
+    - target: {fileID: 8137318997131688169, guid: fd4f367b34e98c924a4ec72280c273aa,
         type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -601
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8137318997131688169, guid: fd4f367b34e98c924a4ec72280c273aa,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8137318996235115558, guid: fd4f367b34e98c924a4ec72280c273aa,
+        type: 3}
+      propertyPath: TimerReadyMethods.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 8837273}
+    - target: {fileID: 8137318996235115558, guid: fd4f367b34e98c924a4ec72280c273aa,
+        type: 3}
+      propertyPath: TimerReadyMethods.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: loseMinigame
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fd4f367b34e98c924a4ec72280c273aa, type: 3}

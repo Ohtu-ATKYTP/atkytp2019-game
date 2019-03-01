@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class PlaceCityManager : MonoBehaviour {
+    // GameObjects representing the cities
     public Transform[] locations;
     public SpriteRenderer map;
     public float radius = 1f;
@@ -17,8 +18,15 @@ public class PlaceCityManager : MonoBehaviour {
 
 
 
+    public int difficulty = 1; 
+
+
+
     void Start() {
         dataController = FindObjectOfType<DataController>();
+        // AdjustDifficulty(dataController.GetDifficulty());
+        AdjustDifficulty(difficulty);
+
         for (int i = 0; i < locations.Length; i++) {
             locations[i].GetComponent<CircleCollider2D>().radius = 2 * radius;
         }
@@ -37,11 +45,16 @@ public class PlaceCityManager : MonoBehaviour {
         organisationText.text = organisationsByCities[targetCity.name];
         winText.enabled = false;
         loseText.enabled = false;
-
     }
 
+    private void AdjustDifficulty(int difficulty){ 
+            TimeProgress timer = FindObjectOfType<TimeProgress>();
+            timer.seconds = Mathf.FloorToInt(Mathf.Max(1f, 3f - (0.5f * (difficulty - 1))));
+            
 
-
+            // once seconds supports floats, use the version below
+            //timer.seconds = Mathf.FloorToInt(Mathf.Max(1f, 3f - (0.5f * (difficulty - 1))));
+        }
 
 
     private void SetOnlyCityActive(GameObject city) {
