@@ -6,6 +6,7 @@ Linkkejä
 
 * [Google drive](https://drive.google.com/drive/folders/1JT9nCbR4lm_Qcn-oC6PgQjtbroR85eQQ)
 * [High score -backend](https://github.com/Ohtu-ATKYTP/atkytp2019-game-web)
+* [Unity Cloud service status](https://status.cloud.unity3d.com/)
 
 
 
@@ -18,17 +19,16 @@ Definition of Done
 
 Web stack
 =========
-* React
 * Node.js
 * MongoDB
 
 Development stack
 =================
-* Unity (> 2018.3.1)
+* Unity (2018.3.2f1)
 * Android SDK
 * JDK
 * (Optional) Visual Studio & Visual Studio Tools for Unity
-  * Linuxilla fiksuin ilmainen valinta voi olla Visual Studio
+  * Linuxilla fiksuin ilmainen valinta voi olla Visual Studio Code
 
 Koodityylistä
 =============
