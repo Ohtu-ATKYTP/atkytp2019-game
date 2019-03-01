@@ -15,7 +15,7 @@ public class JumpmanManager : MonoBehaviour{
 
     public void Jump(){
         foreach (GameObject Jumper in JumpmanList){
-            Jumper.GetComponent<Rigidbody2D>().AddForce(Vector2.up*1000, ForceMode2D.Impulse);
+            Jumper.GetComponent<Rigidbody2D>().AddForce(Vector2.up*3000, ForceMode2D.Impulse);
         }
     }
 }
