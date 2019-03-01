@@ -18,7 +18,9 @@ public class DifficultyAdjuster : MonoBehaviour {
         // parameter: difference from the easiest (0) map, higher signifies more difficult
         // if no difficult enough sprite, the most difficult is used
         spriteManager.ChangeSprite(difficulty - 1);
-        spriteManager.Flip(Mathf.Min(difficulty, 3));
+         spriteManager.Flip(Mathf.Min(difficulty, 3));
+
+        //spriteManager.Rotate(30);
 
     }
 
