@@ -5,7 +5,7 @@ using UnityEngine;
 public class JumpmanManager : MonoBehaviour{   
     
     private GameObject[] JumpmanList;
-    private Rigidbody selfRigidbody;
+    public int forceConst = 500;
     void Start() {
         JumpmanList =  GameObject.FindGameObjectsWithTag("Jumpman");
     }
@@ -14,13 +14,8 @@ public class JumpmanManager : MonoBehaviour{
     }
 
     public void Jump(){
-        while(true){
-
-            foreach (GameObject Jumper in JumpmanList){
-                Jumper.rigidbody.AddForce(0, forceConst, 0, ForceMode.Impulse);
-                //selfRigidbody.AddForce(0, forceConst, 0, ForceMode.Impulse);
-            }
-        WaitForSecondsRealtime(10);
+        foreach (GameObject Jumper in JumpmanList){
+            Jumper.GetComponent<Rigidbody2D>().AddForce(Vector2.up*1000, ForceMode2D.Impulse);
         }
     }
 }
