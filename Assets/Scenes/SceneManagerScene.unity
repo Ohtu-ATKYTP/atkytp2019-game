@@ -625,7 +625,7 @@ GameObject:
   - component: {fileID: 1997416833}
   - component: {fileID: 1997416832}
   m_Layer: 0
-  m_Name: WebManager
+  m_Name: WebService
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
