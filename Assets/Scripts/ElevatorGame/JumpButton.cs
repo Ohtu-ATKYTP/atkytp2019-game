@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class JumpButton : MonoBehaviour{
-    private JumpmanManager Jmanager;
+    private GameObject[] JumpmanList;
 
-    
     void Start() {
-        Jmanager = FindObjectOfType<JumpmanManager>();
+        JumpmanList =  GameObject.FindGameObjectsWithTag("Jumpman");
     }
     public void Jump(){
-        Jmanager.Jump();
+        foreach (GameObject Jumper in JumpmanList){
+            Jumper.GetComponent<Rigidbody2D>().AddForce(Vector2.up*3000, ForceMode2D.Impulse);
+        }
     }
 }
