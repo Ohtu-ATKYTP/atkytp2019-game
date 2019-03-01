@@ -10,7 +10,7 @@ public class GameManager : MonoBehaviour {
 
     private string lastGame;
     private string game;
-    private string[] scenes = { "FirstGame", "SecondGame", "PlaceCity", "TurkuGame", "LogoHaalariin" };
+    private string[] scenes = { "FirstGame", "PlaceCity", "TurkuGame", "LogoHaalariin"};
     private string mainmenuScreen = "MainMenu";
     private string endGameScreen = "MainMenu";
     private DataController dataController;
@@ -34,7 +34,6 @@ public class GameManager : MonoBehaviour {
             prepareNextGame();
         } else if (dataController.GetStatus() == DataController.Status.BETWEEN) {
 			//Execute between screen scene
-			Debug.Log("going to between screen");
 			ExecuteBetweenScreen();
 		} else if (dataController.GetStatus() == DataController.Status.MAIN_MENU) {
 			//Go to main menu (future implementation?)
@@ -44,6 +43,9 @@ public class GameManager : MonoBehaviour {
 	private void ExecuteBetweenScreen() {
 		dataController.SetStatus(DataController.Status.WAIT);
 		SceneManager.UnloadSceneAsync(this.game);
+		if (game != null) {
+            lastGame = game;
+        }
 		this.game = "BetweenGameScreen";
         SceneManager.LoadScene(this.game, LoadSceneMode.Additive);
 	}
@@ -59,14 +61,10 @@ public class GameManager : MonoBehaviour {
     }
 
     private void getRandomGame() {
-        if (game != null) {
-            lastGame = game;
-        }
         game = this.scenes[Random.Range(0, this.scenes.Length)];
         while (game == lastGame) {
             game = this.scenes[Random.Range(0, this.scenes.Length)];
         }
-		Debug.Log("Loading scene " + this.game + " with status " + dataController.GetStatus());
         SceneManager.LoadScene(game, LoadSceneMode.Additive);
     }
 
@@ -91,7 +89,6 @@ public class GameManager : MonoBehaviour {
     }
 
     private void resetGameVariables() {
-        Debug.Log("Päästin resetGameVariables");
         this.game = "MainMenu";
         dataController.Init();
     }
