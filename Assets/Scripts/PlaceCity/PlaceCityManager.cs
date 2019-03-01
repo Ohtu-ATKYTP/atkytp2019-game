@@ -56,19 +56,22 @@ public class PlaceCityManager : MonoBehaviour {
     public void handleCityInteraction(GameObject city) {
         if (city != null) {
             if (city == targetCity) {
-                StartCoroutine(EndMinigame(true));
+                winMinigame();
             } else {
-                StartCoroutine(EndMinigame(false));
+                loseMinigame();
             }
 
         } else {
-            StartCoroutine(EndMinigame(false));
+            loseMinigame();
         }
 
         targetCity.GetComponent<InformationDisplayer>().DisplayOnMap();
     }
 
     public void winMinigame() {
+		if (loseText.enabled) {
+			return;
+		}
         StartCoroutine(EndMinigame(true));
     }
 
@@ -87,12 +90,11 @@ public class PlaceCityManager : MonoBehaviour {
 
 
     private IEnumerator EndMinigame(bool win) {
-
         // jokin ilmoitus loppumisesta
         if (win) {
             winText.enabled = true;
         } else {
-            loseText.enabled = true;
+            loseText.enabled = true;	
         }
         TimeProgress timerScript = FindObjectOfType<TimeProgress>();
         timerScript.StopTimerProgression();
@@ -100,6 +102,3 @@ public class PlaceCityManager : MonoBehaviour {
         dataController.MinigameEnd(win, win ? 10 : 0);
     }
 }
-
-
-
