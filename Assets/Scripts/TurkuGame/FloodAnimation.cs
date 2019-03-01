@@ -29,7 +29,7 @@ public class FloodAnimation : MonoBehaviour
     {
         if (started)
         {
-            direction *= 1 + Time.deltaTime;
+            direction *= 1 + (2 * Time.deltaTime);
             flood.Translate(direction * Time.deltaTime);
             if (flood.position.y > 0) this.started = false;
         }
@@ -37,7 +37,7 @@ public class FloodAnimation : MonoBehaviour
 
     IEnumerator StartBubbles()
     {
-        yield return new WaitForSecondsRealtime(3);
+        yield return new WaitForSecondsRealtime(1.5f);
         var m = bubbles.emission;
         m.enabled = true;
     }
