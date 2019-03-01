@@ -24,8 +24,7 @@ public class PlaceCityManager : MonoBehaviour {
 
     void Start() {
         dataController = FindObjectOfType<DataController>();
-        // AdjustDifficulty(dataController.GetDifficulty());
-        AdjustDifficulty(difficulty);
+        GetComponent<DifficultyAdjuster>().Initialize(difficulty);
 
         for (int i = 0; i < locations.Length; i++) {
             locations[i].GetComponent<CircleCollider2D>().radius = 2 * radius;
@@ -48,12 +47,7 @@ public class PlaceCityManager : MonoBehaviour {
     }
 
     private void AdjustDifficulty(int difficulty){ 
-            TimeProgress timer = FindObjectOfType<TimeProgress>();
-            timer.seconds = Mathf.FloorToInt(Mathf.Max(1f, 3f - (0.5f * (difficulty - 1))));
-            
-
-            // once seconds supports floats, use the version below
-            //timer.seconds = Mathf.FloorToInt(Mathf.Max(1f, 3f - (0.5f * (difficulty - 1))));
+   
         }
 
 
