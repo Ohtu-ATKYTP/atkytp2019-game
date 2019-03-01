@@ -5,35 +5,55 @@ using System.IO;                                                        // The S
 
 public class DataController : MonoBehaviour 
 {
+	//The MAIN_MENU flag is as of yet unused, can be used in a future implementation
+	public enum Status {
+		WAIT,
+		MAIN_MENU,
+		MINIGAME,
+		BETWEEN
+	}
     private RoundData[] allRoundData;
-
+	private readonly int DIFF_INCREASE_INTERVAL = 3;
     private int currentScore;
-    private bool roundEndStatus;
     private bool winStatus;
     private int lives;
     private readonly int MAX_LIVES = 3;
-
-
+	private int lastReceivedScore;
+	private Status status;
+	private int roundsCompleted;
 
     void Start()
     {
         DontDestroyOnLoad(gameObject);
         Init();
-
     }
 
     public void Init() {
         this.currentScore = 0;
-        this.roundEndStatus = false;
         this.winStatus = true;
         this.lives = MAX_LIVES;
+		this.status = Status.WAIT;
+		this.lastReceivedScore = 0;
+		this.roundsCompleted = 0;
     }
+
+	//Calculates and returns the current difficulty level. Difficulty increases every DIFF_INCREASE_INTERVAL levels.
+	//Difficulty range is 1 and upwards
+	public int GetDifficulty() {
+		return this.roundsCompleted / this.DIFF_INCREASE_INTERVAL + 1;
+	}
 
     public void MinigameEnd(bool win, int score) {
         this.SetWinStatus(win);
+		if (!win) this.lives--;
         this.AddCurrentScore(score);
-        this.SetRoundEndStatus(true);
+		this.status = Status.BETWEEN;
+		this.roundsCompleted++;
     }
+
+	public void BetweenScreenEnd() {
+		this.status = Status.MINIGAME;
+	}
 
     public void TakeLife() {
         this.lives--;
@@ -63,16 +83,20 @@ public class DataController : MonoBehaviour
         return this.currentScore;
     }
 
-    public bool GetRoundEndStatus() {
-        return this.roundEndStatus;
-    }
-
-    public void AddCurrentScore(int score) {
+	public void AddCurrentScore(int score) {
+		this.lastReceivedScore = score;
         this.currentScore += score;
     }
 
-    public void SetRoundEndStatus(bool win) {
-        this.roundEndStatus = win;
-    }
+	public Status GetStatus() {
+		return this.status;
+	}
 
+	public void SetStatus(Status newStatus) {
+		this.status = newStatus;
+	}
+
+	public int GetLastReceivedScore() {
+		return this.lastReceivedScore;
+	}
 }

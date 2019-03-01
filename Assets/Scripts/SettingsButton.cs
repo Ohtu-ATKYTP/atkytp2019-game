@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Settings : MonoBehaviour {
+public class SettingsButton : MonoBehaviour {
     private Text playerInfo;
 
     void Start() {
