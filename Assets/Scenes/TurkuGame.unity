@@ -6464,6 +6464,26 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2373825414488131404, guid: 429ac7998153b6f43bf9d92cb21957bf,
+        type: 3}
+      propertyPath: TimerReadyMethods.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1779327965}
+    - target: {fileID: 2373825414488131404, guid: 429ac7998153b6f43bf9d92cb21957bf,
+        type: 3}
+      propertyPath: TimerReadyMethods.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Lose
+      objectReference: {fileID: 0}
+    - target: {fileID: 2373825413886070461, guid: 429ac7998153b6f43bf9d92cb21957bf,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0.00018311
+      objectReference: {fileID: 0}
+    - target: {fileID: 2373825413886070461, guid: 429ac7998153b6f43bf9d92cb21957bf,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 25.575
+      objectReference: {fileID: 0}
     - target: {fileID: 2373825414128706435, guid: 429ac7998153b6f43bf9d92cb21957bf,
         type: 3}
       propertyPath: m_AnchorMax.x
