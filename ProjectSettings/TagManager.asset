@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Jumpman
   - Collider
+  - Border
   layers:
   - Default
   - TransparentFX
