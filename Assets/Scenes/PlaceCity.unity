@@ -182,6 +182,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f537af95aaf7d654faa44c5b96802099, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  timer: {fileID: 1057498761}
+  spriteManager: {fileID: 576472024}
 --- !u!1 &121240060
 GameObject:
   m_ObjectHideFlags: 0
@@ -657,6 +659,7 @@ GameObject:
   - component: {fileID: 576472022}
   - component: {fileID: 576472021}
   - component: {fileID: 576472023}
+  - component: {fileID: 576472024}
   m_Layer: 0
   m_Name: Finland
   m_TagString: Untagged
@@ -701,7 +704,7 @@ SpriteRenderer:
   m_SortingLayerID: -1007454899
   m_SortingLayer: 1
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 8306b4dbe426d9a4099fb4fe4fd5154d, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6ae64159a21b37041a632b7be10ba58a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -745,6 +748,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   distanceFromCorner: 0.01
+--- !u!114 &576472024
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 576472020}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e579679dd92db2408134f61e949616f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mapSprites:
+  - {fileID: 21300000, guid: 6ae64159a21b37041a632b7be10ba58a, type: 3}
+  - {fileID: 21300000, guid: 8306b4dbe426d9a4099fb4fe4fd5154d, type: 3}
+  - {fileID: 21300000, guid: 46fe498bf981c984a8a65d3df37b88f0, type: 3}
 --- !u!1 &611586464
 GameObject:
   m_ObjectHideFlags: 0
@@ -935,6 +954,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scaleFactor: 15
   displayCollider: 1
+--- !u!114 &1057498761 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8137318996235115558, guid: fd4f367b34e98c924a4ec72280c273aa,
+    type: 3}
+  m_PrefabInstance: {fileID: 1745320463}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75c88100962bbafaab5f4254b41fec51, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1263903919
 GameObject:
   m_ObjectHideFlags: 0
