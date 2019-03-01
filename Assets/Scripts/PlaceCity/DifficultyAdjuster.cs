@@ -17,11 +17,22 @@ public class DifficultyAdjuster : MonoBehaviour {
 
         // parameter: difference from the easiest (0) map, higher signifies more difficult
         // if no difficult enough sprite, the most difficult is used
-        spriteManager.ChangeSprite(difficulty - 1);
-         spriteManager.Flip(Mathf.Min(difficulty, 3));
+        spriteManager.ChangeSprite(difficulty - 1); 
+        spriteManager.Flip(true, false);
 
-        //spriteManager.Rotate(30);
+        TuneTime(difficulty);
+        TuneSprite(difficulty);
+        TuneRotation(difficulty);
+        TuneFlipping(difficulty); 
 
     }
+
+    private void TuneTime(int difficulty) { }
+
+    private void TuneSprite(int difficulty) { }
+
+    private void TuneRotation(int difficulty) { }
+
+    private void TuneFlipping(int difficulty) { }
 
 }

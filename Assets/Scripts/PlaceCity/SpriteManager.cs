@@ -1,15 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEditor;
-using UnityEngine;
-using UnityEngine.SceneManagement;
+﻿using UnityEngine;
 
 
 
-/*
- * Only used for storing sprites in a useful format 
- */
 public class SpriteManager : MonoBehaviour {
+    // in order of ascending difficulty
     public Sprite[] mapSprites;
     private SpriteRenderer finlandRenderer;
 
@@ -28,27 +22,10 @@ public class SpriteManager : MonoBehaviour {
     }
 
 
-    public void Rotate(int degrees) {
-        transform.Rotate(new Vector3(0, 0, degrees));        
-    }
-
-
-    public void Flip(int direction) {
-        switch(direction){ 
-            case 1:
-                finlandRenderer.flipX = true; 
-                break;
-            case 2:
-                finlandRenderer.flipY = true;
-                break;
-            case 3:
-                finlandRenderer.flipX = true;
-                finlandRenderer.flipY = true;
-                break;
-            default:
-                break ;
-            }
-        FlipCities(finlandRenderer.flipX, finlandRenderer.flipY);
+    public void Flip(bool horizontally, bool vertically) {
+        finlandRenderer.flipX = horizontally;
+        finlandRenderer.flipY = vertically;
+        FlipCities(horizontally, vertically);
     }
 
     private void FlipCities(bool hor, bool vert) {
@@ -75,6 +52,14 @@ public class SpriteManager : MonoBehaviour {
         }
 
 
+    }
+
+
+    // Use with caution: parts of the map may end up outside the camera view, 
+    // e.g. with degrees = 90
+    public void Rotate(int degrees)
+    {
+        transform.Rotate(new Vector3(0, 0, degrees));
     }
 
 
