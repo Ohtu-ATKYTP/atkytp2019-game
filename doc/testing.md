@@ -51,10 +51,10 @@ namespace Tests
 
 
 ## Edit mode testit
-Tehdään kansioon `Assets/Tests/PlayModeTests`
+Tehdään kansioon `Assets/Tests/PlayModeTests`. Edit mode testit ovat nopeita suorittaa. Suosi näitä aina kuin mahdollista.
 
 ## Play mode testit
-Tehdään `Assets/Tests/PlayModeTests` kansioon. HUOM! .dll tiedostossa on oletuksena 
+Tehdään `Assets/Tests/PlayModeTests` kansioon. Play mode testeissä voidaan simuloida pelimoottorin etenemistä. Nämä testit on hidasta suorittaa.
 
 # NUnit
 [Dokumentaatio](https://github.com/nunit/docs/wiki) <br/>
