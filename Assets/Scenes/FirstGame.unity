@@ -919,7 +919,7 @@ PrefabInstance:
     - target: {fileID: 8137318996837176791, guid: fd4f367b34e98c924a4ec72280c273aa,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -0.00004673
+      value: -0.000045776367
       objectReference: {fileID: 0}
     - target: {fileID: 8137318996837176791, guid: fd4f367b34e98c924a4ec72280c273aa,
         type: 3}
@@ -980,6 +980,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8137318996235115558, guid: fd4f367b34e98c924a4ec72280c273aa,
+        type: 3}
+      propertyPath: TimerReadyMethods.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1345277399}
+    - target: {fileID: 8137318996235115558, guid: fd4f367b34e98c924a4ec72280c273aa,
+        type: 3}
+      propertyPath: TimerReadyMethods.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: LoseMinigame
       objectReference: {fileID: 0}
     - target: {fileID: 8137318997817694969, guid: fd4f367b34e98c924a4ec72280c273aa,
         type: 3}
