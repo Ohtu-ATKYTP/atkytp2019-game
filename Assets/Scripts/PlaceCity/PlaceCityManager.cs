@@ -18,7 +18,7 @@ public class PlaceCityManager : MonoBehaviour {
 
 
 
-    public int difficulty = 1; 
+    public int difficulty = 1;
 
 
 
@@ -26,8 +26,11 @@ public class PlaceCityManager : MonoBehaviour {
         dataController = FindObjectOfType<DataController>();
         GetComponent<DifficultyAdjuster>().Initialize(difficulty);
 
-        for (int i = 0; i < locations.Length; i++) {
-            locations[i].GetComponent<CircleCollider2D>().radius = 2 * radius;
+        // No need to show the positions to the players of the production build
+        if (Debug.isDebugBuild) {
+            for (int i = 0; i < locations.Length; i++) {
+                locations[i].GetComponent<CircleCollider2D>().radius = 2 * radius;
+            }
         }
 
         organisationsByCities = new Dictionary<string, string>(){
@@ -46,9 +49,9 @@ public class PlaceCityManager : MonoBehaviour {
         loseText.enabled = false;
     }
 
-    private void AdjustDifficulty(int difficulty){ 
-   
-        }
+    private void AdjustDifficulty(int difficulty) {
+
+    }
 
 
     private void SetOnlyCityActive(GameObject city) {
@@ -76,9 +79,9 @@ public class PlaceCityManager : MonoBehaviour {
     }
 
     public void winMinigame() {
-		if (loseText.enabled) {
-			return;
-		}
+        if (loseText.enabled) {
+            return;
+        }
         StartCoroutine(EndMinigame(true));
     }
 
@@ -89,8 +92,8 @@ public class PlaceCityManager : MonoBehaviour {
          *
          * 
          */
-        if(winText.enabled){
-                return;
+        if (winText.enabled) {
+            return;
         }
         StartCoroutine(EndMinigame(false));
     }
@@ -101,7 +104,7 @@ public class PlaceCityManager : MonoBehaviour {
         if (win) {
             winText.enabled = true;
         } else {
-            loseText.enabled = true;	
+            loseText.enabled = true;
         }
         TimeProgress timerScript = FindObjectOfType<TimeProgress>();
         timerScript.StopTimerProgression();

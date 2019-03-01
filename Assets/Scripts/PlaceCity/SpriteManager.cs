@@ -1,6 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+
 
 
 /*
@@ -10,7 +13,7 @@ public class SpriteManager : MonoBehaviour {
     public Sprite[] mapSprites;
     private SpriteRenderer finlandRenderer;
 
-
+    
     void Start() {
         finlandRenderer = GetComponent<SpriteRenderer>();
         finlandRenderer.sprite = mapSprites[0];
@@ -25,7 +28,20 @@ public class SpriteManager : MonoBehaviour {
 
 
     public void Flip(int direction) {
-
+        switch(direction){ 
+            case 1:
+                finlandRenderer.flipX = true;
+                break;
+            case 2:
+                finlandRenderer.flipY = true;
+                break;
+            case 3:
+                finlandRenderer.flipX = true;
+                finlandRenderer.flipY = true;
+                break;
+            default:
+                break ;
+            }
     }
 
 }
