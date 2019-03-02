@@ -10,7 +10,7 @@ public class JumpButton : MonoBehaviour{
     }
     public void Jump(){
         foreach (GameObject Jumper in JumpmanList){
-            Jumper.GetComponent<Rigidbody2D>().AddForce(Vector2.up*3000, ForceMode2D.Impulse);
+            Jumper.GetComponent<JumpmanLogic>().Jump();
         }
     }
 }

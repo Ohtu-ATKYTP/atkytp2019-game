@@ -6,11 +6,12 @@ public class ElevatorGameLogic : MonoBehaviour {
     private GameObject[] Borders;
     private BorderLogic BorderLogic;
     private int Damage;
+
+    private GameObject[] JumpmanList;
     void Start() {
         Damage = 0;
         Borders = GameObject.FindGameObjectsWithTag("Border");
-    }
-    void Update(){
+        JumpmanList =  GameObject.FindGameObjectsWithTag("Jumpman");
     }
     public void AddDamage(){
         Damage += 1;
@@ -18,6 +19,12 @@ public class ElevatorGameLogic : MonoBehaviour {
             foreach(GameObject Border in Borders){
                 Border.GetComponent<BorderLogic>().AddRigidBody();
             }
+            this.ChangeFace();
+        }
+    }
+    public void ChangeFace(){
+        foreach (GameObject Jumper in JumpmanList){
+            Jumper.GetComponent<JumpmanLogic>().ChangeFace();
         }
     }
 }
