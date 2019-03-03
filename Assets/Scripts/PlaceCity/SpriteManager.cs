@@ -28,6 +28,7 @@ public class SpriteManager : MonoBehaviour {
         FlipCities(horizontally, vertically);
     }
 
+    // The positions of the cities do not update automatically
     private void FlipCities(bool hor, bool vert) {
         Bounds bounds = finlandRenderer.bounds;
 
@@ -39,10 +40,15 @@ public class SpriteManager : MonoBehaviour {
             Vector3 center = bounds.center;
             Vector3 additionVector = new Vector3(0, 0, cityTransforms[i].position.z);
             if (hor) {
+                // vektori (bounds.center.x - cityTransforms[i], 0) on vektori kaupungin sijainnista
+                // spriten pystysuuntaiseen halkaisijaan. Tämä kahdesti lisättynä antaa 
+                // vektorin haluttu_piste - nykyinen_piste, missä haluttu piste siis pystysuuntaisen halkaisijan
+                // suhteen peilattu piste.
                 additionVector.x += 2 * (bounds.center.x - cityTransforms[i].position.x);
             }
 
             if (vert) {
+                // hyvin sama logiikka kuin ylemmässä laskussa
                 additionVector.y += 2 * (bounds.center.y - cityTransforms[i].position.y);
             }
 
@@ -55,7 +61,7 @@ public class SpriteManager : MonoBehaviour {
 
     // Use with caution: parts of the map may end up outside the camera view, 
     // e.g. with degrees = 90
-    public void Rotate(int degrees)
+    public void Rotate(float degrees)
     {
         transform.Rotate(new Vector3(0, 0, degrees));
     }

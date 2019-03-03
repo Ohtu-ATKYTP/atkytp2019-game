@@ -900,7 +900,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_FirstSelected: {fileID: 0}
   m_sendNavigationEvents: 1
-  m_DragThreshold: 10
+  m_DragThreshold: 11
 --- !u!4 &1414937393
 Transform:
   m_ObjectHideFlags: 0
@@ -1112,6 +1112,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 512722191}
     m_Modifications:
+    - target: {fileID: 8137318998134975751, guid: fd4f367b34e98c924a4ec72280c273aa,
+        type: 3}
+      propertyPath: m_Name
+      value: InfoUI
+      objectReference: {fileID: 0}
+    - target: {fileID: 8137318996235115558, guid: fd4f367b34e98c924a4ec72280c273aa,
+        type: 3}
+      propertyPath: TimerReadyMethods.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 8837273}
+    - target: {fileID: 8137318996235115558, guid: fd4f367b34e98c924a4ec72280c273aa,
+        type: 3}
+      propertyPath: TimerReadyMethods.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: loseMinigame
+      objectReference: {fileID: 0}
     - target: {fileID: 8137318998134975768, guid: fd4f367b34e98c924a4ec72280c273aa,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1232,11 +1247,6 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 8137318998134975751, guid: fd4f367b34e98c924a4ec72280c273aa,
-        type: 3}
-      propertyPath: m_Name
-      value: InfoUI
-      objectReference: {fileID: 0}
     - target: {fileID: 8137318996235115556, guid: fd4f367b34e98c924a4ec72280c273aa,
         type: 3}
       propertyPath: m_AnchorMin.x
@@ -1286,16 +1296,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8137318996235115558, guid: fd4f367b34e98c924a4ec72280c273aa,
-        type: 3}
-      propertyPath: TimerReadyMethods.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 8837273}
-    - target: {fileID: 8137318996235115558, guid: fd4f367b34e98c924a4ec72280c273aa,
-        type: 3}
-      propertyPath: TimerReadyMethods.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: loseMinigame
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fd4f367b34e98c924a4ec72280c273aa, type: 3}

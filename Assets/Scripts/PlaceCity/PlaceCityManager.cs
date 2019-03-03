@@ -23,6 +23,9 @@ public class PlaceCityManager : MonoBehaviour {
 
     void Start() {
         dataController = FindObjectOfType<DataController>();
+        if (dataController != null) {
+            difficulty = dataController.GetDifficulty();
+        }
         GetComponent<DifficultyAdjuster>().Initialize(difficulty);
 
         // No need to show the positions to the players of the production build
@@ -42,17 +45,12 @@ public class PlaceCityManager : MonoBehaviour {
             };
 
         targetCity = locations[((int)Random.Range(0f, 6f))].gameObject;
-        this.SetOnlyCityActive(targetCity);
-        organisationText.text = organisationsByCities[targetCity.name];
-    }
 
-
-    private void SetOnlyCityActive(GameObject city) {
-        for (int i = 0; i < locations.Length; i++) {
-            if (locations[i].gameObject != city) {
-                locations[i].gameObject.SetActive(false);
-            }
+        if (Application.isEditor) {
+            targetCity.GetComponent<InformationDisplayer>().RevealOnMap(Color.gray);
         }
+
+        organisationText.text = organisationsByCities[targetCity.name];
     }
 
 
@@ -101,8 +99,8 @@ public class PlaceCityManager : MonoBehaviour {
         TimeProgress timerScript = FindObjectOfType<TimeProgress>();
         timerScript.StopTimerProgression();
 
-        targetCity.GetComponent<InformationDisplayer>().DisplayOnMap(statusColor);
+        targetCity.GetComponent<InformationDisplayer>().RevealOnMap(statusColor);
         yield return new WaitForSeconds(delayAfterMinigameEndsInSeconds);
         dataController.MinigameEnd(win, win ? 10 : 0);
     }
-}
+} 
