@@ -3,13 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Debugger : MonoBehaviour{
-    private HighScoreManager HSManager;
-    private RankManager rankManager;
 
-    private void Start() {
-        this.rankManager = FindObjectOfType<RankManager>();
-        this.HSManager = FindObjectOfType<HighScoreManager>();
-    }
     public void DeleteAllPlayerPrefs() {
         PlayerPrefs.DeleteAll();
     }
@@ -49,11 +43,11 @@ public class Debugger : MonoBehaviour{
     }
 
     public void syncHighScore() {
-        HSManager.StartSync();
+        //Remove this
     }
 
     public void updateRank() {
-        rankManager.AfterGameRank();
+        //remove this
     }
 
 }
