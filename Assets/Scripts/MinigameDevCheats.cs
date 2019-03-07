@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.Threading.Tasks;
+using System.Linq;
 
 public class MinigameDevCheats : MonoBehaviour {
     private bool inMinigame;
     private TimeProgress timer;
+    private IMinigameEnder minigameManager;
 
     void Start() {
         inMinigame = false;
@@ -15,14 +17,19 @@ public class MinigameDevCheats : MonoBehaviour {
 
     public void ConfigureForNonMinigame() {
         inMinigame = false;
+        minigameManager = null;
     }
 
 
     public async void ConfigureForNewMinigame() {
         inMinigame = true;
-        while (!timer) {
-            timer = FindObjectOfType<TimeProgress>();
+        while (!timer || (minigameManager == null)) {
+
             await Task.Delay(33);
+            var x = FindObjectsOfType<MonoBehaviour>().OfType<IMinigameEnder>();
+            minigameManager = x.First<IMinigameEnder>();
+            timer = FindObjectOfType<TimeProgress>();
+
         }
 
     }
@@ -35,12 +42,9 @@ public class MinigameDevCheats : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.Space)) {
             timer.TogglePause();
         } else if (Input.GetKeyDown(KeyCode.W)) {
-            // win the minigame
-            // easy: end the game, unload immediately
-            // enjoyable: win the minigame, allow it to perform ending actions before unloading
+            minigameManager.WinMinigame();
         } else if (Input.GetKeyDown(KeyCode.L)) {
-            // lose the minigame
-            // see the comments with winning
+            minigameManager.LoseMinigame();
         }
     }
 
