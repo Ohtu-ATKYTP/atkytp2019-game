@@ -18,8 +18,9 @@ namespace Tests
 
         [Test]
         public void TestAllScenesAreInBuildSettings() {
-            var gameObject = new GameObject(GameManager);
-            GameManager gameManager = FindObjectOfType<GameManager>();
+            var gameObject = new GameObject();
+            gameObject.AddComponent<GameManager>();
+            GameManager gameManager = gameObject.GetComponent(typeof(GameManager)) as GameManager;
             string[] scenes = gameManager.getScenes();
             int numberOfScenesInBuildSettings = SceneManager.sceneCountInBuildSettings;
             Assert.That(scenes.Length, Is.EqualTo(numberOfScenesInBuildSettings));
