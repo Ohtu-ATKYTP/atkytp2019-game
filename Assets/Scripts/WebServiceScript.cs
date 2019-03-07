@@ -82,7 +82,6 @@ public class WebServiceScript : MonoBehaviour {
             return "";
         } else if (req.isHttpError) {
             String error = req.downloadHandler.text;
-            Debug.Log (error);
             PlayerPrefs.SetString ("error", error);
             return "";
         }

@@ -36,10 +36,10 @@ public class LogoHaalariinLogic : MonoBehaviour {
         if (this.logo == this.haalari) {
             dataController.MinigameEnd (true, 10);
         } else {
-            dataController.MinigameEnd (false, 10);
+            dataController.MinigameEnd (false, 0);
         }
     }
     public void timesUp () {
-        dataController.MinigameEnd (false, 10);
+        dataController.MinigameEnd (false, 0);
     }
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class TurkuAnimation : MonoBehaviour
 {
-    public TrailRenderer trail;
+    public ParticleSystem trail;
     public ParticleSystem particles;
     public Transform turku;
     public SpriteRenderer turkuOld;
@@ -14,8 +14,9 @@ public class TurkuAnimation : MonoBehaviour
 
     public void StartAnimation()
     {
-        trail.emitting = false;
+        var emissionTrail = trail.emission;
         var emission = particles.emission;
+        emissionTrail.enabled = false;
         emission.enabled = false;
         turkuOld.enabled = false;
         started = true;

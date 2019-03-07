@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour {
     public Scene endGameScene;
     private string lastGame;
     private string game;
-    private string[] scenes = { "FirstGame", "SecondGame", "PlaceCity", "TurkuGame", "LogoHaalariin" };
+    private string[] scenes = { "FirstGame", "PlaceCity", "TurkuGame", "LogoHaalariin"};
     private string mainmenuScreen = "MainMenu";
     private string endGameScreen = "MainMenu";
     private DataController dataController;
@@ -24,25 +24,27 @@ public class GameManager : MonoBehaviour {
         this.lastGame = "";
     }
 
-    private void Update () {
-        if (dataController.GetStatus () == DataController.Status.MINIGAME) {
-            dataController.SetStatus (DataController.Status.WAIT);
-            prepareNextGame ();
-        } else if (dataController.GetStatus () == DataController.Status.BETWEEN) {
-            //Execute between screen scene
-            Debug.Log ("going to between screen");
-            ExecuteBetweenScreen ();
-        } else if (dataController.GetStatus () == DataController.Status.MAIN_MENU) {
-            //Go to main menu (future implementation?)
-        }
+    private void Update() {
+        if (dataController.GetStatus() == DataController.Status.MINIGAME) {
+			dataController.SetStatus(DataController.Status.WAIT);
+            prepareNextGame();
+        } else if (dataController.GetStatus() == DataController.Status.BETWEEN) {
+			//Execute between screen scene
+			ExecuteBetweenScreen();
+		} else if (dataController.GetStatus() == DataController.Status.MAIN_MENU) {
+			//Go to main menu (future implementation?)
+		}
     }
 
-    private void ExecuteBetweenScreen () {
-        dataController.SetStatus (DataController.Status.WAIT);
-        SceneManager.UnloadSceneAsync (this.game);
-        this.game = "BetweenGameScreen";
-        SceneManager.LoadScene (this.game, LoadSceneMode.Additive);
-    }
+	private void ExecuteBetweenScreen() {
+		dataController.SetStatus(DataController.Status.WAIT);
+		SceneManager.UnloadSceneAsync(this.game);
+		if (game != null) {
+            lastGame = game;
+        }
+		this.game = "BetweenGameScreen";
+        SceneManager.LoadScene(this.game, LoadSceneMode.Additive);
+	}
 
     public void nextGame () {
         if (dataController.GetLives () == 0) {
@@ -52,16 +54,12 @@ public class GameManager : MonoBehaviour {
         }
     }
 
-    private void getRandomGame () {
-        if (game != null) {
-            lastGame = game;
-        }
-        game = this.scenes[Random.Range (0, this.scenes.Length)];
+    private void getRandomGame() {
+        game = this.scenes[Random.Range(0, this.scenes.Length)];
         while (game == lastGame) {
             game = this.scenes[Random.Range (0, this.scenes.Length)];
         }
-        Debug.Log ("Loading scene " + this.game + " with status " + dataController.GetStatus ());
-        SceneManager.LoadScene (game, LoadSceneMode.Additive);
+        SceneManager.LoadScene(game, LoadSceneMode.Additive);
     }
 
     private async void endGame (int score) //When the game is lost -- hävisit pelin
@@ -89,8 +87,7 @@ public class GameManager : MonoBehaviour {
 
     }
 
-    private void resetGameVariables () {
-        Debug.Log ("Päästin resetGameVariables");
+    private void resetGameVariables() {
         this.game = "MainMenu";
         dataController.Init ();
     }
