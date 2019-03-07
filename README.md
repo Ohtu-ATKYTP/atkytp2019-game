@@ -24,7 +24,7 @@ Web stack
 
 Development stack
 =================
-* Unity (2018.3.2f1)
+* Unity (2018.3.7f1)
 * Android SDK
 * JDK
 * (Optional) Visual Studio & Visual Studio Tools for Unity
