@@ -66,6 +66,8 @@ public class GameManager : MonoBehaviour {
             game = this.scenes[Random.Range(0, this.scenes.Length)];
         }
         SceneManager.LoadScene(game, LoadSceneMode.Additive);
+        GetComponent<MinigameDevCheats>().ConfigureForNewMinigame(); 
+
     }
 
     private void endGame() //When the game is lost -- hävisit pelin
