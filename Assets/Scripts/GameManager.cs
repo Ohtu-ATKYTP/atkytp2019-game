@@ -7,23 +7,19 @@ public class GameManager : MonoBehaviour {
     public int gamesStartIndex;
     public int gamesEndIndex;
     public Scene endGameScene;
-
     private string lastGame;
     private string game;
     private string[] scenes = { "FirstGame", "PlaceCity", "TurkuGame", "LogoHaalariin"};
     private string mainmenuScreen = "MainMenu";
     private string endGameScreen = "MainMenu";
     private DataController dataController;
-    private HighScoreManager HSManager;
-    private RankManager rankManager;
-    
-    private void Start() {
-        this.dataController = FindObjectOfType<DataController>();
-        this.HSManager = FindObjectOfType<HighScoreManager>();
-        this.rankManager = FindObjectOfType<RankManager>();
+    private WebServiceScript webService;
 
-        
-        SceneManager.LoadScene(this.mainmenuScreen, LoadSceneMode.Additive);
+    private void Start () {
+        this.dataController = FindObjectOfType<DataController> ();
+        this.webService = FindObjectOfType<WebServiceScript> ();
+
+        SceneManager.LoadScene (this.mainmenuScreen, LoadSceneMode.Additive);
         this.game = this.mainmenuScreen;
         this.lastGame = "";
     }
@@ -50,52 +46,55 @@ public class GameManager : MonoBehaviour {
         SceneManager.LoadScene(this.game, LoadSceneMode.Additive);
 	}
 
-    public void nextGame(bool win) {
-        if (dataController.GetLives() == 0) {
-            endGame();
+    public void nextGame () {
+        if (dataController.GetLives () == 0) {
+            endGame (dataController.GetCurrentScore ());
         } else {
-            getRandomGame();
+            getRandomGame ();
         }
-
-        // kutsutaan datacontroller
     }
 
     private void getRandomGame() {
         game = this.scenes[Random.Range(0, this.scenes.Length)];
         while (game == lastGame) {
-            game = this.scenes[Random.Range(0, this.scenes.Length)];
+            game = this.scenes[Random.Range (0, this.scenes.Length)];
         }
         SceneManager.LoadScene(game, LoadSceneMode.Additive);
     }
 
-    private void endGame() //When the game is lost -- hävisit pelin
+    private async void endGame (int score) //When the game is lost -- hävisit pelin
     {
-        SceneManager.UnloadSceneAsync(this.game);
-        SceneManager.LoadScene(endGameScreen, LoadSceneMode.Additive);
-        if (PlayerPrefs.GetInt("highScore") < dataController.GetCurrentScore()) {
-            PlayerPrefs.SetInt("highScore", dataController.GetCurrentScore());
-            PlayerPrefs.SetInt("syncedHS", 0);
+        SceneManager.UnloadSceneAsync (this.game);
+        SceneManager.LoadScene (endGameScreen, LoadSceneMode.Additive);
 
-            //Jos halutaan, että ajantasaiset näkyvät jossain loppuruudussa niin synkkaysta
-            //pitää odottaa. 
-            HSManager.StartSync();
-            //Nyt rankin haku odottaa eka 3 sek että highscore ehditään lähettää
-            //Nämä voi muuttaa sillain että callback odottaa vahvistusta
-            rankManager.AfterGameRank();
-        
+        if (PlayerPrefs.GetInt ("highScore") < score) {
+            PlayerPrefs.SetInt ("highScore", score);
+            string id = PlayerPrefs.GetString ("_id");
+            HighScore updated = await webService.UpdateHighscore (id, score);
+
+            if (updated == null) {
+                PlayerPrefs.SetInt ("syncedHS", 0);
+            }
+
+            HighScore highscore = await webService.GetOne (id);
+
+            if (highscore != null) {
+                PlayerPrefs.SetInt ("rank", highscore.rank);
+            }
+
         }
-        resetGameVariables();
+        resetGameVariables ();
 
     }
 
     private void resetGameVariables() {
         this.game = "MainMenu";
-        dataController.Init();
+        dataController.Init ();
     }
 
-    private void prepareNextGame() {
-		dataController.SetStatus(DataController.Status.WAIT);
-        SceneManager.UnloadSceneAsync(this.game);
-        nextGame(dataController.GetWinStatus());
+    private void prepareNextGame () {
+        dataController.SetStatus (DataController.Status.WAIT);
+        SceneManager.UnloadSceneAsync (this.game);
+        nextGame ();
     }
 }
