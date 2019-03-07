@@ -32,7 +32,11 @@ public class WebServiceScript : MonoBehaviour {
     }
 
     public async Task<HighScore> CreateHighscore (string user, string token) {
-        string jsonHighscore = JsonifyUser (user, token);
+        HighScore h = new HighScore ();
+        h.user = user;
+        h.token = token;
+
+        string jsonHighscore = JsonUtility.ToJson (h);
         string json = await PostRequest (baseUrl, jsonHighscore);
         if (json.Length == 0) {
             return null;
@@ -102,69 +106,5 @@ public class WebServiceScript : MonoBehaviour {
         } else {
             return req.downloadHandler.text;
         }
-    }
-
-    public void SendHighscore (int score, System.Action<bool> callback) {
-      StartCoroutine (SendScore (score, callback));
-    }
-
-    private IEnumerator SendScore (int score, System.Action<bool> callback) {
-        // should we account for the possibility of not existing?
-        string id = PlayerPrefs.GetString ("_id");
-        string url = baseUrl + "/" + id;
-        UnityWebRequest req = new UnityWebRequest (url, "PUT");
-        string jsonHighScore = "{ \"score\": " + score + "}";
-        byte[] bodyRaw = Encoding.UTF8.GetBytes (jsonHighScore);
-
-        req.uploadHandler = (UploadHandler) new UploadHandlerRaw (bodyRaw);
-        req.downloadHandler = (DownloadHandler) new DownloadHandlerBuffer ();
-        req.SetRequestHeader ("Content-Type", "application/json");
-        yield return req.SendWebRequest ();
-
-        if (req.isNetworkError) {
-            callback (false);
-        } else {
-            HighScore h = JsonUtility.FromJson<HighScore> (req.downloadHandler.text);
-            //alempi lienee toivottavaa poistaa
-            PlayerPrefs.SetInt ("highScore", h.score);
-            callback (true);
-        }
-    }
-
-    public void GetRank () {
-        StartCoroutine (GetRankCOR ());
-    }
-
-    public IEnumerator GetRankCOR () {
-
-        string id = PlayerPrefs.GetString ("_id");
-        string url = baseUrl + "/" + id;
-
-        UnityWebRequest req = UnityWebRequest.Get (url);
-
-        yield return req.SendWebRequest ();
-
-        if (req.isNetworkError || req.isHttpError) {
-            Debug.Log (req.error);
-        } else {
-            HighScore h = JsonUtility.FromJson<HighScore> (req.downloadHandler.text);
-            PlayerPrefs.SetInt ("rank", h.rank);
-        }
-
-    }
-    private string JsonifyUser (string user, string token) {
-        return JsonifyUser (user, token, 0);
-    }
-
-    private string JsonifyUser (string user, string token, int score) {
-        return JsonifyUser (user, token, 0, 0);
-    }
-    private string JsonifyUser (string user, string token, int score, int rank) {
-        HighScore h = new HighScore ();
-        h.user = user;
-        h.token = token;
-        h.score = score;
-        h.rank = rank;
-        return JsonUtility.ToJson (h);
     }
 }
