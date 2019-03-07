@@ -4,23 +4,35 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class PlaceCityManager : MonoBehaviour {
+    // GameObjects representing the cities
     public Transform[] locations;
     public SpriteRenderer map;
     public float radius = 1f;
     public int delayAfterMinigameEndsInSeconds = 2;
     public Text organisationText;
-    public Text winText;
-    public Text loseText;
     private DataController dataController;
     private GameObject targetCity;
     private Dictionary<string, string> organisationsByCities;
+    private bool gameIsOver = false;
+
+
+
+    public int difficulty = 1;
 
 
 
     void Start() {
         dataController = FindObjectOfType<DataController>();
-        for (int i = 0; i < locations.Length; i++) {
-            locations[i].GetComponent<CircleCollider2D>().radius = 2 * radius;
+        if (dataController != null) {
+            difficulty = dataController.GetDifficulty();
+        }
+        GetComponent<DifficultyAdjuster>().Initialize(difficulty);
+
+        // No need to show the positions to the players of the production build
+        if (Debug.isDebugBuild) {
+            for (int i = 0; i < locations.Length; i++) {
+                locations[i].GetComponent<CircleCollider2D>().radius = 2 * radius;
+            }
         }
 
         organisationsByCities = new Dictionary<string, string>(){
@@ -33,23 +45,12 @@ public class PlaceCityManager : MonoBehaviour {
             };
 
         targetCity = locations[((int)Random.Range(0f, 6f))].gameObject;
-        this.SetOnlyCityActive(targetCity);
-        organisationText.text = organisationsByCities[targetCity.name];
-        winText.enabled = false;
-        loseText.enabled = false;
 
-    }
-
-
-
-
-
-    private void SetOnlyCityActive(GameObject city) {
-        for (int i = 0; i < locations.Length; i++) {
-            if (locations[i].gameObject != city) {
-                locations[i].gameObject.SetActive(false);
-            }
+        if (Application.isEditor) {
+            targetCity.GetComponent<InformationDisplayer>().RevealOnMap(Color.gray);
         }
+
+        organisationText.text = organisationsByCities[targetCity.name];
     }
 
 
@@ -65,13 +66,12 @@ public class PlaceCityManager : MonoBehaviour {
             loseMinigame();
         }
 
-        targetCity.GetComponent<InformationDisplayer>().DisplayOnMap();
     }
 
     public void winMinigame() {
-		if (loseText.enabled) {
-			return;
-		}
+        if (gameIsOver) {
+            return;
+        }
         StartCoroutine(EndMinigame(true));
     }
 
@@ -80,25 +80,27 @@ public class PlaceCityManager : MonoBehaviour {
          * Check for the following situation:  
          * player has clicked the correct city, but the timer runs out. Should the timer stop?
          *
-         * 
          */
-        if(winText.enabled){
-                return;
+        if (gameIsOver) {
+            return;
         }
         StartCoroutine(EndMinigame(false));
     }
 
 
     private IEnumerator EndMinigame(bool win) {
-        // jokin ilmoitus loppumisesta
-        if (win) {
-            winText.enabled = true;
-        } else {
-            loseText.enabled = true;	
-        }
+
+        Color statusColor = win
+            ? Color.green
+            : Color.red;
+
+        gameIsOver = true;
+
         TimeProgress timerScript = FindObjectOfType<TimeProgress>();
         timerScript.StopTimerProgression();
+
+        targetCity.GetComponent<InformationDisplayer>().RevealOnMap(statusColor);
         yield return new WaitForSeconds(delayAfterMinigameEndsInSeconds);
         dataController.MinigameEnd(win, win ? 10 : 0);
     }
-}
+} 
