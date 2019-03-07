@@ -98,4 +98,8 @@ public class GameManager : MonoBehaviour {
         SceneManager.UnloadSceneAsync(this.game);
         nextGame(dataController.GetWinStatus());
     }
+
+    public string[] getScenes() {
+        return this.scenes;
+    }
 }
