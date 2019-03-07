@@ -15,6 +15,8 @@ public class GameManager : MonoBehaviour {
     private DataController dataController;
     private WebServiceScript webService;
 
+    private MinigameDevCheats devCheats;
+
     private void Start () {
         this.dataController = FindObjectOfType<DataController> ();
         this.webService = FindObjectOfType<WebServiceScript> ();
@@ -22,6 +24,7 @@ public class GameManager : MonoBehaviour {
         SceneManager.LoadScene (this.mainmenuScreen, LoadSceneMode.Additive);
         this.game = this.mainmenuScreen;
         this.lastGame = "";
+        devCheats = GetComponent<MinigameDevCheats>();
     }
 
     private void Update() {
@@ -60,13 +63,14 @@ public class GameManager : MonoBehaviour {
             game = this.scenes[Random.Range (0, this.scenes.Length)];
         }
         SceneManager.LoadScene(game, LoadSceneMode.Additive);
-        GetComponent<MinigameDevCheats>().ConfigureForNewMinigame(); 
+        devCheats.ConfigureForNewMinigame(); 
 
  }
 
     private async void endGame (int score) //When the game is lost -- hävisit pelin
     {
-        SceneManager.UnloadSceneAsync (this.game);
+        devCheats.ConfigureForNonMinigame();
+        await SceneManager.UnloadSceneAsync (this.game);
         SceneManager.LoadScene (endGameScreen, LoadSceneMode.Additive);
 
         if (PlayerPrefs.GetInt ("highScore") < score) {

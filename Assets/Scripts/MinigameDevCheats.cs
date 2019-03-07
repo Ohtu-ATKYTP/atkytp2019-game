@@ -18,7 +18,6 @@ public class MinigameDevCheats : MonoBehaviour {
     }
 
 
-    // should be called when a minigame has already been loaded
     public async void ConfigureForNewMinigame() {
         inMinigame = true;
         while (!timer) {
@@ -37,8 +36,11 @@ public class MinigameDevCheats : MonoBehaviour {
             timer.TogglePause();
         } else if (Input.GetKeyDown(KeyCode.W)) {
             // win the minigame
+            // easy: end the game, unload immediately
+            // enjoyable: win the minigame, allow it to perform ending actions before unloading
         } else if (Input.GetKeyDown(KeyCode.L)) {
             // lose the minigame
+            // see the comments with winning
         }
     }
 
