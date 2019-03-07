@@ -31,9 +31,9 @@ public class WebServiceScript : MonoBehaviour {
         }
     }
 
-    public async Task<HighScore> Create (string user, string token) {
+    public async Task<HighScore> CreateHighscore (string user, string token) {
         string jsonHighscore = JsonifyUser (user, token);
-        string json = await PostRequest(baseUrl, jsonHighscore);
+        string json = await PostRequest (baseUrl, jsonHighscore);
         if (json.Length == 0) {
             return null;
         } else {
@@ -41,10 +41,10 @@ public class WebServiceScript : MonoBehaviour {
         }
     }
 
-    public async Task<HighScore> Update (string id, int score) {
+    public async Task<HighScore> UpdateHighscore (string id, int score) {
         string url = baseUrl + "/" + id;
         string jsonScore = "{ \"score\": " + score + "}";
-        string json = await PutRequest(url, jsonScore);
+        string json = await PutRequest (url, jsonScore);
         if (json.Length == 0) {
             return null;
         } else {
@@ -72,10 +72,17 @@ public class WebServiceScript : MonoBehaviour {
 
         await req.SendWebRequest ();
 
-        if (req.isNetworkError || req.isHttpError) {
-            Debug.Log(req.downloadHandler.text);
+        if (req.isNetworkError) {
+            String error = "No connection try again later";
+            Debug.Log (error);
             return "";
-        } else {
+        } else if (req.isHttpError) {
+            String error = req.downloadHandler.text;
+            Debug.Log (error);
+            PlayerPrefs.SetString ("error", error);
+            return "";
+        }
+        else {
             return req.downloadHandler.text;
         }
     }
@@ -90,50 +97,15 @@ public class WebServiceScript : MonoBehaviour {
         await req.SendWebRequest ();
 
         if (req.isNetworkError || req.isHttpError) {
-            Debug.Log(req.downloadHandler.text);
+            Debug.Log (req.downloadHandler.text);
             return "";
         } else {
             return req.downloadHandler.text;
         }
     }
 
-
-    //Use this method to add new users
-    public void RegisterUser (string user, string token, System.Action<bool, bool, string> callback) {
-        StartCoroutine (SendUser (user, token, callback));
-    }
-
     public void SendHighscore (int score, System.Action<bool> callback) {
-        StartCoroutine (SendScore (score, callback));
-    }
-
-    private IEnumerator SendUser (string user, string token, System.Action<bool, bool, string> callback) {
-        UnityWebRequest req = new UnityWebRequest (baseUrl, "POST");
-        string jsonUser = JsonifyUser (user, token, 0);
-        byte[] bodyRaw = Encoding.UTF8.GetBytes (jsonUser);
-        req.uploadHandler = (UploadHandler) new UploadHandlerRaw (bodyRaw);
-        req.downloadHandler = (DownloadHandler) new DownloadHandlerBuffer ();
-        req.SetRequestHeader ("Content-Type", "application/json");
-
-        yield return req.SendWebRequest ();
-
-        if (req.isHttpError) {
-            callback (true, false, req.downloadHandler.text);
-        } else if (req.isNetworkError) {
-            callback (false, false, "");
-        } else {
-            jsonUser = req.downloadHandler.text;
-            HighScore h = JsonUtility.FromJson<HighScore> (jsonUser);
-
-            PlayerPrefs.SetString ("_id", h._id);
-            PlayerPrefs.SetString ("username", h.user);
-            PlayerPrefs.SetString ("token", h.token);
-            PlayerPrefs.SetInt ("highScore", h.score);
-            PlayerPrefs.SetInt ("syncedHS", 1);
-            callback (true, true, "");
-        }
-        Debug.Log ("------\nSaatu data:" + jsonUser);
-        Debug.Log ("Status code: " + req.responseCode);
+      StartCoroutine (SendScore (score, callback));
     }
 
     private IEnumerator SendScore (int score, System.Action<bool> callback) {

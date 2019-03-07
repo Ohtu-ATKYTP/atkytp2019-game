@@ -7,45 +7,46 @@ public class FormController : MonoBehaviour {
     public Text statusMessage;
     private WebServiceScript webScript;
 
-    void Start() {
-        webScript = FindObjectOfType<WebServiceScript>();
+    void Start () {
+        webScript = FindObjectOfType<WebServiceScript> ();
     }
 
-    public void SendFormData() {
-        if(PlayerPrefs.GetInt("registered") == 1){
-            DisplayMessage("You cannot register twice");   
+    public async void SendFormData () {
+        if (PlayerPrefs.GetInt ("registered") == 1) {
+            DisplayMessage ("You cannot register twice");
             return;
-         }
+        }
 
-        string userName = GameObject.Find("Username Input").transform.Find("Text").GetComponent<Text>().text;
-        string token = GameObject.Find("Token Input").transform.Find("Text").GetComponent<Text>().text;
-        webScript.RegisterUser(userName, token, (connectionSuccess, serverSuccess, errorData) => {
+        string userName = GameObject.Find ("Username Input").transform.Find ("Text").GetComponent<Text> ().text;
+        string token = GameObject.Find ("Token Input").transform.Find ("Text").GetComponent<Text> ().text;
 
-            if(!connectionSuccess){ 
-                    DisplayMessage("Could not reach server, try again later");
-                    return;
-            }
-   
-            if(!serverSuccess){
-                DisplayMessage("Validation failed\n" + errorData);
-                return;
-            }
+        HighScore highscore = await webScript.CreateHighscore (userName, token);
 
-            HandleSuccess(); }
-            );
+        if (highscore != null) {
+            PlayerPrefs.SetString ("_id", highscore._id);
+            PlayerPrefs.SetString ("username", highscore.user);
+            PlayerPrefs.SetString ("token", highscore.token);
+            PlayerPrefs.SetInt ("highScore", highscore.score);
+            PlayerPrefs.SetInt ("syncedHS", 1);
+            PlayerPrefs.SetInt ("registered", 1);
+            FindObjectOfType<MenuManager> ().displayOnlyMenu ("Main Menu Screen");
+        } else {
+            HandleError();
+        }
     }
 
-    private void HandleSuccess(){
-        PlayerPrefs.SetInt("registered", 1);
-        FindObjectOfType<MenuManager>().displayOnlyMenu("Main Menu Screen");
+    private void HandleError () {
+        string errorString = PlayerPrefs.GetString ("error");
+        Debug.Log (errorString);
+        ErrorCollection errorCollection = JsonUtility.FromJson<ErrorCollection> (errorString);
+        string errorMessage = "";
+        foreach (string error in errorCollection.error) {
+            errorMessage = errorMessage + error + "\n";
+        }
+        DisplayMessage (errorMessage);
     }
 
-
-    private void HandleFailure(string username, string token){ 
-        statusMessage.text = "Registration has failed.\nTry again later, or try another username";
-    }
-
-    private void DisplayMessage(string message){ 
-            statusMessage.text = message;
+    private void DisplayMessage (string message) {
+        statusMessage.text = message;
     }
 }
