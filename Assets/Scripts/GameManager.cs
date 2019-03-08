@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Linq;
 
 public class GameManager : MonoBehaviour {
     public int gamesStartIndex;
@@ -9,7 +10,8 @@ public class GameManager : MonoBehaviour {
     public Scene endGameScene;
     private string lastGame;
     private string game;
-    private string[] scenes = { "FirstGame", "PlaceCity", "TurkuGame", "LogoHaalariin"};
+    private string[] games = { "FirstGame", "PlaceCity", "TurkuGame", "LogoHaalariin"};
+    private string[] otherScenesThanGames = {"SceneManagerScene", "MainMenu", "BetweenGameScreen"};
     private string mainmenuScreen = "MainMenu";
     private string endGameScreen = "MainMenu";
     private DataController dataController;
@@ -22,7 +24,7 @@ public class GameManager : MonoBehaviour {
         SceneManager.LoadScene (this.mainmenuScreen, LoadSceneMode.Additive);
         this.game = this.mainmenuScreen;
         this.lastGame = "";
-		dataController.SetGames(scenes);
+		dataController.SetGames(games);
     }
 
     private void Update() {
@@ -64,9 +66,9 @@ public class GameManager : MonoBehaviour {
     }
 
     private void getRandomGame() {
-        this.game = this.scenes[Random.Range(0, this.scenes.Length)];
+        game = this.games[Random.Range(0, this.games.Length)];
         while (game == lastGame) {
-            this.game = this.scenes[Random.Range (0, this.scenes.Length)];
+            game = this.games[Random.Range(0, this.games.Length)];
         }
         SceneManager.LoadScene(this.game, LoadSceneMode.Additive);
     }
@@ -106,4 +108,15 @@ public class GameManager : MonoBehaviour {
         SceneManager.UnloadSceneAsync (this.game);
         nextGame ();
     }
+
+    public string[] getGames() {
+        return this.games;
+    }
+
+    public string[] getAllScenes() {
+        return this.games.Concat(this.otherScenesThanGames).ToArray();
+    }
 }
+
+
+
