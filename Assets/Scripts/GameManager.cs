@@ -46,7 +46,11 @@ public class GameManager : MonoBehaviour {
 		if (game != null) {
             lastGame = game;
         }
-		this.game = "BetweenGameScreen";
+		if (dataController.GetDebugMode()) {
+			this.game = "DebugBetweenGameScreen";
+		} else {
+			this.game = "BetweenGameScreen";
+		}
         SceneManager.LoadScene(this.game, LoadSceneMode.Additive);
 	}
 
@@ -56,8 +60,6 @@ public class GameManager : MonoBehaviour {
         } else {
             getRandomGame();
         }
-
-        // kutsutaan datacontroller
     }
 
     private void getRandomGame() {
