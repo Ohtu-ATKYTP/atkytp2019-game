@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using System.Threading.Tasks;
 using System.Linq;
 
@@ -8,6 +6,22 @@ public class DevCheats : MonoBehaviour {
     private bool inMinigame;
     private TimeProgress timer;
     private IMinigameEnder minigameManager;
+
+
+    private KeyCode[] pauseKeyCodes = {
+            KeyCode.Space
+        };
+
+    private KeyCode[] winKeyCodes = {
+            KeyCode.W,
+            KeyCode.Return
+        };
+
+    private KeyCode[] loseKeyCodes = {
+            KeyCode.L,
+            KeyCode.Backspace
+        };
+
 
     void Start() {
         inMinigame = false;
@@ -39,13 +53,22 @@ public class DevCheats : MonoBehaviour {
             return;
         }
 
-        if (Input.GetKeyDown(KeyCode.Space)) {
+        if (KeyIsDown(pauseKeyCodes)) {
             timer.TogglePause();
-        } else if (Input.GetKeyDown(KeyCode.W)) {
+        } else if (KeyIsDown(winKeyCodes)) {
             minigameManager.WinMinigame();
-        } else if (Input.GetKeyDown(KeyCode.L)) {
+        } else if (KeyIsDown(loseKeyCodes)) {
             minigameManager.LoseMinigame();
         }
+    }
+
+    private bool KeyIsDown(KeyCode[] codes) {
+        for (int i = 0; i < codes.Length; i++) {
+            if (Input.GetKeyDown(codes[i])) {
+                return true;
+            }
+        }
+        return false;
     }
 
 }
