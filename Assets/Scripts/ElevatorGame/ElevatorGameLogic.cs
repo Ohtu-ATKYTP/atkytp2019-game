@@ -24,7 +24,7 @@ public class ElevatorGameLogic : MonoBehaviour {
 
     public void AddDamage(){
         damage += 1;
-        if(damage == 20){
+        if(damage >= 20){
             foreach(GameObject border in borders){
                 border.GetComponent<BorderLogic>().AddRigidBody();
             }
@@ -40,13 +40,17 @@ public class ElevatorGameLogic : MonoBehaviour {
     }
 
     public void setDifficulty(){
-        //int difficulty = dataController.GetDifficulty();
-        //int reducedTime = 25 - difficulty*5;
-        //if(reducedTime < 10){
-        //    reducedTime = 10;
-        //}
-        float time = 30f;
-        Debug.Log("Difficulty time set to "+ time);
-        timer.setTime(time);
+        int difficulty = dataController.GetDifficulty();
+        float reducedTime = (float) 30 - difficulty*3;
+        if(reducedTime < 10){
+            reducedTime = 10;
+        }
+        
+        Debug.Log("Difficulty time set to "+ reducedTime);
+        timer.SetTime(reducedTime);
+
+        //Vaikeusidea: tihennä hyppynopeutta (gravity + force)
     }
+
+    
 }

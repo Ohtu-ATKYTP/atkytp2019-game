@@ -10,12 +10,10 @@ public class GameManager : MonoBehaviour {
     public Scene endGameScene;
     private string lastGame;
     private string game;
-<<<<<<< HEAD
-    private string[] scenes = { "FirstGame", "PlaceCity", "TurkuGame", "LogoHaalariin", "ElevatorGame"};
-=======
-    private string[] games = { "FirstGame", "PlaceCity", "TurkuGame", "LogoHaalariin"};
+
+    private string[] games = { "FirstGame", "PlaceCity", "TurkuGame", "LogoHaalariin", "ElevatorGame"};
     private string[] otherScenesThanGames = {"SceneManagerScene", "MainMenu", "BetweenGameScreen"};
->>>>>>> master
+
     private string mainmenuScreen = "MainMenu";
     private string endGameScreen = "MainMenu";
     private DataController dataController;
