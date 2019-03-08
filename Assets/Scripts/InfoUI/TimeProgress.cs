@@ -13,6 +13,8 @@ public class TimeProgress : MonoBehaviour {
     public UnityEngine.Events.UnityEvent TimerReadyMethods;
     private DataController dataController;
     private bool timerPaused = false;
+    // after stopping the pause status cannot be toggled: the timer will run any longer in the minigame
+    private bool timerStopped = false;
 
     void Start() {
         this.timer = seconds;
@@ -36,11 +38,14 @@ public class TimeProgress : MonoBehaviour {
 
 
     public void TogglePause() {
-        timerPaused = !timerPaused;
+        if (!timerStopped) {
+            timerPaused = !timerPaused;
+        }
     }
 
     public void StopTimerProgression() {
-        timerPaused = true;
+        timerPaused = true; 
+        timerStopped = true;
     }
 
     private void timerEnd() {
