@@ -1,14 +1,10 @@
 {
-    "name": "EditModeTests",
+    "name": "ScriptsAssembly",
     "references": [
-        "ScriptsAssembly"
+        "PluginAssembly"
     ],
-    "optionalUnityReferences": [
-        "TestAssemblies"
-    ],
-    "includePlatforms": [
-        "Editor"
-    ],
+    "optionalUnityReferences": [],
+    "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
     "overrideReferences": false,
