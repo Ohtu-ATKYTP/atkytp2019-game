@@ -5,18 +5,18 @@ using UnityEngine.UI;
 
 public class LogoHaalariinLogic : MonoBehaviour {
     private DataController dataController;
-    private int haalari;
-    private int logo;
+    private TimeProgress timer;
+    private int haalari = 0;
+    private int logo = 0;
+    private int difficulty = 1;
     public int associationAmount;
     public HaalariUpdater haalariUpdater;
     public LogoUpdater logoUpdater;
-    private TimeProgress timer;
-    private int difficulty = 1;
-    void Start () {
 
+    void Start () {
         dataController = FindObjectOfType<DataController> ();
         timer = FindObjectOfType<TimeProgress> ();
-        initializeGame();
+        initializeGame ();
     }
     private void initializeGame () {
         if (dataController != null) {
@@ -28,11 +28,11 @@ public class LogoHaalariinLogic : MonoBehaviour {
         this.logo = Random.Range (0, associationAmount);
         logoUpdater.changeImage (this.logo);
         //Setting game time
-        timer.seconds = 15 - this.difficulty;
-        Debug.Log (timer.seconds + " seconds");
-        if (timer.seconds < 3) {
-            timer.seconds = 3;
+        int time = 15 - this.difficulty;
+        if (time < 3) {
+            time = 3;
         }
+        timer.SetTime (time);
     }
     public void nextLogo () {
         this.logo++;
@@ -49,14 +49,21 @@ public class LogoHaalariinLogic : MonoBehaviour {
         }
         logoUpdater.changeImage (this.logo);
     }
-    public void endGame () {
+    public async void endGame () {
+        timer.StopTimerProgression();
         if (this.logo == this.haalari) {
+            logoUpdater.startRotateLogoAnimation();
+            await new WaitForSecondsRealtime(3);
             dataController.MinigameEnd (true, 10);
         } else {
+            logoUpdater.startDropLogoAnimation();
+            await new WaitForSecondsRealtime(3);
             dataController.MinigameEnd (false, 0);
         }
     }
-    public void timesUp () {
+    public async void timesUp () {
+        logoUpdater.startDropLogoAnimation();
+        await new WaitForSecondsRealtime(3);
         dataController.MinigameEnd (false, 0);
     }
 }

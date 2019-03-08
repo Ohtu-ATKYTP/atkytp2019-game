@@ -144,7 +144,7 @@ RectTransform:
   m_Children:
   - {fileID: 519665499}
   m_Father: {fileID: 278859512951862877}
-  m_RootOrder: 1
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -417,7 +417,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 278859512951862877}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -545,7 +545,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 278859512951862877}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -673,7 +673,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 278859512951862877}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -735,18 +735,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 721409108}
   m_CullTransparentMesh: 0
---- !u!114 &1277903515 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8137318996235115558, guid: fd4f367b34e98c924a4ec72280c273aa,
-    type: 3}
-  m_PrefabInstance: {fileID: 681436903460292831}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 75c88100962bbafaab5f4254b41fec51, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1373019932
 GameObject:
   m_ObjectHideFlags: 0
@@ -930,12 +918,12 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1487076708}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 278859512951862877}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1029,7 +1017,6 @@ MonoBehaviour:
   associationAmount: 6
   haalariUpdater: {fileID: 721409110}
   logoUpdater: {fileID: 1487076710}
-  timer: {fileID: 1277903515}
 --- !u!4 &1688382026
 Transform:
   m_ObjectHideFlags: 0
@@ -1130,11 +1117,11 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 1421473792}
-  - {fileID: 320965194}
   - {fileID: 721409109}
   - {fileID: 1487076709}
   - {fileID: 622358127}
   - {fileID: 673703663}
+  - {fileID: 320965194}
   - {fileID: 681436903460292832}
   m_Father: {fileID: 0}
   m_RootOrder: 3
@@ -1155,6 +1142,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: InfoUI
+      objectReference: {fileID: 0}
+    - target: {fileID: 8137318996235115558, guid: fd4f367b34e98c924a4ec72280c273aa,
+        type: 3}
+      propertyPath: TimerReadyMethods.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1688382025}
+    - target: {fileID: 8137318996235115558, guid: fd4f367b34e98c924a4ec72280c273aa,
+        type: 3}
+      propertyPath: TimerReadyMethods.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: timesUp
+      objectReference: {fileID: 0}
+    - target: {fileID: 8137318996235115558, guid: fd4f367b34e98c924a4ec72280c273aa,
+        type: 3}
+      propertyPath: seconds
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8137318998134975768, guid: fd4f367b34e98c924a4ec72280c273aa,
         type: 3}
@@ -1435,21 +1437,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8137318996235115558, guid: fd4f367b34e98c924a4ec72280c273aa,
-        type: 3}
-      propertyPath: TimerReadyMethods.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1688382025}
-    - target: {fileID: 8137318996235115558, guid: fd4f367b34e98c924a4ec72280c273aa,
-        type: 3}
-      propertyPath: TimerReadyMethods.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: timesUp
-      objectReference: {fileID: 0}
-    - target: {fileID: 8137318996235115558, guid: fd4f367b34e98c924a4ec72280c273aa,
-        type: 3}
-      propertyPath: seconds
-      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8137318997817694969, guid: fd4f367b34e98c924a4ec72280c273aa,
         type: 3}
