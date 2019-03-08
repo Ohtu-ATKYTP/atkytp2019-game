@@ -97,7 +97,7 @@ public class WebServiceScript : MonoBehaviour {
         req.downloadHandler = (DownloadHandler) new DownloadHandlerBuffer ();
         req.SetRequestHeader ("Content-Type", "application/json");
 
-        await req.SendWebRequest ();
+        await req.SendWebRequest();
 
         if (req.isNetworkError || req.isHttpError) {
             Debug.Log (req.downloadHandler.text);
