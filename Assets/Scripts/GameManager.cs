@@ -15,7 +15,7 @@ public class GameManager : MonoBehaviour {
     private DataController dataController;
     private WebServiceScript webService;
 
-    private MinigameDevCheats devCheats;
+    private DevCheats devCheats;
 
     private void Start () {
         this.dataController = FindObjectOfType<DataController> ();
@@ -24,7 +24,7 @@ public class GameManager : MonoBehaviour {
         SceneManager.LoadScene (this.mainmenuScreen, LoadSceneMode.Additive);
         this.game = this.mainmenuScreen;
         this.lastGame = "";
-        devCheats = GetComponent<MinigameDevCheats>();
+        devCheats = GetComponent<DevCheats>();
     }
 
     private void Update() {

@@ -512,7 +512,7 @@ GameObject:
 --- !u!199 &246772683
 ParticleSystemRenderer:
   serializedVersion: 6
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 2
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
@@ -6485,7 +6485,7 @@ PrefabInstance:
     - target: {fileID: 2373825414488131404, guid: 429ac7998153b6f43bf9d92cb21957bf,
         type: 3}
       propertyPath: TimerReadyMethods.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: Lose
+      value: LoseMinigame
       objectReference: {fileID: 0}
     - target: {fileID: 2373825413886070461, guid: 429ac7998153b6f43bf9d92cb21957bf,
         type: 3}
@@ -8606,7 +8606,7 @@ GameObject:
 --- !u!199 &1558651254
 ParticleSystemRenderer:
   serializedVersion: 6
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 2
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
@@ -13983,7 +13983,7 @@ MonoBehaviour:
 --- !u!199 &1868076872
 ParticleSystemRenderer:
   serializedVersion: 6
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 2
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}

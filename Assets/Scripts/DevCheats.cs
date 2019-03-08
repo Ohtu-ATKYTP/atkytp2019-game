@@ -4,7 +4,7 @@ using UnityEngine;
 using System.Threading.Tasks;
 using System.Linq;
 
-public class MinigameDevCheats : MonoBehaviour {
+public class DevCheats : MonoBehaviour {
     private bool inMinigame;
     private TimeProgress timer;
     private IMinigameEnder minigameManager;

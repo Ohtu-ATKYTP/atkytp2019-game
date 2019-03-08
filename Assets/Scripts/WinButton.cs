@@ -9,20 +9,14 @@ public class WinButton : MonoBehaviour, IMinigameEnder {
     private void Start() {
         dataController = FindObjectOfType<DataController>();
     }
-    // Start is called before the first frame update
-    public void EndMinigame() {
-        //level = filterOdd(level);
-        //SceneManager.LoadScene(level);
-        dataController.MinigameEnd(true, 10);
-    }
 
     public void LoseMinigame() {
         dataController.MinigameEnd(false, 0);
     }
 
     public void WinMinigame() {
-        EndMinigame();
-        }
+        dataController.MinigameEnd(true, 10);
+    }
 
     private string filterOdd(string str) {
         char[] arr = str.ToCharArray();
