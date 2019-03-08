@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311912, g: 0.3807398, b: 0.3587271, a: 1}
+  m_IndirectSpecularColor: {r: 0.3731196, g: 0.38074002, b: 0.35872707, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -735,6 +735,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 721409108}
   m_CullTransparentMesh: 0
+--- !u!114 &1277903515 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8137318996235115558, guid: fd4f367b34e98c924a4ec72280c273aa,
+    type: 3}
+  m_PrefabInstance: {fileID: 681436903460292831}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75c88100962bbafaab5f4254b41fec51, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1373019932
 GameObject:
   m_ObjectHideFlags: 0
@@ -1017,6 +1029,7 @@ MonoBehaviour:
   associationAmount: 6
   haalariUpdater: {fileID: 721409110}
   logoUpdater: {fileID: 1487076710}
+  timer: {fileID: 1277903515}
 --- !u!4 &1688382026
 Transform:
   m_ObjectHideFlags: 0
@@ -1432,6 +1445,11 @@ PrefabInstance:
         type: 3}
       propertyPath: TimerReadyMethods.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: timesUp
+      objectReference: {fileID: 0}
+    - target: {fileID: 8137318996235115558, guid: fd4f367b34e98c924a4ec72280c273aa,
+        type: 3}
+      propertyPath: seconds
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8137318997817694969, guid: fd4f367b34e98c924a4ec72280c273aa,
         type: 3}

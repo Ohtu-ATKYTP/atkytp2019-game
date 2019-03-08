@@ -10,12 +10,29 @@ public class LogoHaalariinLogic : MonoBehaviour {
     public int associationAmount;
     public HaalariUpdater haalariUpdater;
     public LogoUpdater logoUpdater;
+    private TimeProgress timer;
+    private int difficulty = 1;
     void Start () {
+
+        dataController = FindObjectOfType<DataController> ();
+        timer = FindObjectOfType<TimeProgress> ();
+        initializeGame();
+    }
+    private void initializeGame () {
+        if (dataController != null) {
+            difficulty = dataController.GetDifficulty ();
+        }
+        //Setting initial haalari and logo
         this.haalari = Random.Range (0, associationAmount);
         haalariUpdater.changeImage (this.haalari);
         this.logo = Random.Range (0, associationAmount);
         logoUpdater.changeImage (this.logo);
-        dataController = FindObjectOfType<DataController> ();
+        //Setting game time
+        timer.seconds = 15 - this.difficulty;
+        Debug.Log (timer.seconds + " seconds");
+        if (timer.seconds < 3) {
+            timer.seconds = 3;
+        }
     }
     public void nextLogo () {
         this.logo++;
