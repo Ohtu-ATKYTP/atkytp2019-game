@@ -45,9 +45,8 @@ public class ElevatorGameLogic : MonoBehaviour {
         //if(reducedTime < 10){
         //    reducedTime = 10;
         //}
-        float time = 5f;
+        float time = 30f;
         Debug.Log("Difficulty time set to "+ time);
-        timer.seconds = time;
         timer.setTime(time);
     }
 }

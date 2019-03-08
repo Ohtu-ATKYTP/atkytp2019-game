@@ -47,7 +47,10 @@ public class TimeProgress : MonoBehaviour {
 
     public void setTime(float time) {
         this.timer = time;
+        this.seconds = time;
     }
+
+    
 
 
 
