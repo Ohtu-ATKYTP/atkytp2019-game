@@ -22,6 +22,7 @@ public class GameManager : MonoBehaviour {
         SceneManager.LoadScene (this.mainmenuScreen, LoadSceneMode.Additive);
         this.game = this.mainmenuScreen;
         this.lastGame = "";
+		dataController.SetGames(scenes);
     }
 
     private void Update() {
@@ -50,20 +51,24 @@ public class GameManager : MonoBehaviour {
         SceneManager.LoadScene(this.game, LoadSceneMode.Additive);
 	}
 	
+	//if you want a random game, call this method with the parameter (string) "Random"
     public void nextGame () {
         if (dataController.GetLives () == 0) {
             endGame (dataController.GetCurrentScore ());
-        } else {
+        } else if (dataController.GetNextGame() == "Random") {
             getRandomGame ();
-        }
+        } else {
+			this.game = dataController.GetNextGame();
+			SceneManager.LoadScene(this.game, LoadSceneMode.Additive);
+		}
     }
 
     private void getRandomGame() {
-        game = this.scenes[Random.Range(0, this.scenes.Length)];
+        this.game = this.scenes[Random.Range(0, this.scenes.Length)];
         while (game == lastGame) {
-            game = this.scenes[Random.Range (0, this.scenes.Length)];
+            this.game = this.scenes[Random.Range (0, this.scenes.Length)];
         }
-        SceneManager.LoadScene(game, LoadSceneMode.Additive);
+        SceneManager.LoadScene(this.game, LoadSceneMode.Additive);
     }
 
     private async void endGame (int score) //When the game is lost -- hävisit pelin

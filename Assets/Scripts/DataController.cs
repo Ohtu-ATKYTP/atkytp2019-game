@@ -12,6 +12,7 @@ public class DataController : MonoBehaviour
 		MINIGAME,
 		BETWEEN
 	}
+	private string nextGame;
 	private bool debug;
     private RoundData[] allRoundData;
 	private readonly int DIFF_INCREASE_INTERVAL = 3;
@@ -22,6 +23,7 @@ public class DataController : MonoBehaviour
 	private int lastReceivedScore;
 	private Status status;
 	private int roundsCompleted;
+	private string[] games;
 
     void Start()
     {
@@ -37,6 +39,7 @@ public class DataController : MonoBehaviour
 		this.lastReceivedScore = 0;
 		this.roundsCompleted = 0;
 		this.debug = false;
+		this.nextGame = "Random";
     }
 
 	//Calculates and returns the current difficulty level. Difficulty increases every DIFF_INCREASE_INTERVAL levels.
@@ -112,5 +115,21 @@ public class DataController : MonoBehaviour
 
 	public bool	GetDebugMode() {
 		return this.debug;
+	}
+
+	public void SetGames(string[] gameScenes) {
+		this.games = gameScenes;
+	}
+
+	public string[] GetGames() {
+		return this.games;
+	}
+
+	public string GetNextGame() {
+		return this.nextGame;
+	}
+
+	public void SetNextGame(string next) {
+		this.nextGame = next;
 	}
 }
