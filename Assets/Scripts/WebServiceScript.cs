@@ -22,6 +22,9 @@ public class WebServiceScript : MonoBehaviour {
     }
 
     public async Task<HighScore> GetOne (string id) {
+        if (id == null || id.Length == 0) {
+            return null;
+        }
         string url = baseUrl + "/" + id;
         string json = await GetRequest (url);
         if (json.Length == 0) {
@@ -46,6 +49,9 @@ public class WebServiceScript : MonoBehaviour {
     }
 
     public async Task<HighScore> UpdateHighscore (string id, int score) {
+        if (id == null || id.Length == 0 || score == null) {
+            return null;
+        }
         string url = baseUrl + "/" + id;
         string jsonScore = "{ \"score\": " + score + "}";
         string json = await PutRequest (url, jsonScore);
@@ -97,7 +103,7 @@ public class WebServiceScript : MonoBehaviour {
         req.downloadHandler = (DownloadHandler) new DownloadHandlerBuffer ();
         req.SetRequestHeader ("Content-Type", "application/json");
 
-        await req.SendWebRequest ();
+        await req.SendWebRequest();
 
         if (req.isNetworkError || req.isHttpError) {
             Debug.Log (req.downloadHandler.text);

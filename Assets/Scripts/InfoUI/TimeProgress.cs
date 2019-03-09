@@ -52,6 +52,9 @@ public class TimeProgress : MonoBehaviour {
         TimerReadyMethods.Invoke();
     }
 
-
+    public void SetTime(float time) {
+        this.timer = time;
+        this.seconds = time;
+    }
 
 }
