@@ -6,6 +6,7 @@ public class DevCheats : MonoBehaviour {
     private bool inMinigame;
     private TimeProgress timer;
     private IMinigameEnder minigameManager;
+    private bool minigameEnded;
 
 
     private KeyCode[] pauseKeyCodes = {
@@ -37,6 +38,7 @@ public class DevCheats : MonoBehaviour {
 
     public async void ConfigureForNewMinigame() {
         inMinigame = true;
+        minigameEnded = false; 
         while (!timer || (minigameManager == null)) {
 
             await Task.Delay(33);
@@ -49,15 +51,18 @@ public class DevCheats : MonoBehaviour {
     }
 
     void Update() {
-        if (!inMinigame) {
+        if (!inMinigame || minigameEnded) {
             return;
         }
 
         if (KeyIsDown(pauseKeyCodes)) {
             timer.TogglePause();
         } else if (KeyIsDown(winKeyCodes)) {
+            minigameEnded = true; 
             minigameManager.WinMinigame();
+            
         } else if (KeyIsDown(loseKeyCodes)) {
+            minigameEnded = true; 
             minigameManager.LoseMinigame();
         }
     }
