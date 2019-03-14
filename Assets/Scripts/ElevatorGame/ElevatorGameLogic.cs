@@ -19,8 +19,8 @@ public class ElevatorGameLogic : MonoBehaviour {
         damage = 0;
         borders = GameObject.FindGameObjectsWithTag("Border");
         jumpmanList =  GameObject.FindGameObjectsWithTag("Jumpman");
-        //miniGameLogic = GameObject.FindObjectOfType<MinigameLogic>();
-        //dataController = FindObjectOfType<DataController>();
+        miniGameLogic = GameObject.FindObjectOfType<MinigameLogic>();
+        dataController = FindObjectOfType<DataController>();
         timer = FindObjectOfType<TimeProgress>();
         supportBorder = GameObject.FindGameObjectWithTag("SupportBorder");
         brokenBorder = GameObject.FindGameObjectWithTag("BrokenBorder");
@@ -47,7 +47,7 @@ public class ElevatorGameLogic : MonoBehaviour {
                 border.GetComponent<BorderLogic>().AddRigidBody();
         }
         this.ChangeFace();
-        //miniGameLogic.EndMinigame(true);
+        miniGameLogic.EndMinigame(true);
     }
 
     public void ChangeFace(){

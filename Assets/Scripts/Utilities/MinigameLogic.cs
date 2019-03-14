@@ -26,7 +26,7 @@ public class MinigameLogic : MonoBehaviour {
         // Placeholder: spawn a sphere at the origin of the world space
         //GameObject go = GameObject.CreatePrimitive(PrimitiveType.Sphere);
 
-        //EndMinigame(false); //LAITA TAKAS
+        EndMinigame(false);
     }
 
 
