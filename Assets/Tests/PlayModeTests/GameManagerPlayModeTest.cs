@@ -58,7 +58,46 @@ namespace Tests
             yield return null;
             Scene scene = SceneManager.GetSceneByName("BetweenGameScreen");
             yield return null;
-            Assert.That(scene.name, Is.EqualTo("BetweenGameSceen"));
+            Assert.That(scene.name, Is.EqualTo("BetweenGameScreen"));
+        }
+
+        [UnityTest]
+        public IEnumerator TestGameEndsWhen3LifesTaken() {
+            SceneManager.LoadScene("SceneManagerScene");
+            yield return null;
+            this.dataController = GameObject.FindObjectOfType<DataController> () as DataController;
+            yield return null;
+            dataController.SetStatus(DataController.Status.MINIGAME);
+            yield return null;
+            //---------------------------------------------------------------
+            dataController.MinigameEnd(false, 0);
+            yield return null;
+            dataController.MinigameEnd(false, 0);
+            yield return null;
+            dataController.MinigameEnd(false, 0);
+            yield return null;
+            Assert.That(dataController.GetLives(), Is.EqualTo(0));
+        }
+
+        [UnityTest]
+        public IEnumerator TestScore() {
+            SceneManager.LoadScene("SceneManagerScene");
+            yield return null;
+            this.dataController = GameObject.FindObjectOfType<DataController> () as DataController;
+            yield return null;
+            dataController.SetStatus(DataController.Status.MINIGAME);
+            yield return null;
+            //---------------------------------------------------------------
+            dataController.MinigameEnd(true, 10);
+            yield return null;
+            dataController.MinigameEnd(true, 10);
+            yield return null;
+            dataController.MinigameEnd(false, 0);
+            yield return null;
+            dataController.MinigameEnd(true, 30);
+            yield return null;
+            Assert.That(dataController.GetCurrentScore(), Is.EqualTo(50));
+
         }
 
 
