@@ -56,7 +56,7 @@ public class GameManager : MonoBehaviour {
         SceneManager.LoadScene(this.game, LoadSceneMode.Additive);
 	}
 	
-	//if you want a random game, call this method with the parameter (string) "Random"
+	
     public void nextGame () {
         if (dataController.GetLives () == 0) {
             endGame (dataController.GetCurrentScore ());
@@ -65,6 +65,7 @@ public class GameManager : MonoBehaviour {
         } else {
 			this.game = dataController.GetNextGame();
 			SceneManager.LoadScene(this.game, LoadSceneMode.Additive);
+			devCheats.ConfigureForNewMinigame(); 
 		}
     }
 
