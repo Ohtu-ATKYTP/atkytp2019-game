@@ -52,12 +52,14 @@ public class LogoHaalariinLogic : MonoBehaviour, IMinigameEnder {
     }
 
     public void WinMinigame() {
+        timer.StopTimerProgression();
         this.logo = this.haalari;
         logoUpdater.changeImage(logo);
         EndGame(true);
     }
 
     public void LoseMinigame() {
+        timer.StopTimerProgression();
         EndGame(false);
     }
 

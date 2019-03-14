@@ -79,6 +79,11 @@ public class GameManager : MonoBehaviour {
 
  }
 
+    public void EndFromDebug(int score){
+        this.game = "DebugBetweenGameScreen";
+        endGame(score);
+        }
+
     private async void endGame (int score) //When the game is lost -- hävisit pelin
     {
         devCheats.ConfigureForNonMinigame();
