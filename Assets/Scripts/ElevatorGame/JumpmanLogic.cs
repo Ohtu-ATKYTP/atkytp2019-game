@@ -9,17 +9,17 @@ public class JumpmanLogic : MonoBehaviour {
 
     void Update(){
 
-        if (Input.GetMouseButtonDown(0)) {
-            this.Jump();
-        }
+        //if (Input.GetMouseButtonDown(0)) {
+        //    this.Jump();
+        //}
 
-        if (Input.touchCount > 0) {
-            this.Jump();
-        }
+        //if (Input.touchCount > 0) {
+        //    this.Jump();
+        //}
     }
 
     public void Jump() {
-        GetComponent<Rigidbody2D>().velocity = Vector2.zero; //Nollaa tippuminen ennen hyppyä
+        GetComponent<Rigidbody2D>().velocity = Vector2.zero; //Zero velocity before jump
         GetComponent<Rigidbody2D>().AddForce(Vector2.up*3000, ForceMode2D.Impulse);
     }
     
