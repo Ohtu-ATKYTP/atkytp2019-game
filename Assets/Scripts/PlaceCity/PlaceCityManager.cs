@@ -46,10 +46,6 @@ public class PlaceCityManager : MonoBehaviour, IMinigameEnder {
 
         targetCity = locations[((int)Random.Range(0f, 6f))].gameObject;
 
-        if (Application.isEditor) {
-            targetCity.GetComponent<InformationDisplayer>().RevealOnMap(Color.gray);
-        }
-
         organisationText.text = organisationsByCities[targetCity.name];
     }
 
