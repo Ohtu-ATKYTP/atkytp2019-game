@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PlaceCityManager : MonoBehaviour {
+public class PlaceCityManager : MonoBehaviour, IMinigameEnder {
     // GameObjects representing the cities
     public Transform[] locations;
     public SpriteRenderer map;
@@ -46,10 +46,6 @@ public class PlaceCityManager : MonoBehaviour {
 
         targetCity = locations[((int)Random.Range(0f, 6f))].gameObject;
 
-        if (Application.isEditor) {
-            targetCity.GetComponent<InformationDisplayer>().RevealOnMap(Color.gray);
-        }
-
         organisationText.text = organisationsByCities[targetCity.name];
     }
 
@@ -57,25 +53,25 @@ public class PlaceCityManager : MonoBehaviour {
     public void handleCityInteraction(GameObject city) {
         if (city != null) {
             if (city == targetCity) {
-                winMinigame();
+                WinMinigame();
             } else {
-                loseMinigame();
+                LoseMinigame();
             }
 
         } else {
-            loseMinigame();
+            LoseMinigame();
         }
 
     }
 
-    public void winMinigame() {
+    public void WinMinigame() {
         if (gameIsOver) {
             return;
         }
         StartCoroutine(EndMinigame(true));
     }
 
-    public void loseMinigame() {
+    public void LoseMinigame() {
         /*
          * Check for the following situation:  
          * player has clicked the correct city, but the timer runs out. Should the timer stop?

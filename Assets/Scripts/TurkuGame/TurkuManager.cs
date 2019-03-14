@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class TurkuManager : MonoBehaviour {
+public class TurkuManager : MonoBehaviour, IMinigameEnder {
     public HitboxManager hitboxes;
     public FloodAnimation flood;
     private DataController dataController;
@@ -17,14 +17,23 @@ public class TurkuManager : MonoBehaviour {
 
     void Update() {
         if (hitboxes.Active() > Mathf.Min(40, difficulty) && !gameOver) {
-            Win();
+            WinMinigame();
         }
     }
 
-	public void Lose() {
-		gameOver = true;
-		StartCoroutine(RunLoseAnimation());
-	}
+
+    public void WinMinigame() {
+        this.gameOver = true;
+        FindObjectOfType<TimeProgress>().StopTimerProgression();
+        StartCoroutine(RunWinAnimation());
+    }
+
+
+    public void LoseMinigame() {
+        gameOver = true;
+        StartCoroutine(RunLoseAnimation());
+        FindObjectOfType<TimeProgress>().StopTimerProgression();
+    }
 
     IEnumerator RunLoseAnimation() {
         flood.StartAnimation();
@@ -32,16 +41,11 @@ public class TurkuManager : MonoBehaviour {
         dataController.MinigameEnd(false, 0);
     }
 
-	private void Win() {
-		this.gameOver = true;
-		TimeProgress timerScript = FindObjectOfType<TimeProgress>();
-		timerScript.StopTimerProgression();
-        StartCoroutine(RunWinAnimation());
-	}
-
     IEnumerator RunWinAnimation() {
         turkuAnimation.StartAnimation();
         yield return new WaitForSecondsRealtime(3);
         dataController.MinigameEnd(true, 10);
     }
+
+
 }
