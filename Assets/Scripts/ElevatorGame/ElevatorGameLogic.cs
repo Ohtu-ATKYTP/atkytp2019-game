@@ -31,15 +31,14 @@ public class ElevatorGameLogic : MonoBehaviour {
 
     public void AddDamage(){
         damage += 1;
-        this.DamageVisual();
+        supportBorder.GetComponent<SupportBorderScript>().DamageVisual(damage);
         if(damage >= 20 && !endedGame){
             endedGame = true;
             this.EndGame();
         }
     }
 
-    public void DamageVisual(){
-    }
+    
 
     public void EndGame(){
         brokenBorder.SetActive(true);
