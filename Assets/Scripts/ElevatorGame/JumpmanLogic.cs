@@ -19,8 +19,11 @@ public class JumpmanLogic : MonoBehaviour {
     }
 
     public void Jump() {
+        GetComponent<Rigidbody2D>().gravityScale = Random.Range(50,200);
+        GetComponent<Rigidbody2D>().mass = Random.Range(1,10);
         GetComponent<Rigidbody2D>().velocity = Vector2.zero; //Zero velocity before jump
         GetComponent<Rigidbody2D>().AddForce(Vector2.up*3000, ForceMode2D.Impulse);
+         
     }
     
     public void ChangeFace(){
