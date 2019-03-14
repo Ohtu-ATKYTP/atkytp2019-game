@@ -10,27 +10,45 @@ public class ElevatorGameLogic : MonoBehaviour {
     private int damage;
     private TimeProgress timer;
     private GameObject[] jumpmanList;
+    private GameObject brokenBorder;
+    private GameObject supportBorder;
+
+    private bool endedGame = false;
     
     void Start() {
         damage = 0;
         borders = GameObject.FindGameObjectsWithTag("Border");
         jumpmanList =  GameObject.FindGameObjectsWithTag("Jumpman");
-        miniGameLogic = GameObject.FindObjectOfType<MinigameLogic>();
-        dataController = FindObjectOfType<DataController>();
+        //miniGameLogic = GameObject.FindObjectOfType<MinigameLogic>();
+        //dataController = FindObjectOfType<DataController>();
         timer = FindObjectOfType<TimeProgress>();
-
+        supportBorder = GameObject.FindGameObjectWithTag("SupportBorder");
+        brokenBorder = GameObject.FindGameObjectWithTag("BrokenBorder");
+        brokenBorder.SetActive(false);
+        
         this.setDifficulty();
     }
 
     public void AddDamage(){
         damage += 1;
-        if(damage >= 20){
-            foreach(GameObject border in borders){
-                border.GetComponent<BorderLogic>().AddRigidBody();
-            }
-            this.ChangeFace();
-            miniGameLogic.EndMinigame(true);
+        this.DamageVisual();
+        if(damage >= 20 && !endedGame){
+            endedGame = true;
+            this.EndGame();
         }
+    }
+
+    public void DamageVisual(){
+    }
+
+    public void EndGame(){
+        brokenBorder.SetActive(true);
+        supportBorder.SetActive(false);
+        foreach(GameObject border in borders){
+                border.GetComponent<BorderLogic>().AddRigidBody();
+        }
+        this.ChangeFace();
+        //miniGameLogic.EndMinigame(true);
     }
 
     public void ChangeFace(){

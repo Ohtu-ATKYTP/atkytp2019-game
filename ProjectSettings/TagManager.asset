@@ -7,6 +7,8 @@ TagManager:
   - Jumpman
   - Collider
   - Border
+  - BrokenBorder
+  - SupportBorder
   layers:
   - Default
   - TransparentFX
