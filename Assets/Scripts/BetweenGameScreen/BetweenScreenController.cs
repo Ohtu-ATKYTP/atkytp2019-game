@@ -25,8 +25,7 @@ public class BetweenScreenController : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
-    {
+    void Update() {
         if (Time.time - startTime > 3 && active) {
 			active = false;
 			dataController.BetweenScreenEnd();
