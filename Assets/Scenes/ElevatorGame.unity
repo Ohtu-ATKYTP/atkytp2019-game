@@ -1364,6 +1364,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1271237774}
     m_Modifications:
+    - target: {fileID: 6098241698546250545, guid: 5e44aebb78c848849b5be09287ab31b4,
+        type: 3}
+      propertyPath: m_Name
+      value: Jumpman
+      objectReference: {fileID: 0}
     - target: {fileID: 6098241698546250544, guid: 5e44aebb78c848849b5be09287ab31b4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1473,11 +1478,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 1.69362
-      objectReference: {fileID: 0}
-    - target: {fileID: 6098241698546250545, guid: 5e44aebb78c848849b5be09287ab31b4,
-        type: 3}
-      propertyPath: m_Name
-      value: Jumpman
       objectReference: {fileID: 0}
     - target: {fileID: 1742862307, guid: 5e44aebb78c848849b5be09287ab31b4, type: 3}
       propertyPath: m_Enabled
@@ -1794,6 +1794,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1271237774}
     m_Modifications:
+    - target: {fileID: 6098241698546250545, guid: 5e44aebb78c848849b5be09287ab31b4,
+        type: 3}
+      propertyPath: m_Name
+      value: Jumpman
+      objectReference: {fileID: 0}
     - target: {fileID: 6098241698546250544, guid: 5e44aebb78c848849b5be09287ab31b4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1913,11 +1918,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 1.6936196
-      objectReference: {fileID: 0}
-    - target: {fileID: 6098241698546250545, guid: 5e44aebb78c848849b5be09287ab31b4,
-        type: 3}
-      propertyPath: m_Name
-      value: Jumpman
       objectReference: {fileID: 0}
     - target: {fileID: 1742862307, guid: 5e44aebb78c848849b5be09287ab31b4, type: 3}
       propertyPath: m_Enabled
@@ -2180,6 +2180,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1271237774}
     m_Modifications:
+    - target: {fileID: 6098241698546250545, guid: 5e44aebb78c848849b5be09287ab31b4,
+        type: 3}
+      propertyPath: m_Name
+      value: Jumpman
+      objectReference: {fileID: 0}
     - target: {fileID: 6098241698546250544, guid: 5e44aebb78c848849b5be09287ab31b4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2284,20 +2289,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 6098241698546250545, guid: 5e44aebb78c848849b5be09287ab31b4,
-        type: 3}
-      propertyPath: m_Name
-      value: Jumpman
-      objectReference: {fileID: 0}
-    - target: {fileID: 5516790201606374082, guid: 5e44aebb78c848849b5be09287ab31b4,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1742862307, guid: 5e44aebb78c848849b5be09287ab31b4, type: 3}
-      propertyPath: m_Enabled
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5e44aebb78c848849b5be09287ab31b4, type: 3}

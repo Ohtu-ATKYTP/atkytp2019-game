@@ -58,9 +58,9 @@ public class ElevatorGameLogic : MonoBehaviour {
 
     public void setDifficulty(){
         int difficulty = dataController.GetDifficulty();
-        float reducedTime = (float) 30 - difficulty*3;
-        if(reducedTime < 10){
-            reducedTime = 10;
+        float reducedTime = (float) 25 - difficulty*5;
+        if(reducedTime < 5){
+            reducedTime = 5;
         }
         
         Debug.Log("Difficulty time set to "+ reducedTime);

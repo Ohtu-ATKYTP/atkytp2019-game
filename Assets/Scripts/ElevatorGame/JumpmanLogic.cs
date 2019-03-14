@@ -19,6 +19,7 @@ public class JumpmanLogic : MonoBehaviour {
     }
 
     public void Jump() {
+        GetComponent<Rigidbody2D>().velocity = Vector2.zero; //Nollaa tippuminen ennen hyppyä
         GetComponent<Rigidbody2D>().AddForce(Vector2.up*3000, ForceMode2D.Impulse);
     }
     
