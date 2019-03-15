@@ -1,16 +1,6 @@
-{
+﻿{
     "name": "PlayModeTests",
-    "references": [
-        "ScriptsAssembly"
-    ],
     "optionalUnityReferences": [
         "TestAssemblies"
-    ],
-    "includePlatforms": [],
-    "excludePlatforms": [],
-    "allowUnsafeCode": false,
-    "overrideReferences": false,
-    "precompiledReferences": [],
-    "autoReferenced": true,
-    "defineConstraints": []
+    ]
 }
