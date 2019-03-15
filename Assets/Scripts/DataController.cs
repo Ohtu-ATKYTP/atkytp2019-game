@@ -12,6 +12,8 @@ public class DataController : MonoBehaviour
 		MINIGAME,
 		BETWEEN
 	}
+	private string nextGame;
+	private bool debug;
     private RoundData[] allRoundData;
 	private readonly int DIFF_INCREASE_INTERVAL = 3;
     private int currentScore;
@@ -21,6 +23,8 @@ public class DataController : MonoBehaviour
 	private int lastReceivedScore;
 	private Status status;
 	private int roundsCompleted;
+	private int difficulty;
+	private string[] games;
 
     void Start()
     {
@@ -35,12 +39,18 @@ public class DataController : MonoBehaviour
 		this.status = Status.WAIT;
 		this.lastReceivedScore = 0;
 		this.roundsCompleted = 0;
+		this.debug = false;
+		this.nextGame = "Random";
+		this.difficulty = 1;
     }
 
-	//Calculates and returns the current difficulty level. Difficulty increases every DIFF_INCREASE_INTERVAL levels.
 	//Difficulty range is 1 and upwards
 	public int GetDifficulty() {
-		return this.roundsCompleted / this.DIFF_INCREASE_INTERVAL + 1;
+		return this.difficulty;
+	}
+
+	public void SetDifficulty(int newDiff) {
+		this.difficulty = newDiff;
 	}
 
     public void MinigameEnd(bool win, int score) {
@@ -49,9 +59,14 @@ public class DataController : MonoBehaviour
         this.AddCurrentScore(score);
 		this.status = Status.BETWEEN;
 		this.roundsCompleted++;
+		this.difficulty = this.roundsCompleted / this.DIFF_INCREASE_INTERVAL + 1;
     }
 
 	public void BetweenScreenEnd() {
+		this.status = Status.MINIGAME;
+	}
+
+	public void DebugBetweenScreenEnd() {
 		this.status = Status.MINIGAME;
 	}
 
@@ -98,5 +113,29 @@ public class DataController : MonoBehaviour
 
 	public int GetLastReceivedScore() {
 		return this.lastReceivedScore;
+	}
+
+	public void SetDebugMode(bool debugIsOn) {
+		this.debug = debugIsOn;
+	}
+
+	public bool	GetDebugMode() {
+		return this.debug;
+	}
+
+	public void SetGames(string[] gameScenes) {
+		this.games = gameScenes;
+	}
+
+	public string[] GetGames() {
+		return this.games;
+	}
+
+	public string GetNextGame() {
+		return this.nextGame;
+	}
+
+	public void SetNextGame(string next) {
+		this.nextGame = next;
 	}
 }

@@ -11,11 +11,13 @@ public class GameManager : MonoBehaviour {
     private string lastGame;
     private string game;
     private string[] games = { "FirstGame", "PlaceCity", "TurkuGame", "LogoHaalariin"};
-    private string[] otherScenesThanGames = {"SceneManagerScene", "MainMenu", "BetweenGameScreen"};
+    private string[] otherScenesThanGames = {"DebugBetweenGameScreen", "SceneManagerScene", "MainMenu", "BetweenGameScreen"};
     private string mainmenuScreen = "MainMenu";
     private string endGameScreen = "MainMenu";
     private DataController dataController;
     private WebServiceScript webService;
+
+    private DevCheats devCheats;
 
     private void Start () {
         this.dataController = FindObjectOfType<DataController> ();
@@ -24,6 +26,8 @@ public class GameManager : MonoBehaviour {
         SceneManager.LoadScene (this.mainmenuScreen, LoadSceneMode.Additive);
         this.game = this.mainmenuScreen;
         this.lastGame = "";
+		dataController.SetGames(games);
+        devCheats = GetComponent<DevCheats>();
     }
 
     private void Update() {
@@ -44,31 +48,41 @@ public class GameManager : MonoBehaviour {
 		if (game != null) {
             lastGame = game;
         }
-		this.game = "BetweenGameScreen";
+		if (dataController.GetDebugMode()) {
+			this.game = "DebugBetweenGameScreen";
+		} else {
+			this.game = "BetweenGameScreen";
+		}
         SceneManager.LoadScene(this.game, LoadSceneMode.Additive);
 	}
-
+	
+	
     public void nextGame () {
         if (dataController.GetLives () == 0) {
             endGame (dataController.GetCurrentScore ());
-        } else {
+        } else if (dataController.GetNextGame() == "Random") {
             getRandomGame ();
-        }
+        } else {
+			this.game = dataController.GetNextGame();
+			SceneManager.LoadScene(this.game, LoadSceneMode.Additive);
+			devCheats.ConfigureForNewMinigame(); 
+		}
     }
 
     private void getRandomGame() {
         game = this.games[Random.Range(0, this.games.Length)];
         while (game == lastGame) {
-
             game = this.games[Random.Range(0, this.games.Length)];
-
         }
-        SceneManager.LoadScene(game, LoadSceneMode.Additive);
-    }
+        SceneManager.LoadScene(this.game, LoadSceneMode.Additive);
+        devCheats.ConfigureForNewMinigame(); 
+
+ }
 
     private async void endGame (int score) //When the game is lost -- hävisit pelin
     {
-        SceneManager.UnloadSceneAsync (this.game);
+        devCheats.ConfigureForNonMinigame();
+        await SceneManager.UnloadSceneAsync (this.game);
         SceneManager.LoadScene (endGameScreen, LoadSceneMode.Additive);
 
         if (PlayerPrefs.GetInt ("highScore") < score) {
@@ -110,6 +124,3 @@ public class GameManager : MonoBehaviour {
         return this.games.Concat(this.otherScenesThanGames).ToArray();
     }
 }
-
-
-

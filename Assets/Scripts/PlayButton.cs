@@ -10,11 +10,9 @@ public class PlayButton : MonoBehaviour
     private void Start() {
         dataController = FindObjectOfType<DataController>();
     }
-    // Start is called before the first frame update
-    public void StartGame()
-    {
-		//dataController.SetRoundEndStatus(true);
-		//dataController.SetReadyStatus(true);
+
+    public void StartGame() {
+		dataController.SetDebugMode(false);
 		dataController.SetStatus(DataController.Status.MINIGAME);
     }
 
