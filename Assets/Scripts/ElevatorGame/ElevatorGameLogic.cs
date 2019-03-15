@@ -76,10 +76,7 @@ public class ElevatorGameLogic : MonoBehaviour, IMinigameEnder {
     public void LoseMinigame() {
         
         Text timeOutText = GameObject.FindGameObjectWithTag("InfoText").GetComponent<Text>();
-        //timeOutText.fontSize  = 70;
-        //timeOutText.color = Color.red;
         timeOutText.text = "TIME OVER";
-        
         
         endedGame = true;
         foreach (GameObject jumper in jumpmanList){
