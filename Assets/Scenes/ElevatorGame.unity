@@ -147,6 +147,7 @@ RectTransform:
   - {fileID: 2110907708}
   - {fileID: 418118589}
   - {fileID: 1271237774}
+  - {fileID: 1189170011}
   m_Father: {fileID: 1815567212}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1659,6 +1660,85 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 4324137168032679635, guid: e4198d52aee36e94585b6275822c43d9, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: e4198d52aee36e94585b6275822c43d9, type: 3}
+--- !u!1 &1189170010
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1189170011}
+  - component: {fileID: 1189170013}
+  - component: {fileID: 1189170012}
+  m_Layer: 5
+  m_Name: InfoText
+  m_TagString: InfoText
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1189170011
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1189170010}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 22502201}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 4, y: 0.1}
+  m_SizeDelta: {x: 395.9, y: 233.1}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1189170012
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1189170010}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.9433962, g: 0.057849795, b: 0.057849795, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 60
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 6
+    m_MaxSize: 60
+    m_Alignment: 4
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: Jump to break elevator!
+--- !u!222 &1189170013
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1189170010}
+  m_CullTransparentMesh: 0
 --- !u!1 &1271237773
 GameObject:
   m_ObjectHideFlags: 0
@@ -2409,6 +2489,21 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2373825414488131404, guid: 429ac7998153b6f43bf9d92cb21957bf,
+        type: 3}
+      propertyPath: TimerReadyMethods.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 85307753}
+    - target: {fileID: 2373825414488131404, guid: 429ac7998153b6f43bf9d92cb21957bf,
+        type: 3}
+      propertyPath: TimerReadyMethods.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnTimerEnd
+      objectReference: {fileID: 0}
+    - target: {fileID: 2373825414488131404, guid: 429ac7998153b6f43bf9d92cb21957bf,
+        type: 3}
+      propertyPath: seconds
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 2373825413886070461, guid: 429ac7998153b6f43bf9d92cb21957bf,
         type: 3}
       propertyPath: m_AnchorMin.y
@@ -2423,21 +2518,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0.000015258789
-      objectReference: {fileID: 0}
-    - target: {fileID: 2373825414488131404, guid: 429ac7998153b6f43bf9d92cb21957bf,
-        type: 3}
-      propertyPath: TimerReadyMethods.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 85307751}
-    - target: {fileID: 2373825414488131404, guid: 429ac7998153b6f43bf9d92cb21957bf,
-        type: 3}
-      propertyPath: TimerReadyMethods.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: OnTimerEnd
-      objectReference: {fileID: 0}
-    - target: {fileID: 2373825414488131404, guid: 429ac7998153b6f43bf9d92cb21957bf,
-        type: 3}
-      propertyPath: seconds
-      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 2373825414128706435, guid: 429ac7998153b6f43bf9d92cb21957bf,
         type: 3}

@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class ElevatorGameLogic : MonoBehaviour {
+public class ElevatorGameLogic : MonoBehaviour, IMinigameEnder {
     private MinigameLogic miniGameLogic;
     private GameObject[] borders;
     private BorderLogic borderLogic;
@@ -34,20 +35,8 @@ public class ElevatorGameLogic : MonoBehaviour {
         supportBorder.GetComponent<SupportBorderScript>().DamageVisual(damage);
         if(damage >= 20 && !endedGame){
             endedGame = true;
-            this.EndGame();
+            this.WinMinigame();
         }
-    }
-
-    
-
-    public void EndGame(){
-        brokenBorder.SetActive(true);
-        supportBorder.SetActive(false);
-        foreach(GameObject border in borders){
-                border.GetComponent<BorderLogic>().AddRigidBody();
-        }
-        this.ChangeFace();
-        miniGameLogic.EndMinigame(true);
     }
 
     public void ChangeFace(){
@@ -58,15 +47,49 @@ public class ElevatorGameLogic : MonoBehaviour {
 
     public void setDifficulty(){
         int difficulty = dataController.GetDifficulty();
-        float reducedTime = (float) 25 - difficulty*5;
-        if(reducedTime < 5){
-            reducedTime = 5;
+        float reducedTime = (float) 25 - difficulty*3;
+        if(reducedTime < 13){
+            reducedTime = 13;
         }
         
         Debug.Log("Difficulty time set to "+ reducedTime);
         timer.SetTime(reducedTime);
 
-        //Vaikeusidea: tihennä hyppynopeutta (gravity + force)
+        //Vaikeusidea: tihennä hyppynopeutta (gravity + force) tai ota randomius myöhemmin käyttöön?
+    }
+
+    public void WinMinigame() {
+        foreach (GameObject jumper in jumpmanList){
+            jumper.GetComponent<Button>().interactable = false;
+        }
+        brokenBorder.SetActive(true);
+        supportBorder.SetActive(false);
+
+        foreach(GameObject border in borders){
+                border.GetComponent<BorderLogic>().AddRigidBody();
+        }
+
+        this.ChangeFace();
+        miniGameLogic.EndMinigame(true);
+    }
+    
+    public void LoseMinigame() {
+        
+        Text timeOutText = GameObject.FindGameObjectWithTag("InfoText").GetComponent<Text>();
+        //timeOutText.fontSize  = 70;
+        //timeOutText.color = Color.red;
+        timeOutText.text = "TIME OVER";
+        
+        
+        endedGame = true;
+        foreach (GameObject jumper in jumpmanList){
+            jumper.GetComponent<Button>().interactable = false;
+        }
+        miniGameLogic.EndMinigame(false);
+    }
+
+    public void OnTimerEnd() {
+        this.LoseMinigame();
     }
 
     

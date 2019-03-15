@@ -9,6 +9,7 @@ TagManager:
   - Border
   - BrokenBorder
   - SupportBorder
+  - InfoText
   layers:
   - Default
   - TransparentFX
