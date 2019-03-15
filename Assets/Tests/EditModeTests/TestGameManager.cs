@@ -9,11 +9,13 @@ namespace Tests
 {
     public class TestGameManager
     {
+        GameManager gameManager;
         // A Test behaves as an ordinary method
-        [Test]
-        public void TestGameManagerSimplePasses()
-        {
-            // Use the Assert class to test conditions
+        [SetUp]
+        public void SetUp() {
+            var gameObject = new GameObject();
+            gameObject.AddComponent<GameManager>();
+            this.gameManager = gameObject.GetComponent(typeof(GameManager)) as GameManager;
         }
 
 
@@ -25,10 +27,7 @@ namespace Tests
         [Test]
         public void TestAllScenesAreInBuildSettings()
         {
-            var gameObject = new GameObject();
-            gameObject.AddComponent<GameManager>();
-            GameManager gameManager = gameObject.GetComponent(typeof(GameManager)) as GameManager;
-            string[] scenesWantToBuild = gameManager.getAllScenes();
+            string[] scenesWantToBuild = this.gameManager.getAllScenes();
             string[] allScenes = getAllScenesInBuildSettings();
             int numberOfScenesInBuildSettings = EditorSceneManager.sceneCountInBuildSettings;
 
