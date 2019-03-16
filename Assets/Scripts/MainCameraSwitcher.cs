@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -24,19 +25,28 @@ public class MainCameraSwitcher : MonoBehaviour, ICameraController {
     }
 
 
+    // Helper wrapper pool for implementation
+    private Dictionary<Camera, CameraWrapper> wrappers;
+    private CameraWrapper WrapCamera(Camera camera) {
+        if (wrappers == null) {
+            wrappers = new Dictionary<Camera, CameraWrapper>();
+        }
+        if (!wrappers.ContainsKey(camera)) {
+            wrappers.Add(camera, new CameraWrapper(camera));
+        }
+        return wrappers[camera];
+    }
 
-    // Implements the interface: offers connections to the game engine
+    // implementations of interface methods
     public ICamera[] FetchCameras() {
         Camera[] cameras = FindObjectsOfType<Camera>();
-        return cameras.Select(cam => new CameraWrapper(cam)).ToArray();
+        return cameras.Select(cam => WrapCamera(cam)).ToArray();
     }
-
     public ICamera FetchMainCamera() {
-        return new CameraWrapper(Camera.main);
+        return WrapCamera(Camera.main);
     }
-
     public ICamera FetchAttachedCamera() {
-        return new CameraWrapper(GetComponent<Camera>());
+        return WrapCamera(GetComponent<Camera>());
     }
 }
 
