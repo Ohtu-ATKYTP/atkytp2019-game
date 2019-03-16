@@ -26,7 +26,8 @@ namespace Tests {
 
         [Test]
         public void ActivateOnlyCameraActivatesAttachedCameraCorrectly() {
-            Camera cam = new Camera();
+            ICamera cam = Substitute.For<ICamera>();
+            cam.enabled.Returns(true);
            
             ICameraController stubController = Substitute.For<ICameraController>();
             stubController.FetchCameras().Returns(new[] { cam });
@@ -37,7 +38,7 @@ namespace Tests {
             logic.ActivateOnlyCamera(cam);
 
             stubController.Received(1).FetchCameras();
-           // Assert.IsTrue(cam.enabled);
+            Assert.IsTrue(cam.enabled);
         }
 
         [Test]

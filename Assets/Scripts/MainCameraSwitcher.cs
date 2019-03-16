@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using UnityEngine;
 
 /*
@@ -25,25 +26,40 @@ public class MainCameraSwitcher : MonoBehaviour, ICameraController {
 
 
     // Implements the interface: offers connections to the game engine
-    public Camera[] FetchCameras() {
-        return FindObjectsOfType<Camera>();
+    public ICamera[] FetchCameras() {
+        Camera[] cameras = FindObjectsOfType<Camera>();
+        return cameras.Select(cam => new CameraWrapper(cam)).ToArray();
     }
 
-    public Camera FetchMainCamera() {
-        return Camera.main;
+    public ICamera FetchMainCamera() {
+        return new CameraWrapper(Camera.main);
     }
 
-    public Camera FetchAttachedCamera() {
-        return GetComponent<Camera>();
+    public ICamera FetchAttachedCamera() {
+        return new CameraWrapper(GetComponent<Camera>());
     }
+}
+
+
+public class CameraWrapper : ICamera {
+    public Camera camera;
+    public bool enabled { get => camera.enabled; set => camera.enabled = value; }
+
+    public CameraWrapper(Camera camera) {
+        this.camera = camera;
+    }
+}
+
+public interface ICamera {
+    bool enabled { get; set; }
 }
 
 
 // methods that must use the game engine
 public interface ICameraController {
-    Camera FetchMainCamera();
-    Camera[] FetchCameras();
-    Camera FetchAttachedCamera();
+    ICamera FetchMainCamera();
+    ICamera[] FetchCameras();
+    ICamera FetchAttachedCamera();
 }
 
 // Logic that is not directly coupled with the game engine
@@ -51,7 +67,7 @@ public interface ICameraController {
 [Serializable]
 public class MainCameraSwitcherLogic {
     private ICameraController cameraController;
-    private Camera initialMainCamera;
+    private ICamera initialMainCamera;
 
 
     public void SetCameraController(ICameraController ctrl) {
@@ -69,8 +85,8 @@ public class MainCameraSwitcherLogic {
         ActivateOnlyCamera(initialMainCamera);
     }
 
-    public void ActivateOnlyCamera(Camera camera) {
-        Camera[] cameras = cameraController.FetchCameras();
+    public void ActivateOnlyCamera(ICamera camera) {
+        ICamera[] cameras = cameraController.FetchCameras();
         for (int i = 0; i < cameras.Length; i++) {
             if (cameras[i] == camera) {
                 if (cameras[i] != null) {
