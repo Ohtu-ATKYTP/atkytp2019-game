@@ -39,12 +39,6 @@ public class ElevatorGameLogic : MonoBehaviour, IMinigameEnder {
         }
     }
 
-    public void ChangeFace(){
-        foreach (GameObject jumper in jumpmanList){
-            jumper.GetComponent<JumpmanLogic>().ChangeFace();
-        }
-    }
-
     public void setDifficulty(){
         int difficulty = dataController.GetDifficulty();
         float reducedTime = (float) 25 - difficulty*3;
@@ -61,7 +55,10 @@ public class ElevatorGameLogic : MonoBehaviour, IMinigameEnder {
     public void WinMinigame() {
         foreach (GameObject jumper in jumpmanList){
             jumper.GetComponent<Button>().interactable = false;
+            jumper.GetComponent<JumpmanLogic>().gameWon = true;
+            jumper.GetComponent<JumpmanLogic>().ChangeToScared();
         }
+
         brokenBorder.SetActive(true);
         supportBorder.SetActive(false);
 
@@ -69,7 +66,6 @@ public class ElevatorGameLogic : MonoBehaviour, IMinigameEnder {
                 border.GetComponent<BorderLogic>().AddRigidBody();
         }
 
-        this.ChangeFace();
         miniGameLogic.EndMinigame(true);
     }
     
@@ -88,6 +84,4 @@ public class ElevatorGameLogic : MonoBehaviour, IMinigameEnder {
     public void OnTimerEnd() {
         this.LoseMinigame();
     }
-
-    
 }

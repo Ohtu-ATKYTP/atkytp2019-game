@@ -32,7 +32,7 @@ RectTransform:
   m_GameObject: {fileID: 6098241698546250545}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 3.5, y: 3.5, z: 1.69362}
+  m_LocalScale: {x: 3.8480704, y: 6.404872, z: 1.69362}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -84,7 +84,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 2.5, y: 2.5}
+  m_Size: {x: 43.2, y: 43.2}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 0
@@ -111,14 +111,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.9339623, g: 0.110137045, b: 0.110137045, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: b6efb3c790a869f4984853c7b7c7bcac, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 595982c4070337241a1c200e1eac6a5d, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -140,18 +140,18 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.19061327, y: 0.055657387}
   m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
+    border: {x: 14.17, y: 0, z: 14.5199995, w: 2.25}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 43.2, y: 43.2}
+    newSize: {x: 43.2, y: 43.2}
+    adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 30, y: 30}
+  m_Size: {x: 29.19175, y: 29.82395}
   m_EdgeRadius: 1
 --- !u!50 &6098241698546250548
 Rigidbody2D:
@@ -186,7 +186,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d006bcf283e7b7e4aba4f0fa696016e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Face: {fileID: 21300000, guid: 7e68a9d0978494d41a808f632a487224, type: 3}
+  jumping: {fileID: 21300000, guid: d9a7863137e9d4a4cbbfb0e9c4d14c9b, type: 3}
+  standing: {fileID: 21300000, guid: 595982c4070337241a1c200e1eac6a5d, type: 3}
+  scared: {fileID: 21300000, guid: 6dcae34dfb98857498075d3bbfccbf92, type: 3}
 --- !u!114 &1985944997599117298
 MonoBehaviour:
   m_ObjectHideFlags: 0
