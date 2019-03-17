@@ -24,39 +24,29 @@ public class MainCameraSwitcher : MonoBehaviour, ICameraController {
         logic.ResetMainCamera();
     }
 
-
-    // Helper wrapper pool for implementation
-    private Dictionary<Camera, CameraWrapper> wrappers;
-    private CameraWrapper WrapCamera(Camera camera) {
-        if (wrappers == null) {
-            wrappers = new Dictionary<Camera, CameraWrapper>();
-        }
-        if (!wrappers.ContainsKey(camera)) {
-            wrappers.Add(camera, new CameraWrapper(camera));
-        }
-        return wrappers[camera];
-    }
-
     // implementations of interface methods
     public ICamera[] FetchCameras() {
         Camera[] cameras = FindObjectsOfType<Camera>();
-        return cameras.Select(cam => WrapCamera(cam)).ToArray();
+        return cameras.Select(cam => 
+        WrapperPool<Camera, CameraWrapper>.WrapComponent(cam)).ToArray();
     }
     public ICamera FetchMainCamera() {
-        return WrapCamera(Camera.main);
+        return WrapperPool<Camera, CameraWrapper>.WrapComponent(Camera.main);
     }
     public ICamera FetchAttachedCamera() {
-        return WrapCamera(GetComponent<Camera>());
+        return WrapperPool<Camera, CameraWrapper>.WrapComponent(GetComponent<Camera>());
     }
 }
 
 
-public class CameraWrapper : ICamera {
+public class CameraWrapper : ICamera, ISettableComponent<Camera> {
     public Camera camera;
     public bool enabled { get => camera.enabled; set => camera.enabled = value; }
 
-    public CameraWrapper(Camera camera) {
-        this.camera = camera;
+    public CameraWrapper() { }
+
+    public void SetComponent(Camera c) {
+        this.camera = c;
     }
 }
 
