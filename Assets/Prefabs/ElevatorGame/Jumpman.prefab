@@ -32,7 +32,7 @@ RectTransform:
   m_GameObject: {fileID: 6098241698546250545}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 3.8480704, y: 6.404872, z: 1.69362}
+  m_LocalScale: {x: 5.368315, y: 7.5585675, z: 1.726137}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -140,7 +140,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.19061327, y: 0.055657387}
+  m_Offset: {x: 0.2739811, y: 0.06525612}
   m_SpriteTilingProperty:
     border: {x: 14.17, y: 0, z: 14.5199995, w: 2.25}
     pivot: {x: 0.5, y: 0.5}
@@ -151,7 +151,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 29.19175, y: 29.82395}
+  m_Size: {x: 22.294739, y: 27.263882}
   m_EdgeRadius: 1
 --- !u!50 &6098241698546250548
 Rigidbody2D:
@@ -173,7 +173,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 1
-  m_Constraints: 0
+  m_Constraints: 1
 --- !u!114 &1742862307
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -189,6 +189,7 @@ MonoBehaviour:
   jumping: {fileID: 21300000, guid: d9a7863137e9d4a4cbbfb0e9c4d14c9b, type: 3}
   standing: {fileID: 21300000, guid: 595982c4070337241a1c200e1eac6a5d, type: 3}
   scared: {fileID: 21300000, guid: 6dcae34dfb98857498075d3bbfccbf92, type: 3}
+  gameWon: 0
 --- !u!114 &1985944997599117298
 MonoBehaviour:
   m_ObjectHideFlags: 0
