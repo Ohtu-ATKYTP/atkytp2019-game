@@ -10,12 +10,16 @@ public class HeatlhIcons : MonoBehaviour
     public Image hearth_3;
 
     private DataController dataController;
-    // Start is called before the first frame update
+
     void Start()
     {
         this.dataController = FindObjectOfType<DataController>();
+        if(dataController == null)
+        {
+            return;
+        }
 
-        switch(dataController.GetLives()) {
+        switch (dataController.GetLives()) {
             case 0:
                 hearth_1.enabled = false;
                 hearth_2.enabled = false;
@@ -40,9 +44,4 @@ public class HeatlhIcons : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
