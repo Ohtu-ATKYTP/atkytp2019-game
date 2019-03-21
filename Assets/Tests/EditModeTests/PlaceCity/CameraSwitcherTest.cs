@@ -1,8 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using NUnit.Framework;
-using UnityEngine;
-using UnityEngine.TestTools;
+﻿using NUnit.Framework;
 using NSubstitute;
 
 namespace Tests {
@@ -28,7 +24,7 @@ namespace Tests {
         public void ActivateOnlyCameraActivatesAttachedCameraCorrectly() {
             ICamera cam = Substitute.For<ICamera>();
             cam.enabled.Returns(true);
-           
+
             ICameraController stubController = Substitute.For<ICameraController>();
             stubController.FetchCameras().Returns(new[] { cam });
             stubController.FetchAttachedCamera().Returns(cam);
@@ -42,21 +38,84 @@ namespace Tests {
         }
 
         [Test]
-        public void ActivateOnlyCameraDoesNotDisableMainCameraIfItIsAttached() { }
+        public void InitializeDoesNotDisableMainCameraIfItIsAttached() {
+            ICamera mainCamera = Substitute.For<ICamera>();
 
-        [Test]
-        public void ActivateonlyCameraWillDisableCamerasThatAreNotParameter() { }
+            ICameraController stubController = Substitute.For<ICameraController>();
+            stubController.FetchCameras().Returns(new[] { mainCamera, Substitute.For<ICamera>(), Substitute.For<ICamera>() });
+            stubController.FetchAttachedCamera().Returns(mainCamera);
+            stubController.FetchMainCamera().Returns(mainCamera);
 
-        [Test]
-        public void ResetMainCameraWorksWhenCameraWasNotDisabled() { }
 
-        [Test]
-        public void ResetMainCameraWillEnableTheInitialMainCamera() { }
+            MainCameraSwitcherLogic logic = new MainCameraSwitcherLogic();
+            logic.SetCameraController(stubController);
+            logic.Initialize();
 
-        [Test]
-        public void CameraSwitcherTestSimplePasses() {
-            // Use the Assert class to test conditions
-            Assert.That(true);
+            mainCamera.DidNotReceive().enabled = false;
         }
+
+        [Test]
+        public void ActivateonlyCameraWillDisableCamerasThatAreNotParameter() {
+            ICamera cam1 = Substitute.For<ICamera>();
+            ICamera cam2 = Substitute.For<ICamera>();
+            ICamera cam3 = Substitute.For<ICamera>();
+            ICamera attachedCamera = Substitute.For<ICamera>();
+
+            ICameraController stubController = Substitute.For<ICameraController>();
+            stubController.FetchCameras().Returns(new[] { cam1, cam2, attachedCamera, cam3 });
+            stubController.FetchAttachedCamera().Returns(attachedCamera);
+
+            MainCameraSwitcherLogic logic = new MainCameraSwitcherLogic();
+            logic.SetCameraController(stubController);
+
+
+            cam1.enabled = true;
+            cam2.enabled = true;
+            cam3.enabled = true;
+            attachedCamera.enabled = true;
+
+
+            Assert.IsTrue(cam1.enabled);
+            Assert.IsTrue(cam2.enabled);
+            Assert.IsTrue(cam3.enabled);
+            Assert.IsTrue(attachedCamera.enabled);
+
+            logic.ActivateOnlyCamera(attachedCamera);
+
+
+            Assert.IsFalse(cam1.enabled);
+            Assert.IsFalse(cam2.enabled);
+            Assert.IsFalse(cam3.enabled);
+            Assert.IsTrue(attachedCamera.enabled);
+        }
+
+        [Test]
+        public void ResetMainCameraWillEnableTheInitialMainCamera() {
+            ICamera initialCam = Substitute.For<ICamera>(); 
+            ICamera sceneCam = Substitute.For<ICamera>(); 
+
+
+            ICameraController stubController = Substitute.For<ICameraController>();
+            stubController.FetchAttachedCamera().Returns(sceneCam);
+            stubController.FetchCameras().Returns(new [] { initialCam, sceneCam });
+            stubController.FetchMainCamera().Returns(initialCam);
+
+            initialCam.enabled = true;
+            sceneCam.enabled = true; 
+
+            MainCameraSwitcherLogic logic = new MainCameraSwitcherLogic(); 
+            logic.SetCameraController(stubController);
+            logic.Initialize(); 
+
+            Assert.IsFalse(initialCam.enabled);
+            Assert.IsTrue(sceneCam.enabled);
+
+            logic.ResetMainCamera(); 
+
+
+            Assert.IsTrue(initialCam.enabled);
+            Assert.IsFalse(sceneCam.enabled);
+        }
+
     }
 }

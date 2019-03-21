@@ -2,8 +2,13 @@
 Testit löytyvät kansiosta Assets/Tests <br/>
 
 ### Hyödyllisiä linkkejä
-https://blogs.unity3d.com/2014/07/28/unit-testing-at-the-speed-of-light-with-unity-test-tools/  
+
+https://blogs.unity3d.com/2014/07/28/unit-testing-at-the-speed-of-light-with-unity-test-tools/
+
+https://blogs.unity3d.com/2014/06/03/unit-testing-part-2-unit-testing-monobehaviours/
+
 https://nsubstitute.github.io/ (mocking kirjasto)
+
 ## Test Runner
 `Unity Test Runner`in saa auki `Window -> General -> Test Runner`
 
@@ -40,6 +45,7 @@ namespace Tests
         }
     }
 }
+
 ```
 `[Test]` määreen testit suoritetaan normaaleina testeinä kuten missä vaan muussakin rajapinnassa <br/>
 `[UnityTest]` määreen testit suoritetaan Unityn moottorin avulla <br/>
@@ -59,7 +65,7 @@ Tehdään `Assets/Tests/PlayModeTests` kansioon. Play mode testeissä voidaan si
 # NUnit
 [Dokumentaatio](https://github.com/nunit/docs/wiki) <br/>
 
-Unit testit kirjoitetaan NUnit kirjaston avulla. Kun luot testisciprtin se importataan automaattisesti. NUnit vaikuttaa toimivan samaan tamaan kuin JUnit, mutta syntaksi eroaa hieman. Ainakin seuraavat komennot ovat olemassa ja hyödyllisiä:  
+Unit testit kirjoitetaan NUnit kirjaston avulla. Kun luot testiscriptin se importataan automaattisesti. NUnit vaikuttaa toimivan samaan tamaan kuin JUnit, mutta syntaksi eroaa hieman. Ainakin seuraavat komennot ovat olemassa ja hyödyllisiä:  
 `EDIT HUOM! Minulle selveisi että seuraavat ovat vanha tapa tehdä assertioneita! Ne kuitenkin toimivat yhä.`
 ```C#
 Assert.AreEqual(Object A, Object B);
@@ -119,6 +125,20 @@ Termistöä ([unity blog postauksen mukaan](https://blogs.unity3d.com/2014/07/28
 Kannattanee vilkaista:  
 https://blogs.unity3d.com/2014/07/28/unit-testing-at-the-speed-of-light-with-unity-test-tools/ (sama kuin ylempänä)  
 https://nsubstitute.github.io  
+https://blogs.unity3d.com/2014/06/03/unit-testing-part-2-unit-testing-monobehaviours/ (sama kuin ylempänä, **lue** jos teet yksikkötestejä)
+
+ ## MonoBehaviourien yksikkötestaamisen vaikeus (oleellista ennen kuin yrität käyttää NSubstitutea!)
+
+ NSubstitute ei mahdollista ei-abstraktien luokkien korvaamista (substitointia). Jos testattava luokka kutsuu MonoBehavioureita (jonka esimerkiksi kaikki oletuskomponentit perivät), ei niitä voi korvata suoraan. Unityn sulkeutumisen vuoksi yksittäistä valmista komponenttia, esimerkiksi Cameraa, ei voi periä (poikkeuksena esimerkiksi lähdekoodiltaan avatut verkkokomponentit). MonoBehaviour-objekteja ei myöskään pysty luomaan niin helposti kuin useimmista luokista; **new MonoBehaviour() ei toimi odotetusti** (kts linkki ylempää). 
+
+
+ ### Humble object
+
+ Ratkaisuja on muutama, ja ne saattavat vaatia testattavan luokan jonkinasteista refaktorointia. Oleellista on eriyttää pelimoottoria hyödyntävät osat ja itse luokan logiikka. Ns Humble object pattern tekee juuri tämän. Eriytetään pelimoottoriin tiukasti kytketyt osat omaksi rajapinnakseen, jonka MonoBehaviourin perivä luokka (oletettavasti siis juuri testattava skripti, joka on liitetty osaksi jotain Game Objektia) toteuttaa. Luodaan uusi luokka, joka toteuttaa alkuperäisen skriptin logiikan. Sillä on asetettava viite aiemmin luotuun rajapintaan, ja se käyttää rajapintaa saadakseen tietoa pelimaailmasta / aiheuttaakseen siinä muutoksia. Testauksessa tämä rajapinta voidaan korvata NSubstituten avulla, jolloin voidaan kontrolloida millaisia tietoja.
+
+ ### Component Wrapper
+
+ Jos logiikkaluokka jostain syystä vaatii (onko tämä aivan väistämätöntä? Kirjoittaja ei uskalla sanoa 100%) esimerkiksi komponenttiparametrin, ei tuota parametria välttämättä voi mockata. Jos kyseessä on esimerkiksi Camera, on se ei-abstrakti luokka; koodin ei-avoimuuden vuoksi Cameraa ei voi myöskään laittaa toteuttamaan itsemääriteltyä rajapintaa. Eräs ratkaisu on luoda rajapinta (esim nyt ICamera), joka sisältää halutut ominaisuudet. Camera ei voi suoraan toteuttaa tätä rajapintaa, joten luodaan luokka CameraWrapper, joka toteuttaa. Se vain lähettää käskyt eteenpäin sisältämälleen Camera-komponentille. CameraWrapper myös toteuttaa ISettableComponent<Camera>-rajapinnan, jolloin voimme hyödyntää wrapper poolia... Tätä varten on olemassa geneerinen luokka WrapperPool<C, CW>, joka tässä tapauksessa saa tyyppiparametrit <Camera, CameraWrapper>. Vilkaise koodista WrapperPool.cs ja MainCameraSwitcher toiminta.
 
  ## NSubstitute
 

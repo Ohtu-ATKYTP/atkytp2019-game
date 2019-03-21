@@ -1,12 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
 /*
  * The main camera is used to calculate the positions of the touches. Therefore it is important to ensure that the camera of this scene is the main camera. 
  * Without the script the camera in the very first scene will be the main camera
- * 
  */
 public class MainCameraSwitcher : MonoBehaviour, ICameraController {
     private MainCameraSwitcherLogic logic;
@@ -24,7 +22,7 @@ public class MainCameraSwitcher : MonoBehaviour, ICameraController {
         logic.ResetMainCamera();
     }
 
-    // implementations of interface methods
+    #region implementation of ICameraController
     public ICamera[] FetchCameras() {
         Camera[] cameras = FindObjectsOfType<Camera>();
         return cameras.Select(cam => 
@@ -36,43 +34,22 @@ public class MainCameraSwitcher : MonoBehaviour, ICameraController {
     public ICamera FetchAttachedCamera() {
         return WrapperPool<Camera, CameraWrapper>.WrapComponent(GetComponent<Camera>());
     }
+    #endregion
 }
 
 
-public class CameraWrapper : ICamera, ISettableComponent<Camera> {
-    public Camera camera;
-    public bool enabled { get => camera.enabled; set => camera.enabled = value; }
-
-    public CameraWrapper() { }
-
-    public void SetComponent(Camera c) {
-        this.camera = c;
-    }
-}
-
-public interface ICamera {
-    bool enabled { get; set; }
-}
-
-
-// methods that must use the game engine
-public interface ICameraController {
-    ICamera FetchMainCamera();
-    ICamera[] FetchCameras();
-    ICamera FetchAttachedCamera();
-}
 
 // Logic that is not directly coupled with the game engine
 // This is presumably what we want to actually test!
 [Serializable]
 public class MainCameraSwitcherLogic {
+    // EVERYTHING to do with game engine through the controller
     private ICameraController cameraController;
     private ICamera initialMainCamera;
 
 
     public void SetCameraController(ICameraController ctrl) {
         this.cameraController = ctrl;
-
     }
 
     public void Initialize() {
@@ -97,4 +74,31 @@ public class MainCameraSwitcherLogic {
             }
         }
     }
+}
+
+
+public class CameraWrapper : ICamera, ISettableComponent<Camera> {
+    public Camera camera;
+    public bool enabled { get => camera.enabled; set => camera.enabled = value; }
+
+
+    public CameraWrapper() { }
+
+    #region implementation of IsettableComponent<Camera>
+    public void SetComponent(Camera c) {
+        this.camera = c;
+    }
+    #endregion
+}
+
+public interface ICamera {
+    bool enabled { get; set; }
+}
+
+
+// methods that use the game engine (or are mocked)
+public interface ICameraController {
+    ICamera FetchMainCamera();
+    ICamera[] FetchCameras();
+    ICamera FetchAttachedCamera();
 }
