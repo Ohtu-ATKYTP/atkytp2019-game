@@ -15,6 +15,8 @@ public class DebugBetweenScreenController : MonoBehaviour
 	public Text livesAmount;
 	public InputField difficultySelect;
 
+	
+
     // Start is called before the first frame update
     void Start() {
         dataController = FindObjectOfType<DataController>();
@@ -38,4 +40,5 @@ public class DebugBetweenScreenController : MonoBehaviour
 	public void SetNextGame(string next) {
 		this.nextGame = next;
 	}
+
 }

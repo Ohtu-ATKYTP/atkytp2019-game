@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections;
+using System.Collections.Generic;
 using System.IO;                                                        // The System.IO namespace contains functions related to loading and saving files
 
 public class DataController : MonoBehaviour 
@@ -25,6 +26,8 @@ public class DataController : MonoBehaviour
 	private int difficulty;
 	private string[] games;
 
+	private Dictionary<string, float> gameParameters;
+
     void Start()
     {
         Init();
@@ -40,6 +43,8 @@ public class DataController : MonoBehaviour
 		this.debug = false;
 		this.nextGame = "Random";
 		this.difficulty = 1;
+
+		this.gameParameters = new Dictionary<string, float>(); 
     }
 
 	//Difficulty range is 1 and upwards
@@ -135,5 +140,17 @@ public class DataController : MonoBehaviour
 
 	public void SetNextGame(string next) {
 		this.nextGame = next;
+	}
+
+	public void setGameParameter(string key, float value) {
+		if(gameParameters.ContainsKey(key)){
+			gameParameters[key] = value;
+		}else{
+			gameParameters.Add(key, value);
+		}
+	}
+
+	public float getGameParameter(string key) {
+		return gameParameters[key];
 	}
 }

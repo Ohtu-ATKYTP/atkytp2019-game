@@ -9,12 +9,25 @@ public class JumpmanLogic : MonoBehaviour {
     public Sprite jumping;
     public Sprite standing;
     public Sprite scared;
-    bool firstJump;
     public bool gameWon;
+    
+    bool firstJump;
+    
+    private DataController dataController;
 
-    void start() {
+    private float maxGravScale;
+    private float minGravScale;
+    private float jumpForce;
+
+    void Start() {
         firstJump = false;
         gameWon = false;
+
+        dataController = FindObjectOfType<DataController>();
+        maxGravScale = dataController.getGameParameter("gravityScaleMax");
+        minGravScale = dataController.getGameParameter("gravityScaleMin");
+        jumpForce = dataController.getGameParameter("jumpForce");
+
     }
 
     public void Jump() {
@@ -24,10 +37,10 @@ public class JumpmanLogic : MonoBehaviour {
             startText.text = "";
         }
         GetComponent<Image>().sprite = jumping;
-        GetComponent<Rigidbody2D>().gravityScale = Random.Range(30,200);
+        GetComponent<Rigidbody2D>().gravityScale = Random.Range(minGravScale,maxGravScale);
         //GetComponent<Rigidbody2D>().mass = Random.Range(1,10);
         GetComponent<Rigidbody2D>().velocity = Vector2.zero; //Zero velocity before jump
-        GetComponent<Rigidbody2D>().AddForce(Vector2.up*3000, ForceMode2D.Impulse);
+        GetComponent<Rigidbody2D>().AddForce(Vector2.up*jumpForce, ForceMode2D.Impulse);
     }
     
     public void ChangeToScared(){
