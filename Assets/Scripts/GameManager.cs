@@ -11,8 +11,8 @@ public class GameManager : MonoBehaviour {
     private string lastGame;
     private string game;
 
-    private string[] games = { "FirstGame", "PlaceCity", "TurkuGame", "LogoHaalariin", "ElevatorGame"};
-    //private string[] games = { "FirstGame", "ElevatorGame"};
+    private string[] games = {"PlaceCity", "TurkuGame", "LogoHaalariin"};
+    
     private string[] otherScenesThanGames = {"DebugBetweenGameScreen", "SceneManagerScene", "MainMenu", "BetweenGameScreen"};
     private string mainmenuScreen = "MainMenu";
     private string endGameScreen = "MainMenu";
@@ -46,7 +46,14 @@ public class GameManager : MonoBehaviour {
 
 	private void ExecuteBetweenScreen() {
 		dataController.SetStatus(DataController.Status.WAIT);
-		SceneManager.UnloadSceneAsync(this.game);
+        try {
+		    SceneManager.UnloadSceneAsync(this.game);
+        } catch (System.Exception e) {
+            Debug.Log(e);
+            Debug.Log("Tried to unload: " + this.game);
+            Debug.Log("Throwing the error...");
+            throw e;
+        }
 		if (game != null) {
             lastGame = game;
         }

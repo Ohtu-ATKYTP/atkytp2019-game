@@ -63,6 +63,7 @@ public class LogoHaalariinLogic : MonoBehaviour, IMinigameEnder {
 
     // win / lose in other cases except time running out 
     public async void EndGame(bool win) {
+        timer.StopTimerProgression();
         if (win) {
             logoUpdater.startRotateLogoAnimation();
         } else {
@@ -73,11 +74,10 @@ public class LogoHaalariinLogic : MonoBehaviour, IMinigameEnder {
     }
 
     public void endGame() {
-        timer.StopTimerProgression();
         if (this.logo == this.haalari) {
             EndGame(true);
         } else {
-            EndGame(false); 
+            EndGame(false);
         }
     }
     public async void timesUp() {

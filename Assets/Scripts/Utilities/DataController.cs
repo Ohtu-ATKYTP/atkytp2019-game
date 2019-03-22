@@ -14,7 +14,6 @@ public class DataController : MonoBehaviour
 	}
 	private string nextGame;
 	private bool debug;
-    private RoundData[] allRoundData;
 	private readonly int DIFF_INCREASE_INTERVAL = 3;
     private int currentScore;
     private bool winStatus;
@@ -28,7 +27,6 @@ public class DataController : MonoBehaviour
 
     void Start()
     {
-        DontDestroyOnLoad(gameObject);
         Init();
     }
 
