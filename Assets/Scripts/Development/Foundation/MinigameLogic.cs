@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEngine.Events;
 
 public abstract class MinigameLogic : MonoBehaviour, IMinigameEnder {
     private DataController dataController;
@@ -15,8 +14,7 @@ public abstract class MinigameLogic : MonoBehaviour, IMinigameEnder {
     protected virtual void Start() {
         dataController = FindObjectOfType<DataController>();
         timebar = FindObjectOfType<TimeProgress>();
-        if(timebar.TimerReadyMethods.GetPersistentEventCount() == 0)
-        {
+        if (timebar.TimerReadyMethods.GetPersistentEventCount() == 0) {
             timebar.TimerReadyMethods.AddListener(OnTimerEnd);
         }
         ConfigureDifficulty(dataController != null ?
@@ -30,8 +28,7 @@ public abstract class MinigameLogic : MonoBehaviour, IMinigameEnder {
 
         DisplayEndingActions(won);
 
-        if (!dataController)
-        {
+        if (!dataController) {
             Debug.Log("Minigame would end now");
         } else {
             dataController.MinigameEnd(won,
@@ -41,8 +38,7 @@ public abstract class MinigameLogic : MonoBehaviour, IMinigameEnder {
     }
 
 
-    public virtual void OnTimerEnd()
-    {
+    public virtual void OnTimerEnd() {
         LoseMinigame();
     }
 
@@ -52,13 +48,11 @@ public abstract class MinigameLogic : MonoBehaviour, IMinigameEnder {
     protected abstract void ConfigureDifficulty(int difficulty);
 
     #region Implements IMinigameEnder
-    public void LoseMinigame()
-    {
+    public void LoseMinigame() {
         EndMinigame(false);
     }
 
-    public void WinMinigame()
-    {
+    public void WinMinigame() {
         EndMinigame(true);
     }
     #endregion
