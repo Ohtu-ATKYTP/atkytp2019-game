@@ -1004,9 +1004,9 @@ MonoBehaviour:
   m_HandleRect: {fileID: 602516084}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 10000
+  m_MaxValue: 20000
   m_WholeNumbers: 0
-  m_Value: 10000
+  m_Value: 12948
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -2458,9 +2458,9 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1605501509}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 1000
+  m_MaxValue: 1500
   m_WholeNumbers: 0
-  m_Value: 1000
+  m_Value: 1009
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -3351,7 +3351,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1121381938}
   m_Direction: 2
   m_Value: 0
-  m_Size: 0.9999999
+  m_Size: 0.9999994
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -4089,7 +4089,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -0.000009536743}
+  m_AnchoredPosition: {x: 0, y: 0.00004386902}
   m_SizeDelta: {x: 0, y: 28}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!1 &1923028449
@@ -4718,9 +4718,9 @@ MonoBehaviour:
   m_HandleRect: {fileID: 412239131}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 1000
+  m_MaxValue: 1500
   m_WholeNumbers: 0
-  m_Value: 701
+  m_Value: 700
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []

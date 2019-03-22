@@ -25,8 +25,8 @@ public class JumpmanLogic : MonoBehaviour {
 
         dataController = FindObjectOfType<DataController>();
         maxGravScale = 1000;
-        minGravScale = 700;
-        jumpForce = 10000;
+        minGravScale = 600;
+        jumpForce = 13000;
 
         if(dataController.GetDebugMode()){
             this.initDebuggerParams();
