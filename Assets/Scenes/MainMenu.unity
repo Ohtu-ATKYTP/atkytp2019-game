@@ -451,7 +451,6 @@ GameObject:
   - component: {fileID: 108597967}
   - component: {fileID: 108597966}
   - component: {fileID: 108597965}
-  - component: {fileID: 108597964}
   m_Layer: 5
   m_Name: DecreaseHSButton
   m_TagString: Untagged
@@ -479,18 +478,6 @@ RectTransform:
   m_AnchoredPosition: {x: 149, y: 243}
   m_SizeDelta: {x: 130.3, y: 52.5}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &108597964
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 108597962}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 50d81bf0fabe84847a08cd2b3d375f08, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &108597965
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -675,7 +662,6 @@ GameObject:
   - component: {fileID: 157911599}
   - component: {fileID: 157911598}
   - component: {fileID: 157911597}
-  - component: {fileID: 157911596}
   m_Layer: 5
   m_Name: DelRegisteredButton
   m_TagString: Untagged
@@ -703,18 +689,6 @@ RectTransform:
   m_AnchoredPosition: {x: -166.00003, y: -444.00003}
   m_SizeDelta: {x: 130.29999, y: 52.5}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &157911596
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 157911594}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 50d81bf0fabe84847a08cd2b3d375f08, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &157911597
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1275,7 +1249,6 @@ GameObject:
   - component: {fileID: 358087637}
   - component: {fileID: 358087636}
   - component: {fileID: 358087635}
-  - component: {fileID: 358087634}
   m_Layer: 5
   m_Name: DelUsernameButton
   m_TagString: Untagged
@@ -1303,18 +1276,6 @@ RectTransform:
   m_AnchoredPosition: {x: -166, y: -61}
   m_SizeDelta: {x: 130.29999, y: 52.5}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &358087634
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 358087632}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 50d81bf0fabe84847a08cd2b3d375f08, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &358087635
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1417,7 +1378,6 @@ GameObject:
   - component: {fileID: 377683242}
   - component: {fileID: 377683241}
   - component: {fileID: 377683240}
-  - component: {fileID: 377683239}
   m_Layer: 5
   m_Name: IncreaseHSButton
   m_TagString: Untagged
@@ -1445,18 +1405,6 @@ RectTransform:
   m_AnchoredPosition: {x: 141, y: 379}
   m_SizeDelta: {x: 130.3, y: 52.5}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &377683239
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 377683237}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 50d81bf0fabe84847a08cd2b3d375f08, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &377683240
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2721,7 +2669,6 @@ GameObject:
   - component: {fileID: 858946067}
   - component: {fileID: 858946066}
   - component: {fileID: 858946065}
-  - component: {fileID: 858946064}
   m_Layer: 5
   m_Name: DelHighScoreButton
   m_TagString: Untagged
@@ -2749,18 +2696,6 @@ RectTransform:
   m_AnchoredPosition: {x: -166.00003, y: -345.00003}
   m_SizeDelta: {x: 130.29999, y: 52.5}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &858946064
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 858946062}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 50d81bf0fabe84847a08cd2b3d375f08, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &858946065
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3798,7 +3733,6 @@ GameObject:
   - component: {fileID: 1300584464}
   - component: {fileID: 1300584463}
   - component: {fileID: 1300584462}
-  - component: {fileID: 1300584461}
   m_Layer: 5
   m_Name: DelSyncedHSButton
   m_TagString: Untagged
@@ -3826,18 +3760,6 @@ RectTransform:
   m_AnchoredPosition: {x: -166.00003, y: -538}
   m_SizeDelta: {x: 130.29999, y: 52.5}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1300584461
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1300584459}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 50d81bf0fabe84847a08cd2b3d375f08, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1300584462
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4371,10 +4293,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9ab521b444fb0b44b46fa703bfdfd9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  registrationCanvas: {fileID: 1798732112}
-  mainMenuCanvas: {fileID: 65540281}
-  highScoreCanvas: {fileID: 1342180099}
-  settingsCanvas: {fileID: 1550171998}
 --- !u!4 &1349790128
 Transform:
   m_ObjectHideFlags: 0
@@ -5084,7 +5002,6 @@ GameObject:
   - component: {fileID: 1597301834}
   - component: {fileID: 1597301833}
   - component: {fileID: 1597301832}
-  - component: {fileID: 1597301831}
   m_Layer: 5
   m_Name: SyncHSButton
   m_TagString: Untagged
@@ -5112,18 +5029,6 @@ RectTransform:
   m_AnchoredPosition: {x: -167, y: 380}
   m_SizeDelta: {x: 130.3, y: 52.5}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1597301831
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1597301829}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 50d81bf0fabe84847a08cd2b3d375f08, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1597301832
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5911,7 +5816,6 @@ GameObject:
   - component: {fileID: 1821216072}
   - component: {fileID: 1821216071}
   - component: {fileID: 1821216070}
-  - component: {fileID: 1821216069}
   m_Layer: 5
   m_Name: DelIDButton
   m_TagString: Untagged
@@ -5939,18 +5843,6 @@ RectTransform:
   m_AnchoredPosition: {x: -166.00003, y: -153}
   m_SizeDelta: {x: 130.29999, y: 52.5}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1821216069
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1821216067}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 50d81bf0fabe84847a08cd2b3d375f08, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1821216070
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6260,7 +6152,6 @@ GameObject:
   - component: {fileID: 1879791573}
   - component: {fileID: 1879791572}
   - component: {fileID: 1879791571}
-  - component: {fileID: 1879791570}
   m_Layer: 5
   m_Name: UpdateRankButton
   m_TagString: Untagged
@@ -6288,18 +6179,6 @@ RectTransform:
   m_AnchoredPosition: {x: -179, y: 248}
   m_SizeDelta: {x: 130.3, y: 52.5}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1879791570
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1879791568}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 50d81bf0fabe84847a08cd2b3d375f08, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1879791571
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6609,7 +6488,6 @@ GameObject:
   - component: {fileID: 2060203603}
   - component: {fileID: 2060203602}
   - component: {fileID: 2060203601}
-  - component: {fileID: 2060203600}
   m_Layer: 5
   m_Name: DelTokenButton
   m_TagString: Untagged
@@ -6637,18 +6515,6 @@ RectTransform:
   m_AnchoredPosition: {x: -166.00003, y: -247}
   m_SizeDelta: {x: 130.29999, y: 52.5}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &2060203600
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2060203598}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 50d81bf0fabe84847a08cd2b3d375f08, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &2060203601
 MonoBehaviour:
   m_ObjectHideFlags: 0
