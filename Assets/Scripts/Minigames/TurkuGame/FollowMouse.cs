@@ -9,7 +9,7 @@ public class FollowMouse : MonoBehaviour
     {
         if(!t.GetLineUsedUp()){
             var e = p.emission;
-            if(p.particleCount==10000){
+            if(p.particleCount==t.GetMaxLineLength()){
                 t.LineUsedUp();
                 e.enabled = false;
             }

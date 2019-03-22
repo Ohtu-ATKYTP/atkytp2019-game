@@ -7,6 +7,7 @@ public class TurkuManager : MonoBehaviour, IMinigameEnder {
     public HitboxManager hitboxes;
     public FloodAnimation flood;
     private DataController dataController;
+    public int maxLineLength=1000;
     public int difficulty;
     private bool gameOver = false;
     public TurkuAnimation turkuAnimation;
@@ -35,6 +36,10 @@ public class TurkuManager : MonoBehaviour, IMinigameEnder {
 
     public bool GetLineUsedUp(){
         return lineUsedUp;
+    }
+
+    public int GetMaxLineLength(){
+        return maxLineLength;
     }
 
     public void LoseMinigame() {
