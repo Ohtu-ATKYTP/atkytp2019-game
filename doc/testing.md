@@ -62,6 +62,14 @@ Tehdään kansioon `Assets/Tests/PlayModeTests`. Edit mode testit ovat nopeita s
 ## Play mode testit
 Tehdään `Assets/Tests/PlayModeTests` kansioon. Play mode testeissä voidaan simuloida pelimoottorin etenemistä. Nämä testit on hidasta suorittaa.
 
+## Komponenttien (MonoBehaviourin perivät) käyttäminen testeissä
+
+Otetaan esimerkiksi Camera, joka halutaan luoda testin alussa, antaa parametriksi yksikkötestattavalle metodille, ja lopussa tarkistaa onko sen tila muuttunut halutusti. __Emme__ voi luoda komponenttia seuraavasti: ~~`Camera cam = new Camera();`~~. Komponentti on liitettävä GameObjektiin, jolloin Unity works its magic ja sitä pystyy käyttämään kuten olettaisi. Prosessin nopeuttamista varten on staattinen luokka `ComponentCreator`, jolla on staattinen metodi `Create<T>()`. Kameratestissä voisi siis luoda kameran komennolla `Camera cam = ComponentCreator.Create<Camera>();`. Tämän jälkeen esimerkiksi asettaminen `Camera.enabled = false;` ei aiheuta NullPointerExceptioniä.
+
+ComponentCreatorin toiminta: 
+
+ Parametriton versio luo uuden GameObjektin, kutsuu tällä `AddComponent<T>` ja palauttaa sitten game objektilta kysymänsä viitteen ko. komponenttiin. Metodin parametrillinen versio `Create<T>(GameObject go)` taas lisää komponentin parametri-game objektiin. Parametrittoman metodikutsun luoma game object ei jää tavoittamattomiin, sillä siihen saa viitteen luodun komponentin `gameObject` kentän kautta. Luokan määrittely löytyy tiedostosta `Utilities/ComponentCreator.cs`.
+
 # NUnit
 [Dokumentaatio](https://github.com/nunit/docs/wiki) <br/>
 
@@ -129,16 +137,72 @@ https://blogs.unity3d.com/2014/06/03/unit-testing-part-2-unit-testing-monobehavi
 
  ## MonoBehaviourien yksikkötestaamisen vaikeus (oleellista ennen kuin yrität käyttää NSubstitutea!)
 
- NSubstitute ei mahdollista ei-abstraktien luokkien korvaamista (substitointia). Jos testattava luokka kutsuu MonoBehavioureita (jonka esimerkiksi kaikki oletuskomponentit perivät), ei niitä voi korvata suoraan. Unityn sulkeutumisen vuoksi yksittäistä valmista komponenttia, esimerkiksi Cameraa, ei voi periä (poikkeuksena esimerkiksi lähdekoodiltaan avatut verkkokomponentit). MonoBehaviour-objekteja ei myöskään pysty luomaan niin helposti kuin useimmista luokista; **new MonoBehaviour() ei toimi odotetusti** (kts linkki ylempää). 
+ NSubstitute ei mahdollista ei-abstraktien luokkien korvaamista (substitointia). Jos testattava luokka perii MonnoBehaviourin, ei sitä voi mockata (tietääkseni). Kannattavinta on refaktoroida luokka niin, että sen kytkökset pelimoottoriin ja varsinainen logiikka ovat mahdollisimman erillään toisistaan.
 
 
  ### Humble object
 
- Ratkaisuja on muutama, ja ne saattavat vaatia testattavan luokan jonkinasteista refaktorointia. Oleellista on eriyttää pelimoottoria hyödyntävät osat ja itse luokan logiikka. Ns Humble object pattern tekee juuri tämän. Eriytetään pelimoottoriin tiukasti kytketyt osat omaksi rajapinnakseen, jonka MonoBehaviourin perivä luokka (oletettavasti siis juuri testattava skripti, joka on liitetty osaksi jotain Game Objektia) toteuttaa. Luodaan uusi luokka, joka toteuttaa alkuperäisen skriptin logiikan. Sillä on asetettava viite aiemmin luotuun rajapintaan, ja se käyttää rajapintaa saadakseen tietoa pelimaailmasta / aiheuttaakseen siinä muutoksia. Testauksessa tämä rajapinta voidaan korvata NSubstituten avulla, jolloin voidaan kontrolloida millaisia tietoja.
+Kuvaus patternista löytyy [tästä](https://blogs.unity3d.com/2014/06/03/unit-testing-part-2-unit-testing-monobehaviours/). Olkoon testattava luokka nimeltään `Example`. Aluksi luokassa logiikka ja pelimoottorikutsut ovat sekaisin. Luodaan rajapinta, jolla on metodit joilla se antaa kutsujalle komponentteja ja tuottaa vaikutuksia pelimoottorissa; annetaan rajapinnalle nimeksi esimerkiksi `ExampleController`   (vaikka meidän projektissa Controllereita on ehkä jo liikaa ;P). Määrittely voisi olla jotain tämäntapaista: 
+``` C#
+public interface IExampleController {
+    public Camera FetchAllCameras();
+}
+```
 
- ### Component Wrapper
+Jonkin verran ehkä joutuu refaktoroimaan luokkaa, jotta nämä pelimoottorin kanssa kommunikoivat osiot ovat omissa metodeissaan (jotka rajapinta määrittelee).
 
- Jos logiikkaluokka jostain syystä vaatii (onko tämä aivan väistämätöntä? Kirjoittaja ei uskalla sanoa 100%) esimerkiksi komponenttiparametrin, ei tuota parametria välttämättä voi mockata. Jos kyseessä on esimerkiksi Camera, on se ei-abstrakti luokka; koodin ei-avoimuuden vuoksi Cameraa ei voi myöskään laittaa toteuttamaan itsemääriteltyä rajapintaa. Eräs ratkaisu on luoda rajapinta (esim nyt ICamera), joka sisältää halutut ominaisuudet. Camera ei voi suoraan toteuttaa tätä rajapintaa, joten luodaan luokka CameraWrapper, joka toteuttaa. Se vain lähettää käskyt eteenpäin sisältämälleen Camera-komponentille. CameraWrapper myös toteuttaa ISettableComponent<Camera>-rajapinnan, jolloin voimme hyödyntää wrapper poolia... Tätä varten on olemassa geneerinen luokka WrapperPool<C, CW>, joka tässä tapauksessa saa tyyppiparametrit <Camera, CameraWrapper>. Vilkaise koodista WrapperPool.cs ja MainCameraSwitcher toiminta.
+Logiikka eriytetään omaksi luokakseen, jolla on asetettava viite ExampleControlleriin. Esimerkiksi: 
+
+``` C# 
+
+public class ExampleLogic {
+    private IExampleController controller; 
+    private Camera[] cameras; 
+    
+    public ExampleLogic(IExampleController controller){
+        this.controller = controller;
+        cameras = controller.FetchAllCameras();
+    }
+
+
+    public void DoSomething(){
+        if(Condition()){
+            cameras[0].scale = new Vector3(2, 2, 2);
+        }
+    }
+
+    .
+    .
+    .
+
+}
+```
+
+Alkuperäinen luokka on muotoa
+
+``` C# 
+public class Example : MonoBehaviour, IExampleController {
+    private ExampleLogic logic;
+
+    // kaikki callbackit joita pelimoottori kutsuun oltava täällä, koska perii MonoBehaviourin
+    private void Start(){
+        // tämä luokkakin toteuttaa rajapinnan
+        logic = new ExampleLogic(this);
+    }
+
+    private void Update(){
+        logic.ProcessUpdate();
+    }
+
+    public Camera FetchAllCameras(){
+        return FindObjectsByType<Camera>();
+    }
+
+}
+```
+
+Esimerkki ei ole täysin loppuun mietitty, kannattaa lukea linkin versio jotta näkee täyteläisemmän esimerkin jolle myös kirjoitettu testejä.
+
 
  ## NSubstitute
 
