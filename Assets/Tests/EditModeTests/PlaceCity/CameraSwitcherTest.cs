@@ -1,5 +1,6 @@
 ﻿using NUnit.Framework;
 using NSubstitute;
+using UnityEngine;
 
 namespace Tests {
     public class CameraSwitcherTest {
@@ -22,8 +23,8 @@ namespace Tests {
 
         [Test]
         public void ActivateOnlyCameraActivatesAttachedCameraCorrectly() {
-            ICamera cam = Substitute.For<ICamera>();
-            cam.enabled.Returns(true);
+            Camera cam = ComponentCreator.Create<Camera>();
+            cam.enabled = false;
 
             ICameraController stubController = Substitute.For<ICameraController>();
             stubController.FetchCameras().Returns(new[] { cam });
@@ -39,10 +40,12 @@ namespace Tests {
 
         [Test]
         public void InitializeDoesNotDisableMainCameraIfItIsAttached() {
-            ICamera mainCamera = Substitute.For<ICamera>();
+            
+            Camera mainCamera = ComponentCreator.Create<Camera>();
+            mainCamera.enabled = true;
 
             ICameraController stubController = Substitute.For<ICameraController>();
-            stubController.FetchCameras().Returns(new[] { mainCamera, Substitute.For<ICamera>(), Substitute.For<ICamera>() });
+            stubController.FetchCameras().Returns(new[] { mainCamera, ComponentCreator.Create<Camera>(), ComponentCreator.Create<Camera>() });
             stubController.FetchAttachedCamera().Returns(mainCamera);
             stubController.FetchMainCamera().Returns(mainCamera);
 
@@ -50,16 +53,15 @@ namespace Tests {
             MainCameraSwitcherLogic logic = new MainCameraSwitcherLogic();
             logic.SetCameraController(stubController);
             logic.Initialize();
-
-            mainCamera.DidNotReceive().enabled = false;
+            Assert.IsTrue(mainCamera.enabled);
         }
 
         [Test]
         public void ActivateonlyCameraWillDisableCamerasThatAreNotParameter() {
-            ICamera cam1 = Substitute.For<ICamera>();
-            ICamera cam2 = Substitute.For<ICamera>();
-            ICamera cam3 = Substitute.For<ICamera>();
-            ICamera attachedCamera = Substitute.For<ICamera>();
+            Camera cam1 = ComponentCreator.Create<Camera>();
+            Camera cam2 = ComponentCreator.Create<Camera>();
+            Camera cam3 = ComponentCreator.Create<Camera>();
+            Camera attachedCamera = ComponentCreator.Create<Camera>();
 
             ICameraController stubController = Substitute.For<ICameraController>();
             stubController.FetchCameras().Returns(new[] { cam1, cam2, attachedCamera, cam3 });
@@ -67,7 +69,6 @@ namespace Tests {
 
             MainCameraSwitcherLogic logic = new MainCameraSwitcherLogic();
             logic.SetCameraController(stubController);
-
 
             cam1.enabled = true;
             cam2.enabled = true;
@@ -91,8 +92,8 @@ namespace Tests {
 
         [Test]
         public void ResetMainCameraWillEnableTheInitialMainCamera() {
-            ICamera initialCam = Substitute.For<ICamera>(); 
-            ICamera sceneCam = Substitute.For<ICamera>(); 
+            Camera initialCam = ComponentCreator.Create<Camera>(); 
+            Camera sceneCam = ComponentCreator.Create<Camera>(); 
 
 
             ICameraController stubController = Substitute.For<ICameraController>();

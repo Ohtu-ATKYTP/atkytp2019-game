@@ -74,12 +74,6 @@ public class MainCameraSwitcherLogic {
     }
 }
 
-
-public interface ICamera {
-    bool enabled { get; set; }
-}
-
-
 // methods that use the game engine (or are mocked)
 public interface ICameraController {
     Camera FetchMainCamera();
