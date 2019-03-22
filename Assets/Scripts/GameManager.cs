@@ -10,7 +10,7 @@ public class GameManager : MonoBehaviour {
     public Scene endGameScene;
     private string lastGame;
     private string game;
-    private string[] games = { "FirstGame", "PlaceCity", "TurkuGame", "LogoHaalariin"};
+    private string[] games = {"PlaceCity", "TurkuGame", "LogoHaalariin"};
     private string[] otherScenesThanGames = {"DebugBetweenGameScreen", "SceneManagerScene", "MainMenu", "BetweenGameScreen"};
     private string mainmenuScreen = "MainMenu";
     private string endGameScreen = "MainMenu";
