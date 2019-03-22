@@ -24,10 +24,19 @@ public class JumpmanLogic : MonoBehaviour {
         gameWon = false;
 
         dataController = FindObjectOfType<DataController>();
+        maxGravScale = 500;
+        minGravScale = 50;
+        jumpForce = 3000;
+
+        if(dataController.GetDebugMode()){
+            this.initDebuggerParams();
+        }
+    }
+
+    private void initDebuggerParams(){
         maxGravScale = dataController.getGameParameter("gravityScaleMax");
         minGravScale = dataController.getGameParameter("gravityScaleMin");
         jumpForce = dataController.getGameParameter("jumpForce");
-
     }
 
     public void Jump() {

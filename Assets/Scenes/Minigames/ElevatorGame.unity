@@ -144,13 +144,13 @@ RectTransform:
   m_LocalScale: {x: 1.0153124, y: 1.0546875, z: 1}
   m_Children:
   - {fileID: 56401418}
+  - {fileID: 846528752}
   - {fileID: 2110907708}
   - {fileID: 418118589}
   - {fileID: 1271237774}
   - {fileID: 1189170011}
-  - {fileID: 846528752}
   m_Father: {fileID: 1815567212}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -959,6 +959,9 @@ GameObject:
   m_Component:
   - component: {fileID: 544409084}
   - component: {fileID: 544409085}
+  - component: {fileID: 544409086}
+  - component: {fileID: 544409087}
+  - component: {fileID: 544409088}
   m_Layer: 0
   m_Name: ElevatorShaft
   m_TagString: Untagged
@@ -966,20 +969,25 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &544409084
-Transform:
+--- !u!224 &544409084
+RectTransform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 544409083}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -8, y: 1321.3, z: 0}
-  m_LocalScale: {x: 64.68464, y: 52.645855, z: 1.589733}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 64.684654, y: 52.645855, z: 1.589733}
   m_Children: []
   m_Father: {fileID: 1815567212}
-  m_RootOrder: 3
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -0.0046287, y: 1266}
+  m_SizeDelta: {x: 11.128, y: 76.8}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!212 &544409085
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1017,7 +1025,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: c541c147eb80a7f4e86eb75f87edc4ab, type: 3}
+  m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1025,9 +1033,59 @@ SpriteRenderer:
   m_Size: {x: 10.799999, y: 76.799995}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!222 &544409086
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 544409083}
+  m_CullTransparentMesh: 0
+--- !u!114 &544409087
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 544409083}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_Sprite: {fileID: 21300000, guid: c541c147eb80a7f4e86eb75f87edc4ab, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+--- !u!114 &544409088
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 544409083}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a98d7732cdedcc549b64e0b39f2cf109, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  endedGame: 0
 --- !u!224 &570708701 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4324137168032679631, guid: e4198d52aee36e94585b6275822c43d9,
@@ -1322,29 +1380,65 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 846528752}
+  - component: {fileID: 846528755}
+  - component: {fileID: 846528754}
   - component: {fileID: 846528753}
-  m_Layer: 0
-  m_Name: elevatorDoors
-  m_TagString: Untagged
+  m_Layer: 5
+  m_Name: ElevatorDoors
+  m_TagString: ElevatorDoors
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &846528752
-Transform:
+--- !u!224 &846528752
+RectTransform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 846528751}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.9, y: -103.7, z: 0}
-  m_LocalScale: {x: 57.613625, y: 89.21257, z: 1.589733}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 57.613632, y: 89.21257, z: 1.589733}
   m_Children: []
   m_Father: {fileID: 22502201}
-  m_RootOrder: 5
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &846528753
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -0.90001106, y: -103.70002}
+  m_SizeDelta: {x: 10.8, y: 10.1}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &846528753
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 846528751}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_Sprite: {fileID: 21300000, guid: cfe217111a30a504e8e6556c717a2041, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+--- !u!212 &846528754
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1381,17 +1475,25 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: cfe217111a30a504e8e6556c717a2041, type: 3}
+  m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 10.8, y: 10.1}
+  m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!222 &846528755
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 846528751}
+  m_CullTransparentMesh: 0
 --- !u!224 &892210662 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4324137168032679631, guid: e4198d52aee36e94585b6275822c43d9,
@@ -1430,7 +1532,7 @@ RectTransform:
   m_LocalScale: {x: 0.99952567, y: 0.99952567, z: 0.99952567}
   m_Children: []
   m_Father: {fileID: 1815567212}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1751,7 +1853,7 @@ PrefabInstance:
     - target: {fileID: 4324137168032679631, guid: e4198d52aee36e94585b6275822c43d9,
         type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4324137168032679631, guid: e4198d52aee36e94585b6275822c43d9,
         type: 3}
@@ -1882,7 +1984,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 22502201}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1962,7 +2064,7 @@ RectTransform:
   - {fileID: 802021795}
   - {fileID: 1379315724}
   m_Father: {fileID: 22502201}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -2240,7 +2342,7 @@ RectTransform:
   - {fileID: 1337492888}
   - {fileID: 1728003981}
   m_Father: {fileID: 22502201}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -2582,6 +2684,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Size.x
       value: 20.822544
+      objectReference: {fileID: 0}
+    - target: {fileID: 6098241698546250549, guid: 5e44aebb78c848849b5be09287ab31b4,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5e44aebb78c848849b5be09287ab31b4, type: 3}

@@ -13,6 +13,7 @@ public class ElevatorGameLogic : MonoBehaviour, IMinigameEnder {
     private GameObject[] jumpmanList;
     private GameObject brokenBorder;
     private GameObject supportBorder;
+    
 
     private bool endedGame = false;
     
@@ -62,9 +63,15 @@ public class ElevatorGameLogic : MonoBehaviour, IMinigameEnder {
         brokenBorder.SetActive(true);
         supportBorder.SetActive(false);
 
+        GameObject.FindObjectOfType<ElevatorShaftMove>().endedGame = true;
+
         foreach(GameObject border in borders){
                 border.GetComponent<BorderLogic>().AddRigidBody();
         }
+        
+        Rigidbody2D RB = GameObject.FindGameObjectWithTag("ElevatorDoors").AddComponent<Rigidbody2D>();
+        RB.mass = 5;
+        RB.gravityScale = 100;
 
         miniGameLogic.EndMinigame(true);
     }
