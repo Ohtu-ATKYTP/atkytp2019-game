@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
+  m_IndirectSpecularColor: {r: 0.4465782, g: 0.49641252, b: 0.5748167, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -14687,6 +14687,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   p: {fileID: 1558651255}
+  t: {fileID: 1779327965}
 --- !u!4 &1558651257
 Transform:
   m_ObjectHideFlags: 0
@@ -15547,6 +15548,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hitboxes: {fileID: 1143713166}
   flood: {fileID: 1236782197}
+  maxLineLength: 1000
   difficulty: 20
   turkuAnimation: {fileID: 370724140}
 --- !u!4 &1779327966
@@ -15764,6 +15766,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   p: {fileID: 1868076873}
+  t: {fileID: 1779327965}
 --- !u!199 &1868076872
 ParticleSystemRenderer:
   serializedVersion: 6
