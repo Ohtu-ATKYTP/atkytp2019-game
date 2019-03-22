@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using UnityEngine;
 
 /*
@@ -23,16 +22,15 @@ public class MainCameraSwitcher : MonoBehaviour, ICameraController {
     }
 
     #region implementation of ICameraController
-    public ICamera[] FetchCameras() {
-        Camera[] cameras = FindObjectsOfType<Camera>();
-        return cameras.Select(cam => 
-        WrapperPool<Camera, CameraWrapper>.WrapComponent(cam)).ToArray();
+    public Camera[] FetchCameras() {
+        return FindObjectsOfType<Camera>();
+        
     }
-    public ICamera FetchMainCamera() {
-        return WrapperPool<Camera, CameraWrapper>.WrapComponent(Camera.main);
+    public Camera FetchMainCamera() {
+        return Camera.main;
     }
-    public ICamera FetchAttachedCamera() {
-        return WrapperPool<Camera, CameraWrapper>.WrapComponent(GetComponent<Camera>());
+    public Camera FetchAttachedCamera() {
+        return (GetComponent<Camera>());
     }
     #endregion
 }
@@ -45,7 +43,7 @@ public class MainCameraSwitcher : MonoBehaviour, ICameraController {
 public class MainCameraSwitcherLogic {
     // EVERYTHING to do with game engine through the controller
     private ICameraController cameraController;
-    private ICamera initialMainCamera;
+    private Camera initialMainCamera;
 
 
     public void SetCameraController(ICameraController ctrl) {
@@ -62,8 +60,8 @@ public class MainCameraSwitcherLogic {
         ActivateOnlyCamera(initialMainCamera);
     }
 
-    public void ActivateOnlyCamera(ICamera camera) {
-        ICamera[] cameras = cameraController.FetchCameras();
+    public void ActivateOnlyCamera(Camera camera) {
+        Camera[] cameras = cameraController.FetchCameras();
         for (int i = 0; i < cameras.Length; i++) {
             if (cameras[i] == camera) {
                 if (cameras[i] != null) {
@@ -77,20 +75,6 @@ public class MainCameraSwitcherLogic {
 }
 
 
-public class CameraWrapper : ICamera, ISettableComponent<Camera> {
-    public Camera camera;
-    public bool enabled { get => camera.enabled; set => camera.enabled = value; }
-
-
-    public CameraWrapper() { }
-
-    #region implementation of IsettableComponent<Camera>
-    public void SetComponent(Camera c) {
-        this.camera = c;
-    }
-    #endregion
-}
-
 public interface ICamera {
     bool enabled { get; set; }
 }
@@ -98,7 +82,7 @@ public interface ICamera {
 
 // methods that use the game engine (or are mocked)
 public interface ICameraController {
-    ICamera FetchMainCamera();
-    ICamera[] FetchCameras();
-    ICamera FetchAttachedCamera();
+    Camera FetchMainCamera();
+    Camera[] FetchCameras();
+    Camera FetchAttachedCamera();
 }
