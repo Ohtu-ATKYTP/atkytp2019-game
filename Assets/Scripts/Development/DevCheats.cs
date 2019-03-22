@@ -1,7 +1,5 @@
 ﻿using UnityEngine;
 using System.Threading.Tasks;
-using System.Linq;
-using System.Collections.Generic;
 
 public class DevCheats : MonoBehaviour {
     private bool inMinigame;
@@ -39,21 +37,24 @@ public class DevCheats : MonoBehaviour {
 
     public async void ConfigureForNewMinigame() {
         inMinigame = true;
-        minigameEnded = false; 
+        minigameEnded = false;
         while (!timer || (minigameManager == null)) {
 
             await Task.Delay(33);
-            var x = FindObjectsOfType<MonoBehaviour>().OfType<IMinigameEnder>();
-            IEnumerator<IMinigameEnder> enumeraattori = x.GetEnumerator();
+            MonoBehaviour[] list = FindObjectsOfType<MonoBehaviour>();
+            IMinigameEnder suitable = null;
+            for (int i = 0; i < list.Length; i++) {
+                if (list[i] is IMinigameEnder) {
+                    suitable = (IMinigameEnder)list[i];
+                }
+            }
 
-            if(enumeraattori.Current != null){
-                minigameManager = x.First<IMinigameEnder>();
+            if (suitable != null) {
+                minigameManager = suitable;
                 timer = FindObjectOfType<TimeProgress>();
-
             }
 
         }
-
     }
 
     void Update() {
@@ -64,11 +65,11 @@ public class DevCheats : MonoBehaviour {
         if (KeyIsDown(pauseKeyCodes)) {
             timer.TogglePause();
         } else if (KeyIsDown(winKeyCodes)) {
-            minigameEnded = true; 
+            minigameEnded = true;
             minigameManager.WinMinigame();
-            
+
         } else if (KeyIsDown(loseKeyCodes)) {
-            minigameEnded = true; 
+            minigameEnded = true;
             minigameManager.LoseMinigame();
         }
     }
