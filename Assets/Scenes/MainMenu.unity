@@ -351,6 +351,7 @@ RectTransform:
   - {fileID: 1994908415}
   - {fileID: 1029817717}
   - {fileID: 3949238}
+  - {fileID: 1513450364}
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -530,7 +531,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 108597964}
+      - m_Target: {fileID: 1550172000}
         m_MethodName: decreaseHighScore
         m_Mode: 1
         m_Arguments:
@@ -754,7 +755,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 157911596}
+      - m_Target: {fileID: 1550172000}
         m_MethodName: DeleteRegistered
         m_Mode: 1
         m_Arguments:
@@ -895,6 +896,7 @@ GameObject:
   - component: {fileID: 238651000}
   - component: {fileID: 238650999}
   - component: {fileID: 238650998}
+  - component: {fileID: 238651001}
   m_Layer: 5
   m_Name: PlayButton
   m_TagString: Untagged
@@ -962,7 +964,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1342959341}
+      - m_Target: {fileID: 238651001}
         m_MethodName: StartGame
         m_Mode: 1
         m_Arguments:
@@ -1012,6 +1014,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 238650996}
   m_CullTransparentMesh: 0
+--- !u!114 &238651001
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 238650996}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d93507df56e666a5c80c9735ce377f64, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &248965411
 GameObject:
   m_ObjectHideFlags: 0
@@ -1341,7 +1355,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 358087634}
+      - m_Target: {fileID: 1550172000}
         m_MethodName: DeleteUsername
         m_Mode: 1
         m_Arguments:
@@ -1483,7 +1497,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 377683239}
+      - m_Target: {fileID: 1550172000}
         m_MethodName: increaseHighScore
         m_Mode: 1
         m_Arguments:
@@ -2787,7 +2801,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 858946064}
+      - m_Target: {fileID: 1550172000}
         m_MethodName: DeleteHighScore
         m_Mode: 1
         m_Arguments:
@@ -3265,7 +3279,6 @@ GameObject:
   - component: {fileID: 1059522098}
   - component: {fileID: 1059522097}
   - component: {fileID: 1059522096}
-  - component: {fileID: 1059522095}
   m_Layer: 5
   m_Name: DelPrefsButton
   m_TagString: Untagged
@@ -3293,18 +3306,6 @@ RectTransform:
   m_AnchoredPosition: {x: -175, y: 225}
   m_SizeDelta: {x: 250, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1059522095
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1059522093}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 50d81bf0fabe84847a08cd2b3d375f08, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1059522096
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3345,7 +3346,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1059522095}
+      - m_Target: {fileID: 1550172000}
         m_MethodName: DeleteAllPlayerPrefs
         m_Mode: 1
         m_Arguments:
@@ -3877,7 +3878,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1300584461}
+      - m_Target: {fileID: 1550172000}
         m_MethodName: DeleteSyncedHS
         m_Mode: 1
         m_Arguments:
@@ -4262,49 +4263,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   requestDelayInSeconds: 60
---- !u!1 &1342959340
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1342959342}
-  - component: {fileID: 1342959341}
-  m_Layer: 0
-  m_Name: LevelChangeButtonManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1342959341
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1342959340}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d93507df56e666a5c80c9735ce377f64, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!4 &1342959342
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1342959340}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 534.9521, y: 317.62796, z: 8.48385}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 8
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1344597076
 GameObject:
   m_ObjectHideFlags: 0
@@ -4784,6 +4742,54 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1488796179}
   m_CullTransparentMesh: 0
+--- !u!1 &1513450363
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1513450364}
+  - component: {fileID: 1513450365}
+  m_Layer: 5
+  m_Name: MainMenuManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1513450364
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1513450363}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 65540282}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1513450365
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1513450363}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7187e75da5cb44ed1848502a325b93b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1539894441
 GameObject:
   m_ObjectHideFlags: 0
@@ -5046,7 +5052,6 @@ RectTransform:
   - {fileID: 108597963}
   - {fileID: 1597301830}
   - {fileID: 1879791569}
-  - {fileID: 1723169465}
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5159,7 +5164,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1597301831}
+      - m_Target: {fileID: 1550172000}
         m_MethodName: syncHighScore
         m_Mode: 1
         m_Arguments:
@@ -5587,41 +5592,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1708544300}
   m_CullTransparentMesh: 0
---- !u!1 &1723169464
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1723169465}
-  m_Layer: 5
-  m_Name: GameObject
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &1723169465
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1723169464}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1550171999}
-  m_RootOrder: 13
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
-  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1751671289
 GameObject:
   m_ObjectHideFlags: 0
@@ -6021,7 +5991,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1821216069}
+      - m_Target: {fileID: 1550172000}
         m_MethodName: DeleteID
         m_Mode: 1
         m_Arguments:
@@ -6370,7 +6340,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1879791570}
+      - m_Target: {fileID: 1550172000}
         m_MethodName: updateRank
         m_Mode: 1
         m_Arguments:
@@ -6588,17 +6558,6 @@ MonoBehaviour:
           m_StringArgument: Settings Screen
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1550172000}
-        m_MethodName: updatePlayerInfo
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &1994908417
@@ -6730,7 +6689,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2060203600}
+      - m_Target: {fileID: 1550172000}
         m_MethodName: DeleteToken
         m_Mode: 1
         m_Arguments:
