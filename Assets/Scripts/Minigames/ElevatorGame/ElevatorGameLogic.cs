@@ -49,8 +49,6 @@ public class ElevatorGameLogic : MonoBehaviour, IMinigameEnder {
         
         Debug.Log("Difficulty time set to "+ reducedTime);
         timer.SetTime(reducedTime);
-
-        //Vaikeusidea: tihennä hyppynopeutta (gravity + force) tai ota randomius myöhemmin käyttöön?
     }
 
     public void WinMinigame() {
@@ -81,9 +79,9 @@ public class ElevatorGameLogic : MonoBehaviour, IMinigameEnder {
         Text timeOutText = GameObject.FindGameObjectWithTag("InfoText").GetComponent<Text>();
         timeOutText.text = "TIME OVER";
         
-        //endedGame = true;
+        endedGame = true;
         foreach (GameObject jumper in jumpmanList){
-            //jumper.GetComponent<Button>().interactable = false;
+            jumper.GetComponent<Button>().interactable = false;
         }
         miniGameLogic.EndMinigame(false);
     }

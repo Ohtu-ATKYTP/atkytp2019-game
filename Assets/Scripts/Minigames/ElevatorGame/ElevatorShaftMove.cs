@@ -10,9 +10,7 @@ public class ElevatorShaftMove : MonoBehaviour
     void Start() {
         endedGame = false;
         speed = 1f;
-        
     }
-
     
     void Update() {
         if(!endedGame) {
