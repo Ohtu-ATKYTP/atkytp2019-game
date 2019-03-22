@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class GlobalHighScores : MonoBehaviour {
+public class HighscoreManager : MonoBehaviour {
     private WebServiceScript webScript;
     private Text usernames;
     private Text scores;
