@@ -27,7 +27,6 @@ public class DataController : MonoBehaviour
 
     void Start()
     {
-        DontDestroyOnLoad(gameObject);
         Init();
     }
 

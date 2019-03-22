@@ -44,7 +44,14 @@ public class GameManager : MonoBehaviour {
 
 	private void ExecuteBetweenScreen() {
 		dataController.SetStatus(DataController.Status.WAIT);
-		SceneManager.UnloadSceneAsync(this.game);
+        try {
+		    SceneManager.UnloadSceneAsync(this.game);
+        } catch (System.Exception e) {
+            Debug.Log(e);
+            Debug.Log("Tried to unload: " + this.game);
+            Debug.Log("Throwing the error...");
+            throw e;
+        }
 		if (game != null) {
             lastGame = game;
         }

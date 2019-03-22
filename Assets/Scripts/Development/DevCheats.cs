@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Threading.Tasks;
 using System.Linq;
+using System.Collections.Generic;
 
 public class DevCheats : MonoBehaviour {
     private bool inMinigame;
@@ -43,8 +44,13 @@ public class DevCheats : MonoBehaviour {
 
             await Task.Delay(33);
             var x = FindObjectsOfType<MonoBehaviour>().OfType<IMinigameEnder>();
-            minigameManager = x.First<IMinigameEnder>();
-            timer = FindObjectOfType<TimeProgress>();
+            IEnumerator<IMinigameEnder> enumeraattori = x.GetEnumerator();
+
+            if(enumeraattori.Current != null){
+                minigameManager = x.First<IMinigameEnder>();
+                timer = FindObjectOfType<TimeProgress>();
+
+            }
 
         }
 
