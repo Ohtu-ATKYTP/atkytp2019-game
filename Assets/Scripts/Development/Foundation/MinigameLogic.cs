@@ -1,12 +1,12 @@
 ﻿using UnityEngine;
 
 public abstract class MinigameLogic : MonoBehaviour, IMinigameEnder {
-    private DataController dataController;
+    protected DataController dataController;
     [SerializeField]
-    private int pointsForWinning = 10;
+    protected int pointsForWinning = 10;
     [SerializeField]
-    private int testingDifficulty = 1;
-    TimeProgress timebar;
+    protected int testingDifficulty = 1;
+    protected TimeProgress timebar;
 
 
 

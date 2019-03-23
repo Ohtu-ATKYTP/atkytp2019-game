@@ -32,6 +32,52 @@ __Huom: overridaava metodi voidaan määritellä async vaikka yläluokan metodi 
 
 ### Tynkäesimerkki logiikkaskriptistä
 
+``` C#
+using UnityEngine;
+
+public class OwnLogic : MinigameLogic {
+    private GnomeManager gnomeManager;
+
+
+    void Update() {
+        if (gnomeManager.gnomeCount <= 0) {
+            WinMinigame();
+        }
+        if(gnomeManager.gnomeCount > 100){ 
+            LoseMinigame();    
+        }
+    }
+
+
+    #region abstract overrides
+    protected async override void DisplayEndingActions(bool won) {
+        Debug.Log(won ? "You won! :)" : "You lost :(");
+        await new WaitForSeconds(5);
+    }
+
+    protected override void ConfigureDifficulty(int difficulty) {
+        // ei mahdottomaksi! Vähintään 1s aikaa aina
+        float time = Mathf.Max(1f, 10 - 0.5f * difficulty);
+        //timebar-attribuutti myös perivän luokan käytettävissä
+        this.timebar.SetTime(time);
+    }
+    #endregion
+
+    #region virtual overrides
+    protected override void Start() {
+        //asettaa dataManager, timebar viitteet; kutsuu vaikeuden konfiguraatiota
+        base.Start();
+        gnomeManager = new GnomeManger(10);
+    }
+
+    public override void OnTimerEnd() {
+        Debug.Log("The time has run out!");
+        base.OnTimerEnd();
+    }
+    #endregion
+}
+```
+
 
 
 ## Pelin olioiden sijoittelu
