@@ -142,6 +142,7 @@ public class DataController : MonoBehaviour
 		this.nextGame = next;
 	}
 
+	//Used to adjust Game Parameters from debug play Screen
 	public void setGameParameter(string key, float value) {
 		if(gameParameters.ContainsKey(key)){
 			gameParameters[key] = value;
@@ -153,4 +154,9 @@ public class DataController : MonoBehaviour
 	public float getGameParameter(string key) {
 		return gameParameters[key];
 	}
+
+	public bool hasGameParameter(string key) {
+		return gameParameters.ContainsKey(key);
+	}
+	//Gameparameter methods END
 }

@@ -14,12 +14,20 @@ public class SliderParameterUpdate : MonoBehaviour {
         this.slider = GetComponent<Slider>();
         slider.onValueChanged.AddListener(delegate {ValueChangeCheck(); });
         dataController = FindObjectOfType<DataController>();
-        dataController.setGameParameter(parameterName, slider.value);
+        this.initSliderValue();
     }
-    
+
     public void ValueChangeCheck() {
         dataController.setGameParameter(parameterName, slider.value);
         valueText.text = dataController.getGameParameter(parameterName).ToString();
+    }
+
+    public void initSliderValue() {
+        if(dataController.hasGameParameter(parameterName)){
+            slider.value = dataController.getGameParameter(parameterName);
+        }else{
+            dataController.setGameParameter(parameterName, slider.value);
+        }
     }
 
 
