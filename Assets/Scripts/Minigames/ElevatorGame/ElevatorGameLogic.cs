@@ -67,10 +67,6 @@ public class ElevatorGameLogic : MonoBehaviour, IMinigameEnder {
                 border.GetComponent<BorderLogic>().AddRigidBody();
         }
         
-        Rigidbody2D RB = GameObject.FindGameObjectWithTag("ElevatorDoors").AddComponent<Rigidbody2D>();
-        RB.mass = 5;
-        RB.gravityScale = 100;
-
         miniGameLogic.EndMinigame(true);
     }
     

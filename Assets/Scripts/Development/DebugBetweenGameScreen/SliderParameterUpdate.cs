@@ -16,12 +16,7 @@ public class SliderParameterUpdate : MonoBehaviour {
         dataController = FindObjectOfType<DataController>();
         dataController.setGameParameter(parameterName, slider.value);
     }
-
     
-    void Update(){
-        
-    }
-
     public void ValueChangeCheck() {
         dataController.setGameParameter(parameterName, slider.value);
         valueText.text = dataController.getGameParameter(parameterName).ToString();

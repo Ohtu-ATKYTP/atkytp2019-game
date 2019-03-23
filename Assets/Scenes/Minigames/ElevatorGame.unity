@@ -146,8 +146,8 @@ RectTransform:
   - {fileID: 56401418}
   - {fileID: 846528752}
   - {fileID: 2110907708}
-  - {fileID: 418118589}
   - {fileID: 1271237774}
+  - {fileID: 418118589}
   - {fileID: 1189170011}
   m_Father: {fileID: 1815567212}
   m_RootOrder: 2
@@ -1383,9 +1383,10 @@ GameObject:
   - component: {fileID: 846528755}
   - component: {fileID: 846528754}
   - component: {fileID: 846528753}
+  - component: {fileID: 846528756}
   m_Layer: 5
   m_Name: ElevatorDoors
-  m_TagString: ElevatorDoors
+  m_TagString: Border
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1494,6 +1495,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 846528751}
   m_CullTransparentMesh: 0
+--- !u!114 &846528756
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 846528751}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 881b42ea4944ad443a448374c1317199, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &892210662 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4324137168032679631, guid: e4198d52aee36e94585b6275822c43d9,
@@ -2064,7 +2077,7 @@ RectTransform:
   - {fileID: 802021795}
   - {fileID: 1379315724}
   m_Father: {fileID: 22502201}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
