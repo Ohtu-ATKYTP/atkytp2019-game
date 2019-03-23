@@ -13,6 +13,7 @@ public class ElevatorGameLogic : MonoBehaviour, IMinigameEnder {
     private GameObject[] jumpmanList;
     private GameObject brokenBorder;
     private GameObject supportBorder;
+    private GameObject infoText;
     
 
     private bool endedGame = false;
@@ -27,6 +28,8 @@ public class ElevatorGameLogic : MonoBehaviour, IMinigameEnder {
         supportBorder = GameObject.FindGameObjectWithTag("SupportBorder");
         brokenBorder = GameObject.FindGameObjectWithTag("BrokenBorder");
         brokenBorder.SetActive(false);
+
+        infoText = GameObject.FindGameObjectWithTag("InfoText");
         
         this.setDifficulty();
     }
@@ -46,8 +49,6 @@ public class ElevatorGameLogic : MonoBehaviour, IMinigameEnder {
         if(reducedTime < 8){
             reducedTime = 8;
         }
-        
-        Debug.Log("Difficulty time set to "+ reducedTime);
         timer.SetTime(reducedTime);
     }
 
@@ -72,8 +73,8 @@ public class ElevatorGameLogic : MonoBehaviour, IMinigameEnder {
     
     public void LoseMinigame() {
         
-        Text timeOutText = GameObject.FindGameObjectWithTag("InfoText").GetComponent<Text>();
-        timeOutText.text = "TIME OVER";
+        infoText.SetActive(true);
+        infoText.GetComponent<Text>().text = "TIME OVER"; 
         
         endedGame = true;
         foreach (GameObject jumper in jumpmanList){

@@ -42,8 +42,7 @@ public class JumpmanLogic : MonoBehaviour {
     public void Jump() {
         if(!firstJump){
             firstJump = true;
-            Text startText = GameObject.FindGameObjectWithTag("InfoText").GetComponent<Text>();
-            startText.text = "";
+            GameObject.FindGameObjectWithTag("InfoText").SetActive(false);
         }
         GetComponent<Image>().sprite = jumping;
         GetComponent<Rigidbody2D>().gravityScale = Random.Range(minGravScale,maxGravScale);
