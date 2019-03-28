@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class SettingsManager : MonoBehaviour {
     private Text playerInfo;
@@ -70,11 +71,8 @@ public class SettingsManager : MonoBehaviour {
         updatePlayerInfo();
     }
 
-    public void syncHighScore() {
-        //Remove this
-    }
-
-    public void updateRank() {
-        //remove this
+    public async void loadMainMenu() {
+        SceneManager.LoadScene ("MainMenu", LoadSceneMode.Additive);
+        await SceneManager.UnloadSceneAsync ("Settings");
     }
 }
