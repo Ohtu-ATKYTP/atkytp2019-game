@@ -28,7 +28,6 @@ public class RegistrationManager : MonoBehaviour {
             PlayerPrefs.SetString ("username", highscore.user);
             PlayerPrefs.SetString ("token", highscore.token);
             PlayerPrefs.SetInt ("highScore", highscore.score);
-            PlayerPrefs.SetInt ("syncedHS", 1);
             PlayerPrefs.SetInt ("registered", 1);
             loadMainMenu();
         } else {
@@ -50,9 +49,9 @@ public class RegistrationManager : MonoBehaviour {
         statusMessage.text = message;
     }
 
-    public async void loadMainMenu() {
+    public void loadMainMenu() {
         SceneManager.LoadScene ("MainMenu", LoadSceneMode.Additive);
-        await SceneManager.UnloadSceneAsync ("Registration");
+        SceneManager.UnloadSceneAsync ("Registration");
     }
 
     

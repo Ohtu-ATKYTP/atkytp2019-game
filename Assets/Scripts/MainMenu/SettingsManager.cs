@@ -5,9 +5,12 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class SettingsManager : MonoBehaviour {
+
+    private WebServiceScript webScript;
     private Text playerInfo;
 
     void Start() {
+        webScript = FindObjectOfType<WebServiceScript> ();
         playerInfo = GameObject.Find("PlayerInfo").GetComponent<Text>();
         updatePlayerInfo();
     }
@@ -17,7 +20,6 @@ public class SettingsManager : MonoBehaviour {
         info += "ID: " + PlayerPrefs.GetString("_id") + "\n";
         info += "Token: " + PlayerPrefs.GetString("token") + "\n";
         info += "HighScore: " + PlayerPrefs.GetInt("highScore") + "\n";
-        info += "HS Synced: " + ((PlayerPrefs.GetInt("syncedHS") == 1) ? "yes" : "no") + "\n";
         info += "Registered: " + ((PlayerPrefs.GetInt("registered") == 1) ? "yes" : "no")+ "\n";
         info += "Rank: " + PlayerPrefs.GetInt("rank") + "\n";
 
@@ -49,11 +51,6 @@ public class SettingsManager : MonoBehaviour {
         updatePlayerInfo();
     }
 
-    public void DeleteSyncedHS() {
-        PlayerPrefs.DeleteKey("syncedHS");
-        updatePlayerInfo();
-    }
-
     public void DeleteRegistered() {
         PlayerPrefs.DeleteKey("registered");
         updatePlayerInfo();
@@ -61,18 +58,22 @@ public class SettingsManager : MonoBehaviour {
 
     public void increaseHighScore() {
         PlayerPrefs.SetInt("highScore", PlayerPrefs.GetInt("highScore")+10);
-        PlayerPrefs.SetInt("syncedHS", 0);
         updatePlayerInfo();
     }
 
     public void decreaseHighScore() {
         PlayerPrefs.SetInt("highScore",PlayerPrefs.GetInt("highScore")-10);
-        PlayerPrefs.SetInt("syncedHS", 0);
         updatePlayerInfo();
     }
-
-    public async void loadMainMenu() {
-        SceneManager.LoadScene ("MainMenu", LoadSceneMode.Additive);
-        await SceneManager.UnloadSceneAsync ("Settings");
+    
+    public void syncHS() {
+        webScript.UpdateHighscore (PlayerPrefs.GetString("_id"), PlayerPrefs.GetInt("highScore"));
     }
+
+    public void loadMainMenu() {
+        SceneManager.LoadScene ("MainMenu", LoadSceneMode.Additive);
+        SceneManager.UnloadSceneAsync ("Settings");
+    }
+
+    
 }

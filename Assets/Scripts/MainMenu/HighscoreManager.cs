@@ -8,10 +8,6 @@ public class HighscoreManager : MonoBehaviour {
     private WebServiceScript webScript;
     private Text usernames;
     private Text scores;
-    private string jsonScores;
-    public int requestDelayInSeconds = 60;
-
-
 
     void Start() {
         webScript = FindObjectOfType<WebServiceScript>();
@@ -24,10 +20,12 @@ public class HighscoreManager : MonoBehaviour {
                 scores = texComp;
             }
         }
+        usernames.text = PlayerPrefs.GetString("usernameInfo");
+        scores.text = PlayerPrefs.GetString("scoreInfo");
         FetchUpdatedHighScores();
     }
 
-    public async void FetchUpdatedHighScores() {
+    private async void FetchUpdatedHighScores() {
         HighScore[] highscores = await webScript.GetTop10();
 
         string usernameInfo = "";
@@ -37,29 +35,28 @@ public class HighscoreManager : MonoBehaviour {
         string playerStyleOff = "</b></color>";
 
         bool isUserinTop10 = false;
-        int i = 0;
+        int i = 1;
         foreach (HighScore hs in highscores) {
             
             if(hs.user == PlayerPrefs.GetString("username")){
                 isUserinTop10 = true;
-                int spot = i+1;
-                usernameInfo +=  playerStyleOn + spot + ". "+hs.user + 
+                usernameInfo +=  playerStyleOn + i + ". "+hs.user + 
                 playerStyleOff + "\n";
                 
                 scoreInfo += playerStyleOn + hs.score + 
                 playerStyleOff + "\n";
             
-            }else{
-            usernameInfo += i+1 + ". " + hs.user + "\n";
+            } else {
+            usernameInfo += i + ". " + hs.user + "\n";
             scoreInfo += hs.score + "\n";
             }
             i++;
         }
 
-        if(!isUserinTop10){
+        if(!isUserinTop10 && PlayerPrefs.HasKey("username")){
             
-            usernameInfo += "------------\n";
-            scoreInfo += "---\n";
+            usernameInfo += "\n";
+            scoreInfo += "\n";
             
             usernameInfo += playerStyleOn + PlayerPrefs.GetInt("rank") + ". " 
             + PlayerPrefs.GetString("username") + playerStyleOff;
@@ -67,13 +64,17 @@ public class HighscoreManager : MonoBehaviour {
             scoreInfo += playerStyleOn + PlayerPrefs.GetInt("highScore")
             + playerStyleOff;
         }
+
         usernames.text = usernameInfo;
         scores.text = scoreInfo;
+
+        PlayerPrefs.SetString("usernameInfo", usernameInfo);
+        PlayerPrefs.SetString("scoreInfo", scoreInfo);
     }
 
-    public async void loadMainMenu() {
+    public void loadMainMenu() {
         SceneManager.LoadScene ("MainMenu", LoadSceneMode.Additive);
-        await SceneManager.UnloadSceneAsync ("Highscores");
+        SceneManager.UnloadSceneAsync ("Highscores");
     }
 }
 

@@ -101,17 +101,6 @@ public class GameManager : MonoBehaviour {
             PlayerPrefs.SetInt ("highScore", score);
             string id = PlayerPrefs.GetString ("_id");
             HighScore updated = await webService.UpdateHighscore (id, score);
-
-            if (updated == null) {
-                PlayerPrefs.SetInt ("syncedHS", 0);
-            }
-
-            HighScore highscore = await webService.GetOne (id);
-
-            if (highscore != null) {
-                PlayerPrefs.SetInt ("rank", highscore.rank);
-            }
-
         }
         resetGameVariables ();
 
@@ -134,10 +123,5 @@ public class GameManager : MonoBehaviour {
 
     public string[] getAllScenes() {
         return this.games.Concat(this.otherScenesThanGames).ToArray();
-    }
-
-    public async void displayScene(string sceneName) {
-        //await SceneManager.UnloadSceneAsync (this.currentScene);
-        //SceneManager.LoadScene (sceneName, LoadSceneMode.Additive);
     }
 }

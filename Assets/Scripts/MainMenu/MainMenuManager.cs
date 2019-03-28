@@ -6,24 +6,32 @@ using UnityEngine.SceneManagement;
 
 public class MainMenuManager : MonoBehaviour {
 
+    private WebServiceScript webScript;
     private DataController dataController;
     private Text ownHighscore;
-    private GameObject registrationButton;
 
     private void Start() {
-        ownHighscore = GameObject.Find("OwnHighScoreText").GetComponent<Text>();
-        updateOwnHighscore();
-        registrationButton = GameObject.Find("RegistrationButton");
-        toggleRegistrationButton();
+        webScript = FindObjectOfType<WebServiceScript> ();
         dataController = FindObjectOfType<DataController>();
+        ownHighscore = GameObject.Find("OwnHighScoreText").GetComponent<Text>();
+        updateOwnHighscoreAndRank();
+        toggleRegistrationButton();
     }
 
-    public void updateOwnHighscore() {
+    public async void updateOwnHighscoreAndRank() {
         int score = (PlayerPrefs.HasKey("highScore")) ?  PlayerPrefs.GetInt("highScore") : 0;
         ownHighscore.text = "High score: " + score;
+
+        string id = PlayerPrefs.GetString ("_id");
+        HighScore highscore = await webScript.GetOne (id);
+        if (highscore != null) {
+            PlayerPrefs.SetInt ("rank", highscore.rank);
+            PlayerPrefs.SetInt ("highScore", highscore.score);
+        }
     }
 
     public void toggleRegistrationButton() {
+        GameObject registrationButton = GameObject.Find("RegistrationButton");
         bool isVisible = PlayerPrefs.GetInt("registered") == 0 ? true: false;
         registrationButton.SetActive(isVisible);
     }
@@ -33,19 +41,9 @@ public class MainMenuManager : MonoBehaviour {
 		dataController.SetStatus(DataController.Status.MINIGAME);
     }
 
-    public async void loadHighscores() {
-        SceneManager.LoadScene ("Highscores", LoadSceneMode.Additive);
-        await SceneManager.UnloadSceneAsync ("MainMenu");
-    }
-
-    public async void loadRegistration() {
-        SceneManager.LoadScene ("Registration", LoadSceneMode.Additive);
-        await SceneManager.UnloadSceneAsync ("MainMenu");
-    }
-
-    public async void loadSettings() {
-        SceneManager.LoadScene ("Settings", LoadSceneMode.Additive);
-        await SceneManager.UnloadSceneAsync ("MainMenu");
+    public void loadScene(string sceneName) {
+        SceneManager.LoadScene (sceneName, LoadSceneMode.Additive);
+        SceneManager.UnloadSceneAsync ("MainMenu");
     }
 
 }
