@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
-public class RegisterButton : MonoBehaviour {
+public class RegistrationManager : MonoBehaviour {
     public Text statusMessage;
     private WebServiceScript webScript;
 
@@ -27,9 +28,8 @@ public class RegisterButton : MonoBehaviour {
             PlayerPrefs.SetString ("username", highscore.user);
             PlayerPrefs.SetString ("token", highscore.token);
             PlayerPrefs.SetInt ("highScore", highscore.score);
-            PlayerPrefs.SetInt ("syncedHS", 1);
             PlayerPrefs.SetInt ("registered", 1);
-            FindObjectOfType<MenuManager> ().displayOnlyMenu ("Main Menu Screen");
+            loadMainMenu();
         } else {
             HandleError();
         }
@@ -48,4 +48,11 @@ public class RegisterButton : MonoBehaviour {
     private void DisplayMessage (string message) {
         statusMessage.text = message;
     }
+
+    public void loadMainMenu() {
+        SceneManager.LoadScene ("MainMenu", LoadSceneMode.Additive);
+        SceneManager.UnloadSceneAsync ("Registration");
+    }
+
+    
 }
