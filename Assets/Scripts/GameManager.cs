@@ -10,7 +10,7 @@ public class GameManager : MonoBehaviour {
     public Scene endGameScene;
     private string lastGame;
     private string currentScene;
-    private string[] games = {"PlaceCity", "TurkuGame", "LogoHaalariin"};
+    private string[] games = {"PlaceCity", "TurkuGame", "LogoHaalariin", "ElevatorGame"};
     private string[] otherScenesThanGames = {"DebugBetweenGameScreen", "SceneManagerScene", "MainMenu", "BetweenGameScreen", "Highscores", "Registration", "Settings"};
     private DataController dataController;
     private WebServiceScript webService;

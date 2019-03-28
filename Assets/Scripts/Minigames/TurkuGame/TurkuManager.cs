@@ -7,16 +7,18 @@ public class TurkuManager : MonoBehaviour, IMinigameEnder {
     public HitboxManager hitboxes;
     public FloodAnimation flood;
     private DataController dataController;
+    public int maxLineLength=1000;
     public int difficulty;
     private bool gameOver = false;
     public TurkuAnimation turkuAnimation;
+    bool lineUsedUp = false;
 
     void Start() {
         dataController = FindObjectOfType<DataController>();
     }
 
     void Update() {
-        if (hitboxes.Active() > Mathf.Min(40, difficulty) && !gameOver) {
+        if (hitboxes.Active() > Mathf.Min(hitboxes.HitboxCount(), difficulty) && !gameOver && !lineUsedUp) {
             WinMinigame();
         }
     }
@@ -28,6 +30,17 @@ public class TurkuManager : MonoBehaviour, IMinigameEnder {
         StartCoroutine(RunWinAnimation());
     }
 
+    public void LineUsedUp(){
+        lineUsedUp = true;
+    }
+
+    public bool GetLineUsedUp(){
+        return lineUsedUp;
+    }
+
+    public int GetMaxLineLength(){
+        return maxLineLength;
+    }
 
     public void LoseMinigame() {
         gameOver = true;
