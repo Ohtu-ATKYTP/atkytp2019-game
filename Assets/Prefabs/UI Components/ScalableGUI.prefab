@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 6536503579276076520}
   - component: {fileID: 4329840303522575728}
   - component: {fileID: 2442476779614446785}
-  - component: {fileID: 4388331909162861575}
   m_Layer: 5
   m_Name: ScalableGUI
   m_TagString: Untagged
@@ -82,23 +81,6 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
---- !u!114 &4388331909162861575
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4045332502782672444}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 1301386320, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_IgnoreReversedGraphics: 1
-  m_BlockingObjects: 0
-  m_BlockingMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
 --- !u!1001 &5772512052517919594
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -329,7 +311,7 @@ PrefabInstance:
     - target: {fileID: 8137318996837176791, guid: fd4f367b34e98c924a4ec72280c273aa,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0.000015259
+      value: 0.000015258789
       objectReference: {fileID: 0}
     - target: {fileID: 8137318996837176791, guid: fd4f367b34e98c924a4ec72280c273aa,
         type: 3}
