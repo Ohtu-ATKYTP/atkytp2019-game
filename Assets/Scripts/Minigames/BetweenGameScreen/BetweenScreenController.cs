@@ -46,6 +46,9 @@ public class BetweenScreenController : MonoBehaviour
 			}else{
 				lostHeart=null;
 			}
+			if(dataController.GetWinStatus()){
+				lostHeart = null;
+			}
 			startScale = lostHeart.transform.localScale;
     }
 
