@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class HighscoreManager : MonoBehaviour {
     private WebServiceScript webScript;
@@ -23,6 +24,7 @@ public class HighscoreManager : MonoBehaviour {
                 scores = texComp;
             }
         }
+        FetchUpdatedHighScores();
     }
 
     public async void FetchUpdatedHighScores() {
@@ -67,6 +69,11 @@ public class HighscoreManager : MonoBehaviour {
         }
         usernames.text = usernameInfo;
         scores.text = scoreInfo;
+    }
+
+    public async void loadMainMenu() {
+        SceneManager.LoadScene ("MainMenu", LoadSceneMode.Additive);
+        await SceneManager.UnloadSceneAsync ("Highscores");
     }
 }
 

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class MenuManager : MonoBehaviour {
 
@@ -22,9 +23,7 @@ public class MenuManager : MonoBehaviour {
     }
 
     private void setupScreens() {
-        screens["Registration Screen"] = GameObject.Find("Registration Screen").GetComponent<Canvas>();
         screens["Main Menu Screen"] = GameObject.Find("Main Menu Screen").GetComponent<Canvas>();
-        screens["High Score Screen"] = GameObject.Find("High Score Screen").GetComponent<Canvas>();
         screens["Settings Screen"] = GameObject.Find("Settings Screen").GetComponent<Canvas>();
 
         foreach(Canvas c in screens.Values) {
@@ -35,7 +34,7 @@ public class MenuManager : MonoBehaviour {
         current = "Main Menu Screen";
 
         if(!PlayerPrefs.HasKey("registered")){
-            displayOnlyMenu("Registration Screen");
+            loadRegistration();
             PlayerPrefs.SetInt("registered", 0);
         }
     }
@@ -59,6 +58,16 @@ public class MenuManager : MonoBehaviour {
     public void startGame() {
         dataController.SetDebugMode(false);
 		dataController.SetStatus(DataController.Status.MINIGAME);
+    }
+
+    public async void loadHighscores() {
+        SceneManager.LoadScene ("Highscores", LoadSceneMode.Additive);
+        await SceneManager.UnloadSceneAsync ("MainMenu");
+    }
+
+    public async void loadRegistration() {
+        SceneManager.LoadScene ("Registration", LoadSceneMode.Additive);
+        await SceneManager.UnloadSceneAsync ("MainMenu");
     }
 
 }
