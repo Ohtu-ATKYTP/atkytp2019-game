@@ -7,16 +7,16 @@ using UnityEngine;
 * Scale should also be set.... appropriately (see place city game or await documentation)
 * 
 */
-[ExecuteInEditMode]
 public class WorldCanvasScaler : MonoBehaviour {
     private Vector2 sizeDelta;
     private bool initialized = false;
 
 
 
-    void Awake() {
-        Camera relatedCamera = GetComponentInParent<Camera>();
+    void OnEnable() {
+        Camera relatedCamera = Camera.main;
         if (!relatedCamera.orthographic) {
+            Debug.Log("HÖh");
             Debug.LogError("Only ortographic cameras supported at the moment");
             return;
         }
@@ -25,7 +25,7 @@ public class WorldCanvasScaler : MonoBehaviour {
         float canvasHeight = 2 * halfSize * 100;
         float canvasWidth = relatedCamera.aspect * canvasHeight;
         rt.sizeDelta = new Vector2(canvasWidth, canvasHeight);
-
+        Debug.Log(rt.sizeDelta);
     }
 
     private void Initialize() {
