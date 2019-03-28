@@ -29,6 +29,7 @@ public class RegisterButton : MonoBehaviour {
             PlayerPrefs.SetInt ("highScore", highscore.score);
             PlayerPrefs.SetInt ("syncedHS", 1);
             PlayerPrefs.SetInt ("registered", 1);
+            FindObjectOfType<MenuManager> ().toggleBackToRegistrationButton();
             FindObjectOfType<MenuManager> ().displayOnlyMenu ("Main Menu Screen");
         } else {
             HandleError();
