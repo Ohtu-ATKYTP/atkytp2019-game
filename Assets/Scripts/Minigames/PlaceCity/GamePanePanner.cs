@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FinlandPanner : MonoBehaviour {
+public class GamePanePanner : MonoBehaviour {
     private Vector2 direction;
     private bool moves = false;
 
@@ -12,7 +12,7 @@ public class FinlandPanner : MonoBehaviour {
 
     public void Initialize(Vector2 direction) {
         this.direction = direction;
-        moves = true; 
+        moves = true;
     }
 
     void Update() {

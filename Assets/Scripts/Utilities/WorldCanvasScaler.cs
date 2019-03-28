@@ -16,7 +16,6 @@ public class WorldCanvasScaler : MonoBehaviour {
     void OnEnable() {
         Camera relatedCamera = Camera.main;
         if (!relatedCamera.orthographic) {
-            Debug.Log("HÖh");
             Debug.LogError("Only ortographic cameras supported at the moment");
             return;
         }

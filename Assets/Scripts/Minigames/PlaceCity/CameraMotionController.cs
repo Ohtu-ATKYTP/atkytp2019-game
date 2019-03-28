@@ -12,7 +12,7 @@ public class CameraMotionController : MonoBehaviour {
 
     private void Start() {
         if (motionIsUsed) {
-            Initialize(true, true, false);
+            Initialize(true, false, false);
         }
     }
 
@@ -22,6 +22,14 @@ public class CameraMotionController : MonoBehaviour {
         this.zAxis = z;
         motionIsUsed = true;
         controlledCam = GetComponent<Camera>().GetComponent<Rigidbody2D>();
+
+    }
+
+    public void AllowMovementByRotating(Vector3 centrePoint) {
+       
+    }
+
+    public void AllowMovementByPanning(Vector2 axis) {
 
     }
 
@@ -37,8 +45,8 @@ public class CameraMotionController : MonoBehaviour {
                 zAxis ? acceleration.z : 0
             );
         filtered.x = Mathf.Abs(filtered.x) < .1f ? 0 : filtered.x;
-        filtered.y = Mathf.Abs(filtered.y) < .1f ? 0 : filtered.y; 
-        controlledCam.AddRelativeForce(200 * filtered);
+        filtered.y = Mathf.Abs(filtered.y) < .1f ? 0 : filtered.y;
+        controlledCam.AddForce(100 * filtered);
         Debug.Log(filtered);
     }
 }
