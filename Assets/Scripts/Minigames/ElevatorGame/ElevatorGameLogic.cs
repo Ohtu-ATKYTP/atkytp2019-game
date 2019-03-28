@@ -68,7 +68,7 @@ public class ElevatorGameLogic : MonoBehaviour, IMinigameEnder {
                 border.GetComponent<BorderLogic>().AddRigidBody();
         }
         
-        miniGameLogic.EndMinigame(true);
+        EndGame(true);
     }
     
     public void LoseMinigame() {
@@ -80,10 +80,16 @@ public class ElevatorGameLogic : MonoBehaviour, IMinigameEnder {
         foreach (GameObject jumper in jumpmanList){
             jumper.GetComponent<Button>().interactable = false;
         }
-        miniGameLogic.EndMinigame(false);
+        EndGame(false);
     }
 
     public void OnTimerEnd() {
         this.LoseMinigame();
+    }
+
+    public async void EndGame(bool won) {
+        timer.StopTimerProgression();
+        await new WaitForSecondsRealtime(3);
+        dataController.MinigameEnd(won, won ? 10 : 0);
     }
 }
