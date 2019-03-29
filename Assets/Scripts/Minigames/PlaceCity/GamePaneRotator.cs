@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
 public class GamePaneRotator : MonoBehaviour {
-    public Vector3 centerPoint = new Vector3(0, 0, 0);
+    public Vector3 centerPoint = new Vector3(0, 100, 10);
     public float speed = 10f;
     public bool clockWise = false;
     public bool rotates = true;
@@ -11,6 +11,8 @@ public class GamePaneRotator : MonoBehaviour {
         if (!rotates) {
             return; 
         }
+        
         transform.RotateAround(centerPoint, new Vector3(0, 0, 1), Time.deltaTime * speed);
+        
     }
 }
