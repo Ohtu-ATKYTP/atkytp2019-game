@@ -11,9 +11,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/MainMenu.unity
     guid: d1581b85f66551644b556e2724477728
-  - enabled: 0
-    path: Assets/Scenes/FirstGame.unity
-    guid: a9d74bd1abc95b376aa6cdb56e2a4a1c
   - enabled: 1
     path: Assets/Scenes/Minigames/TurkuGame.unity
     guid: 624f23f7b5b04d347b1ffbe4938ada1b
@@ -29,4 +26,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Development/DebugBetweenGameScreen.unity
     guid: 73c241fac87c816e8a5d20c1cc7ec059
+  - enabled: 1
+    path: Assets/Scenes/Minigames/ElevatorRescue.unity
+    guid: d0be436a58a9049c4a800ffde3f64eaf
   m_configObjects: {}
