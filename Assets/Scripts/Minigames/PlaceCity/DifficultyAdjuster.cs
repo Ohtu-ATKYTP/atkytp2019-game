@@ -41,6 +41,10 @@ public class DifficultyAdjuster : MonoBehaviour {
     public float shortestPossibleTime = 1f;
     public int steps = 10;
     private InformationDisplayer[] cityDisplayers;
+    private CameraMotionController cameraController;
+    private GameObject gamePane;
+    private bool motionAppliedToGamePane = false;
+    private System.Random random = new System.Random();
 
 
 
@@ -48,12 +52,18 @@ public class DifficultyAdjuster : MonoBehaviour {
         timer = FindObjectOfType<TimeProgress>();
         cityDisplayers = FindObjectsOfType<InformationDisplayer>();
         spriteManager = GameObject.Find("Finland").GetComponent<SpriteManager>();
+        cameraController = Camera.main.GetComponent<CameraMotionController>();
+        gamePane = GameObject.FindGameObjectWithTag("GamePane");
+        random = new System.Random();
 
         TuneLocations(difficulty);
         TuneTime(difficulty);
         TuneSprite(difficulty);
         TuneFlipping(difficulty);
-        TuneRotation(difficulty);
+
+
+        TunePaneRotationInXYPlane(difficulty);
+        //TunePanePanning(difficulty);
 
     }
 
@@ -72,7 +82,7 @@ public class DifficultyAdjuster : MonoBehaviour {
         // siis kun vaikeustaso on 2 * askelia, on jäljellä pienin mahdollinen määrä aikaa
         // koska eri efektejä on melko paljon, tuntui reilulta että aikaa on melko pitkään melko paljon; 
         // jos testaaminen osoittaa että tämä puoleen hidastaminen on turhaa, muokataan kaavaa
-        timer.seconds = timer.seconds - ( difficulty / (2 * steps)) * (timer.seconds - shortestPossibleTime);
+        timer.seconds = timer.seconds - (difficulty / (2 * steps)) * (timer.seconds - shortestPossibleTime);
 
         if (timer.seconds < shortestPossibleTime) {
             timer.seconds = shortestPossibleTime;
@@ -90,9 +100,9 @@ public class DifficultyAdjuster : MonoBehaviour {
 
     private void TuneRotation(int difficulty) {
         if (difficulty >= 9) {
-            float angle = Random.Range(-25, 30);
+            float angle = random.Next(-25, 30);
             spriteManager.Rotate(angle);
-        }    
+        }
     }
 
     private void TuneFlipping(int difficulty) {
@@ -102,14 +112,65 @@ public class DifficultyAdjuster : MonoBehaviour {
             spriteManager.Flip(true, false);
         } else if (difficulty == 7) {
             spriteManager.Flip(true, true);
-        } else if (difficulty >= 8){
-            int idx = Mathf.FloorToInt(Random.Range(0f, 4f));
+        } else if (difficulty >= 8) {
+            int idx = random.Next(0, 4);
             // the two probabilities are independent of one another and both 1/2, so every
             // of the four combinations should be equally probable
             bool hor = idx % 2 == 0;
             bool vert = idx < 2;
             spriteManager.Flip(hor, vert);
         }
+    }
+
+    private void TunePanePanning(int difficulty) {
+        if (difficulty < 10 || motionAppliedToGamePane) {
+            return;
+        }
+        motionAppliedToGamePane = true;
+        Vector2 movementDirection;
+        if (difficulty < 12) {
+            movementDirection = random.NextDouble() < 0.5f ? Vector2.left : Vector2.right;
+        } else if (difficulty < 14) {
+            movementDirection = random.NextDouble() < 0.5f ? Vector2.down : Vector2.up;
+        } else if (difficulty < 16) {
+            Vector2[] easyDirections = new[] { Vector2.one, -1 * Vector2.one, new Vector2(1, -1), new Vector2(-1, 2) };
+            movementDirection = easyDirections[random.Next(0, easyDirections.Length)];
+        } else {
+            movementDirection = Vector2.ClampMagnitude(new Vector2(random.Next(-1000, 1001), random.Next(-1000, 1001)), 1f);
+        }
+
+        gamePane.GetComponent<GamePanePanner>().Initialize(movementDirection);
+        cameraController.Initialize(new Dictionary<string, Vector2> { { "panning", movementDirection } });
+    }
+
+    private void TunePaneRotationInXYPlane(int difficulty) {
+        if (difficulty < 10 || motionAppliedToGamePane) {
+            return;
+        }
+        motionAppliedToGamePane = true;
+
+        bool clockWise = random.NextDouble() < .5f;
+        Vector2 centerPoint = Vector2.zero;
+        if (difficulty < 12) {
+            centerPoint = Vector2.zero;
+        } else if (difficulty < 12) {
+            centerPoint = new Vector2(0, (random.NextDouble() < .5f ? -1 : 1) * 50);
+        } else if (difficulty < 15) {
+            float y = random.Next(-100, 100);
+            centerPoint = new Vector2(0, y);
+        } else if (difficulty < 17) {
+            float x = random.Next(-100, 100);
+            centerPoint = new Vector2(x, 0);
+        } else {
+            centerPoint = new Vector2(random.Next(-100, 100), random.Next(-100, 100));
+        }
+        if (centerPoint.sqrMagnitude < 5) {
+            centerPoint = Vector2.zero;
+        }
+
+        gamePane.GetComponent<GamePaneRotator>().Initialize(centerPoint: centerPoint, clockWise: clockWise);
+        cameraController.Initialize(new Dictionary<string, Vector2> { { "rotation", centerPoint } });
+
     }
 
 }

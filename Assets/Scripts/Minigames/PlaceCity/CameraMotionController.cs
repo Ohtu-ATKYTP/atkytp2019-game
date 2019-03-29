@@ -6,31 +6,45 @@ using UnityEngine;
 public class CameraMotionController : MonoBehaviour {
     private bool xAxis = false;
     private bool yAxis = false;
-    private bool zAxis = false;
     public bool motionIsUsed = false;
-    private Rigidbody2D controlledCam;
+    private GameObject controlledCam;
+    private Rigidbody2D cameraBody;
+    public GameObject centerPointPrefab;
+    private System.Action rotationMethod;
+    private float? prev;
 
-    private void Start() {
-        if (motionIsUsed) {
-            Initialize(true, false, false);
+    public void Initialize(Dictionary<string, Vector2> rotationalInfo) {
+        Input.gyro.enabled = true;
+        controlledCam = this.gameObject;
+        cameraBody = GetComponent<Camera>().GetComponent<Rigidbody2D>();
+
+        foreach (string movementType in rotationalInfo.Keys) {
+            if (movementType == "rotation") {
+                AllowMovementByRotating(rotationalInfo[movementType]);
+            } else if (movementType == "panning") {
+                AllowMovementByPanning(rotationalInfo[movementType]);
+            }
         }
     }
 
-    void Initialize(bool x, bool y, bool z) {
-        this.xAxis = x;
-        this.yAxis = y;
-        this.zAxis = z;
+    public void AllowMovementByRotating(Vector2 centerPoint) {
         motionIsUsed = true;
-        controlledCam = GetComponent<Camera>().GetComponent<Rigidbody2D>();
+        if (centerPoint == Vector2.zero) {
+            rotationMethod = RotateInPlace;
+            cameraBody.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezePositionY;
+        } else {
+            Instantiate(centerPointPrefab, centerPoint, Quaternion.identity);
+            centerPointPrefab.GetComponent<FixedJoint2D>().connectedBody = this.GetComponent<Rigidbody2D>();
+            rotationMethod = RotateAroundPoint;
+        }
 
-    }
-
-    public void AllowMovementByRotating(Vector3 centrePoint) {
-       
     }
 
     public void AllowMovementByPanning(Vector2 axis) {
-
+        motionIsUsed = true;
+        this.gameObject.AddComponent<SliderJoint2D>();
+        SliderJoint2D slider = GetComponent<SliderJoint2D>();
+        slider.anchor = axis;
     }
 
     // Update is called once per frame
@@ -38,15 +52,36 @@ public class CameraMotionController : MonoBehaviour {
         if (!motionIsUsed) {
             return;
         }
+        rotationMethod();
+
+        //Debug.Log(filtered);
+    }
+
+
+    private void RotateAroundPoint() {
+
         Vector3 acceleration = Input.acceleration;
-        Vector3 filtered = new Vector3(
-                xAxis ? acceleration.x : 0,
-                yAxis ? acceleration.y : 0,
-                zAxis ? acceleration.z : 0
-            );
-        filtered.x = Mathf.Abs(filtered.x) < .1f ? 0 : filtered.x;
-        filtered.y = Mathf.Abs(filtered.y) < .1f ? 0 : filtered.y;
-        controlledCam.AddForce(100 * filtered);
-        Debug.Log(filtered);
+
+        acceleration.x = Mathf.Abs(acceleration.x) < .1f ? 0 : acceleration.x;
+        acceleration.y = Mathf.Abs(acceleration.y) < .1f ? 0 : acceleration.y;
+        acceleration.z = 0;
+        cameraBody.AddForce(100 * acceleration);
+    }
+
+    private void RotateInPlace() {
+        Vector3 acceleration = Input.acceleration;
+
+        acceleration.x = Mathf.Abs(acceleration.x) < .001f ? 0 : acceleration.x;
+        acceleration.y = Mathf.Abs(acceleration.y) < .001f ? 0 : acceleration.y;
+        acceleration.z = 0;
+
+        if (Mathf.Abs(acceleration.x) > 0 && Mathf.Abs(acceleration.x) < .3f) {
+            acceleration.x *= 20;
+        }
+        //if (Mathf.Abs(acceleration.y) > 0 && Mathf.Abs(acceleration.y) < .3f) {
+           // acceleration.y *= 20; 
+        //}
+        //cameraBody.AddForce(100 * acceleration);
+        cameraBody.AddTorque((acceleration.x < 0 ? -1 : 1) * Vector3.SqrMagnitude(acceleration));
     }
 }
