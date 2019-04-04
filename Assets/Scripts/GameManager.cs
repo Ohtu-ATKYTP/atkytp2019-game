@@ -9,11 +9,11 @@ public class GameManager : MonoBehaviour {
     public int gamesEndIndex;
     public Scene endGameScene;
     private string lastGame;
-    private string game;
-    private string[] games = {"PlaceCity", "TurkuGame", "LogoHaalariin", "ElevatorRescue"};
-    private string[] otherScenesThanGames = {"DebugBetweenGameScreen", "SceneManagerScene", "MainMenu", "BetweenGameScreen"};
-    private string mainmenuScreen = "MainMenu";
-    private string endGameScreen = "MainMenu";
+
+    private string currentScene;
+    private string[] games = {"PlaceCity", "TurkuGame", "LogoHaalariin", "ElevatorGame", "ElevatorRescue" };
+    private string[] otherScenesThanGames = {"DebugBetweenGameScreen", "SceneManagerScene", "MainMenu", "BetweenGameScreen", "Highscores", "Registration", "Settings"};
+
     private DataController dataController;
     private WebServiceScript webService;
 
@@ -22,9 +22,16 @@ public class GameManager : MonoBehaviour {
     private void Start () {
         this.dataController = FindObjectOfType<DataController> ();
         this.webService = FindObjectOfType<WebServiceScript> ();
+        
+        if(!PlayerPrefs.HasKey("registered")){
+            this.currentScene = "Registration";
+            PlayerPrefs.SetInt("registered", 0);
+        } else {
+            this.currentScene = "MainMenu";
+        }
 
-        SceneManager.LoadScene (this.mainmenuScreen, LoadSceneMode.Additive);
-        this.game = this.mainmenuScreen;
+        SceneManager.LoadScene (this.currentScene, LoadSceneMode.Additive);
+
         this.lastGame = "";
 		dataController.SetGames(games);
         devCheats = GetComponent<DevCheats>();
@@ -45,22 +52,22 @@ public class GameManager : MonoBehaviour {
 	private void ExecuteBetweenScreen() {
 		dataController.SetStatus(DataController.Status.WAIT);
         try {
-		    SceneManager.UnloadSceneAsync(this.game);
+		    SceneManager.UnloadSceneAsync(this.currentScene);
         } catch (System.Exception e) {
             Debug.Log(e);
-            Debug.Log("Tried to unload: " + this.game);
+            Debug.Log("Tried to unload: " + this.currentScene);
             Debug.Log("Throwing the error...");
             throw e;
         }
-		if (game != null) {
-            lastGame = game;
+		if (this.currentScene != null) {
+            lastGame = this.currentScene;
         }
 		if (dataController.GetDebugMode()) {
-			this.game = "DebugBetweenGameScreen";
+			this.currentScene = "DebugBetweenGameScreen";
 		} else {
-			this.game = "BetweenGameScreen";
+			this.currentScene = "BetweenGameScreen";
 		}
-        SceneManager.LoadScene(this.game, LoadSceneMode.Additive);
+        SceneManager.LoadScene(this.currentScene, LoadSceneMode.Additive);
 	}
 	
 	
@@ -70,56 +77,45 @@ public class GameManager : MonoBehaviour {
         } else if (dataController.GetNextGame() == "Random") {
             getRandomGame ();
         } else {
-			this.game = dataController.GetNextGame();
-			SceneManager.LoadScene(this.game, LoadSceneMode.Additive);
+			this.currentScene = dataController.GetNextGame();
+			SceneManager.LoadScene(this.currentScene, LoadSceneMode.Additive);
 			devCheats.ConfigureForNewMinigame(); 
 		}
     }
 
     private void getRandomGame() {
-        game = this.games[Random.Range(0, this.games.Length)];
-        while (game == lastGame) {
-            game = this.games[Random.Range(0, this.games.Length)];
+        this.currentScene = this.games[Random.Range(0, this.games.Length)];
+        while (this.currentScene == lastGame) {
+            this.currentScene = this.games[Random.Range(0, this.games.Length)];
         }
-        SceneManager.LoadScene(this.game, LoadSceneMode.Additive);
+        SceneManager.LoadScene(this.currentScene, LoadSceneMode.Additive);
         devCheats.ConfigureForNewMinigame(); 
 
- }
+    }
 
     private async void endGame (int score) //When the game is lost -- hävisit pelin
     {
         devCheats.ConfigureForNonMinigame();
-        await SceneManager.UnloadSceneAsync (this.game);
-        SceneManager.LoadScene (endGameScreen, LoadSceneMode.Additive);
+        await SceneManager.UnloadSceneAsync (this.currentScene);
+        SceneManager.LoadScene ("MainMenu", LoadSceneMode.Additive);
 
         if (PlayerPrefs.GetInt ("highScore") < score) {
             PlayerPrefs.SetInt ("highScore", score);
             string id = PlayerPrefs.GetString ("_id");
             HighScore updated = await webService.UpdateHighscore (id, score);
-
-            if (updated == null) {
-                PlayerPrefs.SetInt ("syncedHS", 0);
-            }
-
-            HighScore highscore = await webService.GetOne (id);
-
-            if (highscore != null) {
-                PlayerPrefs.SetInt ("rank", highscore.rank);
-            }
-
         }
         resetGameVariables ();
 
     }
 
     private void resetGameVariables() {
-        this.game = "MainMenu";
+        this.currentScene = "MainMenu";
         dataController.Init ();
     }
 
     private void prepareNextGame () {
         dataController.SetStatus (DataController.Status.WAIT);
-        SceneManager.UnloadSceneAsync (this.game);
+        SceneManager.UnloadSceneAsync (this.currentScene);
         nextGame ();
     }
 

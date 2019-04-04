@@ -8,7 +8,7 @@ using UnityEngine;
 using UnityEngine.Networking;
 
 public class WebServiceScript : MonoBehaviour {
-    private string baseUrl = "http://atkytpgame.herokuapp.com/api/highscores";
+    private string baseUrl = "https://atkytpgame.herokuapp.com/api/highscores";
 
     public async Task<HighScore[]> GetTop10 () {
         string url = baseUrl + "/top";

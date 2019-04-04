@@ -11,8 +11,15 @@ public class ShowScoreUI : MonoBehaviour
     void Start()
     {
         dataController = FindObjectOfType<DataController>();
-        this.Score.text = dataController.GetCurrentScore().ToString();
-        
+        if(dataController != null)
+        {
+            this.Score.text = dataController.GetCurrentScore().ToString();
+        }
+        else
+        {
+            this.Score.text = "-";
+        }
+
     }
 
     // Update is called once per frame

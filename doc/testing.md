@@ -2,8 +2,13 @@
 Testit löytyvät kansiosta Assets/Tests <br/>
 
 ### Hyödyllisiä linkkejä
-https://blogs.unity3d.com/2014/07/28/unit-testing-at-the-speed-of-light-with-unity-test-tools/  
+
+https://blogs.unity3d.com/2014/07/28/unit-testing-at-the-speed-of-light-with-unity-test-tools/
+
+https://blogs.unity3d.com/2014/06/03/unit-testing-part-2-unit-testing-monobehaviours/
+
 https://nsubstitute.github.io/ (mocking kirjasto)
+
 ## Test Runner
 `Unity Test Runner`in saa auki `Window -> General -> Test Runner`
 
@@ -40,6 +45,7 @@ namespace Tests
         }
     }
 }
+
 ```
 `[Test]` määreen testit suoritetaan normaaleina testeinä kuten missä vaan muussakin rajapinnassa <br/>
 `[UnityTest]` määreen testit suoritetaan Unityn moottorin avulla <br/>
@@ -56,10 +62,18 @@ Tehdään kansioon `Assets/Tests/PlayModeTests`. Edit mode testit ovat nopeita s
 ## Play mode testit
 Tehdään `Assets/Tests/PlayModeTests` kansioon. Play mode testeissä voidaan simuloida pelimoottorin etenemistä. Nämä testit on hidasta suorittaa.
 
+## Komponenttien (MonoBehaviourin perivät) käyttäminen testeissä
+
+Otetaan esimerkiksi Camera, joka halutaan luoda testin alussa, antaa parametriksi yksikkötestattavalle metodille, ja lopussa tarkistaa onko sen tila muuttunut halutusti. __Emme__ voi luoda komponenttia seuraavasti: ~~`Camera cam = new Camera();`~~. Komponentti on liitettävä GameObjektiin, jolloin Unity works its magic ja sitä pystyy käyttämään kuten olettaisi. Prosessin nopeuttamista varten on staattinen luokka `ComponentCreator`, jolla on staattinen metodi `Create<T>()`. Kameratestissä voisi siis luoda kameran komennolla `Camera cam = ComponentCreator.Create<Camera>();`. Tämän jälkeen esimerkiksi asettaminen `Camera.enabled = false;` ei aiheuta NullPointerExceptioniä.
+
+ComponentCreatorin toiminta: 
+
+ Parametriton versio luo uuden GameObjektin, kutsuu tällä `AddComponent<T>` ja palauttaa sitten game objektilta kysymänsä viitteen ko. komponenttiin. Metodin parametrillinen versio `Create<T>(GameObject go)` taas lisää komponentin parametri-game objektiin. Parametrittoman metodikutsun luoma game object ei jää tavoittamattomiin, sillä siihen saa viitteen luodun komponentin `gameObject` kentän kautta. Luokan määrittely löytyy tiedostosta `Utilities/ComponentCreator.cs`.
+
 # NUnit
 [Dokumentaatio](https://github.com/nunit/docs/wiki) <br/>
 
-Unit testit kirjoitetaan NUnit kirjaston avulla. Kun luot testisciprtin se importataan automaattisesti. NUnit vaikuttaa toimivan samaan tamaan kuin JUnit, mutta syntaksi eroaa hieman. Ainakin seuraavat komennot ovat olemassa ja hyödyllisiä:  
+Unit testit kirjoitetaan NUnit kirjaston avulla. Kun luot testiscriptin se importataan automaattisesti. NUnit vaikuttaa toimivan samaan tamaan kuin JUnit, mutta syntaksi eroaa hieman. Ainakin seuraavat komennot ovat olemassa ja hyödyllisiä:  
 `EDIT HUOM! Minulle selveisi että seuraavat ovat vanha tapa tehdä assertioneita! Ne kuitenkin toimivat yhä.`
 ```C#
 Assert.AreEqual(Object A, Object B);
@@ -119,6 +133,76 @@ Termistöä ([unity blog postauksen mukaan](https://blogs.unity3d.com/2014/07/28
 Kannattanee vilkaista:  
 https://blogs.unity3d.com/2014/07/28/unit-testing-at-the-speed-of-light-with-unity-test-tools/ (sama kuin ylempänä)  
 https://nsubstitute.github.io  
+https://blogs.unity3d.com/2014/06/03/unit-testing-part-2-unit-testing-monobehaviours/ (sama kuin ylempänä, **lue** jos teet yksikkötestejä)
+
+ ## MonoBehaviourien yksikkötestaamisen vaikeus (oleellista ennen kuin yrität käyttää NSubstitutea!)
+
+ NSubstitute ei mahdollista ei-abstraktien luokkien korvaamista (substitointia). Jos testattava luokka perii MonnoBehaviourin, ei sitä voi mockata (tietääkseni). Kannattavinta on refaktoroida luokka niin, että sen kytkökset pelimoottoriin ja varsinainen logiikka ovat mahdollisimman erillään toisistaan.
+
+
+ ### Humble object
+
+Kuvaus patternista löytyy [tästä](https://blogs.unity3d.com/2014/06/03/unit-testing-part-2-unit-testing-monobehaviours/). Olkoon testattava luokka nimeltään `Example`. Aluksi luokassa logiikka ja pelimoottorikutsut ovat sekaisin. Luodaan rajapinta, jolla on metodit joilla se antaa kutsujalle komponentteja ja tuottaa vaikutuksia pelimoottorissa; annetaan rajapinnalle nimeksi esimerkiksi `ExampleController`   (vaikka meidän projektissa Controllereita on ehkä jo liikaa ;P). Määrittely voisi olla jotain tämäntapaista: 
+``` C#
+public interface IExampleController {
+    public Camera FetchAllCameras();
+}
+```
+
+Jonkin verran ehkä joutuu refaktoroimaan luokkaa, jotta nämä pelimoottorin kanssa kommunikoivat osiot ovat omissa metodeissaan (jotka rajapinta määrittelee).
+
+Logiikka eriytetään omaksi luokakseen, jolla on asetettava viite ExampleControlleriin. Esimerkiksi: 
+
+``` C# 
+
+public class ExampleLogic {
+    private IExampleController controller; 
+    private Camera[] cameras; 
+    
+    public ExampleLogic(IExampleController controller){
+        this.controller = controller;
+        cameras = controller.FetchAllCameras();
+    }
+
+
+    public void DoSomething(){
+        if(Condition()){
+            cameras[0].scale = new Vector3(2, 2, 2);
+        }
+    }
+
+    .
+    .
+    .
+
+}
+```
+
+Alkuperäinen luokka on muotoa
+
+``` C# 
+public class Example : MonoBehaviour, IExampleController {
+    private ExampleLogic logic;
+
+    // kaikki callbackit joita pelimoottori kutsuun oltava täällä, koska perii MonoBehaviourin
+    private void Start(){
+        // tämä luokkakin toteuttaa rajapinnan
+        logic = new ExampleLogic(this);
+    }
+
+    private void Update(){
+        logic.ProcessUpdate();
+    }
+
+    public Camera FetchAllCameras(){
+        return FindObjectsByType<Camera>();
+    }
+
+}
+```
+
+Esimerkki ei ole täysin loppuun mietitty, kannattaa lukea linkin versio jotta näkee täyteläisemmän esimerkin jolle myös kirjoitettu testejä.
+
 
  ## NSubstitute
 
