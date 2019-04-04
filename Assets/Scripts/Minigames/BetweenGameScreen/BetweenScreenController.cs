@@ -35,20 +35,21 @@ public class BetweenScreenController : MonoBehaviour {
         lastUpdate = Time.time;
 
         if (dataController.GetLives() == 0) {
+            h1.enabled = !dataController.GetWinStatus();
             h2.enabled = false;
             h3.enabled = false;
             lostHeart = h1;
         } else if (dataController.GetLives() == 1) {
+            h2.enabled = !dataController.GetWinStatus();
             h3.enabled = false;
             lostHeart = h2;
         } else if (dataController.GetLives() == 2) {
+            h3.enabled = !dataController.GetWinStatus();
             lostHeart = h3;
         } else {
             lostHeart = null;
         }
         if (dataController.GetWinStatus()) {
-
-            //lostHeart.enabled = false;
             lostHeart = null;
         } else {
             startScale = lostHeart.transform.localScale;
