@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour {
     public int gamesEndIndex;
     public Scene endGameScene;
     private string lastGame;
-    private string currentScene;
+    private string currentScene = "MainMenu";
     private string[] games = {"PlaceCity", "TurkuGame", "LogoHaalariin", "ElevatorGame"};
     private string[] otherScenesThanGames = {"DebugBetweenGameScreen", "SceneManagerScene", "MainMenu", "BetweenGameScreen", "Highscores", "Registration", "Settings"};
     private DataController dataController;
@@ -21,14 +21,14 @@ public class GameManager : MonoBehaviour {
         this.dataController = FindObjectOfType<DataController> ();
         this.webService = FindObjectOfType<WebServiceScript> ();
         
+        string firstScene = "MainMenu";
+
         if(!PlayerPrefs.HasKey("registered")){
-            this.currentScene = "Registration";
+            firstScene = "Registration";
             PlayerPrefs.SetInt("registered", 0);
-        } else {
-            this.currentScene = "MainMenu";
         }
 
-        SceneManager.LoadScene (this.currentScene, LoadSceneMode.Additive);
+        SceneManager.LoadScene (firstScene, LoadSceneMode.Additive);
 
         this.lastGame = "";
 		dataController.SetGames(games);
