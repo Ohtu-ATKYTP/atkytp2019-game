@@ -55,7 +55,6 @@ public class ElevatorRescueLogic : MonoBehaviour, IMinigameEnder {
         Collider2D[] hitColliders = Physics2D.OverlapBoxAll(escapeTrigger.transform.position, escapeTrigger.size * 4.5f, 0.0f);
         foreach (Collider2D col in hitColliders) {
             if (col.tag == "Escapee") {
-                Debug.Log("Hit " + col.tag);
                 escaped = false;
             }
         }
@@ -91,5 +90,9 @@ public class ElevatorRescueLogic : MonoBehaviour, IMinigameEnder {
 
     public void WinMinigame() {
         EndMinigame(true);
+    }
+
+    public bool GetGameOver() {
+        return this.gameIsOver;
     }
 }
