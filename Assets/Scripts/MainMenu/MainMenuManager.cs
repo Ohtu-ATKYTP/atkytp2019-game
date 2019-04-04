@@ -46,4 +46,8 @@ public class MainMenuManager : MonoBehaviour {
         SceneManager.UnloadSceneAsync ("MainMenu");
     }
 
+    public void openUrl(string url){
+        Application.OpenURL(url);
+    }
+
 }
