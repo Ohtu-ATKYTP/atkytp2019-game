@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour {
     private string lastGame;
     private string game;
 
-    private string[] games = {"PlaceCity", "TurkuGame", "LogoHaalariin", "ElevatorGame"};
+    private string[] games = {"PlaceCity", "TurkuGame", "LogoHaalariin", "ElevatorGame", "Tamperelainen"};
     
     private string[] otherScenesThanGames = {"DebugBetweenGameScreen", "SceneManagerScene", "MainMenu", "BetweenGameScreen"};
     private string mainmenuScreen = "MainMenu";

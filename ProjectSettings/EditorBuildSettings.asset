@@ -29,4 +29,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Development/DebugBetweenGameScreen.unity
     guid: 73c241fac87c816e8a5d20c1cc7ec059
+  - enabled: 1
+    path: Assets/Scenes/Minigames/Tamperelainen.unity
+    guid: 38caa7eb54fe803cba2e273ea98d5f8c
   m_configObjects: {}
