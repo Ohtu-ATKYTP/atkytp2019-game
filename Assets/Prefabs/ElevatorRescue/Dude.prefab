@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 6490827054742522177}
   - component: {fileID: 1275205803832346381}
   m_Layer: 5
-  m_Name: ArmRight
+  m_Name: HandRight
   m_TagString: Escapee
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -33,11 +33,11 @@ RectTransform:
   m_LocalScale: {x: 0.61985195, y: 0.6542192, z: 1}
   m_Children: []
   m_Father: {fileID: 6490827056111241266}
-  m_RootOrder: 9
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 58.034004}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 14.3, y: -206.9}
+  m_AnchoredPosition: {x: 11.31, y: -208.4}
   m_SizeDelta: {x: 10, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6490827054742522180
@@ -68,7 +68,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 52deaa591df714b319c95e68f5d2bce0, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -90,7 +90,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.10761142, y: 0.21525192}
+  m_Offset: {x: 0.107611656, y: -0.52274036}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -101,7 +101,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 10.254421, y: 29.83945}
+  m_Size: {x: 10.254421, y: 28.363482}
   m_EdgeRadius: 0
 --- !u!50 &6490827054742522177
 Rigidbody2D:
@@ -136,7 +136,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64865e6e44bab474f9c03a9ad1fc991d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  forceMultiplier: 0.3
+  magnetMultiplier: 0.6
   maxAccelerationIndex: 200000
 --- !u!1 &6490827054750768759
 GameObject:
@@ -169,14 +169,14 @@ RectTransform:
   m_GameObject: {fileID: 6490827054750768759}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.5782814, y: 1.6171875, z: 1}
   m_Children: []
   m_Father: {fileID: 6490827056111241266}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -21.6, y: -186.2}
+  m_AnchoredPosition: {x: -21.1, y: -182.6}
   m_SizeDelta: {x: 12, y: 14}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6490827054750768744
@@ -207,9 +207,9 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: bc7fd6135c0204c60a7333f36823ff3f, type: 3}
   m_Type: 0
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
@@ -251,16 +251,16 @@ HingeJoint2D:
   m_BreakForce: Infinity
   m_BreakTorque: Infinity
   m_AutoConfigureConnectedAnchor: 1
-  m_Anchor: {x: 0.95740163, y: -7.898688}
-  m_ConnectedAnchor: {x: 0.6573995, y: 20.501333}
+  m_Anchor: {x: 0.18775027, y: -7.585717}
+  m_ConnectedAnchor: {x: 0.4507588, y: 18.342457}
   m_UseMotor: 0
   m_Motor:
     m_MotorSpeed: 0
     m_MaximumMotorForce: 10000
   m_UseLimits: 1
   m_AngleLimits:
-    m_LowerAngle: 0
-    m_UpperAngle: 359
+    m_LowerAngle: -87.64297
+    m_UpperAngle: 222.70505
 --- !u!61 &6490827054750768745
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -274,7 +274,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.040964603, y: -0.000015258789}
+  m_Offset: {x: -0.16928673, y: 0.81389}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -285,7 +285,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 12.0556345, y: 13.939169}
+  m_Size: {x: 9.874144, y: 12.311358}
   m_EdgeRadius: 0
 --- !u!114 &1213265519062648373
 MonoBehaviour:
@@ -299,7 +299,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64865e6e44bab474f9c03a9ad1fc991d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  forceMultiplier: 0.3
+  magnetMultiplier: 0.6
   maxAccelerationIndex: 200000
 --- !u!1 &6490827054806783627
 GameObject:
@@ -331,10 +331,10 @@ RectTransform:
   m_GameObject: {fileID: 6490827054806783627}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.1010938, y: 1.0757813, z: 1}
   m_Children: []
   m_Father: {fileID: 6490827056111241266}
-  m_RootOrder: 1
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -369,7 +369,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 6f485c34111c4419498311ee6c95aab6, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -437,7 +437,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64865e6e44bab474f9c03a9ad1fc991d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  forceMultiplier: 0.3
+  magnetMultiplier: 0.6
   maxAccelerationIndex: 200000
 --- !u!1 &6490827054874108596
 GameObject:
@@ -472,11 +472,11 @@ RectTransform:
   m_LocalScale: {x: 0.61985, y: 0.65422, z: 1}
   m_Children: []
   m_Father: {fileID: 6490827056111241266}
-  m_RootOrder: 7
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -54.162003}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -56.5, y: -208.3}
+  m_AnchoredPosition: {x: -52.07, y: -209.65}
   m_SizeDelta: {x: 10, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6490827054874108585
@@ -507,7 +507,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 2c74f36879c0c4b45be495cbd85a3345, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -529,7 +529,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.10761142, y: 0.21525192}
+  m_Offset: {x: 0.107611656, y: -0.52459526}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -540,7 +540,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 10.254421, y: 29.83945}
+  m_Size: {x: 10.254421, y: 28.359756}
   m_EdgeRadius: 0
 --- !u!50 &6490827054874108586
 Rigidbody2D:
@@ -575,7 +575,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64865e6e44bab474f9c03a9ad1fc991d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  forceMultiplier: 0.3
+  magnetMultiplier: 0.6
   maxAccelerationIndex: 200000
 --- !u!1 &6490827055106373128
 GameObject:
@@ -616,7 +616,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -67.372}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -40.661274, y: -198.1663}
+  m_AnchoredPosition: {x: -37.05, y: -202}
   m_SizeDelta: {x: 12, y: 26}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6490827055106373122
@@ -647,7 +647,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: c6dd897cdc16949f1b51273340025f2e, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -669,7 +669,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.006344795, y: -0.042890072}
+  m_Offset: {x: -0.006344795, y: -1.0094738}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -680,7 +680,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 12.053766, y: 25.809704}
+  m_Size: {x: 12.053766, y: 21.09827}
   m_EdgeRadius: 0
 --- !u!50 &6490827055106373135
 Rigidbody2D:
@@ -717,8 +717,8 @@ HingeJoint2D:
   m_BreakForce: Infinity
   m_BreakTorque: Infinity
   m_AutoConfigureConnectedAnchor: 1
-  m_Anchor: {x: 2.2323709, y: -14.055943}
-  m_ConnectedAnchor: {x: 0.4904364, y: 14.528368}
+  m_Anchor: {x: -0.8633946, y: -11.837793}
+  m_ConnectedAnchor: {x: 0.48660487, y: 14.12076}
   m_UseMotor: 0
   m_Motor:
     m_MotorSpeed: 0
@@ -741,8 +741,8 @@ HingeJoint2D:
   m_BreakForce: Infinity
   m_BreakTorque: Infinity
   m_AutoConfigureConnectedAnchor: 1
-  m_Anchor: {x: 4.2955275, y: 13.913644}
-  m_ConnectedAnchor: {x: -9.934967, y: 17.47825}
+  m_Anchor: {x: 2.084891, y: 10.680102}
+  m_ConnectedAnchor: {x: -7.9952292, y: 13.102503}
   m_UseMotor: 0
   m_Motor:
     m_MotorSpeed: 0
@@ -763,7 +763,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64865e6e44bab474f9c03a9ad1fc991d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  forceMultiplier: 0.3
+  magnetMultiplier: 0.6
   maxAccelerationIndex: 200000
 --- !u!1 &6490827055229117708
 GameObject:
@@ -804,7 +804,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 70.532005}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -2.3000073, y: -197.89998}
+  m_AnchoredPosition: {x: -4.2900066, y: -201.59998}
   m_SizeDelta: {x: 12, y: 26}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6490827055229117702
@@ -835,7 +835,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 0eccb4ae1450240d1b48029ad253e97d, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -857,7 +857,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.006344795, y: -0.042890072}
+  m_Offset: {x: -0.006344795, y: -0.06103754}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -868,7 +868,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 12.053766, y: 25.809704}
+  m_Size: {x: 12.053766, y: 23.166698}
   m_EdgeRadius: 0
 --- !u!50 &6490827055229117699
 Rigidbody2D:
@@ -906,7 +906,7 @@ HingeJoint2D:
   m_BreakTorque: Infinity
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 2.2323709, y: -14.055943}
-  m_ConnectedAnchor: {x: 3.529535, y: 15.544089}
+  m_ConnectedAnchor: {x: 1.3726404, y: 12.466991}
   m_UseMotor: 0
   m_Motor:
     m_MotorSpeed: 0
@@ -929,8 +929,8 @@ HingeJoint2D:
   m_BreakForce: Infinity
   m_BreakTorque: Infinity
   m_AutoConfigureConnectedAnchor: 1
-  m_Anchor: {x: -0.46599644, y: 13.015538}
-  m_ConnectedAnchor: {x: 10.875549, y: 19.265646}
+  m_Anchor: {x: -2.4377313, y: 10.682716}
+  m_ConnectedAnchor: {x: 9.006621, y: 12.925195}
   m_UseMotor: 0
   m_Motor:
     m_MotorSpeed: 0
@@ -951,7 +951,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64865e6e44bab474f9c03a9ad1fc991d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  forceMultiplier: 0.3
+  magnetMultiplier: 0.6
   maxAccelerationIndex: 200000
 --- !u!1 &6490827055474397044
 GameObject:
@@ -992,7 +992,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -26.106}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -32.8, y: -243.9}
+  m_AnchoredPosition: {x: -29.8, y: -235.4}
   m_SizeDelta: {x: 12, y: 26}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6490827055474397038
@@ -1023,7 +1023,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 7a1fff9d3976245e096af22c806e1ca7, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1045,7 +1045,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.006344795, y: -0.042890072}
+  m_Offset: {x: -0.006344795, y: -3.189709}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -1056,7 +1056,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 12.053766, y: 25.809704}
+  m_Size: {x: 12.053766, y: 19.516068}
   m_EdgeRadius: 0
 --- !u!50 &6490827055474397035
 Rigidbody2D:
@@ -1093,16 +1093,16 @@ HingeJoint2D:
   m_BreakForce: Infinity
   m_BreakTorque: Infinity
   m_AutoConfigureConnectedAnchor: 1
-  m_Anchor: {x: 2.2323709, y: -14.055943}
-  m_ConnectedAnchor: {x: 2.119517, y: 14.595749}
+  m_Anchor: {x: -0.9118408, y: -11.7156515}
+  m_ConnectedAnchor: {x: -0.43411255, y: 10.253942}
   m_UseMotor: 0
   m_Motor:
     m_MotorSpeed: 0
     m_MaximumMotorForce: 10000
   m_UseLimits: 1
   m_AngleLimits:
-    m_LowerAngle: -37.22844
-    m_UpperAngle: 79.50083
+    m_LowerAngle: -335.23236
+    m_UpperAngle: 385.96082
 --- !u!233 &6490827055474397039
 HingeJoint2D:
   m_ObjectHideFlags: 0
@@ -1117,8 +1117,8 @@ HingeJoint2D:
   m_BreakForce: Infinity
   m_BreakTorque: Infinity
   m_AutoConfigureConnectedAnchor: 1
-  m_Anchor: {x: -0.48023954, y: 11.6692}
-  m_ConnectedAnchor: {x: -6.7963867, y: -18.60993}
+  m_Anchor: {x: 1.5126526, y: 8.256556}
+  m_ConnectedAnchor: {x: -3.1863718, y: -13.06154}
   m_UseMotor: 0
   m_Motor:
     m_MotorSpeed: 0
@@ -1139,7 +1139,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64865e6e44bab474f9c03a9ad1fc991d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  forceMultiplier: 0.3
+  magnetMultiplier: 0.6
   maxAccelerationIndex: 200000
 --- !u!1 &6490827055514937889
 GameObject:
@@ -1171,14 +1171,14 @@ RectTransform:
   m_GameObject: {fileID: 6490827055514937889}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1.1403124, z: 1}
   m_Children: []
   m_Father: {fileID: 6490827056111241266}
-  m_RootOrder: 3
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -7, y: -272.6}
+  m_AnchoredPosition: {x: -7.5, y: -257.17}
   m_SizeDelta: {x: 10, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6490827055514937946
@@ -1209,7 +1209,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: f7e02058bc7ef4ef88274ea2be664d76, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1277,7 +1277,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64865e6e44bab474f9c03a9ad1fc991d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  forceMultiplier: 0.3
+  magnetMultiplier: 0.6
   maxAccelerationIndex: 200000
 --- !u!1 &6490827055584394919
 GameObject:
@@ -1318,7 +1318,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 20.971}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -11.2, y: -244.1}
+  m_AnchoredPosition: {x: -12.600008, y: -235.4}
   m_SizeDelta: {x: 12, y: 26}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6490827055584394969
@@ -1349,7 +1349,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 06bb43675ba3148a7a1aabe99d613541, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1371,7 +1371,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.006344795, y: -0.042890072}
+  m_Offset: {x: -0.006344795, y: -3.6469517}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -1382,7 +1382,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 12.053766, y: 25.809704}
+  m_Size: {x: 12.053766, y: 18.601582}
   m_EdgeRadius: 0
 --- !u!50 &6490827055584394970
 Rigidbody2D:
@@ -1419,8 +1419,8 @@ HingeJoint2D:
   m_BreakForce: Infinity
   m_BreakTorque: Infinity
   m_AutoConfigureConnectedAnchor: 1
-  m_Anchor: {x: -0.736514, y: -13.663657}
-  m_ConnectedAnchor: {x: 0.0024515789, y: 15.477809}
+  m_Anchor: {x: 0.9405266, y: -11.794278}
+  m_ConnectedAnchor: {x: -0.0006510417, y: 9.728551}
   m_UseMotor: 0
   m_Motor:
     m_MotorSpeed: 0
@@ -1443,8 +1443,8 @@ HingeJoint2D:
   m_BreakForce: Infinity
   m_BreakTorque: Infinity
   m_AutoConfigureConnectedAnchor: 1
-  m_Anchor: {x: 1.7363492, y: 11.698737}
-  m_ConnectedAnchor: {x: 7.534414, y: -17.954737}
+  m_Anchor: {x: -1.0795308, y: 8.687206}
+  m_ConnectedAnchor: {x: 4.1620936, y: -12.153533}
   m_UseMotor: 0
   m_Motor:
     m_MotorSpeed: 0
@@ -1465,7 +1465,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64865e6e44bab474f9c03a9ad1fc991d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  forceMultiplier: 0.3
+  magnetMultiplier: 0.6
   maxAccelerationIndex: 200000
 --- !u!1 &6490827056111241277
 GameObject:
@@ -1495,15 +1495,15 @@ RectTransform:
   m_LocalScale: {x: 1.5, y: 1.5, z: 1}
   m_Children:
   - {fileID: 6490827054750768756}
-  - {fileID: 6490827054806783628}
-  - {fileID: 6490827055584394916}
   - {fileID: 6490827055514937894}
-  - {fileID: 6490827055474397045}
+  - {fileID: 6490827055584394916}
   - {fileID: 6490827056704234808}
-  - {fileID: 6490827055106373129}
+  - {fileID: 6490827055474397045}
   - {fileID: 6490827054874108597}
-  - {fileID: 6490827055229117709}
+  - {fileID: 6490827055106373129}
   - {fileID: 6490827054742522176}
+  - {fileID: 6490827055229117709}
+  - {fileID: 6490827054806783628}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1542,14 +1542,14 @@ RectTransform:
   m_GameObject: {fileID: 6490827056704234811}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1.1489062, z: 1}
   m_Children: []
   m_Father: {fileID: 6490827056111241266}
-  m_RootOrder: 5
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -39.1, y: -272.1}
+  m_AnchoredPosition: {x: -35.34, y: -257.3}
   m_SizeDelta: {x: 10, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6490827056704234812
@@ -1580,7 +1580,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 29dd02a4357ad4a3f82d9b93b6984990, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1602,7 +1602,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.10761142, y: 0.21525192}
+  m_Offset: {x: 0.107611656, y: -1.8592825}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -1613,7 +1613,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 10.254421, y: 29.83945}
+  m_Size: {x: 10.254421, y: 25.690382}
   m_EdgeRadius: 0
 --- !u!50 &6490827056704234809
 Rigidbody2D:
@@ -1648,5 +1648,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64865e6e44bab474f9c03a9ad1fc991d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  forceMultiplier: 0.3
+  magnetMultiplier: 0.6
   maxAccelerationIndex: 200000
