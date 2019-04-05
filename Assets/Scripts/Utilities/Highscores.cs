@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -83,11 +79,11 @@ public static class Highscores {
         await req.SendWebRequest ();
 
         if (req.isNetworkError) {
-            String error = "No connection try again later";
+            string error = "No connection try again later";
             Debug.Log (error);
             return "";
         } else if (req.isHttpError) {
-            String error = req.downloadHandler.text;
+            string error = req.downloadHandler.text;
             PlayerPrefs.SetString ("error", error);
             return "";
         }
