@@ -5,16 +5,12 @@ using UnityEngine.SceneManagement;
 using System.Linq;
 
 public class GameManager : MonoBehaviour {
-    public int gamesStartIndex;
-    public int gamesEndIndex;
-    public Scene endGameScene;
     private string lastGame;
     private string currentScene;
     private string[] games = {"PlaceCity", "TurkuGame", "LogoHaalariin", "ElevatorGame"};
     private string[] otherScenesThanGames = {"DebugBetweenGameScreen", "SceneManagerScene", "MainMenu", "BetweenGameScreen", "Highscores", "Registration", "Settings"};
     private DataController dataController;
     private WebServiceScript webService;
-
     private DevCheats devCheats;
 
     private void Start () {
