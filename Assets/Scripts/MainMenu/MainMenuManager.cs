@@ -6,14 +6,12 @@ using UnityEngine.SceneManagement;
 
 public class MainMenuManager : MonoBehaviour {
 
-    private WebServiceScript webScript;
     private DataController dataController;
     private Text ownHighscore;
 
     private void Start() {
-        webScript = FindObjectOfType<WebServiceScript> ();
         dataController = FindObjectOfType<DataController>();
-        ownHighscore = GameObject.Find("OwnHighScoreText").GetComponent<Text>();
+        ownHighscore = GameObject.Find("OwnHighscoreText").GetComponent<Text>();
         updateOwnHighscoreAndRank();
         toggleRegistrationButton();
     }
@@ -23,7 +21,7 @@ public class MainMenuManager : MonoBehaviour {
         ownHighscore.text = "High score: " + score;
 
         string id = PlayerPrefs.GetString ("_id");
-        HighScore highscore = await webScript.GetOne (id);
+        Highscore highscore = await Highscores.GetOne (id);
         if (highscore != null) {
             PlayerPrefs.SetInt ("rank", highscore.rank);
             PlayerPrefs.SetInt ("highScore", highscore.score);

@@ -768,7 +768,7 @@ GameObject:
   - component: {fileID: 500394507}
   - component: {fileID: 500394506}
   m_Layer: 5
-  m_Name: OwnHighScoreText
+  m_Name: OwnHighscoreText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -8,7 +8,7 @@ Pelaajan tiedot ja joitain apumuuttujia tallennetaan kännykkään
  - PlayerPrefs.SetString("avain", arvo): asettaa halutulla avaimella uuden arvon. Joko muuttaa vanhaa tai tekee uuden
  - PlayerPrefs.GetInt("avain"): hakee avaimella arvon
 
-Seuraavat pelaajan tiedot tallennetaan kännykkään, kun ne saadaan rekisteröidessä serveriltä palautuksena (WebServiceScript.SendUser):
+Seuraavat pelaajan tiedot tallennetaan kännykkään, kun ne saadaan rekisteröidessä serveriltä palautuksena (HighscoresScript.SendUser):
 
 ```C#
 PlayerPrefs.SetString("_id", h._id);
@@ -17,9 +17,9 @@ PlayerPrefs.SetString("token", h.token);
 PlayerPrefs.SetInt("highScore", h.score);
 ```
 
-Lisäksi Playerprefssillä tallennetaan muuttuja **"syncedHS"** (arvot 0 tai 1), joka kertoo voidaanko olettaa, että pelaajan HighScore on
+Lisäksi Playerprefssillä tallennetaan muuttuja **"syncedHS"** (arvot 0 tai 1), joka kertoo voidaanko olettaa, että pelaajan Highscore on
 päivitetty serverille. Aina kun pelaaja saa uuden highscoren, se tallennetaan paikallisesti ja asetetaan "syncedHS" nollaan. Metodi 
-HighScoreManager.Sync() yrittää päivittää pelaajan Highscorea niin kauan kunnes se onnistuu. Tämän jälkeen syncedHS asetetaan taas
+HighscoreManager.Sync() yrittää päivittää pelaajan Highscorea niin kauan kunnes se onnistuu. Tämän jälkeen syncedHS asetetaan taas
 ykköseksi (eli highscore on "synkassa"). "SyncedHS" tarkastetaan myös aina kun appsi käynnistyy.
 
 

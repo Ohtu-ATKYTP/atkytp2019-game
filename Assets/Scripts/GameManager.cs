@@ -10,12 +10,10 @@ public class GameManager : MonoBehaviour {
     private string[] games = {"PlaceCity", "TurkuGame", "LogoHaalariin", "ElevatorGame"};
     private string[] otherScenesThanGames = {"DebugBetweenGameScreen", "SceneManagerScene", "MainMenu", "BetweenGameScreen", "Highscores", "Registration", "Settings"};
     private DataController dataController;
-    private WebServiceScript webService;
     private DevCheats devCheats;
 
     private void Start () {
         this.dataController = FindObjectOfType<DataController> ();
-        this.webService = FindObjectOfType<WebServiceScript> ();
         
         string firstScene = "MainMenu";
         currentScene = firstScene;
@@ -97,7 +95,7 @@ public class GameManager : MonoBehaviour {
         if (PlayerPrefs.GetInt ("highScore") < score) {
             PlayerPrefs.SetInt ("highScore", score);
             string id = PlayerPrefs.GetString ("_id");
-            HighScore updated = await webService.UpdateHighscore (id, score);
+            Highscore updated = await Highscores.Update (id, score);
         }
         resetGameVariables ();
 
