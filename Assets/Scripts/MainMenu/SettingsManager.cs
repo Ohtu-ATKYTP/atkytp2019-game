@@ -64,8 +64,8 @@ public class SettingsManager : MonoBehaviour {
         updatePlayerInfo();
     }
     
-    public void syncHS() {
-        Highscores.Update (PlayerPrefs.GetString("_id"), PlayerPrefs.GetInt("highScore"));
+    public async void syncHS() {
+        await Highscores.Update (PlayerPrefs.GetString("_id"), PlayerPrefs.GetInt("highScore"));
     }
 
     public void loadMainMenu() {

@@ -49,7 +49,7 @@ public static class Highscores {
     }
 
     public static async Task<Highscore> Update (string id, int score) {
-        if (id == null || id.Length == 0 || score == null) {
+        if (id == null || id.Length == 0 || score == 0) {
             return null;
         }
         string url = baseUrl + "/" + id;
