@@ -14,16 +14,8 @@ public class GameManager : MonoBehaviour {
 
     private void Start () {
         this.dataController = FindObjectOfType<DataController> ();
-        
-        string firstScene = "MainMenu";
-        currentScene = firstScene;
 
-        if(!PlayerPrefs.HasKey("registered")){
-            firstScene = "Registration";
-            PlayerPrefs.SetInt("registered", 0);
-        }
-
-        SceneManager.LoadScene (firstScene, LoadSceneMode.Additive);
+        SceneManager.LoadScene ("MainMenu", LoadSceneMode.Additive);
 
         this.lastGame = "";
 		dataController.SetGames(games);

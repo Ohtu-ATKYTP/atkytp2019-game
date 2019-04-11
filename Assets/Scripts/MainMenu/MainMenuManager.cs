@@ -10,6 +10,10 @@ public class MainMenuManager : MonoBehaviour {
     private Text ownHighscore;
 
     private void Start() {
+        if(!PlayerPrefs.HasKey("registered")){
+            PlayerPrefs.SetInt("registered", 0);
+            loadScene("Registration");
+        }
         dataController = FindObjectOfType<DataController>();
         ownHighscore = GameObject.Find("OwnHighscoreText").GetComponent<Text>();
         updateOwnHighscoreAndRank();
