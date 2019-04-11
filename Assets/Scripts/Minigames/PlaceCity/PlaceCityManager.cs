@@ -14,6 +14,7 @@ public class PlaceCityManager : MonoBehaviour, IMinigameEnder {
     private GameObject targetCity;
     private Dictionary<string, string> organisationsByCities;
     private bool gameIsOver = false;
+    private OrganizationDisplayer orgDisplayer; 
 
 
 
@@ -46,7 +47,8 @@ public class PlaceCityManager : MonoBehaviour, IMinigameEnder {
 
         targetCity = locations[((int)Random.Range(0f, 6f))].gameObject;
 
-        organisationText.text = organisationsByCities[targetCity.name];
+        orgDisplayer = FindObjectOfType<OrganizationDisplayer>();
+        orgDisplayer.Initialize(organisationsByCities[targetCity.name]);
     }
 
 
