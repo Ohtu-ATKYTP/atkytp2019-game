@@ -62,8 +62,8 @@ public class DifficultyAdjuster : MonoBehaviour {
         TuneFlipping(difficulty);
 
 
-        TunePaneRotationInXYPlane(difficulty);
-        //TunePanePanning(difficulty);
+        //TunePaneRotationInXYPlane(difficulty);
+        TunePanePanning(difficulty);
 
     }
 
@@ -139,7 +139,7 @@ public class DifficultyAdjuster : MonoBehaviour {
             movementDirection = Vector2.ClampMagnitude(new Vector2(random.Next(-1000, 1001), random.Next(-1000, 1001)), 1f);
         }
 
-        gamePane.GetComponent<GamePanePanner>().Initialize(movementDirection);
+        gamePane.GetComponent<GamePanePanner>().Initialize(movementDirection, panningLengthInSecs: .5f * timer.seconds);
         cameraController.Initialize(new Dictionary<string, Vector2> { { "panning", movementDirection } });
     }
 
@@ -168,7 +168,7 @@ public class DifficultyAdjuster : MonoBehaviour {
             centerPoint = Vector2.zero;
         }
 
-        gamePane.GetComponent<GamePaneRotator>().Initialize(centerPoint: centerPoint, clockWise: clockWise);
+        gamePane.GetComponent<GamePaneRotator>().Initialize(centerPoint: centerPoint, clockWise: clockWise, rotationLengthInSecs: .5f * timer.seconds);
         cameraController.Initialize(new Dictionary<string, Vector2> { { "rotation", centerPoint } });
 
     }

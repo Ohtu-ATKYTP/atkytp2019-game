@@ -4,14 +4,17 @@ using UnityEngine;
 
 public class GamePanePanner : MonoBehaviour {
     private Vector3 direction;
-    private bool moves = false;
+    public bool moves = false;
     private float distanceFromOrigin;
+    private float timeRemaining;
+    public float speed = 10f;
 
     void Start() {
         //Initialize(new Vector2(1, 0));
     }
 
-    public void Initialize(Vector2 direction) {
+    public void Initialize(Vector2 direction, float panningLengthInSecs) {
+        timeRemaining = panningLengthInSecs;
         this.direction = Vector3.ClampMagnitude(direction, 1f);
         moves = true;
         if (Application.isEditor) {
@@ -23,8 +26,11 @@ public class GamePanePanner : MonoBehaviour {
         if (!moves) {
             return;
         }
+        this.transform.position += Time.deltaTime * direction * speed;
 
-        this.transform.position += Time.deltaTime * direction;
+        timeRemaining -= Time.deltaTime;
+        if(timeRemaining <= 0){ moves = false;}
+   
     }
 
     private void OnDrawGizmos() {

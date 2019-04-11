@@ -153,7 +153,7 @@ MonoBehaviour:
   radius: 1
   delayAfterMinigameEndsInSeconds: 2
   organisationText: {fileID: 611586466}
-  difficulty: 11
+  difficulty: 13
 --- !u!4 &8837274
 Transform:
   m_ObjectHideFlags: 0
@@ -434,6 +434,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3d01054c4ffff146854fd1aad09b527, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  moves: 0
+  speed: 10
 --- !u!114 &510616672
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -449,6 +451,7 @@ MonoBehaviour:
   centerPoint: {x: 0, y: 100}
   speed: 1
   rotates: 0
+  timeRemaining: 0
 --- !u!114 &510616673
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1460,9 +1463,9 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 0.1
   m_LinearDrag: 0
-  m_AngularDrag: 3
+  m_AngularDrag: 0
   m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
