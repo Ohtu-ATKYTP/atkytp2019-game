@@ -62,8 +62,8 @@ public class DifficultyAdjuster : MonoBehaviour {
         TuneFlipping(difficulty);
 
 
-        //TunePaneRotationInXYPlane(difficulty);
-        TunePanePanning(difficulty);
+        TunePaneRotationInXYPlane(difficulty);
+        // TunePanePanning(difficulty);
 
     }
 
@@ -83,7 +83,6 @@ public class DifficultyAdjuster : MonoBehaviour {
         // koska eri efektejä on melko paljon, tuntui reilulta että aikaa on melko pitkään melko paljon; 
         // jos testaaminen osoittaa että tämä puoleen hidastaminen on turhaa, muokataan kaavaa
         timer.seconds = timer.seconds - (difficulty / (2 * steps)) * (timer.seconds - shortestPossibleTime);
-
         if (timer.seconds < shortestPossibleTime) {
             timer.seconds = shortestPossibleTime;
         }

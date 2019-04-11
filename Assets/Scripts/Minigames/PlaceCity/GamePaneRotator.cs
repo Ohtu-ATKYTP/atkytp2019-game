@@ -5,9 +5,10 @@ public class GamePaneRotator : MonoBehaviour {
     public float speed = 10f;
     public bool rotates = false;
     public float timeRemaining;
-
+    public bool clockWise; 
 
     public void Initialize(Vector2 centerPoint, float speed = 10f, bool clockWise = true, float rotationLengthInSecs = 3f) {
+        this.clockWise = clockWise;
         this.timeRemaining = rotationLengthInSecs;
         this.centerPoint = centerPoint;
         this.speed = (clockWise ? -1 : 1) * speed;

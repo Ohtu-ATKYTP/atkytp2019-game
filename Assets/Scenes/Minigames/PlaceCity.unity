@@ -153,7 +153,7 @@ MonoBehaviour:
   radius: 1
   delayAfterMinigameEndsInSeconds: 2
   organisationText: {fileID: 611586466}
-  difficulty: 13
+  difficulty: 11
 --- !u!4 &8837274
 Transform:
   m_ObjectHideFlags: 0
@@ -452,6 +452,7 @@ MonoBehaviour:
   speed: 1
   rotates: 0
   timeRemaining: 0
+  clockWise: 0
 --- !u!114 &510616673
 MonoBehaviour:
   m_ObjectHideFlags: 0
