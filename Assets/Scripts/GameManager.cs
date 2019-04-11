@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour {
         
         string firstScene = "MainMenu";
         currentScene = firstScene;
+        dataController.SetStatus(DataController.Status.WAIT);
 
         if(!PlayerPrefs.HasKey("registered")){
             firstScene = "Registration";
