@@ -7,7 +7,7 @@ using UnityEditor.SceneManagement;
 
 namespace Tests
 {
-    public class TestGameManager
+    /*public class TestGameManager
     {
         // A Test behaves as an ordinary method
         [Test]
@@ -17,13 +17,13 @@ namespace Tests
         }
 
 
-        /*
+        
         Checks if Scenes defined in GameManager are in build settings. If this fails check that all scenes are defined in GameManagers Game and
          OtherScenesThanGames string arrays and all those are defined in build settings. If this fails in cloud remember to check if all scenes are
          in clouds build setttings
          */
-        [Test]
-        public void TestAllScenesAreInBuildSettings()
+        //[Test]
+        /*public void TestAllScenesAreInBuildSettings()
         {
             var gameObject = new GameObject();
             gameObject.AddComponent<GameManager>();
@@ -46,5 +46,5 @@ namespace Tests
             }
             return scenes;
         }
-    }
+    }*/
 }

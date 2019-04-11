@@ -6,7 +6,6 @@ using UnityEngine.SceneManagement;
 
 public class MainMenuManager : MonoBehaviour {
 
-    private DataController dataController;
     private Text ownHighscore;
 
     private void Start() {
@@ -14,7 +13,6 @@ public class MainMenuManager : MonoBehaviour {
             PlayerPrefs.SetInt("registered", 0);
             loadScene("Registration");
         }
-        dataController = FindObjectOfType<DataController>();
         ownHighscore = GameObject.Find("OwnHighscoreText").GetComponent<Text>();
         updateOwnHighscoreAndRank();
         toggleRegistrationButton();
@@ -39,8 +37,9 @@ public class MainMenuManager : MonoBehaviour {
     }
 
     public void startGame() {
-        dataController.SetDebugMode(false);
-		dataController.SetStatus(DataController.Status.MINIGAME);
+        DataController.SetDebugMode(false);
+        GameManager.startGame();
+		//DataController.SetStatus(DataController.Status.MINIGAME);
     }
 
     public void loadScene(string sceneName) {

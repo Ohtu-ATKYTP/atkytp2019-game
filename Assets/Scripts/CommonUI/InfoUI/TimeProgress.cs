@@ -11,7 +11,6 @@ public class TimeProgress : MonoBehaviour {
     public Slider timerSlider;
 
     public UnityEngine.Events.UnityEvent TimerReadyMethods;
-    private DataController dataController;
     private bool timerPaused = false;
     // after stopping the pause status cannot be toggled: the timer will run any longer in the minigame
     private bool timerStopped = false;
@@ -19,7 +18,6 @@ public class TimeProgress : MonoBehaviour {
     void Start() {
         this.timer = seconds;
         timerSlider.value = 1f;
-        dataController = FindObjectOfType<DataController>();
     }
 
     // Update is called once per frame

@@ -10,7 +10,6 @@ public class PlaceCityManager : MonoBehaviour, IMinigameEnder {
     public float radius = 1f;
     public int delayAfterMinigameEndsInSeconds = 2;
     public Text organisationText;
-    private DataController dataController;
     private GameObject targetCity;
     private Dictionary<string, string> organisationsByCities;
     private bool gameIsOver = false;
@@ -22,10 +21,7 @@ public class PlaceCityManager : MonoBehaviour, IMinigameEnder {
 
 
     void Start() {
-        dataController = FindObjectOfType<DataController>();
-        if (dataController != null) {
-            difficulty = dataController.GetDifficulty();
-        }
+        difficulty = DataController.GetDifficulty();
         GetComponent<DifficultyAdjuster>().Initialize(difficulty);
 
         // No need to show the positions to the players of the production build
@@ -97,6 +93,6 @@ public class PlaceCityManager : MonoBehaviour, IMinigameEnder {
 
         targetCity.GetComponent<InformationDisplayer>().RevealOnMap(statusColor);
         yield return new WaitForSeconds(delayAfterMinigameEndsInSeconds);
-        dataController.MinigameEnd(win, win ? 10 : 0);
+        GameManager.endMinigame(win, win ? 10 : 0);
     }
 } 

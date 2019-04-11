@@ -12,8 +12,6 @@ public class JumpmanLogic : MonoBehaviour {
     public bool gameWon;
     
     bool firstJump;
-    
-    private DataController dataController;
 
     private float maxGravScale;
     private float minGravScale;
@@ -23,20 +21,19 @@ public class JumpmanLogic : MonoBehaviour {
         firstJump = false;
         gameWon = false;
 
-        dataController = FindObjectOfType<DataController>();
         maxGravScale = 1000;
         minGravScale = 600;
         jumpForce = 13000;
 
-        if(dataController.GetDebugMode()){
+        if(DataController.GetDebugMode()){
             this.initDebuggerParams();
         }
     }
 
     private void initDebuggerParams(){
-        maxGravScale = dataController.getGameParameter("gravityScaleMax");
-        minGravScale = dataController.getGameParameter("gravityScaleMin");
-        jumpForce = dataController.getGameParameter("jumpForce");
+        maxGravScale = DataController.getGameParameter("gravityScaleMax");
+        minGravScale = DataController.getGameParameter("gravityScaleMin");
+        jumpForce = DataController.getGameParameter("jumpForce");
     }
 
     public void Jump() {

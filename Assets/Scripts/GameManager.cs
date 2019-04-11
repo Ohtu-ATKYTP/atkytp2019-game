@@ -1,115 +1,62 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Linq;
 
-public class GameManager : MonoBehaviour {
-    private string lastGame;
-    private string currentScene;
-    private string[] games = {"PlaceCity", "TurkuGame", "LogoHaalariin", "ElevatorGame"};
-    private string[] otherScenesThanGames = {"DebugBetweenGameScreen", "SceneManagerScene", "MainMenu", "BetweenGameScreen", "Highscores", "Registration", "Settings"};
-    private DataController dataController;
-    private DevCheats devCheats;
-
-    private void Start () {
-        this.dataController = FindObjectOfType<DataController> ();
-
-        this.currentScene = "MainMenu";
-        SceneManager.LoadScene ("MainMenu", LoadSceneMode.Additive);
-
-        this.lastGame = "";
-		dataController.SetGames(games);
-        devCheats = GetComponent<DevCheats>();
+public static class GameManager {
+    public static string currentGame;
+    private static string[] games = {"PlaceCity", "TurkuGame", "LogoHaalariin", "ElevatorGame"};
+    private static string betweenGameScreen = "BetweenGameScreen";
+    private static string mainMenu = "MainMenu";
+    public static void startGame() {
+        DataController.Init();
+        string firstGame = getRandomGame();
+        SceneManager.LoadScene(firstGame, LoadSceneMode.Additive);
+        currentGame = firstGame;
+        SceneManager.UnloadSceneAsync(mainMenu);
     }
 
-    private void Update() {
-        if (dataController.GetStatus() == DataController.Status.MINIGAME) {
-			dataController.SetStatus(DataController.Status.WAIT);
-            prepareNextGame();
-        } else if (dataController.GetStatus() == DataController.Status.BETWEEN) {
-			//Execute between screen scene
-			ExecuteBetweenScreen();
-		} else if (dataController.GetStatus() == DataController.Status.MAIN_MENU) {
-			//Go to main menu (future implementation?)
-		}
+    private static string getRandomGame() {
+        string[] filteredGames = games.Where(game => game != currentGame).ToArray();
+        return filteredGames[Random.Range(0, filteredGames.Length)];
     }
 
-	private void ExecuteBetweenScreen() {
-		dataController.SetStatus(DataController.Status.WAIT);
-        try {
-		    SceneManager.UnloadSceneAsync(this.currentScene);
-        } catch (System.Exception e) {
-            Debug.Log(e);
-            Debug.Log("Tried to unload: " + this.currentScene);
-            Debug.Log("Throwing the error...");
-            throw e;
+    public static void endMinigame(bool win, int score) {
+        DataController.SetWinStatus(win);
+        if (!win) {
+            DataController.TakeLife();
         }
-		if (this.currentScene != null) {
-            lastGame = this.currentScene;
-        }
-		if (dataController.GetDebugMode()) {
-			this.currentScene = "DebugBetweenGameScreen";
-		} else {
-			this.currentScene = "BetweenGameScreen";
-		}
-        SceneManager.LoadScene(this.currentScene, LoadSceneMode.Additive);
-	}
-	
-	
-    public void nextGame () {
-        if (dataController.GetLives () == 0) {
-            endGame (dataController.GetCurrentScore ());
-        } else if (dataController.GetNextGame() == "Random") {
-            getRandomGame ();
+        DataController.AddCurrentScore(score);
+		DataController.incrementRoundsCompleted();
+		DataController.UpdateDifficulty();
+
+        betweenGame();
+    }
+
+    private static void betweenGame() {
+
+        SceneManager.LoadScene(betweenGameScreen, LoadSceneMode.Additive);
+        SceneManager.UnloadSceneAsync(currentGame);
+
+        if (DataController.GetLives() == 0) {
+            endGame();
         } else {
-			this.currentScene = dataController.GetNextGame();
-			SceneManager.LoadScene(this.currentScene, LoadSceneMode.Additive);
-			devCheats.ConfigureForNewMinigame(); 
-		}
-    }
-
-    private void getRandomGame() {
-        this.currentScene = this.games[Random.Range(0, this.games.Length)];
-        while (this.currentScene == lastGame) {
-            this.currentScene = this.games[Random.Range(0, this.games.Length)];
+            string nextGame = getRandomGame();
+            SceneManager.LoadScene(nextGame, LoadSceneMode.Additive);
+            SceneManager.UnloadSceneAsync(betweenGameScreen);
         }
-        SceneManager.LoadScene(this.currentScene, LoadSceneMode.Additive);
-        devCheats.ConfigureForNewMinigame(); 
-
     }
 
-    private async void endGame (int score) //When the game is lost -- hävisit pelin
-    {
-        devCheats.ConfigureForNonMinigame();
-        await SceneManager.UnloadSceneAsync (this.currentScene);
-        SceneManager.LoadScene ("MainMenu", LoadSceneMode.Additive);
+    private static async void endGame() {
+        SceneManager.LoadScene(mainMenu, LoadSceneMode.Additive);
+        SceneManager.UnloadSceneAsync(currentGame);
 
+        int score = DataController.GetCurrentScore();
         if (PlayerPrefs.GetInt ("highScore") < score) {
             PlayerPrefs.SetInt ("highScore", score);
             string id = PlayerPrefs.GetString ("_id");
             Highscore updated = await Highscores.Update (id, score);
         }
-        resetGameVariables ();
-
-    }
-
-    private void resetGameVariables() {
-        this.currentScene = "MainMenu";
-        dataController.Init ();
-    }
-
-    private void prepareNextGame () {
-        dataController.SetStatus (DataController.Status.WAIT);
-        SceneManager.UnloadSceneAsync (this.currentScene);
-        nextGame ();
-    }
-
-    public string[] getGames() {
-        return this.games;
-    }
-
-    public string[] getAllScenes() {
-        return this.games.Concat(this.otherScenesThanGames).ToArray();
     }
 }

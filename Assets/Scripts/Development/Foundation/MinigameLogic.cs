@@ -1,24 +1,19 @@
 ﻿using UnityEngine;
 
 public abstract class MinigameLogic : MonoBehaviour, IMinigameEnder {
-    protected DataController dataController;
     [SerializeField]
     protected int pointsForWinning = 10;
     [SerializeField]
     protected int testingDifficulty = 1;
     protected TimeProgress timebar;
 
-
-
-
     protected virtual void Start() {
-        dataController = FindObjectOfType<DataController>();
         timebar = FindObjectOfType<TimeProgress>();
         if (timebar.TimerReadyMethods.GetPersistentEventCount() == 0) {
             timebar.TimerReadyMethods.AddListener(OnTimerEnd);
         }
-        ConfigureDifficulty(dataController != null ?
-                             dataController.GetDifficulty()
+        ConfigureDifficulty(DataController.GetDifficulty() != null ?
+                             DataController.GetDifficulty()
                              : testingDifficulty);
     }
 
@@ -27,14 +22,9 @@ public abstract class MinigameLogic : MonoBehaviour, IMinigameEnder {
         FindObjectOfType<TimeProgress>().StopTimerProgression();
 
         DisplayEndingActions(won);
-
-        if (!dataController) {
-            Debug.Log("Minigame would end now");
-        } else {
-            dataController.MinigameEnd(won,
-                    won ? pointsForWinning : 0
-                );
-        }
+        GameManager.endMinigame(won,
+                won ? pointsForWinning : 0
+        );
     }
 
 
