@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 using System.Linq;
 
 public static class GameManager {
-    public static string currentGame;
+    private static string currentGame;
     private static string[] games = {"PlaceCity", "TurkuGame", "LogoHaalariin", "ElevatorGame"};
     private static string betweenGameScreen = "BetweenGameScreen";
     private static string mainMenu = "MainMenu";
@@ -55,5 +55,6 @@ public static class GameManager {
             string id = PlayerPrefs.GetString ("_id");
             Highscore updated = await Highscores.Update (id, score);
         }
+        DataController.Init();
     }
 }

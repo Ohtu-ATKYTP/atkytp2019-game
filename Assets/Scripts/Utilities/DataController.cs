@@ -11,13 +11,13 @@ public static class DataController
 	private static string nextGame;
 	private static bool debug;
 	private static readonly int DIFF_INCREASE_INTERVAL = 3;
-    private static int currentScore;
+    private static int currentScore = 0;
     private static bool winStatus;
-    private static int lives;
+    private static int lives = 3;
     private static readonly int MAX_LIVES = 3;
-	private static int lastReceivedScore;
-	private static int roundsCompleted;
-	private static int difficulty;
+	private static int lastReceivedScore = 0;
+	private static int roundsCompleted = 0;
+	private static int difficulty = 1;
 	private static string[] games;
 
 	private static Dictionary<string, float> gameParameters = new Dictionary<string, float>();
@@ -60,16 +60,8 @@ public static class DataController
         return lives;
     }
 
-    public static void ResetLives() {
-        lives = 3;
-    }
-
     public static bool GetWinStatus() {
         return winStatus;
-    }
-
-    public static void ResetScore() {
-        currentScore = 0;
     }
 
     public static void SetWinStatus(bool win) {
@@ -95,10 +87,6 @@ public static class DataController
 
 	public static bool GetDebugMode() {
 		return debug;
-	}
-
-	public static void SetGames(string[] gameScenes) {
-		games = gameScenes;
 	}
 
 	public static string[] GetGames() {
@@ -129,5 +117,4 @@ public static class DataController
 	public static bool hasGameParameter(string key) {
 		return gameParameters.ContainsKey(key);
 	}
-	//Gameparameter methods END
 }
