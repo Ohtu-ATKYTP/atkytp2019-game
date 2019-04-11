@@ -45,8 +45,7 @@ public class RegistrationManager : MonoBehaviour {
     }
 
     public void loadMainMenu() {
-        SceneManager.LoadScene ("MainMenu", LoadSceneMode.Additive);
-        SceneManager.UnloadSceneAsync ("Registration");
+        SceneManager.LoadScene ("MainMenu");
     }
 
     

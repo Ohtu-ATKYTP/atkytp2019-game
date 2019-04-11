@@ -43,8 +43,7 @@ public class MainMenuManager : MonoBehaviour {
     }
 
     public void loadScene(string sceneName) {
-        SceneManager.LoadScene (sceneName, LoadSceneMode.Additive);
-        SceneManager.UnloadSceneAsync ("MainMenu");
+        SceneManager.LoadScene (sceneName);
     }
 
     public void openUrl(string url){

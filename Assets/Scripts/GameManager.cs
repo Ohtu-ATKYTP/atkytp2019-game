@@ -12,9 +12,8 @@ public static class GameManager {
     public static void startGame() {
         DataController.Init();
         string firstGame = getRandomGame();
-        SceneManager.LoadScene(firstGame, LoadSceneMode.Additive);
+        SceneManager.LoadScene(firstGame);
         currentGame = firstGame;
-        SceneManager.UnloadSceneAsync(mainMenu);
     }
 
     private static string getRandomGame() {
@@ -34,23 +33,21 @@ public static class GameManager {
         betweenGame();
     }
 
-    private static void betweenGame() {
+    private static async void betweenGame() {
 
-        SceneManager.LoadScene(betweenGameScreen, LoadSceneMode.Additive);
-        SceneManager.UnloadSceneAsync(currentGame);
-
+        SceneManager.LoadScene(betweenGameScreen);
+        await new WaitForSecondsRealtime(3);
         if (DataController.GetLives() == 0) {
             endGame();
         } else {
             string nextGame = getRandomGame();
-            SceneManager.LoadScene(nextGame, LoadSceneMode.Additive);
-            SceneManager.UnloadSceneAsync(betweenGameScreen);
+            SceneManager.LoadScene(nextGame);
+            currentGame = nextGame;
         }
     }
 
     private static async void endGame() {
-        SceneManager.LoadScene(mainMenu, LoadSceneMode.Additive);
-        SceneManager.UnloadSceneAsync(currentGame);
+        SceneManager.LoadScene(mainMenu);
 
         int score = DataController.GetCurrentScore();
         if (PlayerPrefs.GetInt ("highScore") < score) {
