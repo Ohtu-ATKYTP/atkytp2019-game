@@ -6,11 +6,6 @@ using UnityEngine.SceneManagement;
 
 public class RegistrationManager : MonoBehaviour {
     public Text statusMessage;
-    private WebServiceScript webScript;
-
-    void Start () {
-        webScript = FindObjectOfType<WebServiceScript> ();
-    }
 
     public async void SendFormData () {
         if (PlayerPrefs.GetInt ("registered") == 1) {
@@ -21,7 +16,7 @@ public class RegistrationManager : MonoBehaviour {
         string userName = GameObject.Find("UsernameInput").transform.Find("Text").GetComponent<Text>().text;
         string token = GameObject.Find("TokenInput").transform.Find("Text").GetComponent<Text>().text;
 
-        HighScore highscore = await webScript.CreateHighscore (userName, token);
+        Highscore highscore = await Highscores.Create (userName, token);
 
         if (highscore != null) {
             PlayerPrefs.SetString ("_id", highscore._id);

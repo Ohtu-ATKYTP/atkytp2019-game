@@ -6,11 +6,9 @@ using UnityEngine.SceneManagement;
 
 public class SettingsManager : MonoBehaviour {
 
-    private WebServiceScript webScript;
     private Text playerInfo;
 
     void Start() {
-        webScript = FindObjectOfType<WebServiceScript> ();
         playerInfo = GameObject.Find("PlayerInfo").GetComponent<Text>();
         updatePlayerInfo();
     }
@@ -19,7 +17,7 @@ public class SettingsManager : MonoBehaviour {
         string info = "Username: "+ PlayerPrefs.GetString("username")+"\n";
         info += "ID: " + PlayerPrefs.GetString("_id") + "\n";
         info += "Token: " + PlayerPrefs.GetString("token") + "\n";
-        info += "HighScore: " + PlayerPrefs.GetInt("highScore") + "\n";
+        info += "Highscore: " + PlayerPrefs.GetInt("highScore") + "\n";
         info += "Registered: " + ((PlayerPrefs.GetInt("registered") == 1) ? "yes" : "no")+ "\n";
         info += "Rank: " + PlayerPrefs.GetInt("rank") + "\n";
 
@@ -46,7 +44,7 @@ public class SettingsManager : MonoBehaviour {
         updatePlayerInfo();
     }
 
-    public void DeleteHighScore() {
+    public void DeleteHighscore() {
         PlayerPrefs.DeleteKey("highScore");
         updatePlayerInfo();
     }
@@ -56,18 +54,18 @@ public class SettingsManager : MonoBehaviour {
         updatePlayerInfo();
     }
 
-    public void increaseHighScore() {
+    public void increaseHighscore() {
         PlayerPrefs.SetInt("highScore", PlayerPrefs.GetInt("highScore")+10);
         updatePlayerInfo();
     }
 
-    public void decreaseHighScore() {
+    public void decreaseHighscore() {
         PlayerPrefs.SetInt("highScore",PlayerPrefs.GetInt("highScore")-10);
         updatePlayerInfo();
     }
     
-    public void syncHS() {
-        webScript.UpdateHighscore (PlayerPrefs.GetString("_id"), PlayerPrefs.GetInt("highScore"));
+    public async void syncHS() {
+        await Highscores.Update (PlayerPrefs.GetString("_id"), PlayerPrefs.GetInt("highScore"));
     }
 
     public void loadMainMenu() {

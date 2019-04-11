@@ -5,12 +5,10 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class HighscoreManager : MonoBehaviour {
-    private WebServiceScript webScript;
     private Text usernames;
     private Text scores;
 
     void Start() {
-        webScript = FindObjectOfType<WebServiceScript>();
         Text[] textComponents = GetComponentsInChildren<Text>();
         for (int i = 0; i < textComponents.Length; i++) {
             Text texComp = textComponents[i];
@@ -22,11 +20,11 @@ public class HighscoreManager : MonoBehaviour {
         }
         usernames.text = PlayerPrefs.GetString("usernameInfo");
         scores.text = PlayerPrefs.GetString("scoreInfo");
-        FetchUpdatedHighScores();
+        FetchUpdatedHighscores();
     }
 
-    private async void FetchUpdatedHighScores() {
-        HighScore[] highscores = await webScript.GetTop10();
+    private async void FetchUpdatedHighscores() {
+        Highscore[] highscores = await Highscores.GetTop10();
 
         string usernameInfo = "";
         string scoreInfo = "";
@@ -36,7 +34,7 @@ public class HighscoreManager : MonoBehaviour {
 
         bool isUserinTop10 = false;
         int i = 1;
-        foreach (HighScore hs in highscores) {
+        foreach (Highscore hs in highscores) {
             
             if(hs.user == PlayerPrefs.GetString("username")){
                 isUserinTop10 = true;
