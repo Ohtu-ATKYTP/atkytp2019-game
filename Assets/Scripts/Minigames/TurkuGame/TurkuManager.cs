@@ -18,7 +18,7 @@ public class TurkuManager : MonoBehaviour, IMinigameEnder {
     }
 
     void Update() {
-        if (hitboxes.Active() > Mathf.Min(hitboxes.HitboxCount()*0.95f, (difficulty*dataController.GetDifficulty())) && !gameOver && !lineUsedUp) {
+        if (hitboxes.Active() > Mathf.Min(hitboxes.HitboxCount()*0.95f, (difficulty*(dataController.GetDifficulty()+2))) && !gameOver && !lineUsedUp) {
             WinMinigame();
         }
     }
