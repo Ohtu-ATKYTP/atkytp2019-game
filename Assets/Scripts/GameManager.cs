@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour {
     private void Start () {
         this.dataController = FindObjectOfType<DataController> ();
 
+        this.currentScene = "MainMenu";
         SceneManager.LoadScene ("MainMenu", LoadSceneMode.Additive);
 
         this.lastGame = "";
