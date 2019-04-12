@@ -9,7 +9,6 @@ public class PlaceCityManager : MonoBehaviour, IMinigameEnder {
     public float radius = 1f;
     public int delayAfterMinigameEndsInSeconds = 2;
     public Text organisationText;
-    private DataController dataController;
     private GameObject targetCity;
     private bool gameIsOver = false;
 
@@ -19,10 +18,7 @@ public class PlaceCityManager : MonoBehaviour, IMinigameEnder {
 
 
     void Start() {
-        dataController = FindObjectOfType<DataController>();
-        if (dataController != null) {
-            difficulty = dataController.GetDifficulty();
-        }
+        difficulty = DataController.GetDifficulty();
         GetComponent<DifficultyAdjuster>().Initialize(difficulty);
 
 #if UNITY_EDITOR
@@ -82,6 +78,6 @@ public class PlaceCityManager : MonoBehaviour, IMinigameEnder {
             : Color.red;
         targetCity.GetComponent<InformationDisplayer>().RevealOnMap(statusColor);
         yield return new WaitForSeconds(delayAfterMinigameEndsInSeconds);
-        dataController.MinigameEnd(win, win ? 10 : 0);
+        GameManager.endMinigame(win, win ? 10 : 0);
     }
 }

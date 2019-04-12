@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class LogoHaalariinLogic : MonoBehaviour, IMinigameEnder {
-    private DataController dataController;
     private TimeProgress timer;
     private int haalari = 0;
     private int logo = 0;
@@ -14,14 +13,11 @@ public class LogoHaalariinLogic : MonoBehaviour, IMinigameEnder {
     public LogoUpdater logoUpdater;
 
     void Start() {
-        dataController = FindObjectOfType<DataController>();
         timer = FindObjectOfType<TimeProgress>();
         initializeGame();
     }
     private void initializeGame() {
-        if (dataController != null) {
-            difficulty = dataController.GetDifficulty();
-        }
+        difficulty = DataController.GetDifficulty();
         //Setting initial haalari and logo
         this.haalari = Random.Range(0, associationAmount);
         haalariUpdater.changeImage(this.haalari);
@@ -70,7 +66,7 @@ public class LogoHaalariinLogic : MonoBehaviour, IMinigameEnder {
             logoUpdater.startDropLogoAnimation();
         }
         await new WaitForSecondsRealtime(3);
-        dataController.MinigameEnd(win, win ? 10 : 0);
+        GameManager.endMinigame(win, win ? 10 : 0);
     }
 
     public void endGame() {
@@ -83,6 +79,6 @@ public class LogoHaalariinLogic : MonoBehaviour, IMinigameEnder {
     public async void timesUp() {
         logoUpdater.startDropLogoAnimation();
         await new WaitForSecondsRealtime(3);
-        dataController.MinigameEnd(false, 0);
+        GameManager.endMinigame(false, 0);
     }
 }
