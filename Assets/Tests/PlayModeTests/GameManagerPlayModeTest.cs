@@ -61,19 +61,5 @@ namespace Tests
             //UnloadAllScenesExcept("");
         }
 
-        void UnloadAllScenesExcept(string sceneName)
-        {
-            int c = SceneManager.sceneCount;
-            for (int i = 0; i < c; i++)
-            {
-                Scene scene = SceneManager.GetSceneAt(i);
-                if (scene.name != sceneName)
-                {
-                    SceneManager.UnloadScene(scene);
-                }
-            }
-        }
-
-
     }
 }

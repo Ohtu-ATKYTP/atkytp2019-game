@@ -41,7 +41,6 @@ public static class GameManager {
     }
 
     private static async void betweenGame() {
-
         SceneManager.LoadScene(betweenGameScreen);
         await new WaitForSecondsRealtime(3);
         if (DataController.GetLives() == 0) {
@@ -63,6 +62,7 @@ public static class GameManager {
         DataController.Init();
     }
 
+    // Helper functions
     private static string getRandomGame() {
         string[] filteredGames = games.Where(game => game != currentGame).ToArray();
         return filteredGames[Random.Range(0, filteredGames.Length)];
@@ -72,7 +72,7 @@ public static class GameManager {
         return games;
     }
 
-    // Debugging stuff
+    // Debugging functions
 
     public static void startDebugGame() {
         DataController.SetDebugMode(true);
