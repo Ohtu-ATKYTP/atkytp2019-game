@@ -69,8 +69,7 @@ public class SettingsManager : MonoBehaviour {
     }
 
     public void loadMainMenu() {
-        SceneManager.LoadScene ("MainMenu", LoadSceneMode.Additive);
-        SceneManager.UnloadSceneAsync ("Settings");
+        SceneManager.LoadScene ("MainMenu");
     }
 
     

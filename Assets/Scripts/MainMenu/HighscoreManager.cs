@@ -71,8 +71,7 @@ public class HighscoreManager : MonoBehaviour {
     }
 
     public void loadMainMenu() {
-        SceneManager.LoadScene ("MainMenu", LoadSceneMode.Additive);
-        SceneManager.UnloadSceneAsync ("Highscores");
+        SceneManager.LoadScene ("MainMenu");
     }
 }
 
