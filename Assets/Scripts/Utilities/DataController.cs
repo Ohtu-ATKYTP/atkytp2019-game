@@ -4,146 +4,105 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;                                                        // The System.IO namespace contains functions related to loading and saving files
 
-public class DataController : MonoBehaviour 
+public static class DataController
 {
 	//The MAIN_MENU flag is as of yet unused, can be used in a future implementation
-	public enum Status {
-		WAIT,
-		MAIN_MENU,
-		MINIGAME,
-		BETWEEN
-	}
-	private string nextGame;
-	private bool debug;
-	private readonly int DIFF_INCREASE_INTERVAL = 3;
-    private int currentScore;
-    private bool winStatus;
-    private int lives;
-    private readonly int MAX_LIVES = 3;
-	private int lastReceivedScore;
-	private Status status;
-	private int roundsCompleted;
-	private int difficulty;
-	private string[] games;
 
-	private Dictionary<string, float> gameParameters;
+	private static string nextGame;
+	private static bool debug;
+	private static readonly int DIFF_INCREASE_INTERVAL = 3;
+    private static int currentScore = 0;
+    private static bool winStatus;
+    private static int lives = 3;
+    private static readonly int MAX_LIVES = 3;
+	private static int lastReceivedScore = 0;
+	private static int roundsCompleted = 0;
+	private static int difficulty = 1;
+	private static string[] games;
 
-    void Start()
-    {
-        Init();
-    }
+	private static Dictionary<string, float> gameParameters = new Dictionary<string, float>();
 
-    public void Init() {
-        this.currentScore = 0;
-        this.winStatus = true;
-        this.lives = MAX_LIVES;
-		this.status = Status.WAIT;
-		this.lastReceivedScore = 0;
-		this.roundsCompleted = 0;
-		this.debug = false;
-		this.nextGame = "Random";
-		this.difficulty = 1;
+    public static void Init() {
+        currentScore = 0;
+        winStatus = true;
+        lives = MAX_LIVES;
+		lastReceivedScore = 0;
+		roundsCompleted = 0;
+		debug = false;
+		nextGame = "Random";
+		difficulty = 1;
 
-		this.gameParameters = new Dictionary<string, float>(); 
+		gameParameters = new Dictionary<string, float>(); 
     }
 
 	//Difficulty range is 1 and upwards
-	public int GetDifficulty() {
-		return this.difficulty;
+	public static int GetDifficulty() {
+		return difficulty;
 	}
 
-	public void SetDifficulty(int newDiff) {
-		this.difficulty = newDiff;
+	public static void SetDifficulty(int newDiff) {
+		difficulty = newDiff;
 	}
 
-    public void MinigameEnd(bool win, int score) {
-        this.SetWinStatus(win);
-		if (!win) this.lives--;
-        this.AddCurrentScore(score);
-		this.status = Status.BETWEEN;
-		this.roundsCompleted++;
-		this.difficulty = this.roundsCompleted / this.DIFF_INCREASE_INTERVAL + 1;
+    public static void UpdateDifficulty() {
+        difficulty = roundsCompleted / DIFF_INCREASE_INTERVAL + 1;
     }
 
-	public void BetweenScreenEnd() {
-		this.status = Status.MINIGAME;
-	}
-
-	public void DebugBetweenScreenEnd() {
-		this.status = Status.MINIGAME;
-	}
-
-    public void TakeLife() {
-        this.lives--;
+    public static void incrementRoundsCompleted() {
+        roundsCompleted++;
     }
 
-    public int GetLives() {
-        return this.lives;
+    public static void TakeLife() {
+        lives--;
     }
 
-    public void ResetLives() {
-        this.lives = 3;
+    public static int GetLives() {
+        return lives;
     }
 
-    public bool GetWinStatus() {
-        return this.winStatus;
+    public static bool GetWinStatus() {
+        return winStatus;
     }
 
-    public void ResetScore() {
-        this.currentScore = 0;
+    public static void SetWinStatus(bool win) {
+        winStatus = win;
     }
 
-    public void SetWinStatus(bool win) {
-        this.winStatus = win;
+    public static int GetCurrentScore() {
+        return currentScore;
     }
 
-    public int GetCurrentScore() {
-        return this.currentScore;
+	public static void AddCurrentScore(int score) {
+		lastReceivedScore = score;
+        currentScore += score;
     }
 
-	public void AddCurrentScore(int score) {
-		this.lastReceivedScore = score;
-        this.currentScore += score;
-    }
-
-	public Status GetStatus() {
-		return this.status;
+	public static int GetLastReceivedScore() {
+		return lastReceivedScore;
 	}
 
-	public void SetStatus(Status newStatus) {
-		this.status = newStatus;
+	public static void SetDebugMode(bool debugIsOn) {
+		debug = debugIsOn;
 	}
 
-	public int GetLastReceivedScore() {
-		return this.lastReceivedScore;
+	public static bool GetDebugMode() {
+		return debug;
 	}
 
-	public void SetDebugMode(bool debugIsOn) {
-		this.debug = debugIsOn;
+	public static string[] GetGames() {
+		return games;
 	}
 
-	public bool	GetDebugMode() {
-		return this.debug;
+	public static string GetNextGame() {
+		return nextGame;
 	}
 
-	public void SetGames(string[] gameScenes) {
-		this.games = gameScenes;
-	}
-
-	public string[] GetGames() {
-		return this.games;
-	}
-
-	public string GetNextGame() {
-		return this.nextGame;
-	}
-
-	public void SetNextGame(string next) {
-		this.nextGame = next;
+	public static void SetNextGame(string next) {
+		nextGame = next;
 	}
 
 	//Used to adjust Game Parameters from debug play Screen
-	public void setGameParameter(string key, float value) {
+	public static void setGameParameter(string key, float value) {
 		if(gameParameters.ContainsKey(key)){
 			gameParameters[key] = value;
 		}else{
@@ -151,12 +110,11 @@ public class DataController : MonoBehaviour
 		}
 	}
 
-	public float getGameParameter(string key) {
+	public static float getGameParameter(string key) {
 		return gameParameters[key];
 	}
 
-	public bool hasGameParameter(string key) {
+	public static bool hasGameParameter(string key) {
 		return gameParameters.ContainsKey(key);
 	}
-	//Gameparameter methods END
 }

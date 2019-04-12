@@ -6,7 +6,6 @@ using UnityEngine.UI;
 public class DebugBetweenScreenController : MonoBehaviour
 {
 	private string nextGame;
-	private DataController dataController;
 	private Dropdown dropdown;
 	private int difficulty;
 	public Text prevScore;
@@ -19,22 +18,20 @@ public class DebugBetweenScreenController : MonoBehaviour
 
     // Start is called before the first frame update
     void Start() {
-        dataController = FindObjectOfType<DataController>();
 		dropdown = FindObjectOfType<Dropdown>();
 		this.nextGame = "Random";
-		this.difficulty = dataController.GetDifficulty();
+		this.difficulty = DataController.GetDifficulty();
 
-		prevScore.text = "" + (dataController.GetCurrentScore() - dataController.GetLastReceivedScore());
-		addScore.text = "" + dataController.GetLastReceivedScore();
-		newScore.text = "" + dataController.GetCurrentScore();
-		livesAmount.text = "" + dataController.GetLives();
+		prevScore.text = "" + (DataController.GetCurrentScore() - DataController.GetLastReceivedScore());
+		addScore.text = "" + DataController.GetLastReceivedScore();
+		newScore.text = "" + DataController.GetCurrentScore();
+		livesAmount.text = "" + DataController.GetLives();
 		difficultySelect.text = "" + difficulty;
 	}
 
 	public void EndDebugScreen() {
-		dataController.SetNextGame(nextGame);
-		dataController.SetDifficulty(int.Parse(difficultySelect.text));
-		dataController.DebugBetweenScreenEnd();
+		GameManager.nextGame(nextGame);
+		DataController.SetDifficulty(int.Parse(difficultySelect.text));
 	}
 
 	public void SetNextGame(string next) {

@@ -9,17 +9,10 @@ public class HeatlhIcons : MonoBehaviour
     public Image hearth_2;
     public Image hearth_3;
 
-    private DataController dataController;
-
     void Start()
     {
-        this.dataController = FindObjectOfType<DataController>();
-        if(dataController == null)
-        {
-            return;
-        }
 
-        switch (dataController.GetLives()) {
+        switch (DataController.GetLives()) {
             case 0:
                 hearth_1.enabled = false;
                 hearth_2.enabled = false;
