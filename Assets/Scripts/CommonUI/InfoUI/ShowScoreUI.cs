@@ -9,14 +9,7 @@ public class ShowScoreUI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        this.Score.text = DataController.GetCurrentScore() != null ?
-            DataController.GetCurrentScore().ToString() : "-";
+        this.Score.text = DataController.GetCurrentScore() + "";
 
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }
