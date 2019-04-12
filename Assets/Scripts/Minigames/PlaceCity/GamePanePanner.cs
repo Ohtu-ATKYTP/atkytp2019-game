@@ -2,6 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+ * In charge of moving the map in the determined direction
+ * 
+ */
 public class GamePanePanner : MonoBehaviour {
     private Vector3 direction;
     public bool moves = false;
@@ -9,30 +13,30 @@ public class GamePanePanner : MonoBehaviour {
     private float timeRemaining;
     public float speed = 10f;
 
-    void Start() {
-        //Initialize(new Vector2(1, 0));
-    }
-
     public void Initialize(Vector2 direction, float panningLengthInSecs) {
         timeRemaining = panningLengthInSecs;
         this.direction = Vector3.ClampMagnitude(direction, 1f);
         moves = true;
-        if (Application.isEditor) {
-            StartCoroutine(UpdateDistanceInfoCOR());
-        }
+
+#if UNITY_EDITOR
+        StartCoroutine(UpdateDistanceInfoCOR());
+#endif
     }
 
     void Update() {
         if (!moves) {
             return;
         }
-        this.transform.position += Time.deltaTime * direction * speed;
 
+        this.transform.position += Time.deltaTime * direction * speed;
         timeRemaining -= Time.deltaTime;
-        if(timeRemaining <= 0){ moves = false;}
-   
+        if (timeRemaining <= 0)  
+            moves = false; 
     }
 
+
+
+#if UNITY_EDITOR
     private void OnDrawGizmos() {
         float distance = Mathf.Max(100f, 2 * distanceFromOrigin);
         Gizmos.color = Color.green;
@@ -44,6 +48,6 @@ public class GamePanePanner : MonoBehaviour {
             distanceFromOrigin = Vector3.Magnitude(transform.position);
             yield return new WaitForSecondsRealtime(1f);
         }
-
     }
+#endif
 }

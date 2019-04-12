@@ -16,7 +16,6 @@ public class SpriteManager : MonoBehaviour {
     // map difficulty need not be the difficulty of the game
     // the decision will be made in the DifficultyAdjuster script
     public void ChangeSprite(int mapDifficulty) {
-
         int idx = Mathf.Min(mapSprites.Length - 1, mapDifficulty);
         finlandRenderer.sprite = mapSprites[idx];
     }

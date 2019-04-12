@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class InputController : MonoBehaviour {
     private DeviceType playingDevice;
@@ -19,7 +17,9 @@ public class InputController : MonoBehaviour {
         } else {
             throw new UnityException("The device type is unknown");
         }
+       
     }
+
 
     void Update() {
         Vector3 pos = clickingMethod();
@@ -46,7 +46,6 @@ public class InputController : MonoBehaviour {
 
      /*
      * No interaction is indicated by a special vector with negative z
-     * 
      */
     private Vector3 inputLocation(bool condition, System.Func<Vector3> positionSeeker) {
         if (condition) {

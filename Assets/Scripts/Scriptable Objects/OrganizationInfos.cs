@@ -22,11 +22,10 @@ public class OrganizationInfos : ScriptableObject {
     }
 
     public OrganizationInfo GetOrgByName(string name) {
-        Debug.Log("name:" + name);
-        if (organizationsByNames == null){ 
-            Initialize(); 
+        if (organizationsByNames == null) {
+            Initialize();
         }
-            name = name.Trim().ToLower();
+        name = name.Trim().ToLower();
         if (organizationsByNames[name] == null) {
             throw new System.ArgumentException("Organization with name " + name + " cannot be found");
         }
