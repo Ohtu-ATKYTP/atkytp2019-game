@@ -4,6 +4,6 @@ using UnityEngine;
 
 public class DebugPlayButtonScript : MonoBehaviour {
     public void StartGameInDebug() {
-		DataController.SetDebugMode(true);
+		GameManager.startDebugGame();
 	}
 }

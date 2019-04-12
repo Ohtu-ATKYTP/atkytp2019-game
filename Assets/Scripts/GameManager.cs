@@ -9,16 +9,18 @@ public static class GameManager {
     private static string[] games = {"PlaceCity", "TurkuGame", "LogoHaalariin", "ElevatorGame"};
     private static string betweenGameScreen = "BetweenGameScreen";
     private static string mainMenu = "MainMenu";
+
     public static void startGame() {
         DataController.Init();
-        string firstGame = getRandomGame();
-        SceneManager.LoadScene(firstGame);
-        currentGame = firstGame;
+        nextGame();
     }
 
-    private static string getRandomGame() {
-        string[] filteredGames = games.Where(game => game != currentGame).ToArray();
-        return filteredGames[Random.Range(0, filteredGames.Length)];
+    public static void nextGame(string game = "Random") {
+        if (game == "Random") {
+            game = getRandomGame();
+        }
+        SceneManager.LoadScene(game);
+        currentGame = game;
     }
 
     public static void endMinigame(bool win, int score) {
@@ -30,7 +32,12 @@ public static class GameManager {
 		DataController.incrementRoundsCompleted();
 		DataController.UpdateDifficulty();
 
-        betweenGame();
+        // Debug mode checker
+        if (!DataController.GetDebugMode()) {
+            betweenGame();
+        } else {
+            dubugBetweenGame();
+        }
     }
 
     private static async void betweenGame() {
@@ -40,21 +47,42 @@ public static class GameManager {
         if (DataController.GetLives() == 0) {
             endGame();
         } else {
-            string nextGame = getRandomGame();
-            SceneManager.LoadScene(nextGame);
-            currentGame = nextGame;
+            nextGame();
         }
     }
 
-    private static async void endGame() {
+    public static async void endGame() {
         SceneManager.LoadScene(mainMenu);
 
         int score = DataController.GetCurrentScore();
         if (PlayerPrefs.GetInt ("highScore") < score) {
             PlayerPrefs.SetInt ("highScore", score);
             string id = PlayerPrefs.GetString ("_id");
-            Highscore updated = await Highscores.Update (id, score);
+            await Highscores.Update (id, score);
         }
         DataController.Init();
+    }
+
+    private static string getRandomGame() {
+        string[] filteredGames = games.Where(game => game != currentGame).ToArray();
+        return filteredGames[Random.Range(0, filteredGames.Length)];
+    }
+
+    public static string[] getGames() {
+        return games;
+    }
+
+    // Debugging stuff
+
+    public static void startDebugGame() {
+        DataController.SetDebugMode(true);
+        SceneManager.LoadScene("DebugBetweenGameScreen");
+    }
+
+    private static void dubugBetweenGame() {
+        if (DataController.GetLives() == 0) {
+            endGame();
+        }
+        SceneManager.LoadScene("DebugBetweenGameScreen");
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using NUnit.Framework;
 using UnityEngine;
@@ -7,7 +8,7 @@ using UnityEditor.SceneManagement;
 
 namespace Tests
 {
-    /*public class TestGameManager
+    public class TestGameManager
     {
         // A Test behaves as an ordinary method
         [Test]
@@ -18,21 +19,19 @@ namespace Tests
 
 
         
-        Checks if Scenes defined in GameManager are in build settings. If this fails check that all scenes are defined in GameManagers Game and
+        /*Checks if Scenes defined in GameManager are in build settings. If this fails check that all scenes are defined in GameManagers Game and
          OtherScenesThanGames string arrays and all those are defined in build settings. If this fails in cloud remember to check if all scenes are
          in clouds build setttings
          */
-        //[Test]
-        /*public void TestAllScenesAreInBuildSettings()
+        [Test]
+        public void TestAllGamesAreInBuildSettings()
         {
-            var gameObject = new GameObject();
-            gameObject.AddComponent<GameManager>();
-            GameManager gameManager = gameObject.GetComponent(typeof(GameManager)) as GameManager;
-            string[] scenesWantToBuild = gameManager.getAllScenes();
+            string[] games = GameManager.getGames();
             string[] allScenes = getAllScenesInBuildSettings();
-            int numberOfScenesInBuildSettings = EditorSceneManager.sceneCountInBuildSettings;
-
-            Assert.That(scenesWantToBuild, Is.EquivalentTo(allScenes));
+            
+            foreach (string game in games) {
+                Assert.IsTrue(Array.IndexOf(allScenes, game) > -1);
+            }
         }
 
 
@@ -46,5 +45,5 @@ namespace Tests
             }
             return scenes;
         }
-    }*/
+    }
 }

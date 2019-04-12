@@ -30,7 +30,7 @@ public class DebugBetweenScreenController : MonoBehaviour
 	}
 
 	public void EndDebugScreen() {
-		DataController.SetNextGame(nextGame);
+		GameManager.nextGame(nextGame);
 		DataController.SetDifficulty(int.Parse(difficultySelect.text));
 	}
 

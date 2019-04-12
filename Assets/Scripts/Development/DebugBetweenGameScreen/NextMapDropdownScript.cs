@@ -28,7 +28,7 @@ public class NextMapDropdownScript : MonoBehaviour {
 		dropdown.captionText.text = newData.text;
 
 		//Add the dropdown options to the actual dropdown game object
-		foreach (string s in DataController.GetGames()) {
+		foreach (string s in GameManager.getGames()) {
 			newData = new Dropdown.OptionData();
 			newData.text = s;
 			mapOptions.Add(newData);

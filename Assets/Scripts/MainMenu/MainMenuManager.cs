@@ -18,7 +18,7 @@ public class MainMenuManager : MonoBehaviour {
         toggleRegistrationButton();
     }
 
-    public async void updateOwnHighscoreAndRank() {
+    private async void updateOwnHighscoreAndRank() {
         int score = (PlayerPrefs.HasKey("highScore")) ?  PlayerPrefs.GetInt("highScore") : 0;
         ownHighscore.text = "High score: " + score;
 
@@ -30,7 +30,7 @@ public class MainMenuManager : MonoBehaviour {
         }
     }
 
-    public void toggleRegistrationButton() {
+    private void toggleRegistrationButton() {
         GameObject registrationButton = GameObject.Find("RegistrationButton");
         bool isVisible = PlayerPrefs.GetInt("registered") == 0 ? true: false;
         registrationButton.SetActive(isVisible);
@@ -39,7 +39,6 @@ public class MainMenuManager : MonoBehaviour {
     public void startGame() {
         DataController.SetDebugMode(false);
         GameManager.startGame();
-		//DataController.SetStatus(DataController.Status.MINIGAME);
     }
 
     public void loadScene(string sceneName) {

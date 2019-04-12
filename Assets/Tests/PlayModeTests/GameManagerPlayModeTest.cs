@@ -14,16 +14,7 @@ namespace Tests
         [SetUp]
         public void SetUp()
         {
-            SceneManager.LoadScene("SceneManagerScene");
-        }
-
-        [UnityTest]
-        public IEnumerator SampleTest()
-        {
-            // Use the Assert class to test conditions.
-            // Use yield to skip a frame.
-            yield return null;
-            yield return null;
+            SceneManager.LoadScene("MainMenu");
         }
         // A Test behaves as an ordinary method
 
@@ -39,19 +30,20 @@ namespace Tests
             Assert.That(scene.name, Is.EqualTo("BetweenGameScreen"));
         }
         [UnityTest]
-        public IEnumerator TestThatMenuIsUnloadedWhenStatusToMinigame() // And that some other scene is loaded
+        public IEnumerator TestThatMenuIsUnloadedWhenEnteringMinigame() // And that some other scene is loaded
         {
             yield return null;
-
             Scene scene = SceneManager.GetSceneByName("MainMenu");
             yield return null;
             Assert.That(scene.name, Is.EqualTo("MainMenu")); // Checks that main menu is loaded
-            Assert.That(SceneManager.sceneCount, Is.EqualTo(2));
+            GameManager.startGame();
+            yield return null;
+            Assert.That(SceneManager.sceneCount, Is.EqualTo(1));
             yield return null;
             scene = SceneManager.GetSceneByName("MainMenu");
             yield return null;
             Assert.That(scene.name, Is.EqualTo(null)); // Checks that main menu is not loaded anymore
-            Assert.That(SceneManager.sceneCount, Is.EqualTo(2));
+            Assert.That(SceneManager.sceneCount, Is.EqualTo(1));
         }
 
 
@@ -74,21 +66,21 @@ namespace Tests
 
         [UnityTest]
         public IEnumerator TestScore()
-        {
+        {   
             yield return new WaitForSeconds(1);
             yield return null;
             //---------------------------------------------------------------
             Debug.Log("Score: " + DataController.GetCurrentScore());
-            GameManager.endMinigame(true, 10);
+            DataController.AddCurrentScore(10);
             yield return null;
             Debug.Log("Score: " + DataController.GetCurrentScore());
-            GameManager.endMinigame(true, 10);
+            DataController.AddCurrentScore(10);
             yield return null;
             Debug.Log("Score: " + DataController.GetCurrentScore());
-            GameManager.endMinigame(false, 0);
+            DataController.AddCurrentScore(0);
             yield return null;
             Debug.Log("Score: " + DataController.GetCurrentScore());
-            GameManager.endMinigame(true, 30);
+            DataController.AddCurrentScore(30);
             yield return null;
             Debug.Log("Score: " + DataController.GetCurrentScore());
             Assert.That(DataController.GetCurrentScore(), Is.EqualTo(50));
