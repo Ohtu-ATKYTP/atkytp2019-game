@@ -13,7 +13,7 @@ public class TurkuManager : MonoBehaviour, IMinigameEnder {
     bool lineUsedUp = false;
 
     void Update() {
-        if (hitboxes.Active() > Mathf.Min(hitboxes.HitboxCount()*0.95f, difficulty+(6*DataController.GetDifficulty())) && !gameOver && !lineUsedUp) {
+        if (hitboxes.Active() > Mathf.Min(hitboxes.HitboxCount()*0.95f, (difficulty*(DataController.GetDifficulty()+2))) && !gameOver && !lineUsedUp) {
             WinMinigame();
         }
     }

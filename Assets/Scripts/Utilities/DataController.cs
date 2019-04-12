@@ -18,7 +18,6 @@ public static class DataController
 	private static int lastReceivedScore = 0;
 	private static int roundsCompleted = 0;
 	private static int difficulty = 1;
-	private static string[] games;
 
 	private static Dictionary<string, float> gameParameters = new Dictionary<string, float>();
 
@@ -87,10 +86,6 @@ public static class DataController
 
 	public static bool GetDebugMode() {
 		return debug;
-	}
-
-	public static string[] GetGames() {
-		return games;
 	}
 
 	public static string GetNextGame() {

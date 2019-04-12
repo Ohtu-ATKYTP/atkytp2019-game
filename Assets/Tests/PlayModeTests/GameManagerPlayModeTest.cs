@@ -29,38 +29,6 @@ namespace Tests
             yield return null;
             Assert.That(scene.name, Is.EqualTo("BetweenGameScreen"));
         }
-        [UnityTest]
-        public IEnumerator TestThatMenuIsUnloadedWhenEnteringMinigame() // And that some other scene is loaded
-        {
-            yield return null;
-            Scene scene = SceneManager.GetSceneByName("MainMenu");
-            yield return null;
-            Assert.That(scene.name, Is.EqualTo("MainMenu")); // Checks that main menu is loaded
-            GameManager.startGame();
-            yield return null;
-            Assert.That(SceneManager.sceneCount, Is.EqualTo(1));
-            yield return null;
-            scene = SceneManager.GetSceneByName("MainMenu");
-            yield return null;
-            Assert.That(scene.name, Is.EqualTo(null)); // Checks that main menu is not loaded anymore
-            Assert.That(SceneManager.sceneCount, Is.EqualTo(1));
-        }
-
-
-        [UnityTest]
-        public IEnumerator TestGameEndsWhen3LifesTaken()
-        {
-            yield return null;
-            //---------------------------------------------------------------
-            GameManager.endMinigame(false, 0);
-            yield return null;
-            GameManager.endMinigame(false, 0);
-            yield return null;
-            GameManager.endMinigame(false, 0);
-            yield return null;
-            Assert.That(DataController.GetLives(), Is.EqualTo(0));
-        }
-
 
 
 
@@ -92,20 +60,6 @@ namespace Tests
         {
             //UnloadAllScenesExcept("");
         }
-
-        void UnloadAllScenesExcept(string sceneName)
-        {
-            int c = SceneManager.sceneCount;
-            for (int i = 0; i < c; i++)
-            {
-                Scene scene = SceneManager.GetSceneAt(i);
-                if (scene.name != sceneName)
-                {
-                    SceneManager.UnloadScene(scene);
-                }
-            }
-        }
-
 
     }
 }

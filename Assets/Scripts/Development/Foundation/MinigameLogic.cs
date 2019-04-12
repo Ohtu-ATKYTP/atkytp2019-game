@@ -3,8 +3,6 @@
 public abstract class MinigameLogic : MonoBehaviour, IMinigameEnder {
     [SerializeField]
     protected int pointsForWinning = 10;
-    [SerializeField]
-    protected int testingDifficulty = 1;
     protected TimeProgress timebar;
 
     protected virtual void Start() {
@@ -12,9 +10,7 @@ public abstract class MinigameLogic : MonoBehaviour, IMinigameEnder {
         if (timebar.TimerReadyMethods.GetPersistentEventCount() == 0) {
             timebar.TimerReadyMethods.AddListener(OnTimerEnd);
         }
-        ConfigureDifficulty(DataController.GetDifficulty() != null ?
-                             DataController.GetDifficulty()
-                             : testingDifficulty);
+        ConfigureDifficulty(DataController.GetDifficulty());
     }
 
 
