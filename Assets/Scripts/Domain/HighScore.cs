@@ -1,5 +1,5 @@
 ﻿[System.Serializable]
-public class HighScore {
+public class Highscore {
     public string _id;
     public string user;
     public string token;

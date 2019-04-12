@@ -7,11 +7,9 @@ public class NextMapDropdownScript : MonoBehaviour {
 	private Dropdown.OptionData newData;
 	private DebugBetweenScreenController controller;
 	private Dropdown dropdown;
-	private DataController dataController;
 	private List<Dropdown.OptionData> mapOptions;
     // Start is called before the first frame update
     void Start() {
-		dataController = FindObjectOfType<DataController>();
 		controller = FindObjectOfType<DebugBetweenScreenController>();
         dropdown = GetComponent<Dropdown>();
 		dropdown.ClearOptions();
@@ -30,7 +28,7 @@ public class NextMapDropdownScript : MonoBehaviour {
 		dropdown.captionText.text = newData.text;
 
 		//Add the dropdown options to the actual dropdown game object
-		foreach (string s in dataController.GetGames()) {
+		foreach (string s in GameManager.getGames()) {
 			newData = new Dropdown.OptionData();
 			newData.text = s;
 			mapOptions.Add(newData);

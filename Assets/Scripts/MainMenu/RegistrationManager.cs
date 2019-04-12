@@ -2,14 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
-public class RegisterButton : MonoBehaviour {
+public class RegistrationManager : MonoBehaviour {
     public Text statusMessage;
-    private WebServiceScript webScript;
-
-    void Start () {
-        webScript = FindObjectOfType<WebServiceScript> ();
-    }
 
     public async void SendFormData () {
         if (PlayerPrefs.GetInt ("registered") == 1) {
@@ -20,16 +16,15 @@ public class RegisterButton : MonoBehaviour {
         string userName = GameObject.Find("UsernameInput").transform.Find("Text").GetComponent<Text>().text;
         string token = GameObject.Find("TokenInput").transform.Find("Text").GetComponent<Text>().text;
 
-        HighScore highscore = await webScript.CreateHighscore (userName, token);
+        Highscore highscore = await Highscores.Create (userName, token);
 
         if (highscore != null) {
             PlayerPrefs.SetString ("_id", highscore._id);
             PlayerPrefs.SetString ("username", highscore.user);
             PlayerPrefs.SetString ("token", highscore.token);
             PlayerPrefs.SetInt ("highScore", highscore.score);
-            PlayerPrefs.SetInt ("syncedHS", 1);
             PlayerPrefs.SetInt ("registered", 1);
-            FindObjectOfType<MenuManager> ().displayOnlyMenu ("Main Menu Screen");
+            loadMainMenu();
         } else {
             HandleError();
         }
@@ -48,4 +43,10 @@ public class RegisterButton : MonoBehaviour {
     private void DisplayMessage (string message) {
         statusMessage.text = message;
     }
+
+    public void loadMainMenu() {
+        SceneManager.LoadScene ("MainMenu");
+    }
+
+    
 }

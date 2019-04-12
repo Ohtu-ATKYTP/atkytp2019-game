@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class BetweenScreenController : MonoBehaviour {
-    private DataController dataController;
     private float startTime;
     public Text score;
     public Image h1;
@@ -20,13 +19,12 @@ public class BetweenScreenController : MonoBehaviour {
     // Start is called before the first frame update
     void Start() {
         active = true;
-        dataController = FindObjectOfType<DataController>();
         startTime = Time.time;
-        h2.enabled = dataController.GetLives() > 0;
-        h3.enabled = dataController.GetLives() > 1;
-        increasingScore = dataController.GetCurrentScore() - dataController.GetLastReceivedScore();
-        scoreDifference = dataController.GetLastReceivedScore();
-        if (dataController.GetWinStatus()) {
+        h2.enabled = DataController.GetLives() > 0;
+        h3.enabled = DataController.GetLives() > 1;
+        increasingScore = DataController.GetCurrentScore() - DataController.GetLastReceivedScore();
+        scoreDifference = DataController.GetLastReceivedScore();
+        if (DataController.GetWinStatus()) {
             winStatus.text = "WIN";
         } else {
             winStatus.text = "LOSS";
@@ -34,21 +32,22 @@ public class BetweenScreenController : MonoBehaviour {
         score.text = "" + increasingScore;
         lastUpdate = Time.time;
 
-        if (dataController.GetLives() == 0) {
+        if (DataController.GetLives() == 0) {
+            h1.enabled = !DataController.GetWinStatus();
             h2.enabled = false;
             h3.enabled = false;
             lostHeart = h1;
-        } else if (dataController.GetLives() == 1) {
+        } else if (DataController.GetLives() == 1) {
+            h2.enabled = !DataController.GetWinStatus();
             h3.enabled = false;
             lostHeart = h2;
-        } else if (dataController.GetLives() == 2) {
+        } else if (DataController.GetLives() == 2) {
+            h3.enabled = !DataController.GetWinStatus();
             lostHeart = h3;
         } else {
             lostHeart = null;
         }
-        if (dataController.GetWinStatus()) {
-
-            //lostHeart.enabled = false;
+        if (DataController.GetWinStatus()) {
             lostHeart = null;
         } else {
             startScale = lostHeart.transform.localScale;
@@ -69,13 +68,12 @@ public class BetweenScreenController : MonoBehaviour {
             increasingScore++;
             score.text = "" + increasingScore;
             lastUpdate = Time.time;
-            if (increasingScore == dataController.GetCurrentScore()) {
+            if (increasingScore == DataController.GetCurrentScore()) {
                 scoreDifference = 0;
             }
         }
         if (Time.time - startTime > 3 && active) {
             active = false;
-            dataController.BetweenScreenEnd();
         }
     }
 

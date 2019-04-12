@@ -7,7 +7,6 @@ public class ElevatorGameLogic : MonoBehaviour, IMinigameEnder {
     private MinigameLogic miniGameLogic;
     private GameObject[] borders;
     private BorderLogic borderLogic;
-    private DataController dataController;
     private int damage;
     private TimeProgress timer;
     private GameObject[] jumpmanList;
@@ -23,7 +22,6 @@ public class ElevatorGameLogic : MonoBehaviour, IMinigameEnder {
         borders = GameObject.FindGameObjectsWithTag("Border");
         jumpmanList =  GameObject.FindGameObjectsWithTag("Jumpman");
         miniGameLogic = GameObject.FindObjectOfType<MinigameLogic>();
-        dataController = FindObjectOfType<DataController>();
         timer = FindObjectOfType<TimeProgress>();
         supportBorder = GameObject.FindGameObjectWithTag("SupportBorder");
         brokenBorder = GameObject.FindGameObjectWithTag("BrokenBorder");
@@ -44,7 +42,7 @@ public class ElevatorGameLogic : MonoBehaviour, IMinigameEnder {
     }
 
     public void setDifficulty(){
-        int difficulty = dataController.GetDifficulty();
+        int difficulty = DataController.GetDifficulty();
         float reducedTime = (float) 25 - difficulty*3;
         if(reducedTime < 8){
             reducedTime = 8;
@@ -68,7 +66,7 @@ public class ElevatorGameLogic : MonoBehaviour, IMinigameEnder {
                 border.GetComponent<BorderLogic>().AddRigidBody();
         }
         
-        miniGameLogic.EndMinigame(true);
+        EndGame(true);
     }
     
     public void LoseMinigame() {
@@ -80,10 +78,16 @@ public class ElevatorGameLogic : MonoBehaviour, IMinigameEnder {
         foreach (GameObject jumper in jumpmanList){
             jumper.GetComponent<Button>().interactable = false;
         }
-        miniGameLogic.EndMinigame(false);
+        EndGame(false);
     }
 
     public void OnTimerEnd() {
         this.LoseMinigame();
+    }
+
+    public async void EndGame(bool won) {
+        timer.StopTimerProgression();
+        await new WaitForSecondsRealtime(3);
+        GameManager.endMinigame(won, won ? 10 : 0);
     }
 }
