@@ -11,10 +11,10 @@ public class TamperelainenControl : MonoBehaviour
     private float direction = 0f;
 
     //finals
-    private readonly float ACCEPTED_AREA = 70f;
+    private readonly float ACCEPTED_AREA_LEFT = 150f;
+    private readonly float ACCEPTED_AREA_RIGHT = 450f;
     private readonly float SPEED = 7000f;
     private readonly float DRUNK_SPEED_RANGE = 5000f;
-    private readonly float CIRCLE = 360f;
     private readonly float START_TIME = 1.0f;
     private readonly float INTERVAL = 1.5f;
     // Start is called before the first frame update
@@ -38,7 +38,7 @@ public class TamperelainenControl : MonoBehaviour
     }
 
     private void Control() {
-        rb.AddForce(transform.right * Input.acceleration.x * SPEED * (1 + (GetRelativeRotation() / 100)));
+        rb.AddForce(transform.right * Input.acceleration.x * SPEED * (1 + (Mathf.Abs(GetPositionX()) / 100)));
     }
 
     private void Drunkify() {
@@ -52,21 +52,19 @@ public class TamperelainenControl : MonoBehaviour
     }
 
     private void CheckLoseCondition() {
-        float zRotation = this.GetRelativeRotation();
-        if (zRotation < -ACCEPTED_AREA || zRotation > ACCEPTED_AREA ) {
-            if (zRotation > ACCEPTED_AREA) BreakWindow(); else FallRight();
+        float xPostion = this.GetPositionX();
+        Debug.Log("Position x:" + xPostion);
+        if (xPostion < ACCEPTED_AREA_LEFT || xPostion > ACCEPTED_AREA_RIGHT ) {
+            if (xPostion < ACCEPTED_AREA_LEFT) BreakWindow(); else FallRight();
             this.enabled = false;
             logicScript.LoseMinigame();
             
         }
     }
 
-    private float GetRelativeRotation() {
-        float zRotation = this.GetComponent<RectTransform>().eulerAngles.z;
-        if (zRotation > CIRCLE/2) {
-            zRotation = zRotation - CIRCLE;
-        }
-        return zRotation;
+    private float GetPositionX() {
+        float position_x = this.GetComponent<RectTransform>().position.x;
+        return position_x;
     }
 
     private void FallRight() {
