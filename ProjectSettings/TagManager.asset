@@ -11,6 +11,8 @@ TagManager:
   - SupportBorder
   - InfoText
   - ElevatorDoors
+  - ForceDownButton
+  - Logic
   layers:
   - Default
   - TransparentFX

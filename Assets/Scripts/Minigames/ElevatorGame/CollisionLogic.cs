@@ -19,7 +19,7 @@ public class CollisionLogic : MonoBehaviour
             collisionCount += 1;
         }
         else{
-            EGLogic.AddDamage();
+            //EGLogic.AddDamage();
             shake.TriggerShake();
         }
 

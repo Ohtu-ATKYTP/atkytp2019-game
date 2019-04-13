@@ -7,36 +7,61 @@ public class ElevatorGameLogic : MonoBehaviour, IMinigameEnder {
     private MinigameLogic miniGameLogic;
     private GameObject[] borders;
     private BorderLogic borderLogic;
-    private int damage;
+    //private DataController dataController;
+    private float damage;
     private TimeProgress timer;
     private GameObject[] jumpmanList;
     private GameObject brokenBorder;
     private GameObject supportBorder;
     private GameObject infoText;
-    
 
-    private bool endedGame = false;
+    private GameObject forceDownButton;
+    
+    private int jumpmenHighEnough;
+
+    private bool endedGame;
+
+    private bool forceDownButtonCoolTime;
     
     void Start() {
+
+        endedGame = false;
+        forceDownButtonCoolTime = false;
+
         damage = 0;
         borders = GameObject.FindGameObjectsWithTag("Border");
         jumpmanList =  GameObject.FindGameObjectsWithTag("Jumpman");
         miniGameLogic = GameObject.FindObjectOfType<MinigameLogic>();
+        //dataController = FindObjectOfType<DataController>();
         timer = FindObjectOfType<TimeProgress>();
         supportBorder = GameObject.FindGameObjectWithTag("SupportBorder");
         brokenBorder = GameObject.FindGameObjectWithTag("BrokenBorder");
         brokenBorder.SetActive(false);
 
         infoText = GameObject.FindGameObjectWithTag("InfoText");
+
+        jumpmenHighEnough = 0;
+
+        forceDownButton = GameObject.FindGameObjectWithTag("ForceDownButton");
+        forceDownButton.SetActive(false);
         
         this.setDifficulty();
+
+        
     }
 
-    public void AddDamage(){
-        damage += 1;
+    void Update() {
+        this.checkJumpmenHighEnough();
+    }
+
+    public async void AddDamage(float DMG){
+        //Debug.Log("Height based damage is: " + heightDMG);
+        damage += DMG;
+        ///Debug.Log("NEW DAMAGE IS: " + damage);
         supportBorder.GetComponent<SupportBorderScript>().DamageVisual(damage);
-        if(damage >= 20 && !endedGame){
+        if(damage >= 3 && !endedGame){
             endedGame = true;
+            await new WaitForSecondsRealtime((float) 0.3);
             this.WinMinigame();
         }
     }
@@ -82,12 +107,40 @@ public class ElevatorGameLogic : MonoBehaviour, IMinigameEnder {
     }
 
     public void OnTimerEnd() {
-        this.LoseMinigame();
+        //this.LoseMinigame();
     }
 
     public async void EndGame(bool won) {
         timer.StopTimerProgression();
         await new WaitForSecondsRealtime(3);
         GameManager.endMinigame(won, won ? 10 : 0);
+    }
+
+    public void increaseJumpmenHighEnough(){
+        this.jumpmenHighEnough++;
+    }
+
+    public void decreaseJumpmenHighEnough(){
+        this.jumpmenHighEnough--;
+    }
+
+    private void checkJumpmenHighEnough(){
+        if (jumpmenHighEnough==3 && forceDownButtonCoolTime == false){
+            forceDownButton.SetActive(true);
+        }else{
+            forceDownButton.SetActive(false);   
+        }
+    }
+
+    public void PressForceDownButton(){
+        this.AddDamage(1);
+
+        foreach (GameObject jumper in jumpmanList){
+            jumper.GetComponent<JumpmanLogic>().ForceDown();
+            forceDownButton.SetActive(false);
+            //forceDownButtonCoolTime = true;
+            //await new WaitForSecondsRealtime((float) 0.5);
+            //forceDownButtonCoolTime = false;
+        }
     }
 }

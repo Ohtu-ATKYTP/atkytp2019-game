@@ -15,25 +15,62 @@ public class JumpmanLogic : MonoBehaviour {
 
     private float maxGravScale;
     private float minGravScale;
-    private float jumpForce;
+    private float minJumpForce;
+    private float maxJumpForce;
+
+    public float height;
+    private bool highEnough;
+
+    private ElevatorGameLogic EGLogic;
 
     void Start() {
+
+        highEnough = false;
+
         firstJump = false;
         gameWon = false;
 
-        maxGravScale = 1000;
-        minGravScale = 600;
-        jumpForce = 13000;
+        EGLogic = GameObject.FindGameObjectWithTag("Logic").GetComponent<ElevatorGameLogic>();
+
+        maxGravScale = 20; //1000;
+        minGravScale = 10; //600
+        minJumpForce = 1000; //13000
+        maxJumpForce = 5000;
 
         if(DataController.GetDebugMode()){
             this.initDebuggerParams();
         }
     }
 
+    void Update(){
+        //Debug.Log("GETTING UPDATES FROM JUMPMEN");
+        this.CheckYpos();
+    }
+
+    private void CheckYpos(){
+        //Debug.Log("GETTIN Y POS: "+ transform.position.y );
+
+        if(transform.position.y > 350){
+            if(highEnough == false){
+                highEnough = true;
+                EGLogic.increaseJumpmenHighEnough();
+                GetComponent<Image>().color = Color.red;
+            }
+            
+        }else{
+            if(highEnough == true){
+                highEnough = false;
+                GetComponent<Image>().color = Color.white;
+                EGLogic.decreaseJumpmenHighEnough();
+            }
+            
+        }
+    }
+
     private void initDebuggerParams(){
         maxGravScale = DataController.getGameParameter("gravityScaleMax");
         minGravScale = DataController.getGameParameter("gravityScaleMin");
-        jumpForce = DataController.getGameParameter("jumpForce");
+        maxJumpForce = DataController.getGameParameter("jumpForce");
     }
 
     public void Jump() {
@@ -47,7 +84,7 @@ public class JumpmanLogic : MonoBehaviour {
         GetComponent<Image>().sprite = jumping;
         GetComponent<Rigidbody2D>().gravityScale = Random.Range(minGravScale,maxGravScale);
         GetComponent<Rigidbody2D>().velocity = Vector2.zero; //Zero velocity before jump
-        GetComponent<Rigidbody2D>().AddForce(Vector2.up*jumpForce, ForceMode2D.Impulse);
+        GetComponent<Rigidbody2D>().AddForce(Vector2.up*Random.Range(minJumpForce, maxJumpForce), ForceMode2D.Impulse);
     }
     
     public void ChangeToScared(){
@@ -58,6 +95,10 @@ public class JumpmanLogic : MonoBehaviour {
         if(collision2D.gameObject.name == "BottomBorder" && !gameWon) {
             GetComponent<Image>().sprite = standing;
         }
+    }
+
+    public void ForceDown(){
+        GetComponent<Rigidbody2D>().AddForce(Vector2.down*6000, ForceMode2D.Impulse);
     }
 
 }

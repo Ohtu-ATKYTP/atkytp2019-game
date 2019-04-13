@@ -9,19 +9,19 @@ public class SupportBorderScript : MonoBehaviour {
     public Sprite damage2;
     public Sprite damage3;
     
-    public void DamageVisual(int damage){
+    public void DamageVisual(float damage){
         if(damage>=20){
             return;
         }
-        if(damage>=15){
+        if(damage>=3){
             GetComponent<Image>().sprite = damage3;
             return;
         }
-        if(damage>=10){
+        if(damage>=2){
             GetComponent<Image>().sprite = damage2;
             return;
         }
-        if(damage>=5){
+        if(damage>=1){
             GetComponent<Image>().sprite = damage1;
             return;
         }
