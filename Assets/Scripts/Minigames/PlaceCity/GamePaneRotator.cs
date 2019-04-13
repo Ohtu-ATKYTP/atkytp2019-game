@@ -2,7 +2,7 @@
 
 public class GamePaneRotator : MonoBehaviour {
     public Vector2 centerPoint;
-    public float speed = 10f;
+    public float speed = 3f;
     public bool rotates = false;
     public float timeRemaining;
     public bool clockWise; 
@@ -19,7 +19,7 @@ public class GamePaneRotator : MonoBehaviour {
         if (!rotates) {
             return;
         }
-        transform.RotateAround(centerPoint, new Vector3(0, 0, 1), Time.deltaTime * speed);
+        transform.RotateAround(centerPoint, new Vector3(0, 0, 1), Time.deltaTime * speed);      
 
         timeRemaining -= Time.deltaTime;
         if (timeRemaining <= 0) {

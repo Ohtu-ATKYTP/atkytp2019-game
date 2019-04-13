@@ -37,7 +37,7 @@ public class SpriteManager : MonoBehaviour {
                 continue;
             }
             Vector3 center = bounds.center;
-            Vector3 additionVector = new Vector3(0, 0, cityTransforms[i].position.z);
+            Vector3 additionVector = new Vector3(0, 0, 0);
             if (hor) {
                 // vektori (bounds.center.x - cityTransforms[i], 0) on vektori kaupungin sijainnista
                 // spriten pystysuuntaiseen halkaisijaan. Tämä kahdesti lisättynä antaa 

@@ -23,7 +23,7 @@ public class CameraMotionController : MonoBehaviour {
 
         gamePane = GameObject.FindGameObjectWithTag("GamePane").transform;
         paneRotator = FindObjectOfType<GamePaneRotator>();
-        cameraBody = GetComponent<Camera>().GetComponent<Rigidbody2D>();
+        cameraBody = GetComponent<Rigidbody2D>();
 
 
         Input.gyro.enabled = true;
@@ -44,8 +44,8 @@ public class CameraMotionController : MonoBehaviour {
             rotationMethod = RotateInPlace;
             cameraBody.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezePositionY;
         } else {
-            Instantiate(centerPointPrefab, centerPoint, Quaternion.identity);
-            centerPointPrefab.GetComponent<FixedJoint2D>().connectedBody = this.GetComponent<Rigidbody2D>();
+            GameObject centerSphere = Instantiate(centerPointPrefab, centerPoint, Quaternion.identity);
+            centerSphere.GetComponent<FixedJoint2D>().connectedBody = cameraBody;
             rotationMethod = RotateAroundPoint;
         }
 
@@ -96,18 +96,19 @@ public class CameraMotionController : MonoBehaviour {
         if (projectedNormalized == Vector2.zero) {
             return;
         }
-        cameraBody.AddForce(30 * projectedNormalized);
+        cameraBody.AddForce(50 * projectedNormalized);
         motionIsUsed = false;
     }
 
     private void FixedUpdate() {
         // Avoid calculating anything unnecessary in such a tight loop
-        if (!motionIsUsed) {
+        if (cameraBody.bodyType != RigidbodyType2D.Dynamic) {
             return;
         }
 
-        if (elapsedTime > .2f && (new Vector2(this.transform.position.x - gamePane.position.x, this.transform.position.y - gamePane.position.y).sqrMagnitude < .7f)) {
+        if (elapsedTime > .5f && (new Vector2(this.transform.position.x - gamePane.position.x, this.transform.position.y - gamePane.position.y).sqrMagnitude <= 1f)) {
             cameraBody.bodyType = RigidbodyType2D.Static;
+            paneRotator.rotates = false; 
             motionIsUsed = false;
         }
     }
@@ -169,7 +170,7 @@ public class CameraMotionController : MonoBehaviour {
         if (forceVector.sqrMagnitude < .1f) {
             return;
         }
-        cameraBody.AddForce(30 * forceVector);
+        cameraBody.AddForce(50 * forceVector);
         motionIsUsed = false; 
     }
 

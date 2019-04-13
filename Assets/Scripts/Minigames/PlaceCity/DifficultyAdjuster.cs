@@ -43,7 +43,7 @@ public class DifficultyAdjuster : MonoBehaviour {
     public TimeProgress timer;
     public SpriteManager spriteManager;
     public float shortestPossibleTime = 1f;
-    public float shortestPossibleTimeWithMapMovement = 3f;
+    public float shortestPossibleTimeWithMapMovement = 7f;
     public int steps = 10;
     private InformationDisplayer[] cityDisplayers;
     private CameraMotionController cameraController;
@@ -63,7 +63,8 @@ public class DifficultyAdjuster : MonoBehaviour {
         TuneTime(difficulty);
         TuneSprite(difficulty);
         TuneFlipping(difficulty);
-        TuneFinlandRotation(difficulty);
+        // Tuning the positions of the cities is unfinished(?)
+       // TuneFinlandRotation(difficulty);
 
         if (difficulty > 9) {
             if (random.Next(0, 2) == 0) {
@@ -86,14 +87,14 @@ public class DifficultyAdjuster : MonoBehaviour {
 
     private void TuneTime(int difficulty) {
         if (difficulty > 9) {
-            timer.seconds = 15f - ((difficulty - 9) / 2) * (15f - shortestPossibleTimeWithMapMovement);
-            if (timer.seconds > shortestPossibleTimeWithMapMovement) {
-                timer.seconds = shortestPossibleTimeWithMapMovement;
+            timer.SetTime(  20f - ((difficulty - 9) / 2) );
+            if (timer.seconds < shortestPossibleTimeWithMapMovement) {
+               timer.SetTime(  shortestPossibleTimeWithMapMovement );
             }
         } else {
-            timer.seconds = timer.seconds - (difficulty / (2 * steps)) * (timer.seconds - shortestPossibleTime);
+            timer.SetTime( timer.seconds - (difficulty / (2 * steps)) * (timer.seconds - shortestPossibleTime) );
             if (timer.seconds < shortestPossibleTime) {
-                timer.seconds = shortestPossibleTime;
+                timer.SetTime(shortestPossibleTime);
             }
         }
 
@@ -148,7 +149,7 @@ public class DifficultyAdjuster : MonoBehaviour {
             movementDirection = Vector2.ClampMagnitude(new Vector2(random.Next(-1000, 1001), random.Next(-1000, 1001)), 1f);
         }
 
-        gamePane.GetComponent<GamePanePanner>().Initialize(movementDirection, panningLengthInSecs: .5f * timer.seconds);
+        gamePane.GetComponent<GamePanePanner>().Initialize(movementDirection, panningLengthInSecs: .3f * timer.seconds);
         cameraController.Initialize(new Dictionary<string, Vector2> { { "panning", movementDirection } });
     }
 
@@ -171,7 +172,7 @@ public class DifficultyAdjuster : MonoBehaviour {
             centerPoint = Vector2.zero;
         }
 
-        gamePane.GetComponent<GamePaneRotator>().Initialize(centerPoint: centerPoint, clockWise: clockWise, rotationLengthInSecs: .5f * timer.seconds);
+        gamePane.GetComponent<GamePaneRotator>().Initialize(centerPoint: centerPoint, clockWise: clockWise, rotationLengthInSecs: .3f * timer.seconds);
         cameraController.Initialize(new Dictionary<string, Vector2> { { "rotation", centerPoint } });
 
     }

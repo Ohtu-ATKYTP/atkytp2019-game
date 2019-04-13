@@ -13,12 +13,12 @@ public class PlaceCityManager : MonoBehaviour, IMinigameEnder {
     private bool gameIsOver = false;
 
 
-    public int difficulty = 1;
+    public int difficulty;
 
 
 
     void Start() {
-        difficulty = DataController.GetDifficulty();
+       // difficulty = DataController.GetDifficulty();
         GetComponent<DifficultyAdjuster>().Initialize(difficulty);
 
 #if UNITY_EDITOR
