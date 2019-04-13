@@ -17,6 +17,7 @@ public class JumpmanLogic : MonoBehaviour {
     private float minGravScale;
     private float minJumpForce;
     private float maxJumpForce;
+    private float downForce;
 
     public float height;
     private bool highEnough;
@@ -37,19 +38,29 @@ public class JumpmanLogic : MonoBehaviour {
         minJumpForce = 1000; //13000
         maxJumpForce = 5000;
 
-        if(DataController.GetDebugMode()){
-            this.initDebuggerParams();
-        }
+        downForce = 7000;
+
+        //if(DataController.GetDebugMode()){
+        //    this.initDebuggerParams();
+        //}
+
+        SetDifficulty();
     }
 
     void Update(){
-        //Debug.Log("GETTING UPDATES FROM JUMPMEN");
         this.CheckYpos();
     }
 
-    private void CheckYpos(){
-        //Debug.Log("GETTIN Y POS: "+ transform.position.y );
+    private void SetDifficulty(){
+        int difficulty = DataController.GetDifficulty();
+        //Debug.Log("Difficulty is: " + difficulty);
 
+        float gravScaleAdjuster = difficulty*0.9f;
+        maxGravScale = maxGravScale*gravScaleAdjuster;
+        minGravScale = minGravScale*gravScaleAdjuster;
+    }
+
+    private void CheckYpos(){
         if(transform.position.y > 350){
             if(highEnough == false){
                 highEnough = true;
@@ -98,7 +109,7 @@ public class JumpmanLogic : MonoBehaviour {
     }
 
     public void ForceDown(){
-        GetComponent<Rigidbody2D>().AddForce(Vector2.down*6000, ForceMode2D.Impulse);
+        GetComponent<Rigidbody2D>().AddForce(Vector2.down*downForce, ForceMode2D.Impulse);
     }
 
 }

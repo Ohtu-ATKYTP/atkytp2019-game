@@ -10,7 +10,7 @@ public class SupportBorderScript : MonoBehaviour {
     public Sprite damage3;
     
     public void DamageVisual(float damage){
-        if(damage>=20){
+        if(damage>=4){
             return;
         }
         if(damage>=3){

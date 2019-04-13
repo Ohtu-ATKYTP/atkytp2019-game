@@ -14,8 +14,11 @@ public class ElevatorGameLogic : MonoBehaviour, IMinigameEnder {
     private GameObject brokenBorder;
     private GameObject supportBorder;
     private GameObject infoText;
+    private GameObject elevatorDoors;
 
     private GameObject forceDownButton;
+
+    private GameObject instructions;
     
     private int jumpmenHighEnough;
 
@@ -44,14 +47,31 @@ public class ElevatorGameLogic : MonoBehaviour, IMinigameEnder {
 
         forceDownButton = GameObject.FindGameObjectWithTag("ForceDownButton");
         forceDownButton.SetActive(false);
-        
-        this.setDifficulty();
 
+        elevatorDoors = GameObject.Find("ElevatorDoors");
         
+        //this.setDifficulty();
+
+        instructions = GameObject.FindGameObjectWithTag("Instructions");
+        instructions.SetActive(false);
+        
+        if(DataController.GetDifficulty() == 1){
+            DisplayInstructions();
+        }
+
+        timer.SetTime(30);
     }
 
     void Update() {
         this.checkJumpmenHighEnough();
+    }
+
+    public async void DisplayInstructions(){
+        instructions.SetActive(true);
+        await new WaitForSecondsRealtime(5);
+        instructions.SetActive(false);
+        timer.SetTime(30);
+
     }
 
     public async void AddDamage(float DMG){
@@ -59,6 +79,10 @@ public class ElevatorGameLogic : MonoBehaviour, IMinigameEnder {
         damage += DMG;
         ///Debug.Log("NEW DAMAGE IS: " + damage);
         supportBorder.GetComponent<SupportBorderScript>().DamageVisual(damage);
+        elevatorDoors.GetComponent<SupportBorderScript>().DamageVisual(damage);
+        foreach(GameObject border in borders){
+                border.GetComponent<SupportBorderScript>().DamageVisual(damage);
+        }
         if(damage >= 3 && !endedGame){
             endedGame = true;
             await new WaitForSecondsRealtime((float) 0.3);
@@ -67,12 +91,14 @@ public class ElevatorGameLogic : MonoBehaviour, IMinigameEnder {
     }
 
     public void setDifficulty(){
-        int difficulty = DataController.GetDifficulty();
-        float reducedTime = (float) 25 - difficulty*3;
-        if(reducedTime < 8){
-            reducedTime = 8;
-        }
-        timer.SetTime(reducedTime);
+        //int difficulty = DataController.GetDifficulty();
+        //float reducedTime = (float) 25 - difficulty*3;
+        //if(reducedTime < 8){
+        //    reducedTime = 8;
+        //}
+        //timer.SetTime(reducedTime);
+
+
     }
 
     public void WinMinigame() {
@@ -127,6 +153,7 @@ public class ElevatorGameLogic : MonoBehaviour, IMinigameEnder {
     private void checkJumpmenHighEnough(){
         if (jumpmenHighEnough==3 && forceDownButtonCoolTime == false){
             forceDownButton.SetActive(true);
+            ScreenCapture.CaptureScreenshot("unitygamepic");
         }else{
             forceDownButton.SetActive(false);   
         }

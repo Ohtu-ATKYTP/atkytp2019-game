@@ -13,6 +13,7 @@ TagManager:
   - ElevatorDoors
   - ForceDownButton
   - Logic
+  - Instructions
   layers:
   - Default
   - TransparentFX
