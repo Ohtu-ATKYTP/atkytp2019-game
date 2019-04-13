@@ -11,7 +11,7 @@ public class GamePanePanner : MonoBehaviour {
     public bool moves = false;
     private float distanceFromOrigin;
     private float timeRemaining;
-    public float speed = 4f;
+    public float speed = 2f;
 
     public void Initialize(Vector2 direction, float panningLengthInSecs) {
         timeRemaining = panningLengthInSecs;

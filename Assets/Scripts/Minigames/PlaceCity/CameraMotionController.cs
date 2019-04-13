@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
 
 public class CameraMotionController : MonoBehaviour {
@@ -8,6 +9,7 @@ public class CameraMotionController : MonoBehaviour {
     private System.Action rotationMethod;
     private float? initialZAngle = null;
     private GamePaneRotator paneRotator;
+    private GamePanePanner panePanner;
     private Transform gamePane;
     private Vector2 panningAxis;
     private float elapsedTime = 0f;
@@ -22,7 +24,8 @@ public class CameraMotionController : MonoBehaviour {
         }
 
         gamePane = GameObject.FindGameObjectWithTag("GamePane").transform;
-        paneRotator = FindObjectOfType<GamePaneRotator>();
+        paneRotator = gamePane.gameObject.GetComponent<GamePaneRotator>();
+        panePanner = gamePane.gameObject.GetComponent<GamePanePanner>();
         cameraBody = GetComponent<Rigidbody2D>();
 
 
@@ -96,7 +99,7 @@ public class CameraMotionController : MonoBehaviour {
         if (projectedNormalized == Vector2.zero) {
             return;
         }
-        cameraBody.AddForce(50 * projectedNormalized);
+        cameraBody.AddForce(75 * projectedNormalized);
         motionIsUsed = false;
     }
 
@@ -106,10 +109,16 @@ public class CameraMotionController : MonoBehaviour {
             return;
         }
 
-        if (elapsedTime > .5f && (new Vector2(this.transform.position.x - gamePane.position.x, this.transform.position.y - gamePane.position.y).sqrMagnitude <= 1f)) {
+        if (elapsedTime > .5f &&
+            (new Vector2(this.transform.position.x - gamePane.position.x, this.transform.position.y - gamePane.position.y).sqrMagnitude <= .25f)) {
+
+            StartCoroutine(CORSettleFinalAdjustments());
             cameraBody.bodyType = RigidbodyType2D.Static;
-            paneRotator.rotates = false; 
+            paneRotator.rotates = false;
+            panePanner.moves = false;
             motionIsUsed = false;
+
+
         }
     }
 
@@ -125,7 +134,7 @@ public class CameraMotionController : MonoBehaviour {
     private Vector2 RotationToForce(Vector2 rotations, float threshold = .7f) {
         Vector2 forceVector = new Vector2(0, 0);
         if (Mathf.Abs(rotations.y) > threshold) {
-            forceVector.x = rotations.y > 0 ? 1 : -1;
+            forceVector.x = rotations.y > 0 ? -1 : 1;
         }
 
         if (Mathf.Abs(rotations.x) > threshold) {
@@ -170,8 +179,8 @@ public class CameraMotionController : MonoBehaviour {
         if (forceVector.sqrMagnitude < .1f) {
             return;
         }
-        cameraBody.AddForce(50 * forceVector);
-        motionIsUsed = false; 
+        cameraBody.AddForce(75 * forceVector);
+        motionIsUsed = false;
     }
 
     private void RotateInPlace() {
@@ -185,5 +194,25 @@ public class CameraMotionController : MonoBehaviour {
         }
         float relativeZAngle = initialZAngle.Value + Input.gyro.attitude.eulerAngles.z - 90f;
         cameraBody.MoveRotation(relativeZAngle);
+    }
+
+
+    private IEnumerator CORSettleFinalAdjustments() {
+        yield return null;
+        Vector3 targetPositionInRightZPlane = new Vector3(gamePane.transform.position.x, gamePane.transform.position.y, this.transform.position.z);
+
+        bool transformsFine = Vector3.SqrMagnitude(this.transform.position - targetPositionInRightZPlane) < .01f;
+        bool rotationsFine = Quaternion.Angle(this.transform.rotation, gamePane.transform.rotation) < .1f;
+        float t = 0f;
+        float lengthOfJourney = 2f; 
+        
+
+        while (!rotationsFine || !transformsFine) {
+            this.transform.rotation = Quaternion.Slerp(this.transform.rotation, gamePane.transform.rotation, t / lengthOfJourney);
+            this.transform.position = Vector3.Slerp(this.transform.position, targetPositionInRightZPlane, t / lengthOfJourney);
+            t += Time.deltaTime;
+            yield return null;
+        }
+
     }
 }

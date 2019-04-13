@@ -1,6 +1,9 @@
 ﻿using System.Collections;
+using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+
 
 
 /**
@@ -49,6 +52,7 @@ public class DifficultyAdjuster : MonoBehaviour {
     private CameraMotionController cameraController;
     private GameObject gamePane;
     private System.Random random = new System.Random();
+    private GameObject gyroInstructions; 
 
 
     public void Initialize(int difficulty) {
@@ -67,6 +71,9 @@ public class DifficultyAdjuster : MonoBehaviour {
        // TuneFinlandRotation(difficulty);
 
         if (difficulty > 9) {
+            gyroInstructions = GameObject.Find("GyroInstructionsPane");
+            gyroInstructions.GetComponent<Canvas>().enabled = true; 
+            gyroInstructions.GetComponentsInChildren<SpriteRenderer>().ToList().ForEach(sr => sr.enabled = true);
             if (random.Next(0, 2) == 0) {
                 TunePaneRotationInXYPlane(difficulty);
             } else {
@@ -170,6 +177,7 @@ public class DifficultyAdjuster : MonoBehaviour {
 
         if (centerPoint.sqrMagnitude < 5) {
             centerPoint = Vector2.zero;
+            gyroInstructions.GetComponentInChildren<Text>().text = "Käännä puhelin asentoon";
         }
 
         gamePane.GetComponent<GamePaneRotator>().Initialize(centerPoint: centerPoint, clockWise: clockWise, rotationLengthInSecs: .3f * timer.seconds);

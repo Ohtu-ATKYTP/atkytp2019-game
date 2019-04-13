@@ -2,12 +2,12 @@
 
 public class GamePaneRotator : MonoBehaviour {
     public Vector2 centerPoint;
-    public float speed = 3f;
+    public float speed;
     public bool rotates = false;
     public float timeRemaining;
     public bool clockWise; 
 
-    public void Initialize(Vector2 centerPoint, float speed = 5f, bool clockWise = true, float rotationLengthInSecs = 3f) {
+    public void Initialize(Vector2 centerPoint, float speed = 2f, bool clockWise = true, float rotationLengthInSecs = 3f) {
         this.clockWise = clockWise;
         this.timeRemaining = rotationLengthInSecs;
         this.centerPoint = centerPoint;
