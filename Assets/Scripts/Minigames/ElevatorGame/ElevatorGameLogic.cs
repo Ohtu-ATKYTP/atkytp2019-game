@@ -25,8 +25,15 @@ public class ElevatorGameLogic : MonoBehaviour, IMinigameEnder {
     private bool endedGame;
 
     private bool forceDownButtonCoolTime;
+
+    private GameObject[] stars;
     
     void Start() {
+
+        stars = GameObject.FindGameObjectsWithTag("Star");
+        foreach(GameObject star in stars){
+            star.SetActive(false);
+        }
 
         endedGame = false;
         forceDownButtonCoolTime = false;
@@ -85,8 +92,20 @@ public class ElevatorGameLogic : MonoBehaviour, IMinigameEnder {
         }
         if(damage >= 3 && !endedGame){
             endedGame = true;
-            await new WaitForSecondsRealtime((float) 0.3);
+            await new WaitForSecondsRealtime(0.3f);
             this.WinMinigame();
+        }
+
+        await new WaitForSecondsRealtime(0.3f);
+
+        foreach(GameObject star in stars){
+            //if(Random.Range(0,1)> 0.5){
+                star.SetActive(true);
+            //}
+        }
+        await new WaitForSecondsRealtime(0.1f);
+        foreach(GameObject star in stars){
+            star.SetActive(false);
         }
     }
 
