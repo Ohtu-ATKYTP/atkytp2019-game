@@ -90,7 +90,7 @@ public class ElevatorGameLogic : MonoBehaviour, IMinigameEnder {
         foreach(GameObject border in borders){
                 border.GetComponent<SupportBorderScript>().DamageVisual(damage);
         }
-        if(damage >= 3 && !endedGame){
+        if(damage >= 1 && !endedGame){
             endedGame = true;
             await new WaitForSecondsRealtime(0.3f);
             this.WinMinigame();
@@ -99,7 +99,7 @@ public class ElevatorGameLogic : MonoBehaviour, IMinigameEnder {
         await new WaitForSecondsRealtime(0.3f);
 
         foreach(GameObject star in stars){
-            //if(Random.Range(0,1)> 0.5){
+            //if( Random.Range(0,1) > 0.5){
                 star.SetActive(true);
             //}
         }
@@ -116,8 +116,6 @@ public class ElevatorGameLogic : MonoBehaviour, IMinigameEnder {
         //    reducedTime = 8;
         //}
         //timer.SetTime(reducedTime);
-
-
     }
 
     public void WinMinigame() {
@@ -172,7 +170,7 @@ public class ElevatorGameLogic : MonoBehaviour, IMinigameEnder {
     private void checkJumpmenHighEnough(){
         if (jumpmenHighEnough==3 && forceDownButtonCoolTime == false){
             forceDownButton.SetActive(true);
-            ScreenCapture.CaptureScreenshot("unitygamepic");
+            //ScreenCapture.CaptureScreenshot("unitygamepic");
         }else{
             forceDownButton.SetActive(false);   
         }
