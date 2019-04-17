@@ -20,6 +20,7 @@ public class CollisionLogic : MonoBehaviour
         }
         else{
             //EGLogic.AddDamage();
+            EGLogic.ShowStars();
             shake.TriggerShake();
         }
 

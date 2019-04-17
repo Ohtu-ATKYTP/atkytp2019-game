@@ -7,7 +7,7 @@ public class ElevatorGameLogic : MonoBehaviour, IMinigameEnder {
     private MinigameLogic miniGameLogic;
     private GameObject[] borders;
     private BorderLogic borderLogic;
-    //private DataController dataController;
+    
     private float damage;
     private TimeProgress timer;
     private GameObject[] jumpmanList;
@@ -27,6 +27,8 @@ public class ElevatorGameLogic : MonoBehaviour, IMinigameEnder {
     private bool forceDownButtonCoolTime;
 
     private GameObject[] stars;
+
+    public bool forceDownActive;
     
     void Start() {
 
@@ -42,7 +44,6 @@ public class ElevatorGameLogic : MonoBehaviour, IMinigameEnder {
         borders = GameObject.FindGameObjectsWithTag("Border");
         jumpmanList =  GameObject.FindGameObjectsWithTag("Jumpman");
         miniGameLogic = GameObject.FindObjectOfType<MinigameLogic>();
-        //dataController = FindObjectOfType<DataController>();
         timer = FindObjectOfType<TimeProgress>();
         supportBorder = GameObject.FindGameObjectWithTag("SupportBorder");
         brokenBorder = GameObject.FindGameObjectWithTag("BrokenBorder");
@@ -95,15 +96,21 @@ public class ElevatorGameLogic : MonoBehaviour, IMinigameEnder {
             await new WaitForSecondsRealtime(0.3f);
             this.WinMinigame();
         }
+    }
 
-        await new WaitForSecondsRealtime(0.3f);
+    public async void ShowStars(){
+        if(!forceDownActive){
+            return;
+        }
+
+        forceDownActive = false;
 
         foreach(GameObject star in stars){
             //if( Random.Range(0,1) > 0.5){
                 star.SetActive(true);
             //}
         }
-        await new WaitForSecondsRealtime(0.1f);
+        await new WaitForSecondsRealtime(0.2f);
         foreach(GameObject star in stars){
             star.SetActive(false);
         }
@@ -179,12 +186,11 @@ public class ElevatorGameLogic : MonoBehaviour, IMinigameEnder {
     public void PressForceDownButton(){
         this.AddDamage(1);
 
+        forceDownActive = true;
+
         foreach (GameObject jumper in jumpmanList){
             jumper.GetComponent<JumpmanLogic>().ForceDown();
             forceDownButton.SetActive(false);
-            //forceDownButtonCoolTime = true;
-            //await new WaitForSecondsRealtime((float) 0.5);
-            //forceDownButtonCoolTime = false;
         }
     }
 }
