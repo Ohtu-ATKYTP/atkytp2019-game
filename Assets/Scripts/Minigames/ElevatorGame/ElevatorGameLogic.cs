@@ -16,11 +16,11 @@ public class ElevatorGameLogic : MonoBehaviour, IMinigameEnder {
     private GameObject infoText;
     private GameObject elevatorDoors;
 
-    private GameObject forceDownButton;
+    
 
     private GameObject instructions;
     
-    private int jumpmenHighEnough;
+    
 
     private bool endedGame;
 
@@ -50,12 +50,6 @@ public class ElevatorGameLogic : MonoBehaviour, IMinigameEnder {
         brokenBorder.SetActive(false);
 
         infoText = GameObject.FindGameObjectWithTag("InfoText");
-
-        jumpmenHighEnough = 0;
-
-        forceDownButton = GameObject.FindGameObjectWithTag("ForceDownButton");
-        forceDownButton.SetActive(false);
-
         elevatorDoors = GameObject.Find("ElevatorDoors");
         
         //this.setDifficulty();
@@ -67,18 +61,14 @@ public class ElevatorGameLogic : MonoBehaviour, IMinigameEnder {
             DisplayInstructions();
         }
 
-        timer.SetTime(30);
-    }
-
-    void Update() {
-        this.checkJumpmenHighEnough();
+        timer.SetTime(10);
     }
 
     public async void DisplayInstructions(){
         instructions.SetActive(true);
         await new WaitForSecondsRealtime(5);
         instructions.SetActive(false);
-        timer.SetTime(30);
+        timer.SetTime(10);
 
     }
 
@@ -114,15 +104,6 @@ public class ElevatorGameLogic : MonoBehaviour, IMinigameEnder {
         foreach(GameObject star in stars){
             star.SetActive(false);
         }
-    }
-
-    public void setDifficulty(){
-        //int difficulty = DataController.GetDifficulty();
-        //float reducedTime = (float) 25 - difficulty*3;
-        //if(reducedTime < 8){
-        //    reducedTime = 8;
-        //}
-        //timer.SetTime(reducedTime);
     }
 
     public void WinMinigame() {
@@ -166,22 +147,7 @@ public class ElevatorGameLogic : MonoBehaviour, IMinigameEnder {
         GameManager.endMinigame(won, won ? 10 : 0);
     }
 
-    public void increaseJumpmenHighEnough(){
-        this.jumpmenHighEnough++;
-    }
 
-    public void decreaseJumpmenHighEnough(){
-        this.jumpmenHighEnough--;
-    }
-
-    private void checkJumpmenHighEnough(){
-        if (jumpmenHighEnough==3 && forceDownButtonCoolTime == false){
-            forceDownButton.SetActive(true);
-            //ScreenCapture.CaptureScreenshot("unitygamepic");
-        }else{
-            forceDownButton.SetActive(false);   
-        }
-    }
 
     public void PressForceDownButton(){
         this.AddDamage(1);
@@ -190,7 +156,7 @@ public class ElevatorGameLogic : MonoBehaviour, IMinigameEnder {
 
         foreach (GameObject jumper in jumpmanList){
             jumper.GetComponent<JumpmanLogic>().ForceDown();
-            forceDownButton.SetActive(false);
+            //forceDownButton.SetActive(false);
         }
     }
 }

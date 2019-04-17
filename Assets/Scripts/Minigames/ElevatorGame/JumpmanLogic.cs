@@ -23,6 +23,7 @@ public class JumpmanLogic : MonoBehaviour {
     private bool highEnough;
 
     private ElevatorGameLogic EGLogic;
+    private JumperPositions jumperPositions;
 
     void Start() {
 
@@ -32,6 +33,8 @@ public class JumpmanLogic : MonoBehaviour {
         gameWon = false;
 
         EGLogic = GameObject.FindGameObjectWithTag("Logic").GetComponent<ElevatorGameLogic>();
+
+        jumperPositions = GameObject.FindGameObjectWithTag("Logic").GetComponent<JumperPositions>();
 
         maxGravScale = 20; //1000;
         minGravScale = 10; //600
@@ -43,19 +46,13 @@ public class JumpmanLogic : MonoBehaviour {
         //if(DataController.GetDebugMode()){
         //    this.initDebuggerParams();
         //}
-
-        SetDifficulty();
     }
 
     void Update(){
         this.CheckYpos();
     }
 
-    private void SetDifficulty(){
-        int difficulty = DataController.GetDifficulty();
-        //Debug.Log("Difficulty is: " + difficulty);
-
-        float gravScaleAdjuster = difficulty*0.9f;
+    public void SetGravScale(float gravScaleAdjuster){
         maxGravScale = maxGravScale*gravScaleAdjuster;
         minGravScale = minGravScale*gravScaleAdjuster;
     }
@@ -64,7 +61,7 @@ public class JumpmanLogic : MonoBehaviour {
         if(transform.position.y > 350){
             if(highEnough == false){
                 highEnough = true;
-                EGLogic.increaseJumpmenHighEnough();
+                jumperPositions.increaseJumpmenHighEnough();
                 GetComponent<Image>().color = Color.red;
             }
             
@@ -72,7 +69,7 @@ public class JumpmanLogic : MonoBehaviour {
             if(highEnough == true){
                 highEnough = false;
                 GetComponent<Image>().color = Color.white;
-                EGLogic.decreaseJumpmenHighEnough();
+                jumperPositions.decreaseJumpmenHighEnough();
             }
             
         }

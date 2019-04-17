@@ -279,6 +279,8 @@ GameObject:
   m_Component:
   - component: {fileID: 85307752}
   - component: {fileID: 85307753}
+  - component: {fileID: 85307751}
+  - component: {fileID: 85307754}
   m_Layer: 0
   m_Name: Logic
   m_TagString: Logic
@@ -286,6 +288,18 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &85307751
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 85307750}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3865a84a2cede7746bf53b5b8f96583e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &85307752
 Transform:
   m_ObjectHideFlags: 0
@@ -310,6 +324,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0812533a880ea3a48b97f5be31475b81, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  forceDownActive: 0
+--- !u!114 &85307754
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 85307750}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4be8042cc6cf3c14aadd8b51f725ba5e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &132078090
