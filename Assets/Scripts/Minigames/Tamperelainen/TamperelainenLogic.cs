@@ -4,20 +4,17 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class TamperelainenLogic: MonoBehaviour, IMinigameEnder {
-    private DataController dataController;
     private TimeProgress timer;
     private int difficulty = 1;
 
 
     void Start() {
-        dataController = FindObjectOfType<DataController>();
         timer = FindObjectOfType<TimeProgress>();
         initializeGame();
     }
     private void initializeGame() {
-        if (dataController != null) {
-            difficulty = dataController.GetDifficulty();
-        }
+
+        difficulty = DataController.GetDifficulty();
 
         //Setting game time
         int time = 5 + this.difficulty;
@@ -40,7 +37,7 @@ public class TamperelainenLogic: MonoBehaviour, IMinigameEnder {
         timer.StopTimerProgression();
         await new WaitForSecondsRealtime(3);
         Time.timeScale = 1;
-        dataController.MinigameEnd(win, win ? 10 : 0);
+        GameManager.endMinigame(win, win ? 10 : 0);
     }
 
     public void endGame() {

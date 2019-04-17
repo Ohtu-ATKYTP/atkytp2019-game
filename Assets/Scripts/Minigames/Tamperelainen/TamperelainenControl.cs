@@ -11,8 +11,8 @@ public class TamperelainenControl : MonoBehaviour
     private float direction = 0f;
 
     //finals
-    private readonly float ACCEPTED_AREA_LEFT = 150f;
-    private readonly float ACCEPTED_AREA_RIGHT = 450f;
+    private readonly float ACCEPTED_AREA_LEFT = 70f;
+    private readonly float ACCEPTED_AREA_RIGHT = 300f;
     private readonly float SPEED = 7000f;
     private readonly float DRUNK_SPEED_RANGE = 5000f;
     private readonly float START_TIME = 1.0f;
