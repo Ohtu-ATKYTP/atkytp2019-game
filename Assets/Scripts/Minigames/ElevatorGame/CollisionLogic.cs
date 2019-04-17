@@ -6,11 +6,13 @@ public class CollisionLogic : MonoBehaviour
 {
     private ElevatorGameLogic EGLogic;
     private ShakeBehavior shake;
+    private EffectsController effects;
     private int collisionCount;
     
     void Start() {
         this.EGLogic = FindObjectOfType<ElevatorGameLogic>();
         this.shake = FindObjectOfType<ShakeBehavior>();
+        this.effects = FindObjectOfType<EffectsController>();
         this.collisionCount = 0;
     }
 
@@ -20,8 +22,14 @@ public class CollisionLogic : MonoBehaviour
         }
         else{
             //EGLogic.AddDamage();
-            EGLogic.ShowStars();
+            effects.ShowStars();
             shake.TriggerShake();
+        }
+
+        if(EGLogic.forceDownActive==true){
+            EGLogic.AddDamage(1f);
+            effects.ShowStars();
+            EGLogic.forceDownActive=false;
         }
 
     }

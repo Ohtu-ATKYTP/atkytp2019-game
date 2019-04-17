@@ -16,26 +16,14 @@ public class ElevatorGameLogic : MonoBehaviour, IMinigameEnder {
     private GameObject infoText;
     private GameObject elevatorDoors;
 
-    
-
     private GameObject instructions;
-    
-    
-
     private bool endedGame;
 
     private bool forceDownButtonCoolTime;
 
-    private GameObject[] stars;
-
     public bool forceDownActive;
     
     void Start() {
-
-        stars = GameObject.FindGameObjectsWithTag("Star");
-        foreach(GameObject star in stars){
-            star.SetActive(false);
-        }
 
         endedGame = false;
         forceDownButtonCoolTime = false;
@@ -85,24 +73,6 @@ public class ElevatorGameLogic : MonoBehaviour, IMinigameEnder {
             endedGame = true;
             await new WaitForSecondsRealtime(0.3f);
             this.WinMinigame();
-        }
-    }
-
-    public async void ShowStars(){
-        if(!forceDownActive){
-            return;
-        }
-
-        forceDownActive = false;
-
-        foreach(GameObject star in stars){
-            //if( Random.Range(0,1) > 0.5){
-                star.SetActive(true);
-            //}
-        }
-        await new WaitForSecondsRealtime(0.2f);
-        foreach(GameObject star in stars){
-            star.SetActive(false);
         }
     }
 
