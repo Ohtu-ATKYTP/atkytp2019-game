@@ -1,15 +1,16 @@
 ﻿using UnityEngine;
 
-public abstract class MinigameLogic : MonoBehaviour, IMinigameEnder {
+public abstract class MinigameLogic : MonoBehaviour, IMinigameEnder
+{
     [SerializeField]
     protected int pointsForWinning = 10;
     protected TimeProgress timebar;
 
     protected virtual void Start() {
         timebar = FindObjectOfType<TimeProgress>();
-        if (timebar.TimerReadyMethods.GetPersistentEventCount() == 0) {
-            timebar.TimerReadyMethods.AddListener(OnTimerEnd);
-        }
+        timebar.TimerReadyMethods.RemoveAllListeners();
+        timebar.TimerReadyMethods.AddListener(OnTimerEnd);
+
         ConfigureDifficulty(DataController.GetDifficulty());
     }
 

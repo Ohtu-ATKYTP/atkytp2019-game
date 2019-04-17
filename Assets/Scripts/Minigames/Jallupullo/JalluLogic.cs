@@ -11,5 +11,6 @@ public class JalluLogic : MinigameLogic
 
     protected override void ConfigureDifficulty(int difficulty) {
         Debug.Log("The difficulty of the Jallu shall be: " + difficulty);
+        FindObjectOfType<TimeProgress>().SetTime(1000f);
     }
 }
