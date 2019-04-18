@@ -6,7 +6,6 @@ using UnityEngine.UI;
 public class ElevatorGameLogic : MonoBehaviour, IMinigameEnder {
     
     private GameObject[] jumpmanList;
-    private GameObject[] toAddRigidBodies;
     private GameObject[] borders;
     
     private MinigameLogic miniGameLogic; 

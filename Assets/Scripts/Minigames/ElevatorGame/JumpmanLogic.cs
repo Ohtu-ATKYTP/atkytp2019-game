@@ -12,6 +12,7 @@ public class JumpmanLogic : MonoBehaviour {
 
     private ElevatorGameLogic EGLogic;
     private JumperPositions jumperPositions;
+    private GameObject heightLine;
     
     private float maxGravScale;
     private float minGravScale;
@@ -32,12 +33,14 @@ public class JumpmanLogic : MonoBehaviour {
 
         jumperPositions = GameObject.FindGameObjectWithTag("Logic").GetComponent<JumperPositions>();
 
-        maxGravScale = 1000; //20; //100;
-        minGravScale = 600; //10; //600
+        heightLine = GameObject.Find("HeightLine");
+
+        maxGravScale = 500; //20; //100;
+        minGravScale = 300; //10; //600
         minJumpForce = 13000; //1000; //13000
         maxJumpForce = 20000;//5000;
 
-        downForce = 1400;
+        downForce = 10000;
 
         //if(DataController.GetDebugMode()){
         //    this.initDebuggerParams();
@@ -54,7 +57,8 @@ public class JumpmanLogic : MonoBehaviour {
     }
 
     private void CheckYpos(){
-        if(transform.position.y > 350){
+        //if(transform.position.y > 350){
+        if(transform.position.y > heightLine.transform.position.y){
             if(highEnough == false){
                 highEnough = true;
                 jumperPositions.increaseJumpmenHighEnough();
