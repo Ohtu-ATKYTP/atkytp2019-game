@@ -8,12 +8,18 @@ public class CollisionLogic : MonoBehaviour
     private ShakeBehavior shake;
     private EffectsController effects;
     private int collisionCount;
+
+    private GameObject elevatorDoors;
+    private GameObject[] borders;
     
     void Start() {
         this.EGLogic = FindObjectOfType<ElevatorGameLogic>();
         this.shake = FindObjectOfType<ShakeBehavior>();
         this.effects = FindObjectOfType<EffectsController>();
         this.collisionCount = 0;
+
+        elevatorDoors = GameObject.Find("ElevatorDoors");
+        borders = GameObject.FindGameObjectsWithTag("Border");
     }
 
     void OnCollisionEnter2D(Collision2D collision2D){
@@ -21,8 +27,6 @@ public class CollisionLogic : MonoBehaviour
             collisionCount += 1;
         }
         else{
-            //EGLogic.AddDamage();
-            effects.ShowStars();
             shake.TriggerShake();
         }
 
@@ -30,7 +34,15 @@ public class CollisionLogic : MonoBehaviour
             EGLogic.AddDamage(1f);
             effects.ShowStars();
             EGLogic.forceDownActive=false;
+            this.AddDamageVisuals();
         }
 
+    }
+
+    private void AddDamageVisuals(){
+        elevatorDoors.GetComponent<DamageVisuals>().DamageVisual();
+        foreach(GameObject border in borders){
+                border.GetComponent<DamageVisuals>().DamageVisual();
+        }
     }
 }

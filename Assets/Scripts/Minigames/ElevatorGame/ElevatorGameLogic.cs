@@ -4,8 +4,9 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class ElevatorGameLogic : MonoBehaviour, IMinigameEnder {
+    
     private MinigameLogic miniGameLogic;
-    private GameObject[] borders;
+    
     private BorderLogic borderLogic;
     
     private float damage;
@@ -14,34 +15,35 @@ public class ElevatorGameLogic : MonoBehaviour, IMinigameEnder {
     private GameObject brokenBorder;
     private GameObject supportBorder;
     private GameObject infoText;
-    private GameObject elevatorDoors;
-
     private GameObject instructions;
     private bool endedGame;
 
     private bool forceDownButtonCoolTime;
 
     public bool forceDownActive;
+
+    private GameObject[] borders;
     
     void Start() {
 
         endedGame = false;
         forceDownButtonCoolTime = false;
 
-        damage = 0;
         borders = GameObject.FindGameObjectsWithTag("Border");
+
+        damage = 0;
+        
         jumpmanList =  GameObject.FindGameObjectsWithTag("Jumpman");
         miniGameLogic = GameObject.FindObjectOfType<MinigameLogic>();
         timer = FindObjectOfType<TimeProgress>();
-        supportBorder = GameObject.FindGameObjectWithTag("SupportBorder");
+        
         brokenBorder = GameObject.FindGameObjectWithTag("BrokenBorder");
         brokenBorder.SetActive(false);
+        supportBorder = GameObject.FindGameObjectWithTag("SupportBorder");
 
         infoText = GameObject.FindGameObjectWithTag("InfoText");
-        elevatorDoors = GameObject.Find("ElevatorDoors");
         
-        //this.setDifficulty();
-
+        
         instructions = GameObject.FindGameObjectWithTag("Instructions");
         instructions.SetActive(false);
         
@@ -61,14 +63,8 @@ public class ElevatorGameLogic : MonoBehaviour, IMinigameEnder {
     }
 
     public async void AddDamage(float DMG){
-        //Debug.Log("Height based damage is: " + heightDMG);
         damage += DMG;
-        ///Debug.Log("NEW DAMAGE IS: " + damage);
-        supportBorder.GetComponent<SupportBorderScript>().DamageVisual(damage);
-        elevatorDoors.GetComponent<SupportBorderScript>().DamageVisual(damage);
-        foreach(GameObject border in borders){
-                border.GetComponent<SupportBorderScript>().DamageVisual(damage);
-        }
+        
         if(damage >= 1 && !endedGame){
             endedGame = true;
             await new WaitForSecondsRealtime(0.3f);
@@ -117,8 +113,6 @@ public class ElevatorGameLogic : MonoBehaviour, IMinigameEnder {
         GameManager.endMinigame(won, won ? 10 : 0);
     }
 
-
-
     public void PressForceDownButton(){
         this.AddDamage(1);
 
@@ -126,7 +120,6 @@ public class ElevatorGameLogic : MonoBehaviour, IMinigameEnder {
 
         foreach (GameObject jumper in jumpmanList){
             jumper.GetComponent<JumpmanLogic>().ForceDown();
-            //forceDownButton.SetActive(false);
         }
     }
 }

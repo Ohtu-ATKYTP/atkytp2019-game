@@ -12,22 +12,11 @@ public class EffectsController : MonoBehaviour {
             star.SetActive(false);
         }
     }
-
-    void Update() {
-        
-    }
-
+    
     public async void ShowStars(){
-        //if(!forceDownActive){
-        //    return;
-        //}
-
-        //forceDownActive = false;
-
+        
         foreach(GameObject star in stars){
-            //if( Random.Range(0,1) > 0.5){
-                star.SetActive(true);
-            //}
+            star.SetActive(true);
         }
         await new WaitForSecondsRealtime(0.2f);
         foreach(GameObject star in stars){
