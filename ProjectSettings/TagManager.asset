@@ -5,16 +5,11 @@ TagManager:
   serializedVersion: 2
   tags:
   - Jumpman
-  - Collider
-  - Border
-  - BrokenBorder
-  - SupportBorder
-  - InfoText
-  - ElevatorDoors
-  - ForceDownButton
   - Logic
-  - Instructions
   - Star
+  - AddRigidBody
+  - Instructions
+  - Border
   layers:
   - Default
   - TransparentFX

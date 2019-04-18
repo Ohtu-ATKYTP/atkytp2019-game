@@ -4,16 +4,16 @@ using UnityEngine;
 
 public class ElevatorShaftMove : MonoBehaviour
 {
-    public bool endedGame;
+    public bool move;
     private float speed;
 
     void Start() {
-        endedGame = false;
+        move = true;
         speed = 1f;
     }
     
     void Update() {
-        if(!endedGame) {
+        if(move) {
             Vector2 position = transform.position;
             position.y -= speed;
             transform.position = position;

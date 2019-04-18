@@ -11,7 +11,7 @@ public class JumperPositions : MonoBehaviour {
     private GameObject forceDownButton;
 
     void Start() {
-        forceDownButton = GameObject.FindGameObjectWithTag("ForceDownButton");
+        forceDownButton = GameObject.Find("ForceDownButton");
         forceDownButton.SetActive(false);
     }
 

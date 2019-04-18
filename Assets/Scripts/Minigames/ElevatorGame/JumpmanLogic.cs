@@ -9,39 +9,35 @@ public class JumpmanLogic : MonoBehaviour {
     public Sprite jumping;
     public Sprite standing;
     public Sprite scared;
-    public bool gameWon;
-    
-    bool firstJump;
 
+    private ElevatorGameLogic EGLogic;
+    private JumperPositions jumperPositions;
+    
     private float maxGravScale;
     private float minGravScale;
     private float minJumpForce;
     private float maxJumpForce;
     private float downForce;
 
+    bool firstJump;
     public float height;
     private bool highEnough;
-
-    private ElevatorGameLogic EGLogic;
-    private JumperPositions jumperPositions;
 
     void Start() {
 
         highEnough = false;
-
         firstJump = false;
-        gameWon = false;
-
+        
         EGLogic = GameObject.FindGameObjectWithTag("Logic").GetComponent<ElevatorGameLogic>();
 
         jumperPositions = GameObject.FindGameObjectWithTag("Logic").GetComponent<JumperPositions>();
 
-        maxGravScale = 20; //1000;
-        minGravScale = 10; //600
-        minJumpForce = 1000; //13000
-        maxJumpForce = 5000;
+        maxGravScale = 1000; //20; //100;
+        minGravScale = 600; //10; //600
+        minJumpForce = 13000; //1000; //13000
+        maxJumpForce = 20000;//5000;
 
-        downForce = 7000;
+        downForce = 1400;
 
         //if(DataController.GetDebugMode()){
         //    this.initDebuggerParams();
@@ -84,9 +80,9 @@ public class JumpmanLogic : MonoBehaviour {
     public void Jump() {
         if(!firstJump){
             firstJump = true;
-            GameObject infoText = GameObject.FindGameObjectWithTag("InfoText");
+            GameObject infoText = GameObject.Find("InfoText");
             if(infoText != null) {
-               GameObject.FindGameObjectWithTag("InfoText").SetActive(false);
+               GameObject.Find("InfoText").SetActive(false);
             }
         }
         GetComponent<Image>().sprite = jumping;
@@ -100,7 +96,7 @@ public class JumpmanLogic : MonoBehaviour {
     }
 
     void OnCollisionEnter2D(Collision2D collision2D){
-        if(collision2D.gameObject.name == "BottomBorder" && !gameWon) {
+        if(collision2D.gameObject.name == "BottomBorder") {
             GetComponent<Image>().sprite = standing;
         }
     }
