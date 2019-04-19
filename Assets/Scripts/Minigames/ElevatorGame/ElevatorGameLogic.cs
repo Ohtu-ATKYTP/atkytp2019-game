@@ -41,14 +41,14 @@ public class ElevatorGameLogic : MonoBehaviour, IMinigameEnder {
         if(DataController.GetDifficulty() == 1){
             DisplayInstructions();
         }
-        timer.SetTime(10);
+        timer.SetTime(20);
     }
 
     public async void DisplayInstructions(){
         instructions.SetActive(true);
         await new WaitForSecondsRealtime(5);
         instructions.SetActive(false);
-        timer.SetTime(10);
+        timer.SetTime(20);
     }
 
     //Damage after smash. Right now win with 1, but option to add more.
@@ -96,7 +96,7 @@ public class ElevatorGameLogic : MonoBehaviour, IMinigameEnder {
     }
 
     public void OnTimerEnd() {
-        this.LoseMinigame();
+        //this.LoseMinigame();
     }
 
     public async void EndGame(bool won) {
