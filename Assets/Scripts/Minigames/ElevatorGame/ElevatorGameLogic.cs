@@ -35,20 +35,29 @@ public class ElevatorGameLogic : MonoBehaviour, IMinigameEnder {
         supportRope = GameObject.Find("SupportRope");
 
         infoText = GameObject.Find("InfoText");
+
+        //debugging
+        //foreach (GameObject jumper in jumpmanList){
+        //    float gravi = jumper.GetComponent<JumpmanLogic>().getGravScale();
+        //    infoText.GetComponent<Text>().text = gravi.ToString("0.00");
+
+        //}
+
+        
         
         instructions = GameObject.FindGameObjectWithTag("Instructions");
         instructions.SetActive(false);
         if(DataController.GetDifficulty() == 1){
             DisplayInstructions();
         }
-        timer.SetTime(20);
+        timer.SetTime(60);
     }
 
     public async void DisplayInstructions(){
         instructions.SetActive(true);
         await new WaitForSecondsRealtime(5);
         instructions.SetActive(false);
-        timer.SetTime(20);
+        timer.SetTime(60);
     }
 
     //Damage after smash. Right now win with 1, but option to add more.
@@ -96,7 +105,7 @@ public class ElevatorGameLogic : MonoBehaviour, IMinigameEnder {
     }
 
     public void OnTimerEnd() {
-        //this.LoseMinigame();
+        this.LoseMinigame();
     }
 
     public async void EndGame(bool won) {

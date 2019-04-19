@@ -20,4 +20,5 @@ public class DifficultyController : MonoBehaviour {
             jumper.GetComponent<JumpmanLogic>().SetGravScale(gravScaleAdjuster);
         }
     }
+
 }

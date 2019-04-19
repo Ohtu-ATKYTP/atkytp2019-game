@@ -30,13 +30,13 @@ public class JumpmanLogic : MonoBehaviour {
 
 
     void Start() {
-        gravScaleStart = 1000;
-        jumpForceStart = 40000;
-        androidScaler = 50;
+        gravScaleStart = 50;
+        jumpForceStart =  2000;
+        androidScaler = 1;
 
-        if(DataController.GetDebugMode()){
-            this.initDebuggerParams();
-        }
+        //if(DataController.GetDebugMode()){
+        //    this.initDebuggerParams();
+        //}
 
         highEnough = false;
         firstJump = false;
@@ -47,19 +47,16 @@ public class JumpmanLogic : MonoBehaviour {
 
         heightLine = GameObject.Find("HeightLine");
 
-        
+        Debug.Log("FIXEDDELTATIME: " + Time.fixedDeltaTime);
 
 
-        minGravScale = gravScaleStart* Time.fixedDeltaTime * androidScaler; //10; //600
+        minGravScale = gravScaleStart; //10; //600
         maxGravScale = minGravScale; //20; //100;
         
-
-        minJumpForce = jumpForceStart* Time.fixedDeltaTime * androidScaler; //1000; //13000
+        minJumpForce = jumpForceStart; //1000; //13000
         maxJumpForce = minJumpForce*2f;//5000;
         
-        downForce = 300000* Time.fixedDeltaTime * androidScaler;
-
-        
+        downForce = 300000;
     }
 
     void Update(){
@@ -77,10 +74,16 @@ public class JumpmanLogic : MonoBehaviour {
     }
 
     public void SetGravScale(float gravScaleAdjuster){
-        maxGravScale = maxGravScale*gravScaleAdjuster*0.8f;
-        minGravScale = minGravScale*gravScaleAdjuster*0.8f;
-        minJumpForce = minJumpForce + (10000*gravScaleAdjuster*Time.fixedDeltaTime*androidScaler);
+        maxGravScale = maxGravScale*gravScaleAdjuster*2f;
+        minGravScale = minGravScale*gravScaleAdjuster*2f;
+        minJumpForce = minJumpForce + (200*gravScaleAdjuster);
         maxJumpForce = minJumpForce*2f;
+
+        GameObject.Find("InfoText").GetComponent<Text>().text = maxGravScale.ToString();
+    }
+
+    public float getGravScale(){
+        return maxGravScale;
     }
 
     private void CheckYpos(){
