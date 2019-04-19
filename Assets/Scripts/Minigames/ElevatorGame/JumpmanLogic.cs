@@ -47,7 +47,7 @@ public class JumpmanLogic : MonoBehaviour {
 
         heightLine = GameObject.Find("HeightLine");
 
-        Debug.Log("FIXEDDELTATIME: " + Time.fixedDeltaTime);
+        //Debug.Log("FIXEDDELTATIME: " + Time.fixedDeltaTime);
 
 
         minGravScale = gravScaleStart; //10; //600
