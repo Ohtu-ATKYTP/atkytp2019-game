@@ -28,15 +28,14 @@ public class JumpmanLogic : MonoBehaviour {
     private float gravScaleStart;
     private float jumpForceStart;
 
+    private float gravMultiplier;
+    private float jumpMultiplier;
+
 
     void Start() {
-        gravScaleStart = 50;
-        jumpForceStart =  2000;
+        gravScaleStart = 75;
+        jumpForceStart =  3000;
         androidScaler = 1;
-
-        //if(DataController.GetDebugMode()){
-        //    this.initDebuggerParams();
-        //}
 
         highEnough = false;
         firstJump = false;
@@ -47,16 +46,24 @@ public class JumpmanLogic : MonoBehaviour {
 
         heightLine = GameObject.Find("HeightLine");
 
-        //Debug.Log("FIXEDDELTATIME: " + Time.fixedDeltaTime);
-
-
-        minGravScale = gravScaleStart; //10; //600
-        maxGravScale = minGravScale; //20; //100;
+        minGravScale = gravScaleStart;
+        maxGravScale = minGravScale;
         
         minJumpForce = jumpForceStart; //1000; //13000
-        maxJumpForce = minJumpForce*2f;//5000;
+        maxJumpForce = minJumpForce*4f;//5000;
         
         downForce = 300000;
+
+        gravMultiplier = 35;
+        jumpMultiplier = 200;
+
+        if(DataController.GetDebugMode()){
+            this.initDebuggerParams();
+        }
+
+        int difficulty = DataController.GetDifficulty();
+        float gravScaleAdjuster = difficulty;
+        this.SetGravScale(gravScaleAdjuster);
     }
 
     void Update(){
@@ -65,29 +72,27 @@ public class JumpmanLogic : MonoBehaviour {
 
     private void initDebuggerParams(){
         androidScaler = DataController.getGameParameter("gravityScaleMax"); //android
-        gravScaleStart = DataController.getGameParameter("gravityScaleMin");
-        jumpForceStart = DataController.getGameParameter("jumpForce");
+        gravMultiplier = DataController.getGameParameter("gravityScaleMin"); //gravMult
+        jumpMultiplier = DataController.getGameParameter("jumpForce");       //jumpMult
     }
-
-    public void setAndroidScaler(float androidScale){
-        androidScaler = androidScale; 
-    }
-
+    
     public void SetGravScale(float gravScaleAdjuster){
-        maxGravScale = maxGravScale*gravScaleAdjuster*2f;
-        minGravScale = minGravScale*gravScaleAdjuster*2f;
-        minJumpForce = minJumpForce + (200*gravScaleAdjuster);
-        maxJumpForce = minJumpForce*2f;
+        maxGravScale = (maxGravScale+(gravScaleAdjuster*gravMultiplier))*androidScaler;
+        minGravScale = maxGravScale;
+        minJumpForce = (minJumpForce + (gravScaleAdjuster*jumpMultiplier))*androidScaler;
+        maxJumpForce = minJumpForce*3f;
 
-        GameObject.Find("InfoText").GetComponent<Text>().text = maxGravScale.ToString();
+        //Display current gravScale, debugging reasons
+        //GameObject.Find("InfoText").GetComponent<Text>().text = maxGravScale.ToString();
     }
 
-    public float getGravScale(){
-        return maxGravScale;
-    }
+    //public float getGravScale(){
+    //    return maxGravScale;
+    //}
 
     private void CheckYpos(){
-        //if(transform.position.y > 350){
+        //if(transform.position.y > 350){  //Android positions are different so have to use
+        //HeightLine Object
         if(transform.position.y > heightLine.transform.position.y){
             if(highEnough == false){
                 highEnough = true;
@@ -104,8 +109,6 @@ public class JumpmanLogic : MonoBehaviour {
             
         }
     }
-
-    
 
     public void Jump() {
         if(!firstJump){

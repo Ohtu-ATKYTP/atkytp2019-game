@@ -36,28 +36,20 @@ public class ElevatorGameLogic : MonoBehaviour, IMinigameEnder {
 
         infoText = GameObject.Find("InfoText");
 
-        //debugging
-        //foreach (GameObject jumper in jumpmanList){
-        //    float gravi = jumper.GetComponent<JumpmanLogic>().getGravScale();
-        //    infoText.GetComponent<Text>().text = gravi.ToString("0.00");
-
-        //}
-
-        
-        
+        timer.SetTime(15);
         instructions = GameObject.FindGameObjectWithTag("Instructions");
         instructions.SetActive(false);
+        
         if(DataController.GetDifficulty() == 1){
             DisplayInstructions();
         }
-        timer.SetTime(60);
     }
 
     public async void DisplayInstructions(){
         instructions.SetActive(true);
         await new WaitForSecondsRealtime(5);
         instructions.SetActive(false);
-        timer.SetTime(60);
+        timer.SetTime(15);
     }
 
     //Damage after smash. Right now win with 1, but option to add more.

@@ -1,4 +1,6 @@
-﻿using System.Collections;
+﻿//Controls what happens when jumpers collide with bottom border
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
