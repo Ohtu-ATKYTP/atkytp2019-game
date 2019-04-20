@@ -5,7 +5,8 @@ using UnityEngine;
 public class MoveMetro : MonoBehaviour
 {   
     public Rigidbody2D rb;
-    Vector2 swipeStartLocation = new Vector2(9999,9999);
+    public int difficulty;
+    Vector3 swipeStartLocation = new Vector2(9999,9999);
 
     // Update is called once per frame
     void Update()
@@ -14,7 +15,7 @@ public class MoveMetro : MonoBehaviour
             swipeStartLocation = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
         }    
         if(swipeStartLocation.x != 9999 && swipeStartLocation.y != 9999 && !Input.GetMouseButton(0)){
-            rb.AddForce(new Vector2(Input.mousePosition.x-swipeStartLocation.x,0));
+            rb.AddForce((Input.mousePosition-swipeStartLocation)/difficulty);
             swipeStartLocation = new Vector2(9999,9999);
         }    
     }
