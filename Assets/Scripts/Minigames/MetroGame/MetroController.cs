@@ -11,7 +11,7 @@ public class MetroController : MonoBehaviour, IMinigameEnder
     
 
     void Start(){
-        scene.Rotate(0,0,Mathf.Max(-60,(dif-1)*-5));
+        scene.Rotate(0,0,Mathf.Max(-90,(dif-1)*-5));
     }
 
     public void WinMinigame() {
