@@ -4,14 +4,12 @@ using UnityEngine;
 
 public class ShakeBehavior : MonoBehaviour {
     
-    private Transform transform;
     private float shakeDuration = 0f;
     private float shakeMagnitude = 15f;
     private float dampingSpeed = 1.0f;
     Vector3 initialPosition;
 
     void Start() {
-        this.transform = GetComponent<Transform>();
         this.initialPosition = transform.localPosition;
     }
 

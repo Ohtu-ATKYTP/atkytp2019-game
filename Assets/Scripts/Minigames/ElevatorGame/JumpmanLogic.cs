@@ -33,9 +33,14 @@ public class JumpmanLogic : MonoBehaviour {
 
 
     void Start() {
+
+        //Physics parameters
         gravScaleStart = 75;
         jumpForceStart =  3000;
+        gravMultiplier = 35;
+        jumpMultiplier = 200;
         androidScaler = 1;
+        downForce = 300000;
 
         highEnough = false;
         firstJump = false;
@@ -52,18 +57,13 @@ public class JumpmanLogic : MonoBehaviour {
         minJumpForce = jumpForceStart; //1000; //13000
         maxJumpForce = minJumpForce*4f;//5000;
         
-        downForce = 300000;
-
-        gravMultiplier = 35;
-        jumpMultiplier = 200;
-
         if(DataController.GetDebugMode()){
             this.initDebuggerParams();
         }
 
         int difficulty = DataController.GetDifficulty();
-        float gravScaleAdjuster = difficulty;
-        this.SetGravScale(gravScaleAdjuster);
+        float difficultyAdjuster = difficulty;
+        this.AdjustDifficulty(difficultyAdjuster);
     }
 
     void Update(){
@@ -76,7 +76,8 @@ public class JumpmanLogic : MonoBehaviour {
         jumpMultiplier = DataController.getGameParameter("jumpForce");       //jumpMult
     }
     
-    public void SetGravScale(float gravScaleAdjuster){
+    //Adjusts jumpforce and gravity scale based on difficulty;
+    public void AdjustDifficulty(float gravScaleAdjuster){
         maxGravScale = (maxGravScale+(gravScaleAdjuster*gravMultiplier))*androidScaler;
         minGravScale = maxGravScale;
         minJumpForce = (minJumpForce + (gravScaleAdjuster*jumpMultiplier))*androidScaler;
@@ -86,13 +87,9 @@ public class JumpmanLogic : MonoBehaviour {
         //GameObject.Find("InfoText").GetComponent<Text>().text = maxGravScale.ToString();
     }
 
-    //public float getGravScale(){
-    //    return maxGravScale;
-    //}
-
     private void CheckYpos(){
-        //if(transform.position.y > 350){  //Android positions are different so have to use
-        //HeightLine Object
+        //if(transform.position.y > 350){
+        //Android positions are different so have to use heightLine Object
         if(transform.position.y > heightLine.transform.position.y){
             if(highEnough == false){
                 highEnough = true;

@@ -19,7 +19,7 @@ public class DifficultyController : MonoBehaviour {
         float gravScaleAdjuster = difficulty;
 
         foreach (GameObject jumper in jumpmanList){
-            jumper.GetComponent<JumpmanLogic>().SetGravScale(gravScaleAdjuster);
+            jumper.GetComponent<JumpmanLogic>().AdjustDifficulty(gravScaleAdjuster);
         }
     }
 
