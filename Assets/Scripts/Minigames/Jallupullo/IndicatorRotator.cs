@@ -11,6 +11,6 @@ public class IndicatorRotator : MonoBehaviour
     }
     public void RotateToAngle(float angles) {
         rotationVector.z = angles;
-        this.transform.rotation = Quaternion.Euler(0, 0, -1 * angles);
+        this.transform.localRotation = Quaternion.Euler(0, 0, -1 * angles);
     }
 }
