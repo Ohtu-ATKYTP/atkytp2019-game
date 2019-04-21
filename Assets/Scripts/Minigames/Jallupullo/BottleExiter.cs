@@ -12,7 +12,6 @@ public class BottleExiter : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        Debug.Log("Here come dat boy");
         logic.RemoveLiquid();
         StartCoroutine(collision.GetComponent<LiquidState>().CORStartDestruction());
         Destroy(collision);
