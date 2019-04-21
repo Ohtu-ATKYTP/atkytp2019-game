@@ -1,4 +1,6 @@
 ﻿using UnityEngine;
+using UnityAsyncAwaitUtil;
+using System.Threading.Tasks;
 
 public abstract class MinigameLogic : MonoBehaviour, IMinigameEnder
 {
@@ -15,10 +17,10 @@ public abstract class MinigameLogic : MonoBehaviour, IMinigameEnder
     }
 
 
-    protected void EndMinigame(bool won) {
+    protected async void EndMinigameAsync(bool won) {
         FindObjectOfType<TimeProgress>().StopTimerProgression();
 
-        DisplayEndingActions(won);
+        await DisplayEndingActions(won);
         GameManager.endMinigame(won,
                 won ? pointsForWinning : 0
         );
@@ -29,18 +31,22 @@ public abstract class MinigameLogic : MonoBehaviour, IMinigameEnder
         LoseMinigame();
     }
 
-    protected abstract void DisplayEndingActions(bool won);
+    protected  virtual async Task DisplayEndingActions(bool won) {
+        string message = won ? "You won!" : "You lost!";
+        Debug.Log(message);
+      await new WaitForSeconds(3);
+    }
 
 
     protected abstract void ConfigureDifficulty(int difficulty);
 
     #region Implements IMinigameEnder
     public void LoseMinigame() {
-        EndMinigame(false);
+        EndMinigameAsync(false);
     }
 
     public void WinMinigame() {
-        EndMinigame(true);
+        EndMinigameAsync(true);
     }
     #endregion
 

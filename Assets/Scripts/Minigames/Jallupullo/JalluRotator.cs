@@ -9,6 +9,8 @@ public class JalluRotator : MonoBehaviour
         if (!Input.gyro.enabled) {
             Input.gyro.enabled = true;
         }
+        Input.compensateSensors = true;
+
 
     }
 
@@ -22,14 +24,24 @@ public class JalluRotator : MonoBehaviour
 
 
     public IEnumerator CORUpdateRotation() {
+
         Vector3 XYVector = new Vector3(0, 0, 0);
-        Quaternion devAttitude;
+        Vector3 gravity;
+        Vector2 down = new Vector2(0, -1);
+        Vector2 gravity2D = new Vector2(0, 0);
+        float angle;
         while (true) {
-            devAttitude = Input.gyro.attitude;
-            XYVector.z = devAttitude.eulerAngles.z + 90f;
-            transform.eulerAngles = XYVector;
-            indicator.RotateToAngle(-1 * XYVector.z);
-            yield return new WaitForSecondsRealtime(.25f);
+            gravity = Input.gyro.gravity;
+            if(Mathf.Abs(gravity.z) <= .5f)
+            {
+                gravity2D.x = gravity.x;
+                gravity2D.y = gravity.y;
+                angle = Vector2.SignedAngle( gravity2D, down);
+                XYVector.z = angle;
+                transform.eulerAngles = XYVector;
+                indicator.RotateToAngle(-1 * XYVector.z);
+            }
+            yield return new WaitForSecondsRealtime(.2f);
         }
     }
 }
