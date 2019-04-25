@@ -5,6 +5,12 @@ TagManager:
   serializedVersion: 2
   tags:
   - Escapee
+  - Jumpman
+  - Logic
+  - Star
+  - AddRigidBody
+  - Instructions
+  - Border
   layers:
   - Default
   - TransparentFX
