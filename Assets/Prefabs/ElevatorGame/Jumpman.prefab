@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 6098241698546250548}
   - component: {fileID: 1742862307}
   - component: {fileID: 1985944997599117298}
+  - component: {fileID: 1002556963}
   m_Layer: 5
   m_Name: Jumpman
   m_TagString: Jumpman
@@ -32,7 +33,7 @@ RectTransform:
   m_GameObject: {fileID: 6098241698546250545}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 5.368315, y: 7.5585675, z: 1.726137}
+  m_LocalScale: {x: 5.3012114, y: 8.861341, z: 1.726137}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -118,7 +119,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 595982c4070337241a1c200e1eac6a5d, type: 3}
+  m_Sprite: {fileID: 21300000, guid: d9a7863137e9d4a4cbbfb0e9c4d14c9b, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -140,7 +141,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.2739811, y: 0.06525612}
+  m_Offset: {x: -0.22296333, y: 0.06525612}
   m_SpriteTilingProperty:
     border: {x: 14.17, y: 0, z: 14.5199995, w: 2.25}
     pivot: {x: 0.5, y: 0.5}
@@ -151,7 +152,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 22.294739, y: 27.263882}
+  m_Size: {x: 19.313072, y: 27.263882}
   m_EdgeRadius: 1
 --- !u!50 &6098241698546250548
 Rigidbody2D:
@@ -168,12 +169,12 @@ Rigidbody2D:
   m_Mass: 5
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 150
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 1
-  m_Constraints: 1
+  m_Constraints: 5
 --- !u!114 &1742862307
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -189,7 +190,7 @@ MonoBehaviour:
   jumping: {fileID: 21300000, guid: d9a7863137e9d4a4cbbfb0e9c4d14c9b, type: 3}
   standing: {fileID: 21300000, guid: 595982c4070337241a1c200e1eac6a5d, type: 3}
   scared: {fileID: 21300000, guid: 6dcae34dfb98857498075d3bbfccbf92, type: 3}
-  gameWon: 0
+  height: 0
 --- !u!114 &1985944997599117298
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -197,7 +198,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6098241698546250545}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 1392445389, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
@@ -243,3 +244,34 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &1002556963
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6098241698546250545}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1862395651, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 4
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1742862307}
+          m_MethodName: Jump
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+      m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
+        Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  delegates: []
