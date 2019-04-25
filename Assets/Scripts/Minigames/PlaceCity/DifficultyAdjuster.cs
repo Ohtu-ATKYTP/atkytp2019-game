@@ -67,13 +67,16 @@ public class DifficultyAdjuster : MonoBehaviour {
         TuneTime(difficulty);
         TuneSprite(difficulty);
         TuneFlipping(difficulty);
-        // Tuning the positions of the cities is unfinished(?)
+
+       // Tuning the positions of the cities is unfinished(?)
        // TuneFinlandRotation(difficulty);
 
         if (difficulty > 9) {
             gyroInstructions = GameObject.Find("GyroInstructionsPane");
             gyroInstructions.GetComponent<Canvas>().enabled = true; 
             gyroInstructions.GetComponentsInChildren<SpriteRenderer>().ToList().ForEach(sr => sr.enabled = true);
+            PlaceCityManager mgr = FindObjectOfType<PlaceCityManager>();
+            gyroInstructions.GetComponent<FadingInstructor>().Fade(1f, 2f, mgr.initialInstructionDuration + mgr.initialInstructionFadeDuration); 
             if (random.Next(0, 2) == 0) {
                 TunePaneRotationInXYPlane(difficulty);
             } else {

@@ -153,7 +153,9 @@ MonoBehaviour:
   radius: 1
   delayAfterMinigameEndsInSeconds: 2
   organisationText: {fileID: 0}
-  difficulty: 15
+  initialInstructionDuration: 2
+  initialInstructionFadeDuration: 1
+  difficulty: 10
 --- !u!4 &8837274
 Transform:
   m_ObjectHideFlags: 0
@@ -233,7 +235,7 @@ Canvas:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 131103190}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 3
   m_RenderMode: 1
   m_Camera: {fileID: 1943231070}
@@ -281,7 +283,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ac59244b34d64740a1ef14b6f537309, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  visibleDuration: 0
   fadeDuration: 2
+  delay: 0
 --- !u!4 &200871582 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3603301569510358462, guid: 84b17d828c232eb4ab605c2067c439f6,
@@ -299,6 +303,7 @@ GameObject:
   - component: {fileID: 336374749}
   - component: {fileID: 336374751}
   - component: {fileID: 336374750}
+  - component: {fileID: 336374752}
   m_Layer: 5
   m_Name: Instructions
   m_TagString: Untagged
@@ -320,10 +325,10 @@ RectTransform:
   m_Father: {fileID: 512722191}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 351, y: -531}
-  m_SizeDelta: {x: 600, y: 100}
+  m_AnchorMin: {x: 0, y: 0.5}
+  m_AnchorMax: {x: 1, y: 0.5}
+  m_AnchoredPosition: {x: 14.5, y: 191.93}
+  m_SizeDelta: {x: -131.3, y: 383.85}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &336374750
 MonoBehaviour:
@@ -339,7 +344,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -347,20 +352,18 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 38
+    m_FontSize: 48
     m_FontStyle: 0
-    m_BestFit: 0
+    m_BestFit: 1
     m_MinSize: 3
-    m_MaxSize: 42
-    m_Alignment: 0
+    m_MaxSize: 300
+    m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Sijoita kartalle!
-
-    Kosketa kaupunkia'
+  m_Text: "Sijoita ainej\xE4rjest\xF6 kartalle! Paina oikeaa kaupunkia"
 --- !u!222 &336374751
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -369,6 +372,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 336374748}
   m_CullTransparentMesh: 0
+--- !u!114 &336374752
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 336374748}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ac59244b34d64740a1ef14b6f537309, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  visibleDuration: 0
+  fadeDuration: 1
+  delay: 0
 --- !u!1 &366876210
 GameObject:
   m_ObjectHideFlags: 0
@@ -447,7 +465,7 @@ CanvasRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 366876210}
-  m_CullTransparentMesh: 0
+  m_CullTransparentMesh: 1
 --- !u!1 &510616669
 GameObject:
   m_ObjectHideFlags: 0
@@ -510,7 +528,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   centerPoint: {x: 0, y: 100}
-  speed: 1
+  speed: 0.5
   rotates: 0
   timeRemaining: 0
   clockWise: 0
@@ -971,7 +989,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: b70600d72417ff846aa6b069a8fe789a, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1252,7 +1270,7 @@ SpriteRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1700513167}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -1300,7 +1318,7 @@ CanvasRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1700513167}
-  m_CullTransparentMesh: 0
+  m_CullTransparentMesh: 1
 --- !u!1001 &1745320463
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2046,7 +2064,7 @@ SpriteRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2140687595}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -2094,7 +2112,7 @@ CanvasRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2140687595}
-  m_CullTransparentMesh: 0
+  m_CullTransparentMesh: 1
 --- !u!1001 &3603301569669149472
 PrefabInstance:
   m_ObjectHideFlags: 0

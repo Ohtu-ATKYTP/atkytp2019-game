@@ -4,41 +4,110 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class FadingInstructor : MonoBehaviour {
-
-    public float fadeDuration = 1f;
+public class FadingInstructor : MonoBehaviour
+{
+    public float visibleDuration;
+    public float fadeDuration;
+    public float delay = 0;
     private Text[] texts;
     private SpriteRenderer[] sprites;
 
     void Start() {
+        Initialize();
+    }
+
+    void Initialize() {
         texts = GetComponentsInChildren<Text>();
         sprites = GetComponentsInChildren<SpriteRenderer>();
-        StartCoroutine(CORFadeAway());
+        UpdateTextsAlpha(0);
+        UpdateSpritesAlpha(0);
+    }
+
+    public void Fade(float visibleTime, float transitionTime) {
+        Fade(visibleTime, transitionTime, 0);
+
+    }
+
+    public void Fade(float visibleTime, float transitionTime, float delay) {
+        if (texts == null && sprites == null) {
+            Initialize();
+        }
+        this.delay = delay;
+        this.visibleDuration = visibleTime;
+        this.fadeDuration = transitionTime;
+        if (sprites == null) {
+            StartCoroutine(CORFadeAwayText());
+        } else {
+            StartCoroutine(CORFadeAway());
+        }
+
+    }
+
+
+    private Color ChangeAlpha(Color c, float a) {
+        return new Color(c.r, c.g, c.b, a);
+    }
+
+    private void UpdateTextsAlpha(float a) {
+        texts.ToList().ForEach(txt => {
+            txt.color = ChangeAlpha(txt.color, a);
+            txt.SetAllDirty();
+        });
+    }
+
+
+    private void UpdateSpritesAlpha(float a) {
+        sprites.ToList().ForEach(sprite =>
+                sprite.color = ChangeAlpha(sprite.color, a));
+    }
+
+    private IEnumerator CORFadeAway() {
+
+        while (delay > 0) {
+            yield return null;
+            delay -= Time.unscaledDeltaTime;
+        }
+
+
+        UpdateTextsAlpha(1);
+        UpdateSpritesAlpha(1);
+        while (visibleDuration >= 0) {
+            yield return null;
+            visibleDuration -= Time.unscaledDeltaTime;
+        }
+
+
+        float t = 1f;
+        do {
+            yield return null;
+            t -= Time.unscaledDeltaTime / fadeDuration;
+            UpdateTextsAlpha(t);
+            UpdateSpritesAlpha(t);
+        } while (t >= 0);
     }
 
 
 
-    private IEnumerator CORFadeAway() {
+    private IEnumerator CORFadeAwayText() {
+
+        while (delay > 0) {
+            yield return null;
+            delay -= Time.unscaledDeltaTime;
+        }
+
+        UpdateTextsAlpha(1);
+        while (visibleDuration >= 0) {
+            yield return null;
+            visibleDuration -= Time.unscaledDeltaTime;
+        }
+
+
         float t = 1f;
-
-
-
         do {
             yield return null;
-            t -= Time.deltaTime / fadeDuration;
-            for (int i = 0; i < texts.Length; i++) {
-                texts[i].color = new Color(texts[i].color.r, texts[i].color.g, texts[i].color.b, t);
-                texts[i].SetAllDirty();
-            }
-            for (int i = 0; i < sprites.Length; i++) {
-                sprites[i].color = new Color(sprites[i].color.r, sprites[i].color.g, sprites[i].color.b, t);
-            }
-            Debug.Log("T: " + t);
-            Debug.Log("Counts: " + texts.Length + sprites.Length);
+            t -= Time.unscaledDeltaTime / fadeDuration;
+            UpdateTextsAlpha(t);
         } while (t >= 0);
-        Debug.Log("DONE");
-
-
     }
 
 }
