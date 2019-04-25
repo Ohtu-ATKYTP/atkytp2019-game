@@ -6,7 +6,7 @@ using System.Linq;
 
 public static class GameManager {
     private static string currentGame;
-    private static string[] games = {"PlaceCity", "TurkuGame", "LogoHaalariin", "ElevatorGame"};
+    private static string[] games = {"PlaceCity", "TurkuGame", "LogoHaalariin", "ElevatorGame", "ElevatorRescue"};
     private static string betweenGameScreen = "BetweenGameScreen";
     private static string mainMenu = "MainMenu";
 

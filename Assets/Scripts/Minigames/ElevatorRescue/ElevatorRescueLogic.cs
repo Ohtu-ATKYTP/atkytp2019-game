@@ -2,7 +2,6 @@
 using UnityEngine;
 
 public class ElevatorRescueLogic : MonoBehaviour, IMinigameEnder {
-    private DataController dataController;
     [SerializeField]
     [Tooltip("Higher values mean more difficult minigame. Will be requested from the data manager in the game, but set here if you want to test only this scene.")]
     private int difficulty = 1;
@@ -18,10 +17,13 @@ public class ElevatorRescueLogic : MonoBehaviour, IMinigameEnder {
     public BoxCollider2D escapeTrigger;
 
     private bool gameIsOver = false;
+    private ElevatorRescueSetup ers;
 
     void Start() {
-        dataController = FindObjectOfType<DataController>();
-        difficulty = dataController.GetDifficulty();
+        difficulty = DataController.GetDifficulty();
+        ers = gameObject.GetComponent<ElevatorRescueSetup>();
+        ers.Setup(difficulty);
+        //setup the scene based on difficulty
 
         //Use custom gravity for scene
         originalGravity = Physics.gravity;
@@ -79,7 +81,7 @@ public class ElevatorRescueLogic : MonoBehaviour, IMinigameEnder {
         await Task.Delay(1000 * delayAfterMinigameEndsInSeconds);
 
         Debug.Log("The scene is ready to be changed.");
-        dataController.MinigameEnd(won,
+        GameManager.endMinigame(won,
                 won ? pointsForWinning : 0
             );
     }
