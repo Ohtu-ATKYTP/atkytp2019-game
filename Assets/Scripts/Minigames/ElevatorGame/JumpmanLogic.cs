@@ -13,6 +13,7 @@ public class JumpmanLogic : MonoBehaviour {
     private ElevatorGameLogic EGLogic;
     private JumperPositions jumperPositions;
     private GameObject heightLine;
+    private Rigidbody2D RB;
     
     private float maxGravScale;
     private float minGravScale;
@@ -23,6 +24,7 @@ public class JumpmanLogic : MonoBehaviour {
     bool firstJump;
     public float height;
     private bool highEnough;
+    private bool inJump;
 
     private float androidScaler;
     private float gravScaleStart;
@@ -44,10 +46,14 @@ public class JumpmanLogic : MonoBehaviour {
 
         highEnough = false;
         firstJump = false;
+        inJump = false;
         
         EGLogic = GameObject.FindGameObjectWithTag("Logic").GetComponent<ElevatorGameLogic>();
 
         jumperPositions = GameObject.FindGameObjectWithTag("Logic").GetComponent<JumperPositions>();
+
+        RB = GetComponent<Rigidbody2D>();
+
 
         heightLine = GameObject.Find("HeightLine");
 
@@ -115,10 +121,14 @@ public class JumpmanLogic : MonoBehaviour {
                GameObject.Find("InfoText").SetActive(false);
             }
         }
-        GetComponent<Image>().sprite = jumping;
-        GetComponent<Rigidbody2D>().gravityScale = Random.Range(minGravScale,maxGravScale);
-        GetComponent<Rigidbody2D>().velocity = Vector2.zero; //Zero velocity before jump
-        GetComponent<Rigidbody2D>().AddForce(Vector2.up*Random.Range(minJumpForce, maxJumpForce), ForceMode2D.Impulse);
+        if(!inJump){
+            GetComponent<Image>().sprite = jumping;
+        }
+        inJump = true;
+        
+        RB.gravityScale = Random.Range(minGravScale,maxGravScale);
+        RB.velocity = Vector2.zero; //Zero velocity before jump
+        RB.AddForce(Vector2.up*Random.Range(minJumpForce, maxJumpForce), ForceMode2D.Impulse);
     }
     
     public void ChangeToScared(){
@@ -128,6 +138,7 @@ public class JumpmanLogic : MonoBehaviour {
     void OnCollisionEnter2D(Collision2D collision2D){
         if(collision2D.gameObject.name == "BottomBorder") {
             GetComponent<Image>().sprite = standing;
+            inJump = false;
         }
     }
 
