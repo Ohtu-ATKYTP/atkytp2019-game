@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class LogoUpdater : MonoBehaviour {
     private float successRotation = 360;
-    private RectTransform logoTransform;
+    private float logoFadeTime = 0f;
     private Image logoImage;
     private bool dropLogoAnimation = false;
     private bool rotateLogoAnimation = false;
@@ -17,8 +17,20 @@ public class LogoUpdater : MonoBehaviour {
     public Sprite blankoLogo;
 
     void Start () {
-        logoTransform = GetComponent<RectTransform> ();
         logoImage = GetComponent<Image> ();
+
+        int difficulty = DataController.GetDifficulty();
+        if (difficulty <= 3) {
+            logoFadeTime = 0f;
+        } else if (difficulty <= 6) {
+            logoFadeTime = 2f;
+        } else if (difficulty <= 9) {
+            logoFadeTime = 1f;
+        } else if (difficulty <= 12) {
+            logoFadeTime = 0.5f;
+        } else {
+            logoFadeTime = 0.25f;
+        }
     }
     public void changeImage (int logo) {
         switch (logo) {
@@ -44,18 +56,38 @@ public class LogoUpdater : MonoBehaviour {
                 logoImage.sprite = tkoalyLogo;
                 break;
         }
+        startfadeLogoAnimation();
     }
+
     public void startDropLogoAnimation () {
+        setLogoVisible();
         this.dropLogoAnimation = true;
     }
+
     public void startRotateLogoAnimation () {
+        setLogoVisible();
         this.rotateLogoAnimation = true;
+    }
+
+    private void startfadeLogoAnimation () {
+        setLogoVisible();
+        if (this.logoFadeTime > 0f) {
+            logoImage.CrossFadeAlpha(0, logoFadeTime, false);
+        }
+    }
+
+    private void setLogoVisible() {
+        logoImage.CrossFadeAlpha(1, 0, false);
+    }
+
+    public void setLogoFadeTime(float time) {
+        this.logoFadeTime = time;
     }
     void Update () {
         if (dropLogoAnimation) {
-            logoTransform.localPosition += Vector3.down * Time.deltaTime * 1000;
-            logoTransform.Rotate (Vector3.right * Time.deltaTime * 1000);
-            if (logoTransform.position.y < -1000) dropLogoAnimation = false;
+            transform.localPosition += Vector3.down * Time.deltaTime * 1000;
+            transform.Rotate (Vector3.right * Time.deltaTime * 1000);
+            if (transform.position.y < -1000) dropLogoAnimation = false;
         }
 
         if (rotateLogoAnimation) {
