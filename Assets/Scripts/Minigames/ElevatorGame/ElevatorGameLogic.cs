@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class ElevatorGameLogic : MonoBehaviour, IMinigameEnder {
     
@@ -64,8 +65,9 @@ public class ElevatorGameLogic : MonoBehaviour, IMinigameEnder {
 
     public void WinMinigame() {
         foreach (GameObject jumper in jumpmanList){
-            jumper.GetComponent<Button>().interactable = false;
+            jumper.GetComponent<EventTrigger>().enabled = false;
             jumper.GetComponent<JumpmanLogic>().ChangeToScared();
+            
         }
 
         brokenRope.SetActive(true);
@@ -91,7 +93,7 @@ public class ElevatorGameLogic : MonoBehaviour, IMinigameEnder {
         
         endedGame = true;
         foreach (GameObject jumper in jumpmanList){
-            jumper.GetComponent<Button>().interactable = false;
+            jumper.GetComponent<EventTrigger>().enabled = false;
         }
         EndGame(false);
     }
