@@ -105,7 +105,7 @@ public class CameraMotionController : MonoBehaviour {
 
     private void FixedUpdate() {
         // Avoid calculating anything unnecessary in such a tight loop
-        if (cameraBody.bodyType != RigidbodyType2D.Dynamic) {
+        if (cameraBody != null && cameraBody.bodyType != RigidbodyType2D.Dynamic) {
             return;
         }
 
