@@ -10,7 +10,7 @@ public class MetroController : MonoBehaviour, IMinigameEnder
     
 //DataController.GetDifficulty()
     void Start(){
-        scene.Rotate(0,0,Mathf.Max(-90,(20-1)*-5));
+        scene.Rotate(0,0,Mathf.Max(-90,(DataController.GetDifficulty()-1)*-5));
     }
 
     public void WinMinigame() {
