@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 public class TamperelainenControl : MonoBehaviour
 
 {
@@ -17,6 +17,9 @@ public class TamperelainenControl : MonoBehaviour
     private readonly float DRUNK_SPEED_RANGE = 5000f;
     private readonly float START_TIME = 1.0f;
     private readonly float INTERVAL = 1.5f;
+
+    public Image broken_window;
+
     // Start is called before the first frame update
 
     private TamperelainenLogic logicScript;
@@ -25,6 +28,7 @@ public class TamperelainenControl : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         InvokeRepeating("DefineDrunkDirectionAndSpeed", START_TIME, INTERVAL);
         logicScript = FindObjectOfType<TamperelainenLogic>();
+        broken_window.enabled = false;
     }
 
 
@@ -32,9 +36,27 @@ public class TamperelainenControl : MonoBehaviour
     {
         Control();
         Drunkify();
-        CheckLoseCondition();
-        Debug.Log(this.enabled ? "Enabled" : "Disabled");
+        //CheckLoseCondition();
 
+
+    }
+
+    /// <summary>
+    /// OnCollisionEnter is called when this collider/rigidbody has begun
+    /// touching another rigidbody/collider.
+    /// </summary>
+    /// <param name="other">The Collision data associated with this collision.</param>
+    void OnCollisionEnter2D(Collision2D other)
+    {
+        Debug.Log("Hit!");
+        if (other.gameObject.name == "Hitbox_left") {
+            BreakWindow();
+            this.enabled = false;
+            logicScript.LoseMinigame();
+        } else if (other.gameObject.name == "Hitbox_right") {
+            this.enabled = false;
+            logicScript.LoseMinigame();
+        }
     }
 
     private void Control() {
@@ -72,7 +94,7 @@ public class TamperelainenControl : MonoBehaviour
     }
 
     private void BreakWindow() {
-
+        broken_window.enabled = true;
     }
 
 
