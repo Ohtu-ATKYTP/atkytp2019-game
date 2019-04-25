@@ -37,11 +37,11 @@ public class JumpmanLogic : MonoBehaviour {
     void Start() {
 
         //Physics parameters
-        gravScaleStart = 75;
-        jumpForceStart =  3000;
-        gravMultiplier = 35;
-        jumpMultiplier = 200;
-        androidScaler = 1;
+        gravScaleStart = 200;
+        jumpForceStart =  5000;
+        gravMultiplier = 40;
+        jumpMultiplier = 300;
+        androidScaler = 1f;
         downForce = 300000;
 
         highEnough = false;
@@ -53,8 +53,6 @@ public class JumpmanLogic : MonoBehaviour {
         jumperPositions = GameObject.FindGameObjectWithTag("Logic").GetComponent<JumperPositions>();
 
         RB = GetComponent<Rigidbody2D>();
-
-
         heightLine = GameObject.Find("HeightLine");
 
         minGravScale = gravScaleStart;
@@ -77,21 +75,36 @@ public class JumpmanLogic : MonoBehaviour {
     }
 
     private void initDebuggerParams(){
-        androidScaler = DataController.getGameParameter("gravityScaleMax"); //android
-        gravMultiplier = DataController.getGameParameter("gravityScaleMin"); //gravMult
-        jumpMultiplier = DataController.getGameParameter("jumpForce");       //jumpMult
+        //androidScaler = DataController.getGameParameter("gravityScaleMax"); //android
+        //gravMultiplier = DataController.getGameParameter("gravityScaleMin"); //gravMult
+        //jumpMultiplier = DataController.getGameParameter("jumpForce");       //jumpMult
     }
     
     //Adjusts jumpforce and gravity scale based on difficulty;
     public void AdjustDifficulty(float gravScaleAdjuster){
-        maxGravScale = (maxGravScale+(gravScaleAdjuster*gravMultiplier))*androidScaler;
+        maxGravScale = (maxGravScale+((gravScaleAdjuster-1)*gravMultiplier))*androidScaler;
+        Debug.Log("Max grav is "+maxGravScale);
         minGravScale = maxGravScale;
-        minJumpForce = (minJumpForce + (gravScaleAdjuster*jumpMultiplier))*androidScaler;
-        maxJumpForce = minJumpForce*3f;
+        minJumpForce = (minJumpForce + ((gravScaleAdjuster-1)*jumpMultiplier))*androidScaler;
+        maxJumpForce = minJumpForce*2f;
 
-        //Display current gravScale, debugging reasons
-        //GameObject.Find("InfoText").GetComponent<Text>().text = maxGravScale.ToString();
+        //if(DataController.GetDifficulty()==1){
+        //    Debug.Log("Set difficulty 1");
+        //    maxGravScale = 200*androidScaler;
+        //    minGravScale = maxGravScale;
+        //    minJumpForce = 5000*androidScaler;
+        //    maxJumpForce = minJumpForce*2f;
+        //}
+
+        //if(DataController.GetDifficulty()==10){
+        //    maxGravScale = 600*androidScaler;
+        //    minGravScale = maxGravScale;
+        //    minJumpForce = 8000*androidScaler;
+        //    maxJumpForce = minJumpForce*2f;
+        //}
     }
+    
+    
 
     private void CheckYpos(){
         //if(transform.position.y > 350){
@@ -109,7 +122,6 @@ public class JumpmanLogic : MonoBehaviour {
                 GetComponent<Image>().color = Color.white;
                 jumperPositions.decreaseJumpmenHighEnough();
             }
-            
         }
     }
 

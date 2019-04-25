@@ -67,7 +67,6 @@ public class ElevatorGameLogic : MonoBehaviour, IMinigameEnder {
         foreach (GameObject jumper in jumpmanList){
             jumper.GetComponent<EventTrigger>().enabled = false;
             jumper.GetComponent<JumpmanLogic>().ChangeToScared();
-            
         }
 
         brokenRope.SetActive(true);
