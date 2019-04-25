@@ -4,75 +4,88 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class ElevatorGameLogic : MonoBehaviour, IMinigameEnder {
-    private MinigameLogic miniGameLogic;
-    private GameObject[] borders;
-    private BorderLogic borderLogic;
-    private DataController dataController;
-    private int damage;
-    private TimeProgress timer;
+    
     private GameObject[] jumpmanList;
-    private GameObject brokenBorder;
-    private GameObject supportBorder;
+    private GameObject[] borders;
+    
+    private MinigameLogic miniGameLogic; 
+    private TimeProgress timer;
+    private GameObject brokenRope;
+    private GameObject supportRope;
     private GameObject infoText;
+    private GameObject instructions;
     
+    public bool forceDownActive;
+    private float damage;
+    private bool endedGame;
 
-    private bool endedGame = false;
-    
     void Start() {
-        damage = 0;
         borders = GameObject.FindGameObjectsWithTag("Border");
+
+        endedGame = false;
+        damage = 0;
+
         jumpmanList =  GameObject.FindGameObjectsWithTag("Jumpman");
         miniGameLogic = GameObject.FindObjectOfType<MinigameLogic>();
-        dataController = FindObjectOfType<DataController>();
         timer = FindObjectOfType<TimeProgress>();
-        supportBorder = GameObject.FindGameObjectWithTag("SupportBorder");
-        brokenBorder = GameObject.FindGameObjectWithTag("BrokenBorder");
-        brokenBorder.SetActive(false);
-
-        infoText = GameObject.FindGameObjectWithTag("InfoText");
         
-        this.setDifficulty();
+        brokenRope = GameObject.Find("BrokenSupportRopes");
+        brokenRope.SetActive(false);
+
+        supportRope = GameObject.Find("SupportRope");
+
+        infoText = GameObject.Find("InfoText");
+
+        timer.SetTime(15);
+        instructions = GameObject.FindGameObjectWithTag("Instructions");
+        instructions.SetActive(false);
+        
+        if(DataController.GetDifficulty() == 1){
+            DisplayInstructions();
+        }
     }
 
-    public void AddDamage(){
-        damage += 1;
-        supportBorder.GetComponent<SupportBorderScript>().DamageVisual(damage);
-        if(damage >= 20 && !endedGame){
+    public async void DisplayInstructions(){
+        instructions.SetActive(true);
+        await new WaitForSecondsRealtime(5);
+        instructions.SetActive(false);
+        timer.SetTime(15);
+    }
+
+    //Damage after smash. Right now win with 1, but option to add more.
+    public void AddDamage(float DMG){
+        damage += DMG;
+        
+        if(damage >= 1 && !endedGame){
             endedGame = true;
             this.WinMinigame();
         }
     }
 
-    public void setDifficulty(){
-        int difficulty = dataController.GetDifficulty();
-        float reducedTime = (float) 25 - difficulty*3;
-        if(reducedTime < 8){
-            reducedTime = 8;
-        }
-        timer.SetTime(reducedTime);
-    }
-
     public void WinMinigame() {
         foreach (GameObject jumper in jumpmanList){
             jumper.GetComponent<Button>().interactable = false;
-            jumper.GetComponent<JumpmanLogic>().gameWon = true;
             jumper.GetComponent<JumpmanLogic>().ChangeToScared();
         }
 
-        brokenBorder.SetActive(true);
-        supportBorder.SetActive(false);
+        brokenRope.SetActive(true);
+        supportRope.SetActive(false);
 
-        GameObject.FindObjectOfType<ElevatorShaftMove>().endedGame = true;
+        GameObject.FindObjectOfType<ElevatorShaftMove>().move = false;
 
-        foreach(GameObject border in borders){
-                border.GetComponent<BorderLogic>().AddRigidBody();
-        }
+        this.AddRigidBodies();
         
         EndGame(true);
     }
+
+    private void AddRigidBodies(){
+        foreach(GameObject border in borders){
+                border.GetComponent<AddRigidBody>().AddRB();
+        }
+        GameObject.Find("ElevatorDoors").GetComponent<AddRigidBody>().AddRB();
+    }
     
     public void LoseMinigame() {
-        
         infoText.SetActive(true);
         infoText.GetComponent<Text>().text = "TIME OVER"; 
         
@@ -90,6 +103,13 @@ public class ElevatorGameLogic : MonoBehaviour, IMinigameEnder {
     public async void EndGame(bool won) {
         timer.StopTimerProgression();
         await new WaitForSecondsRealtime(3);
-        dataController.MinigameEnd(won, won ? 10 : 0);
+        GameManager.endMinigame(won, won ? 10 : 0);
+    }
+
+    public void PressForceDownButton(){
+        forceDownActive = true;
+        foreach (GameObject jumper in jumpmanList){
+            jumper.GetComponent<JumpmanLogic>().ForceDown();
+        }
     }
 }
