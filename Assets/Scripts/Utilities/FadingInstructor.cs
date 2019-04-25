@@ -11,6 +11,8 @@ public class FadingInstructor : MonoBehaviour
     public float delay = 0;
     private Text[] texts;
     private SpriteRenderer[] sprites;
+    private Image[] images; 
+
 
     void Start() {
         Initialize();
@@ -19,8 +21,10 @@ public class FadingInstructor : MonoBehaviour
     void Initialize() {
         texts = GetComponentsInChildren<Text>();
         sprites = GetComponentsInChildren<SpriteRenderer>();
+        images = GetComponentsInChildren<Image>();
         UpdateTextsAlpha(0);
         UpdateSpritesAlpha(0);
+        UpdateImagesAlpha(0);
     }
 
     public void Fade(float visibleTime, float transitionTime) {
@@ -35,11 +39,11 @@ public class FadingInstructor : MonoBehaviour
         this.delay = delay;
         this.visibleDuration = visibleTime;
         this.fadeDuration = transitionTime;
-        if (sprites == null) {
+      /*  if (sprites == null) {
             StartCoroutine(CORFadeAwayText());
-        } else {
+        } else { */
             StartCoroutine(CORFadeAway());
-        }
+       // }
 
     }
 
@@ -61,6 +65,11 @@ public class FadingInstructor : MonoBehaviour
                 sprite.color = ChangeAlpha(sprite.color, a));
     }
 
+    private void UpdateImagesAlpha(float a){ 
+                images.ToList().ForEach(image =>
+                image.color = ChangeAlpha(image.color, a));
+        }
+
     private IEnumerator CORFadeAway() {
 
         while (delay > 0) {
@@ -71,6 +80,7 @@ public class FadingInstructor : MonoBehaviour
 
         UpdateTextsAlpha(1);
         UpdateSpritesAlpha(1);
+        UpdateImagesAlpha(1);
         while (visibleDuration >= 0) {
             yield return null;
             visibleDuration -= Time.unscaledDeltaTime;
@@ -83,6 +93,7 @@ public class FadingInstructor : MonoBehaviour
             t -= Time.unscaledDeltaTime / fadeDuration;
             UpdateTextsAlpha(t);
             UpdateSpritesAlpha(t);
+            UpdateImagesAlpha(t); 
         } while (t >= 0);
     }
 
