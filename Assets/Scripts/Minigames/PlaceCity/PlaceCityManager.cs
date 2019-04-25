@@ -4,34 +4,29 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class PlaceCityManager : MonoBehaviour, IMinigameEnder {
-    // GameObjects representing the cities
     public Transform[] locations;
     public SpriteRenderer map;
     public float radius = 1f;
     public int delayAfterMinigameEndsInSeconds = 2;
     public Text organisationText;
     private GameObject targetCity;
-    private Dictionary<string, string> organisationsByCities;
     private bool gameIsOver = false;
 
 
-
-    public int difficulty = 1;
+    public int difficulty;
 
 
 
     void Start() {
-        difficulty = DataController.GetDifficulty();
+       // difficulty = DataController.GetDifficulty();
         GetComponent<DifficultyAdjuster>().Initialize(difficulty);
 
-        // No need to show the positions to the players of the production build
-        if (Debug.isDebugBuild) {
-            for (int i = 0; i < locations.Length; i++) {
-                locations[i].GetComponent<CircleCollider2D>().radius = 2 * radius;
-            }
+#if UNITY_EDITOR
+        for (int i = 0; i < locations.Length; i++) {
+            locations[i].GetComponent<CircleCollider2D>().radius = 2 * radius;
         }
-
-        organisationsByCities = new Dictionary<string, string>(){
+#endif
+        Dictionary<string, string> organisationsByCities = new Dictionary<string, string>(){
                 {"Helsinki", "TKO-aly"},
                 {"Turku", "Asteriski" },
                 {"Tampere", "Luuppi" },
@@ -41,8 +36,7 @@ public class PlaceCityManager : MonoBehaviour, IMinigameEnder {
             };
 
         targetCity = locations[((int)Random.Range(0f, 6f))].gameObject;
-
-        organisationText.text = organisationsByCities[targetCity.name];
+        FindObjectOfType<OrganizationDisplayer>().Initialize(organisationsByCities[targetCity.name]);
     }
 
 
@@ -57,7 +51,6 @@ public class PlaceCityManager : MonoBehaviour, IMinigameEnder {
         } else {
             LoseMinigame();
         }
-
     }
 
     public void WinMinigame() {
@@ -68,11 +61,6 @@ public class PlaceCityManager : MonoBehaviour, IMinigameEnder {
     }
 
     public void LoseMinigame() {
-        /*
-         * Check for the following situation:  
-         * player has clicked the correct city, but the timer runs out. Should the timer stop?
-         *
-         */
         if (gameIsOver) {
             return;
         }
@@ -81,18 +69,15 @@ public class PlaceCityManager : MonoBehaviour, IMinigameEnder {
 
 
     private IEnumerator EndMinigame(bool win) {
+        gameIsOver = true;
+        FindObjectOfType<TimeProgress>().StopTimerProgression();
+
 
         Color statusColor = win
             ? Color.green
             : Color.red;
-
-        gameIsOver = true;
-
-        TimeProgress timerScript = FindObjectOfType<TimeProgress>();
-        timerScript.StopTimerProgression();
-
         targetCity.GetComponent<InformationDisplayer>().RevealOnMap(statusColor);
         yield return new WaitForSeconds(delayAfterMinigameEndsInSeconds);
         GameManager.endMinigame(win, win ? 10 : 0);
     }
-} 
+}
