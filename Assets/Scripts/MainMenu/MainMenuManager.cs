@@ -6,28 +6,17 @@ using UnityEngine.SceneManagement;
 
 public class MainMenuManager : MonoBehaviour {
 
-    private Text ownHighscore;
-
     private void Start() {
         if(!PlayerPrefs.HasKey("registered")){
             PlayerPrefs.SetInt("registered", 0);
             loadScene("Registration");
         }
-        ownHighscore = GameObject.Find("OwnHighscoreText").GetComponent<Text>();
-        updateOwnHighscoreAndRank();
-        toggleRegistrationButton();
-    }
-
-    private async void updateOwnHighscoreAndRank() {
+        
+        Text ownHighscore = GameObject.Find("OwnHighscoreText").GetComponent<Text>();
         int score = (PlayerPrefs.HasKey("highScore")) ?  PlayerPrefs.GetInt("highScore") : 0;
         ownHighscore.text = "High score: " + score;
 
-        string id = PlayerPrefs.GetString ("_id");
-        Highscore highscore = await Highscores.GetOne (id);
-        if (highscore != null) {
-            PlayerPrefs.SetInt ("rank", highscore.rank);
-            PlayerPrefs.SetInt ("highScore", highscore.score);
-        }
+        toggleRegistrationButton();
     }
 
     private void toggleRegistrationButton() {

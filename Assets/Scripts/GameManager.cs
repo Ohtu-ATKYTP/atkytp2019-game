@@ -57,7 +57,8 @@ public static class GameManager {
         if (PlayerPrefs.GetInt ("highScore") < score) {
             PlayerPrefs.SetInt ("highScore", score);
             string id = PlayerPrefs.GetString ("_id");
-            await Highscores.Update (id, score);
+            Highscore highscore = await Highscores.Update (id, score);
+            PlayerPrefs.SetInt ("rank", highscore.rank);
         }
         DataController.Init();
     }
