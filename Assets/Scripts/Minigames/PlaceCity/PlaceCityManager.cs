@@ -18,7 +18,7 @@ public class PlaceCityManager : MonoBehaviour, IMinigameEnder {
 
 
     void Start() {
-       // difficulty = DataController.GetDifficulty();
+        difficulty = DataController.GetDifficulty();
         GetComponent<DifficultyAdjuster>().Initialize(difficulty);
 
 #if UNITY_EDITOR
