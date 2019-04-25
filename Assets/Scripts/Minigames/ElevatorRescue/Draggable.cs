@@ -48,6 +48,12 @@ public class Draggable : MonoBehaviour {
 
         Debug.Log(newForce);
         rbody.AddForce(newForce);
+
+
+        //We also add torque to the object
+        Vector2 torque = 
+
+
         prevCursorPosition = Input.mousePosition;
     }
 
