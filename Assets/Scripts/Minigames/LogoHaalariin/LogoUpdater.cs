@@ -19,6 +19,10 @@ public class LogoUpdater : MonoBehaviour {
     void Start () {
         logoImage = GetComponent<Image> ();
 
+        initializeFadeTime();
+    }
+
+    private void initializeFadeTime() {
         int difficulty = DataController.GetDifficulty();
         if (difficulty <= 3) {
             logoFadeTime = 0f;
