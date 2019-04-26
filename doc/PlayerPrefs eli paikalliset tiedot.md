@@ -8,26 +8,13 @@ Pelaajan tiedot ja joitain apumuuttujia tallennetaan kännykkään
  - PlayerPrefs.SetString("avain", arvo): asettaa halutulla avaimella uuden arvon. Joko muuttaa vanhaa tai tekee uuden
  - PlayerPrefs.GetInt("avain"): hakee avaimella arvon
 
-Seuraavat pelaajan tiedot tallennetaan kännykkään, kun ne saadaan rekisteröidessä serveriltä palautuksena (HighscoresScript.SendUser):
+Seuraavat pelaajan tiedot tallennetaan kännykkään, kun ne saadaan rekisteröidessä serveriltä palautuksena:
 
 ```C#
-PlayerPrefs.SetString("_id", h._id);
-PlayerPrefs.SetString("username", h.user);
-PlayerPrefs.SetString("token", h.token);
-PlayerPrefs.SetInt("highScore", h.score);
+ PlayerPrefs.SetString ("_id");
+ PlayerPrefs.SetString ("username");
+ PlayerPrefs.SetString ("token");
+ PlayerPrefs.SetInt ("highScore");
+ PlayerPrefs.SetInt ("rank");
+ PlayerPrefs.SetInt ("registered");
 ```
-
-Lisäksi Playerprefssillä tallennetaan muuttuja **"syncedHS"** (arvot 0 tai 1), joka kertoo voidaanko olettaa, että pelaajan Highscore on
-päivitetty serverille. Aina kun pelaaja saa uuden highscoren, se tallennetaan paikallisesti ja asetetaan "syncedHS" nollaan. Metodi 
-HighscoreManager.Sync() yrittää päivittää pelaajan Highscorea niin kauan kunnes se onnistuu. Tämän jälkeen syncedHS asetetaan taas
-ykköseksi (eli highscore on "synkassa"). "SyncedHS" tarkastetaan myös aina kun appsi käynnistyy.
-
-
-Toinen apumuuttuja on nimeltään **"registered"** (0 tai 1). Muuttuja kertoo onko pelaaja rekisteröitynyt serverille vai ei. Muuttujalla
-päätetään ohjelmassa erilaisia asioita:
- - Näytetäänkö pelaajalle alussa rekisteröintiruutu vai ei.
- - Yritetäänkö paikallista highscorea päivittää (Jos ei rekisteröitynyt niin ei kannata)
- - Estää uudelleen rekisteröitymisen
- 
- (vielä omassa branchissä)
- Uusi tulokas on **rank** muuttuja. Se tallettaa pelaajan rankin (joka tällä hetkellä päivitetään servulta 1min välein).
