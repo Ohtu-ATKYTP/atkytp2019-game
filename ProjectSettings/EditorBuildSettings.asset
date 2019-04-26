@@ -9,30 +9,33 @@ EditorBuildSettings:
     path: Assets/Scenes/MainMenu/MainMenu.unity
     guid: d1581b85f66551644b556e2724477728
   - enabled: 1
-    path: Assets/Scenes/MainMenu/Registration.unity
-    guid: 1ab79a59342494cf4888680dec9c93cb
-  - enabled: 1
-    path: Assets/Scenes/MainMenu/Settings.unity
-    guid: 9208bb85285d4447d8f34ca68f492401
-  - enabled: 1
-    path: Assets/Scenes/MainMenu/Highscores.unity
-    guid: a498e715e511541e390ef365e232fd39
-  - enabled: 1
-    path: Assets/Scenes/Development/DebugBetweenGameScreen.unity
-    guid: 73c241fac87c816e8a5d20c1cc7ec059
-  - enabled: 1
-    path: Assets/Scenes/Minigames/BetweenGameScreen.unity
-    guid: 31199e994df73baa080811712f92c52c
-  - enabled: 1
     path: Assets/Scenes/Minigames/TurkuGame.unity
     guid: 624f23f7b5b04d347b1ffbe4938ada1b
   - enabled: 1
     path: Assets/Scenes/Minigames/PlaceCity.unity
     guid: a05118a1e411fdb4d9dd85e8253a8e24
   - enabled: 1
+    path: Assets/Scenes/Minigames/BetweenGameScreen.unity
+    guid: 31199e994df73baa080811712f92c52c
+  - enabled: 1
     path: Assets/Scenes/Minigames/LogoHaalariin.unity
     guid: 52b7924d7febc448cb97b5820b102e51
   - enabled: 1
+    path: Assets/Scenes/Development/DebugBetweenGameScreen.unity
+    guid: 73c241fac87c816e8a5d20c1cc7ec059
+  - enabled: 1
+    path: Assets/Scenes/Minigames/ElevatorRescue.unity
+    guid: d0be436a58a9049c4a800ffde3f64eaf
+  - enabled: 1
     path: Assets/Scenes/Minigames/ElevatorGame.unity
     guid: 895bd7b67a5c9de41a38c5911e64ec0e
+  - enabled: 1
+    path: Assets/Scenes/MainMenu/Highscores.unity
+    guid: a498e715e511541e390ef365e232fd39
+  - enabled: 1
+    path: Assets/Scenes/MainMenu/Registration.unity
+    guid: 1ab79a59342494cf4888680dec9c93cb
+  - enabled: 1
+    path: Assets/Scenes/MainMenu/Settings.unity
+    guid: 9208bb85285d4447d8f34ca68f492401
   m_configObjects: {}
