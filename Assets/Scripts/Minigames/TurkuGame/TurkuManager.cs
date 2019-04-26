@@ -46,13 +46,13 @@ public class TurkuManager : MonoBehaviour, IMinigameEnder {
     IEnumerator RunLoseAnimation() {
         flood.StartAnimation();
         yield return new WaitForSecondsRealtime(4);
-        GameManager.endMinigame(false, 0);
+        GameManager.endMinigame(false);
     }
 
     IEnumerator RunWinAnimation() {
         turkuAnimation.StartAnimation();
         yield return new WaitForSecondsRealtime(3);
-        GameManager.endMinigame(true, 10);
+        GameManager.endMinigame(true);
     }
 
 
