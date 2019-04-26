@@ -10,8 +10,8 @@ public class JalluLogic : MinigameLogic
     public float introductionLength;
     private int remainingLiquid = 0;
     public Text finishText;
+    public JalluDifficultyAdjuster difAdjuster;
 
-   
 
     protected override void Start() {
         base.Start();
@@ -19,40 +19,39 @@ public class JalluLogic : MinigameLogic
         StartCoroutine(CORIntroduceGame());
     }
 
-    protected override Task DisplayEndingActions(bool won)
-    {
+    protected override Task DisplayEndingActions(bool won) {
         finishText.gameObject.SetActive(true);
-        finishText.text = won ? "You drank the whole bottle" : "You showed restraint";
+        finishText.text = won ? "You drank a bottle of tasty refreshment!" : "You drank the bottle of methane someone left on the table. RIP";
         return base.DisplayEndingActions(won);
     }
 
-    protected override void ConfigureDifficulty(int difficulty) {
-        Debug.Log("The difficulty of the Jallu shall be: " + difficulty);
-        FindObjectOfType<TimeProgress>().SetTime(1000f);
+    protected override void ConfigureDifficulty(int difficulty) {    
+        difAdjuster.Configure(difficulty);
     }
 
-    public void AddLiquid()
-    {
-        remainingLiquid++; 
+    public void AddLiquid() {
+        remainingLiquid++;
     }
 
-    public void RemoveLiquid()
-    {
-        remainingLiquid--; 
-        if (remainingLiquid <= 0)
-        {
+    public void RemoveLiquid() {
+        remainingLiquid--;
+        if (remainingLiquid <= 0) {
             this.WinMinigame();
         }
     }
 
-    
+
 
     public IEnumerator CORIntroduceGame() {
-        while(introductionLength > 0){ 
+        while (introductionLength > 0) {
             introductionLength -= Time.deltaTime;
-            yield return null; 
-            }
+            yield return null;
+        }
 
-        FindObjectOfType<JalluRotator>().Initialize(); 
+        if (!Application.isEditor) {
+            FindObjectOfType<JalluRotator>().Initialize();
+        }
     }
+
+    
 }
