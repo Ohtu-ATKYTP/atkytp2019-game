@@ -15,107 +15,76 @@ public class JumpmanLogic : MonoBehaviour {
     private GameObject heightLine;
     private Rigidbody2D RB;
     
-    private float maxGravScale;
-    private float minGravScale;
-    private float minJumpForce;
-    private float maxJumpForce;
-    private float downForce;
-
-    bool firstJump;
-    public float height;
+    private bool firstJump;
     private bool highEnough;
     private bool inJump;
 
     private float androidScaler;
-    private float gravScaleStart;
-    private float jumpForceStart;
 
+    private float jumpForceStart;
+    private float minJumpForce;
+    private float maxJumpForce;
+    private float downForce;
     private float gravMultiplier;
     private float jumpMultiplier;
+    private float gravScaleStart;
+    private float gravScale;
 
 
     void Start() {
 
-        //Physics parameters
+        //Physics parameters. Adjust for different behaviour.
         gravScaleStart = 200;
         jumpForceStart =  5000;
         gravMultiplier = 40;
         jumpMultiplier = 300;
-        androidScaler = 1f;
         downForce = 300000;
+
+        //If physics behave differently on project and android, adjust this multiplier
+        androidScaler = 0.3f;
 
         highEnough = false;
         firstJump = false;
         inJump = false;
         
         EGLogic = GameObject.FindGameObjectWithTag("Logic").GetComponent<ElevatorGameLogic>();
-
         jumperPositions = GameObject.FindGameObjectWithTag("Logic").GetComponent<JumperPositions>();
-
-        RB = GetComponent<Rigidbody2D>();
         heightLine = GameObject.Find("HeightLine");
+        RB = GetComponent<Rigidbody2D>();
 
-        minGravScale = gravScaleStart;
-        maxGravScale = minGravScale;
-        
-        minJumpForce = jumpForceStart; //1000; //13000
-        maxJumpForce = minJumpForce*4f;//5000;
-        
         if(DataController.GetDebugMode()){
             this.initDebuggerParams();
         }
 
-        int difficulty = DataController.GetDifficulty();
-        float difficultyAdjuster = difficulty;
-        this.AdjustDifficulty(difficultyAdjuster);
+        this.AdjustDifficulty(DataController.GetDifficulty());
     }
 
     void Update(){
         this.CheckYpos();
     }
 
+
+    //If debugger screen is used, you can adjust parameters with sliders.
     private void initDebuggerParams(){
-        //androidScaler = DataController.getGameParameter("gravityScaleMax"); //android
-        //gravMultiplier = DataController.getGameParameter("gravityScaleMin"); //gravMult
-        //jumpMultiplier = DataController.getGameParameter("jumpForce");       //jumpMult
+        gravScaleStart = DataController.getGameParameter("gravityStart");
+        gravMultiplier = DataController.getGameParameter("gravityMultiplier");
+        jumpMultiplier = DataController.getGameParameter("jumpMultiplier");
     }
     
     //Adjusts jumpforce and gravity scale based on difficulty;
-    public void AdjustDifficulty(float gravScaleAdjuster){
-        maxGravScale = (maxGravScale+((gravScaleAdjuster-1)*gravMultiplier))*androidScaler;
-        Debug.Log("Max grav is "+maxGravScale);
-        minGravScale = maxGravScale;
-        minJumpForce = (minJumpForce + ((gravScaleAdjuster-1)*jumpMultiplier))*androidScaler;
+    public void AdjustDifficulty(float difficulty){
+        gravScale = (gravScaleStart+((difficulty-1)*gravMultiplier))*androidScaler;
+        minJumpForce = (jumpForceStart + ((difficulty-1)*jumpMultiplier))*androidScaler;
         maxJumpForce = minJumpForce*2f;
-
-        //if(DataController.GetDifficulty()==1){
-        //    Debug.Log("Set difficulty 1");
-        //    maxGravScale = 200*androidScaler;
-        //    minGravScale = maxGravScale;
-        //    minJumpForce = 5000*androidScaler;
-        //    maxJumpForce = minJumpForce*2f;
-        //}
-
-        //if(DataController.GetDifficulty()==10){
-        //    maxGravScale = 600*androidScaler;
-        //    minGravScale = maxGravScale;
-        //    minJumpForce = 8000*androidScaler;
-        //    maxJumpForce = minJumpForce*2f;
-        //}
     }
     
-    
-
     private void CheckYpos(){
-        //if(transform.position.y > 350){
-        //Android positions are different so have to use heightLine Object
         if(transform.position.y > heightLine.transform.position.y){
             if(highEnough == false){
                 highEnough = true;
                 jumperPositions.increaseJumpmenHighEnough();
                 GetComponent<Image>().color = Color.red;
             }
-            
         }else{
             if(highEnough == true){
                 highEnough = false;
@@ -137,9 +106,8 @@ public class JumpmanLogic : MonoBehaviour {
             GetComponent<Image>().sprite = jumping;
         }
         inJump = true;
-        
-        RB.gravityScale = Random.Range(minGravScale,maxGravScale);
-        RB.velocity = Vector2.zero; //Zero velocity before jump
+        RB.gravityScale = gravScale;
+        RB.velocity = Vector2.zero;
         RB.AddForce(Vector2.up*Random.Range(minJumpForce, maxJumpForce), ForceMode2D.Impulse);
     }
     
@@ -157,5 +125,4 @@ public class JumpmanLogic : MonoBehaviour {
     public void ForceDown(){
         GetComponent<Rigidbody2D>().AddForce(Vector2.down*downForce, ForceMode2D.Impulse);
     }
-
 }

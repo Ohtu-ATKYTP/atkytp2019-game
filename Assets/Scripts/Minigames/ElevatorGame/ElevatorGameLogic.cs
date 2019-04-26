@@ -21,26 +21,24 @@ public class ElevatorGameLogic : MonoBehaviour, IMinigameEnder {
     private bool endedGame;
 
     void Start() {
-        borders = GameObject.FindGameObjectsWithTag("Border");
-
+        
         endedGame = false;
         damage = 0;
 
-        jumpmanList =  GameObject.FindGameObjectsWithTag("Jumpman");
         miniGameLogic = GameObject.FindObjectOfType<MinigameLogic>();
-        timer = FindObjectOfType<TimeProgress>();
-        
-        brokenRope = GameObject.Find("BrokenSupportRopes");
-        brokenRope.SetActive(false);
-
+        borders = GameObject.FindGameObjectsWithTag("Border");
+        jumpmanList =  GameObject.FindGameObjectsWithTag("Jumpman");
         supportRope = GameObject.Find("SupportRope");
-
         infoText = GameObject.Find("InfoText");
 
+        brokenRope = GameObject.Find("BrokenSupportRopes");
+        brokenRope.SetActive(false);
+        
+        timer = FindObjectOfType<TimeProgress>();
         timer.SetTime(15);
+
         instructions = GameObject.FindGameObjectWithTag("Instructions");
         instructions.SetActive(false);
-        
         if(DataController.GetDifficulty() == 1){
             DisplayInstructions();
         }
@@ -53,10 +51,9 @@ public class ElevatorGameLogic : MonoBehaviour, IMinigameEnder {
         timer.SetTime(15);
     }
 
-    //Damage after smash. Right now win with 1, but option to add more.
+    //Win with one damage (one forcedown), but option to add more.
     public void AddDamage(float DMG){
         damage += DMG;
-        
         if(damage >= 1 && !endedGame){
             endedGame = true;
             this.WinMinigame();
@@ -68,14 +65,11 @@ public class ElevatorGameLogic : MonoBehaviour, IMinigameEnder {
             jumper.GetComponent<EventTrigger>().enabled = false;
             jumper.GetComponent<JumpmanLogic>().ChangeToScared();
         }
-
         brokenRope.SetActive(true);
         supportRope.SetActive(false);
-
         GameObject.FindObjectOfType<ElevatorShaftMove>().move = false;
-
-        this.AddRigidBodies();
         
+        this.AddRigidBodies();
         EndGame(true);
     }
 
