@@ -32,29 +32,6 @@ namespace Tests
 
 
 
-        [UnityTest]
-        public IEnumerator TestScore()
-        {   
-            yield return new WaitForSeconds(1);
-            yield return null;
-            //---------------------------------------------------------------
-            Debug.Log("Score: " + DataController.GetCurrentScore());
-            DataController.AddCurrentScore(10);
-            yield return null;
-            Debug.Log("Score: " + DataController.GetCurrentScore());
-            DataController.AddCurrentScore(10);
-            yield return null;
-            Debug.Log("Score: " + DataController.GetCurrentScore());
-            DataController.AddCurrentScore(0);
-            yield return null;
-            Debug.Log("Score: " + DataController.GetCurrentScore());
-            DataController.AddCurrentScore(30);
-            yield return null;
-            Debug.Log("Score: " + DataController.GetCurrentScore());
-            Assert.That(DataController.GetCurrentScore(), Is.EqualTo(50));
-
-        }
-
         [TearDown]
         public void TearDown()
         {
