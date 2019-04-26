@@ -10,6 +10,7 @@ public class LogoHaalariinLogic : MonoBehaviour {
     public int associationAmount;
     public HaalariUpdater haalariUpdater;
     public LogoUpdater logoUpdater;
+    private bool gameOver = false;
 
     void Start() {
         timer = FindObjectOfType<TimeProgress>();
@@ -48,6 +49,10 @@ public class LogoHaalariinLogic : MonoBehaviour {
 
     // win / lose in other cases except time running out 
     public async void endGame() {
+        if (this.gameOver) {
+            return;
+        }
+        this.gameOver = true;
         timer.StopTimerProgression();
 
         bool win = this.logo == this.haalari;
@@ -64,6 +69,7 @@ public class LogoHaalariinLogic : MonoBehaviour {
     }
 
     public async void timesUp() {
+        this.gameOver = true;
         logoUpdater.startDropLogoAnimation();
         await new WaitForSecondsRealtime(3);
         GameManager.endMinigame(false);

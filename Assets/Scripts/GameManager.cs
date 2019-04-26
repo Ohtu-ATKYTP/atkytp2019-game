@@ -86,7 +86,9 @@ public static class GameManager
             if (id != null && id.Length > 0)
             {
                 Highscore highscore = await Highscores.Update(id, score);
-                PlayerPrefs.SetInt("rank", highscore.rank);
+                if (highscore != null) {
+                    PlayerPrefs.SetInt("rank", highscore.rank);
+                }
             }
         }
         DataController.Init();
