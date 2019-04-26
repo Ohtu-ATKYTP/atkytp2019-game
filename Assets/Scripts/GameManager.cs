@@ -7,7 +7,8 @@ using System.Linq;
 public static class GameManager
 {
     private static string currentGame;
-    private static string[] games = { "PlaceCity", "TurkuGame", "LogoHaalariin", "ElevatorGame", "ElevatorRescue" };
+
+    private static string[] games = {"PlaceCity", "TurkuGame", "LogoHaalariin", "ElevatorGame", "ElevatorRescue", "MetroGame", "Tamperelainen"};
     private static string betweenGameScreen = "BetweenGameScreen";
     private static string mainMenu = "MainMenu";
 
@@ -55,7 +56,7 @@ public static class GameManager
         }
         else
         {
-            dubugBetweenGame();
+            debugBetweenGame();
         }
     }
 
@@ -111,7 +112,7 @@ public static class GameManager
         SceneManager.LoadScene("DebugBetweenGameScreen");
     }
 
-    private static async void dubugBetweenGame()
+    private static void debugBetweenGame()
     {
         if (DataController.GetLives() == 0)
         {
