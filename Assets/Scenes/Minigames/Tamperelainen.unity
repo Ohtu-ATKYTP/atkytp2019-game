@@ -370,7 +370,7 @@ Transform:
   m_GameObject: {fileID: 663888272}
   m_LocalRotation: {x: -0, y: -0, z: 0.12303538, w: 0.9924023}
   m_LocalPosition: {x: 0, y: -168, z: 0}
-  m_LocalScale: {x: 4.0318, y: 2.68787, z: 1.8536999}
+  m_LocalScale: {x: 2.3333235, y: 2.68787, z: 1.8536999}
   m_Children: []
   m_Father: {fileID: 1167472105}
   m_RootOrder: 0
@@ -811,7 +811,7 @@ Transform:
   m_GameObject: {fileID: 1828587645}
   m_LocalRotation: {x: -0, y: -0, z: -0.1854003, w: 0.9826631}
   m_LocalPosition: {x: -385.34964, y: -17.03888, z: 0}
-  m_LocalScale: {x: 4.031797, y: 2.6878653, z: 1.8537}
+  m_LocalScale: {x: 3.2543857, y: 2.6878653, z: 1.8537}
   m_Children: []
   m_Father: {fileID: 1167472105}
   m_RootOrder: 1
@@ -1032,6 +1032,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2373825414488131404, guid: 429ac7998153b6f43bf9d92cb21957bf,
+        type: 3}
+      propertyPath: TimerReadyMethods.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 85307753}
+    - target: {fileID: 2373825414488131404, guid: 429ac7998153b6f43bf9d92cb21957bf,
+        type: 3}
+      propertyPath: TimerReadyMethods.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: timesUp
       objectReference: {fileID: 0}
     - target: {fileID: 2373825414128706435, guid: 429ac7998153b6f43bf9d92cb21957bf,
         type: 3}
