@@ -2,7 +2,6 @@
 
 public abstract class MinigameLogic : MonoBehaviour, IMinigameEnder {
     [SerializeField]
-    protected int pointsForWinning = 10;
     protected TimeProgress timebar;
 
     protected virtual void Start() {
@@ -18,9 +17,7 @@ public abstract class MinigameLogic : MonoBehaviour, IMinigameEnder {
         FindObjectOfType<TimeProgress>().StopTimerProgression();
 
         DisplayEndingActions(won);
-        GameManager.endMinigame(won,
-                won ? pointsForWinning : 0
-        );
+        GameManager.endMinigame(won);
     }
 
 

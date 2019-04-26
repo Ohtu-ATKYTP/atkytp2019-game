@@ -23,12 +23,22 @@ public static class GameManager {
         currentGame = game;
     }
 
-    public static void endMinigame(bool win, int score) {
+    public static void endMinigame(bool win) {
         DataController.SetWinStatus(win);
         if (!win) {
             DataController.TakeLife();
         }
+        // Base score = 10 if win, else 0
+        int score = win ? 10 : 0;
+        // Adding to score based on difficulty
+        int difficultyAddition = DataController.GetDifficulty() / 2;
+        score += difficultyAddition;
+        // Adding to score random number between -4 and 4
+        int randomAddition = Random.Range(-4, 5);
+        score += randomAddition;
+
         DataController.AddCurrentScore(score);
+
 		DataController.incrementRoundsCompleted();
 		DataController.UpdateDifficulty();
 

@@ -23,7 +23,7 @@ namespace Tests
         {
 
             yield return null;
-            GameManager.endMinigame(true, 0);
+            GameManager.endMinigame(true);
             yield return null;
             Scene scene = SceneManager.GetSceneByName("BetweenGameScreen");
             yield return null;
