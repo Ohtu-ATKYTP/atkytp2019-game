@@ -11,21 +11,32 @@ public class JalluLogic : MinigameLogic
     private int remainingLiquid = 0;
     public Text finishText;
     public JalluDifficultyAdjuster difAdjuster;
+    public bool gameOver;
 
 
     protected override void Start() {
         base.Start();
         finishText.gameObject.SetActive(false);
+        gameOver = false;
         StartCoroutine(CORIntroduceGame());
     }
 
     protected override Task DisplayEndingActions(bool won) {
         finishText.gameObject.SetActive(true);
-        finishText.text = won ? "You drank a bottle of tasty refreshment!" : "You drank the bottle of methane someone left on the table. RIP";
+        finishText.text = won ? "You drank a bottle of tasty refreshment!" : "You wasted too much time";
         return base.DisplayEndingActions(won);
     }
 
-    protected override void ConfigureDifficulty(int difficulty) {    
+
+    protected override  void EndMinigameAsync(bool won) {
+        if (gameOver) {
+            return;
+        }
+        gameOver = true;
+        base.EndMinigameAsync(won);
+    }
+
+    protected override void ConfigureDifficulty(int difficulty) {
         difAdjuster.Configure(difficulty);
     }
 
@@ -40,8 +51,6 @@ public class JalluLogic : MinigameLogic
         }
     }
 
-
-
     public IEnumerator CORIntroduceGame() {
         while (introductionLength > 0) {
             introductionLength -= Time.deltaTime;
@@ -53,5 +62,5 @@ public class JalluLogic : MinigameLogic
         }
     }
 
-    
+
 }
