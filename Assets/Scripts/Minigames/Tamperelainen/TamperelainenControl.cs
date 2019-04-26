@@ -11,33 +11,39 @@ public class TamperelainenControl : MonoBehaviour
     private float direction = 0f;
 
     //finals
-    private readonly float ACCEPTED_AREA_LEFT = 70f;
-    private readonly float ACCEPTED_AREA_RIGHT = 300f;
+
     private readonly float SPEED = 7000f;
     private readonly float DRUNK_SPEED_RANGE = 5000f;
     private readonly float START_TIME = 1.0f;
     private readonly float INTERVAL = 1.5f;
 
+    private bool isFalling;
+
     public Image broken_window;
+
+    Animator animator;
 
     // Start is called before the first frame update
 
     private TamperelainenLogic logicScript;
     void Start()
     {
+        animator = GameObject.Find("GameObjects").GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
         InvokeRepeating("DefineDrunkDirectionAndSpeed", START_TIME, INTERVAL);
         logicScript = FindObjectOfType<TamperelainenLogic>();
         broken_window.enabled = false;
+        isFalling = false;
+        animator.SetBool("isFalling", isFalling);
     }
 
 
     void FixedUpdate()
     {
+
+        
         Control();
         Drunkify();
-        //CheckLoseCondition();
-
 
     }
 
@@ -49,52 +55,56 @@ public class TamperelainenControl : MonoBehaviour
     void OnCollisionEnter2D(Collision2D other)
     {
         Debug.Log("Hit!");
-        if (other.gameObject.name == "Hitbox_left") {
+        if (other.gameObject.name == "Hitbox_left")
+        {
             BreakWindow();
             this.enabled = false;
             logicScript.LoseMinigame();
-        } else if (other.gameObject.name == "Hitbox_right") {
-            this.enabled = false;
-            logicScript.LoseMinigame();
         }
-    }
-
-    private void Control() {
-        rb.AddForce(transform.right * Input.acceleration.x * SPEED * (1 + (Mathf.Abs(GetPositionX()) / 100)));
-    }
-
-    private void Drunkify() {
-        rb.AddForce(transform.right * this.direction * this.drunkSpeed);
-    }
-
-    private void DefineDrunkDirectionAndSpeed() {
-        this.direction = Random.Range(-DRUNK_SPEED_RANGE, DRUNK_SPEED_RANGE);
-        this.drunkSpeed = Random.Range(1f, 2f);
-
-    }
-
-    private void CheckLoseCondition() {
-        float xPostion = this.GetPositionX();
-        Debug.Log("Position x:" + xPostion);
-        if (xPostion < ACCEPTED_AREA_LEFT || xPostion > ACCEPTED_AREA_RIGHT ) {
-            if (xPostion < ACCEPTED_AREA_LEFT) BreakWindow(); else FallRight();
+        else if (other.gameObject.name == "Hitbox_right")
+        {
+            isFalling = true;
+            animator.SetBool("isFalling", isFalling);
             this.enabled = false;
             logicScript.LoseMinigame();
             
         }
     }
 
-    private float GetPositionX() {
+    private void Control()
+    {
+        rb.AddForce(transform.right * Input.acceleration.x * SPEED * (1 + (Mathf.Abs(GetPositionX()) / 100)));
+    }
+
+    private void Drunkify()
+    {
+        rb.AddForce(transform.right * this.direction * this.drunkSpeed);
+    }
+
+    private void DefineDrunkDirectionAndSpeed()
+    {
+        this.direction = Random.Range(-DRUNK_SPEED_RANGE, DRUNK_SPEED_RANGE);
+        this.drunkSpeed = Random.Range(1f, 2f);
+
+    }
+
+
+
+    private float GetPositionX()
+    {
         float position_x = this.GetComponent<RectTransform>().position.x;
         return position_x;
     }
 
-    private void FallRight() {
+    private void FallRight()
+    {
         //Destroy(GetComponent<HingeJoint2D>());
     }
 
-    private void BreakWindow() {
+    private void BreakWindow()
+    {
         broken_window.enabled = true;
+        Destroy(this.gameObject);
     }
 
 

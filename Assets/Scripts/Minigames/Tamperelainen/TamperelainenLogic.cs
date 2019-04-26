@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System;
 
 public class TamperelainenLogic: MonoBehaviour, IMinigameEnder {
     private TimeProgress timer;
@@ -17,7 +18,7 @@ public class TamperelainenLogic: MonoBehaviour, IMinigameEnder {
         difficulty = DataController.GetDifficulty();
 
         //Setting game time
-        int time = 5 + this.difficulty;
+        int time = 4 + Math.Min(3, difficulty);
 
         timer.SetTime(time);
     }
