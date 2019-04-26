@@ -6,6 +6,8 @@ public class MetroController : MonoBehaviour, IMinigameEnder
 {
     public Transform metroPos;
     public Transform scene;
+    public BoxCollider2D w1;
+    public BoxCollider2D w2;
     bool gameOver = false;
     
 //DataController.GetDifficulty()
@@ -27,7 +29,7 @@ public class MetroController : MonoBehaviour, IMinigameEnder
 
     void Update()
     {
-        if(metroPos.position.x<-6 && !gameOver){
+        if(w1.IsTouching(w2) && !gameOver){
             WinMinigame();
         }
     }
