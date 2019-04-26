@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   organizations:
   - name: Asteriski
-    logo: {fileID: 21300000, guid: 9a4ab01be299a4a0187f9ab01e702fc5, type: 3}
+    logo: {fileID: 21300000, guid: 2124c556c358578409e5d4d9990e8f0a, type: 3}
   - name: Blanko
     logo: {fileID: 21300000, guid: 93a1d4cd2dbab24459c873d96b86522e, type: 3}
   - name: Linkki
@@ -22,6 +22,6 @@ MonoBehaviour:
   - name: Luuppi
     logo: {fileID: 21300000, guid: 890c65fa5a5439e479c51699d2f31785, type: 3}
   - name: Serveri
-    logo: {fileID: 21300000, guid: b08ef3bffd18d4f00ad9c02bbf14359b, type: 3}
+    logo: {fileID: 21300000, guid: 3da5dac37d2a02d42a1ec4e695ef8da4, type: 3}
   - name: TKO-Aly
     logo: {fileID: 21300000, guid: deb3d7560fc241d479e7ee085afc3829, type: 3}

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityAsyncAwaitUtil; 
+using UnityAsyncAwaitUtil;
 
 public class PlaceCityManager : MonoBehaviour, IMinigameEnder
 {
@@ -16,15 +16,15 @@ public class PlaceCityManager : MonoBehaviour, IMinigameEnder
     private bool gameIsOver = false;
 
 
-    public float initialInstructionDuration = 2f;
-    public float initialInstructionFadeDuration = 1f;
+    public float initialInstructionDuration = 3f;
+    public float initialInstructionFadeDuration = 1.5f;
 
     public int difficulty;
 
 
 
     public async void Start() {
-       // difficulty = DataController.GetDifficulty();
+        difficulty = DataController.GetDifficulty();
         GetComponent<DifficultyAdjuster>().Initialize(difficulty);
 
 #if UNITY_EDITOR
@@ -43,19 +43,21 @@ public class PlaceCityManager : MonoBehaviour, IMinigameEnder
         DisplayInstructionsBeforeGame();
         targetCity = locations[((int)Random.Range(0f, 6f))].gameObject;
 
+        // wait so the mystery remains: what org will I have to place? 
         await new WaitForSecondsRealtime(initialInstructionDuration);
+
         FindObjectOfType<OrganizationDisplayer>().Initialize(organisationsByCities[targetCity.name]);
     }
 
     private async void DisplayInstructionsBeforeGame() {
-        TimeProgress timer = FindObjectOfType<TimeProgress>(); 
+        TimeProgress timer = FindObjectOfType<TimeProgress>();
         timer.TogglePause();
         FadingInstructor fade = FindObjectsOfType<FadingInstructor>().First(fi => fi.name.Equals("Instructions"));
-        Time.timeScale = 0f; 
-        fade.Fade(initialInstructionDuration, initialInstructionFadeDuration);   
+        Time.timeScale = 0f;
+        fade.Fade(initialInstructionDuration, initialInstructionFadeDuration);
         await new WaitForSecondsRealtime(initialInstructionDuration + initialInstructionFadeDuration);
+        Time.timeScale = 1f;
         timer.TogglePause();
-        Time.timeScale = 1f; 
     }
 
 

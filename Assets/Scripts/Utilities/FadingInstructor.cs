@@ -11,17 +11,32 @@ public class FadingInstructor : MonoBehaviour
     public float delay = 0;
     private Text[] texts;
     private SpriteRenderer[] sprites;
-    private Image[] images; 
+    private Image[] images;
+
+    private bool initialized = false;
+
+    private float[] initTextAlphas;
+    private float[] initSpriteAlphas;
+    private float[] initImageAlphas;
 
 
     void Start() {
-        Initialize();
+        if (!initialized) {
+            Initialize();
+        }
     }
 
     void Initialize() {
+        initialized = true;
         texts = GetComponentsInChildren<Text>();
         sprites = GetComponentsInChildren<SpriteRenderer>();
         images = GetComponentsInChildren<Image>();
+
+        // Initial alpha of image / text might well be less than one - need to store for when that element is displayed again
+        initTextAlphas = texts.Select(t => t.color.a).ToArray();
+        initSpriteAlphas = sprites.Select(s => s.color.a).ToArray();
+        initImageAlphas = images.Select(i => i.color.a).ToArray();
+
         UpdateTextsAlpha(0);
         UpdateSpritesAlpha(0);
         UpdateImagesAlpha(0);
@@ -33,18 +48,14 @@ public class FadingInstructor : MonoBehaviour
     }
 
     public void Fade(float visibleTime, float transitionTime, float delay) {
-        if (texts == null && sprites == null) {
+
+        if (!initialized) {
             Initialize();
         }
         this.delay = delay;
         this.visibleDuration = visibleTime;
         this.fadeDuration = transitionTime;
-      /*  if (sprites == null) {
-            StartCoroutine(CORFadeAwayText());
-        } else { */
-            StartCoroutine(CORFadeAway());
-       // }
-
+        StartCoroutine(CORFadeAway());
     }
 
 
@@ -54,7 +65,7 @@ public class FadingInstructor : MonoBehaviour
 
     private void UpdateTextsAlpha(float a) {
         texts.ToList().ForEach(txt => {
-            txt.color = ChangeAlpha(txt.color, a);
+            txt.color = ChangeAlpha(txt.color, Mathf.Min(a, txt.color.a));
             txt.SetAllDirty();
         });
     }
@@ -62,15 +73,20 @@ public class FadingInstructor : MonoBehaviour
 
     private void UpdateSpritesAlpha(float a) {
         sprites.ToList().ForEach(sprite =>
-                sprite.color = ChangeAlpha(sprite.color, a));
+                sprite.color = ChangeAlpha(sprite.color, Mathf.Min(a, sprite.color.a)));
     }
 
-    private void UpdateImagesAlpha(float a){ 
-                images.ToList().ForEach(image =>
-                image.color = ChangeAlpha(image.color, a));
-        }
+    private void UpdateImagesAlpha(float a) {
+        images.ToList().ForEach(image =>
+        image.color = ChangeAlpha(image.color, Mathf.Min(a, image.color.a)));
+    }
 
     private IEnumerator CORFadeAway() {
+
+        // we need to wait for a frame always before updating the initial alpha, otherwise the instructions remain invisible
+        if (delay <= 0) {
+            yield return null;
+        }
 
         while (delay > 0) {
             yield return null;
@@ -78,47 +94,39 @@ public class FadingInstructor : MonoBehaviour
         }
 
 
-        UpdateTextsAlpha(1);
-        UpdateSpritesAlpha(1);
-        UpdateImagesAlpha(1);
-        while (visibleDuration >= 0) {
-            yield return null;
-            visibleDuration -= Time.unscaledDeltaTime;
+
+
+        for (int i = 0; i < texts.Length; i++) {
+            texts[i].color = ChangeAlpha(texts[i].color, initTextAlphas[i]);
         }
 
+        for (int i = 0; i < sprites.Length; i++) {
+            sprites[i].color = ChangeAlpha(sprites[i].color, initSpriteAlphas[i]);
+        }
+
+        for (int i = 0; i < images.Length; i++) {
+            images[i].color = ChangeAlpha(images[i].color, initImageAlphas[i]);
+        }
+
+        while (visibleDuration > 0) {
+            yield return null;
+            visibleDuration -= Time.unscaledDeltaTime;
+
+        }
 
         float t = 1f;
+
+
         do {
             yield return null;
             t -= Time.unscaledDeltaTime / fadeDuration;
             UpdateTextsAlpha(t);
             UpdateSpritesAlpha(t);
-            UpdateImagesAlpha(t); 
-        } while (t >= 0);
+            UpdateImagesAlpha(t);
+        } while (t > 0);
     }
 
 
 
-    private IEnumerator CORFadeAwayText() {
-
-        while (delay > 0) {
-            yield return null;
-            delay -= Time.unscaledDeltaTime;
-        }
-
-        UpdateTextsAlpha(1);
-        while (visibleDuration >= 0) {
-            yield return null;
-            visibleDuration -= Time.unscaledDeltaTime;
-        }
-
-
-        float t = 1f;
-        do {
-            yield return null;
-            t -= Time.unscaledDeltaTime / fadeDuration;
-            UpdateTextsAlpha(t);
-        } while (t >= 0);
-    }
 
 }

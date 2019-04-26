@@ -42,9 +42,11 @@ using UnityEngine.UI;
  * - Similarly for horizontal line
  * 
  */
-public class DifficultyAdjuster : MonoBehaviour {
+public class DifficultyAdjuster : MonoBehaviour
+{
     public TimeProgress timer;
     public SpriteManager spriteManager;
+    public EuropeScreenAdjuster europeAdjuster;
     public float shortestPossibleTime = 1f;
     public float shortestPossibleTimeWithMapMovement = 7f;
     public int steps = 10;
@@ -52,12 +54,13 @@ public class DifficultyAdjuster : MonoBehaviour {
     private CameraMotionController cameraController;
     private GameObject gamePane;
     private System.Random random = new System.Random();
-    private GameObject gyroInstructions; 
+    private GameObject gyroInstructions;
 
 
     public void Initialize(int difficulty) {
         timer = FindObjectOfType<TimeProgress>();
         cityDisplayers = FindObjectsOfType<InformationDisplayer>();
+        europeAdjuster = FindObjectOfType<EuropeScreenAdjuster>();
         spriteManager = GameObject.Find("Finland").GetComponent<SpriteManager>();
         cameraController = Camera.main.GetComponent<CameraMotionController>();
         gamePane = GameObject.FindGameObjectWithTag("GamePane");
@@ -68,15 +71,15 @@ public class DifficultyAdjuster : MonoBehaviour {
         TuneSprite(difficulty);
         TuneFlipping(difficulty);
 
-       // Tuning the positions of the cities is unfinished(?)
-       // TuneFinlandRotation(difficulty);
+        // Tuning the positions of the cities is unfinished(?)
+        // TuneFinlandRotation(difficulty);
 
-        if (difficulty > 9) {
+        if (difficulty > 8) {
             gyroInstructions = GameObject.Find("GyroInstructionsPane");
-            gyroInstructions.GetComponent<Canvas>().enabled = true; 
+            gyroInstructions.GetComponent<Canvas>().enabled = true;
             gyroInstructions.GetComponentsInChildren<SpriteRenderer>().ToList().ForEach(sr => sr.enabled = true);
             PlaceCityManager mgr = FindObjectOfType<PlaceCityManager>();
-            gyroInstructions.GetComponent<FadingInstructor>().Fade(1f, 2f, mgr.initialInstructionDuration + mgr.initialInstructionFadeDuration); 
+            gyroInstructions.GetComponent<FadingInstructor>().Fade(1f, 2f, mgr.initialInstructionDuration + mgr.initialInstructionFadeDuration);
             if (random.Next(0, 2) == 0) {
                 TunePaneRotationInXYPlane(difficulty);
             } else {
@@ -96,13 +99,13 @@ public class DifficultyAdjuster : MonoBehaviour {
     }
 
     private void TuneTime(int difficulty) {
-        if (difficulty > 9) {
-            timer.SetTime(  20f - ((difficulty - 9) / 2) );
+        if (difficulty > 8) {
+            timer.SetTime(15f - ((difficulty - 8)));
             if (timer.seconds < shortestPossibleTimeWithMapMovement) {
-               timer.SetTime(  shortestPossibleTimeWithMapMovement );
+                timer.SetTime(shortestPossibleTimeWithMapMovement);
             }
         } else {
-            timer.SetTime( timer.seconds - (difficulty / (2 * steps)) * (timer.seconds - shortestPossibleTime) );
+            timer.SetTime(timer.seconds - (difficulty / (2 * steps)) * (timer.seconds - shortestPossibleTime));
             if (timer.seconds < shortestPossibleTime) {
                 timer.SetTime(shortestPossibleTime);
             }
@@ -131,28 +134,23 @@ public class DifficultyAdjuster : MonoBehaviour {
     private void TuneFlipping(int difficulty) {
         if (difficulty == 5) {
             spriteManager.Flip(true, false);
-        } else if (difficulty == 6) {
-            spriteManager.Flip(true, false);
-        } else if (difficulty == 7) {
-            spriteManager.Flip(true, true);
-        } else if (difficulty >= 8) {
+        } else if (difficulty >= 6) {
             int idx = random.Next(0, 4);
             // the two probabilities are independent of one another and both 1/2, so every
             // of the four combinations should be equally probable
             bool hor = idx % 2 == 0;
             bool vert = idx < 2;
             spriteManager.Flip(hor, vert);
+            europeAdjuster.Flip(hor, vert);
         }
     }
 
     private void TunePanePanning(int difficulty) {
 
         Vector2 movementDirection;
-        if (difficulty <= 11) {
+        if (difficulty <= 8) {
             movementDirection = random.NextDouble() < 0.5f ? Vector2.left : Vector2.right;
-        } else if (difficulty < 13) {
-            movementDirection = random.NextDouble() < 0.5f ? Vector2.down : Vector2.up;
-        } else if (difficulty < 14) {
+        } else if (difficulty == 9) {
             Vector2[] easyDirections = new[] { Vector2.one, -1 * Vector2.one, new Vector2(1, -1), new Vector2(-1, 2) };
             movementDirection = easyDirections[random.Next(0, easyDirections.Length)];
         } else {
@@ -166,17 +164,14 @@ public class DifficultyAdjuster : MonoBehaviour {
     private void TunePaneRotationInXYPlane(int difficulty) {
         bool clockWise = random.NextDouble() < .5f;
         Vector2 centerPoint = Vector2.zero;
-        if (difficulty <= 11) {
+        if (difficulty == 9) {
             centerPoint = new Vector2(0, (random.NextDouble() < .5f ? -1 : 1) * 50);
-        } else if (difficulty < 15) {
+        } else if (difficulty == 10) {
             float y = random.Next(-100, 100);
             centerPoint = new Vector2(0, y);
-        } else if (difficulty < 17) {
-            float x = random.Next(-100, 100);
-            centerPoint = new Vector2(x, 0);
         } else {
             centerPoint = new Vector2(random.Next(-100, 100), random.Next(-100, 100));
-        } 
+        }
 
         if (centerPoint.sqrMagnitude < 5) {
             centerPoint = Vector2.zero;
