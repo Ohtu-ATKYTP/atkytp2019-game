@@ -167,7 +167,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 99384763}
-  difficulty: 10
+  difficulty: 5
 --- !u!212 &99384765
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -270,7 +270,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 0}
-  difficulty: 10
+  difficulty: 5
 --- !u!1 &244638388
 GameObject:
   m_ObjectHideFlags: 0
