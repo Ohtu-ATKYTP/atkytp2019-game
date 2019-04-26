@@ -8,7 +8,6 @@ public class FloodAnimation : MonoBehaviour
     public ParticleSystem bubbles;
     public GameObject pointer;
     public GameObject topSprite;
-    private Vector3 direction = new Vector3(0, 1, 0);
     private bool started = false;
 
     private void Start()
@@ -29,8 +28,7 @@ public class FloodAnimation : MonoBehaviour
     {
         if (started)
         {
-            direction *= 1 + (2 * Time.deltaTime);
-            flood.Translate(direction * Time.deltaTime);
+            flood.Translate((-1*flood.position.y+1) * Vector3.up * Time.deltaTime);
             if (flood.position.y > 0) this.started = false;
         }
     }
