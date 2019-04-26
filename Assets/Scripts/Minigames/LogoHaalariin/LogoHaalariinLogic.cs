@@ -60,7 +60,6 @@ public class LogoHaalariinLogic : MonoBehaviour {
 
         await new WaitForSecondsRealtime(3);
 
-
         GameManager.endMinigame(win);
     }
 

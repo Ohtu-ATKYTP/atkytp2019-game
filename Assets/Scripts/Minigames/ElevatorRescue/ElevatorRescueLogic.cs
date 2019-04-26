@@ -5,7 +5,6 @@ public class ElevatorRescueLogic : MonoBehaviour, IMinigameEnder {
     [SerializeField]
     [Tooltip("Higher values mean more difficult minigame. Will be requested from the data manager in the game, but set here if you want to test only this scene.")]
     private int difficulty = 1;
-
     [Tooltip("The delay between the time of losing/winning, and the time of unloading the minigame scene (in seconds)")]
     public int delayAfterMinigameEndsInSeconds = 2;
 
@@ -80,9 +79,7 @@ public class ElevatorRescueLogic : MonoBehaviour, IMinigameEnder {
         await Task.Delay(1000 * delayAfterMinigameEndsInSeconds);
 
         Debug.Log("The scene is ready to be changed.");
-
         GameManager.endMinigame(won);
-        
     }
 
     public void LoseMinigame() {
