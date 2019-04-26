@@ -90,10 +90,11 @@ public static class GameManager {
         SceneManager.LoadScene("DebugBetweenGameScreen");
     }
 
-    private static void dubugBetweenGame() {
+    private static async void dubugBetweenGame() {
         if (DataController.GetLives() == 0) {
             endGame();
+        } else {
+            SceneManager.LoadScene("DebugBetweenGameScreen");
         }
-        SceneManager.LoadScene("DebugBetweenGameScreen");
     }
 }
