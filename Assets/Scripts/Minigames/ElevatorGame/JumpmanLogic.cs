@@ -41,7 +41,7 @@ public class JumpmanLogic : MonoBehaviour {
         downForce = 300000;
 
         //If physics behave differently on project and android, adjust this multiplier
-        androidScaler = 0.3f;
+        androidScaler = 1f;
 
         highEnough = false;
         firstJump = false;
