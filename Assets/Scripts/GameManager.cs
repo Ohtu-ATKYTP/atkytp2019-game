@@ -7,6 +7,7 @@ using System.Linq;
 public static class GameManager
 {
     private static string currentGame;
+
     private static string[] games = {"PlaceCity", "TurkuGame", "LogoHaalariin", "ElevatorGame", "ElevatorRescue", "MetroGame", "Tamperelainen"};
     private static string betweenGameScreen = "BetweenGameScreen";
     private static string mainMenu = "MainMenu";
@@ -55,7 +56,7 @@ public static class GameManager
         }
         else
         {
-            dubugBetweenGame();
+            debugBetweenGame();
         }
     }
 
@@ -85,7 +86,9 @@ public static class GameManager
             if (id != null && id.Length > 0)
             {
                 Highscore highscore = await Highscores.Update(id, score);
-                PlayerPrefs.SetInt("rank", highscore.rank);
+                if (highscore != null) {
+                    PlayerPrefs.SetInt("rank", highscore.rank);
+                }
             }
         }
         DataController.Init();
@@ -111,7 +114,7 @@ public static class GameManager
         SceneManager.LoadScene("DebugBetweenGameScreen");
     }
 
-    private static async void dubugBetweenGame()
+    private static void debugBetweenGame()
     {
         if (DataController.GetLives() == 0)
         {

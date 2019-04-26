@@ -38,7 +38,6 @@ public class CollisionLogic : MonoBehaviour
             EGLogic.forceDownActive=false;
             this.AddDamageVisuals();
         }
-
     }
 
     private void AddDamageVisuals(){
