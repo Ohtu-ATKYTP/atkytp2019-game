@@ -98,7 +98,7 @@ public class ElevatorGameLogic : MonoBehaviour, IMinigameEnder {
     public async void EndGame(bool won) {
         timer.StopTimerProgression();
         await new WaitForSecondsRealtime(3);
-        GameManager.endMinigame(won, won ? 10 : 0);
+        GameManager.endMinigame(won);
     }
 
     public void PressForceDownButton(){

@@ -60,12 +60,13 @@ public class LogoHaalariinLogic : MonoBehaviour {
 
         await new WaitForSecondsRealtime(3);
 
-        GameManager.endMinigame(win, win ? 10 : 0);
+
+        GameManager.endMinigame(win);
     }
 
     public async void timesUp() {
         logoUpdater.startDropLogoAnimation();
         await new WaitForSecondsRealtime(3);
-        GameManager.endMinigame(false, 0);
+        GameManager.endMinigame(false);
     }
 }

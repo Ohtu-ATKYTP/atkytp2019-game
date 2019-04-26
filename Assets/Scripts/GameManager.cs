@@ -4,86 +4,124 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Linq;
 
-public static class GameManager {
+public static class GameManager
+{
     private static string currentGame;
-    private static string[] games = {"PlaceCity", "TurkuGame", "LogoHaalariin", "ElevatorGame", "ElevatorRescue"};
+
+    private static string[] games = { "PlaceCity", "TurkuGame", "LogoHaalariin", "ElevatorGame", "ElevatorRescue" };
+
     private static string betweenGameScreen = "BetweenGameScreen";
     private static string mainMenu = "MainMenu";
 
-    public static void startGame() {
+    public static void startGame()
+    {
         DataController.Init();
         nextGame();
     }
 
-    public static void nextGame(string game = "Random") {
-        if (game == "Random") {
+    public static void nextGame(string game = "Random")
+    {
+        if (game == "Random")
+        {
             game = getRandomGame();
         }
         SceneManager.LoadScene(game);
         currentGame = game;
     }
 
-    public static void endMinigame(bool win, int score) {
+    public static void endMinigame(bool win)
+    {
         DataController.SetWinStatus(win);
-        if (!win) {
+        if (!win)
+        {
             DataController.TakeLife();
         }
+        // Base score = 10 if win, else 0
+        int score = win ? 10 : 0;
+        // Adding to score based on difficulty
+        int difficultyAddition = DataController.GetDifficulty() / 2;
+        score += difficultyAddition;
+        // Adding to score random number between -4 and 4
+        int randomAddition = Random.Range(-4, 5);
+        score += randomAddition;
+
         DataController.AddCurrentScore(score);
-		DataController.incrementRoundsCompleted();
-		DataController.UpdateDifficulty();
+
+        DataController.incrementRoundsCompleted();
+        DataController.UpdateDifficulty();
 
         // Debug mode checker
-        if (!DataController.GetDebugMode()) {
+        if (!DataController.GetDebugMode())
+        {
             betweenGame();
-        } else {
+        }
+        else
+        {
             dubugBetweenGame();
         }
     }
 
-    private static async void betweenGame() {
+    private static async void betweenGame()
+    {
         SceneManager.LoadScene(betweenGameScreen);
         await new WaitForSecondsRealtime(3);
-        if (DataController.GetLives() == 0) {
+        if (DataController.GetLives() == 0)
+        {
             endGame();
-        } else {
+        }
+        else
+        {
             nextGame();
         }
     }
 
-    public static async void endGame() {
+    public static async void endGame()
+    {
         SceneManager.LoadScene(mainMenu);
 
         int score = DataController.GetCurrentScore();
-        if (PlayerPrefs.GetInt ("highScore") < score) {
-            PlayerPrefs.SetInt ("highScore", score);
-            string id = PlayerPrefs.GetString ("_id");
-            Highscore highscore = await Highscores.Update (id, score);
-            PlayerPrefs.SetInt ("rank", highscore.rank);
+        if (PlayerPrefs.GetInt("highScore") < score)
+        {
+            PlayerPrefs.SetInt("highScore", score);
+            string id = PlayerPrefs.GetString("_id");
+            if (id != null && id.Length > 0)
+            {
+                Highscore highscore = await Highscores.Update(id, score);
+                PlayerPrefs.SetInt("rank", highscore.rank);
+            }
         }
         DataController.Init();
     }
 
     // Helper functions
-    private static string getRandomGame() {
+    private static string getRandomGame()
+    {
         string[] filteredGames = games.Where(game => game != currentGame).ToArray();
         return filteredGames[Random.Range(0, filteredGames.Length)];
     }
 
-    public static string[] getGames() {
+    public static string[] getGames()
+    {
         return games;
     }
 
     // Debugging functions
 
-    public static void startDebugGame() {
+    public static void startDebugGame()
+    {
         DataController.SetDebugMode(true);
         SceneManager.LoadScene("DebugBetweenGameScreen");
     }
 
-    private static void dubugBetweenGame() {
-        if (DataController.GetLives() == 0) {
+    private static async void dubugBetweenGame()
+    {
+        if (DataController.GetLives() == 0)
+        {
             endGame();
         }
-        SceneManager.LoadScene("DebugBetweenGameScreen");
+        else
+        {
+            SceneManager.LoadScene("DebugBetweenGameScreen");
+        }
     }
 }
