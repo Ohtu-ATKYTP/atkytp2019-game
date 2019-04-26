@@ -80,13 +80,9 @@ public class ElevatorRescueLogic : MonoBehaviour, IMinigameEnder {
         await Task.Delay(1000 * delayAfterMinigameEndsInSeconds);
 
         Debug.Log("The scene is ready to be changed.");
-<<<<<<< HEAD
-        GameManager.endMinigame(won,
-                won ? pointsForWinning : 0
-            );
-=======
+
         GameManager.endMinigame(won);
->>>>>>> master
+        
     }
 
     public void LoseMinigame() {
