@@ -10,7 +10,6 @@ public class MetroController : MonoBehaviour, IMinigameEnder
     public BoxCollider2D w2;
     bool gameOver = false;
     
-//DataController.GetDifficulty()
     void Start(){
         scene.Rotate(0,0,Mathf.Max(-90,(DataController.GetDifficulty()-1)*-5));
     }
@@ -18,13 +17,13 @@ public class MetroController : MonoBehaviour, IMinigameEnder
     public void WinMinigame() {
         this.gameOver = true;
         FindObjectOfType<TimeProgress>().StopTimerProgression();
-        GameManager.endMinigame(true, 10);
+        GameManager.endMinigame(true);
     }
     
     public void LoseMinigame() {
         gameOver = true;
         FindObjectOfType<TimeProgress>().StopTimerProgression();
-        GameManager.endMinigame(false, 0);
+        GameManager.endMinigame(false);
     }
 
     void Update()

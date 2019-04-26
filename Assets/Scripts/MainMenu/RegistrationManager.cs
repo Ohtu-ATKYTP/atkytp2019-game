@@ -23,6 +23,7 @@ public class RegistrationManager : MonoBehaviour {
             PlayerPrefs.SetString ("username", highscore.user);
             PlayerPrefs.SetString ("token", highscore.token);
             PlayerPrefs.SetInt ("highScore", highscore.score);
+            PlayerPrefs.SetInt ("rank", highscore.rank);
             PlayerPrefs.SetInt ("registered", 1);
             loadMainMenu();
         } else {

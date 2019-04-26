@@ -8,8 +8,11 @@ public class SettingsManager : MonoBehaviour {
 
     private Text playerInfo;
 
+    private int score;
+
     void Start() {
         playerInfo = GameObject.Find("PlayerInfo").GetComponent<Text>();
+        score = PlayerPrefs.GetInt("highScore");
         updatePlayerInfo();
     }
 
@@ -17,7 +20,7 @@ public class SettingsManager : MonoBehaviour {
         string info = "Username: "+ PlayerPrefs.GetString("username")+"\n";
         info += "ID: " + PlayerPrefs.GetString("_id") + "\n";
         info += "Token: " + PlayerPrefs.GetString("token") + "\n";
-        info += "Highscore: " + PlayerPrefs.GetInt("highScore") + "\n";
+        info += "Highscore: " + score + "\n";
         info += "Registered: " + ((PlayerPrefs.GetInt("registered") == 1) ? "yes" : "no")+ "\n";
         info += "Rank: " + PlayerPrefs.GetInt("rank") + "\n";
 
@@ -26,6 +29,7 @@ public class SettingsManager : MonoBehaviour {
 
     public void DeleteAllPlayerPrefs() {
         PlayerPrefs.DeleteAll();
+        score = 0;
         updatePlayerInfo();
     }
 
@@ -55,17 +59,20 @@ public class SettingsManager : MonoBehaviour {
     }
 
     public void increaseHighscore() {
-        PlayerPrefs.SetInt("highScore", PlayerPrefs.GetInt("highScore")+10);
+        score += 10;
         updatePlayerInfo();
     }
 
     public void decreaseHighscore() {
-        PlayerPrefs.SetInt("highScore",PlayerPrefs.GetInt("highScore")-10);
+        score -= 10;
         updatePlayerInfo();
     }
     
     public async void syncHS() {
-        await Highscores.Update (PlayerPrefs.GetString("_id"), PlayerPrefs.GetInt("highScore"));
+        Highscore highscore = await Highscores.Update (PlayerPrefs.GetString("_id"), score);
+        PlayerPrefs.SetInt("highScore", highscore.score);
+        PlayerPrefs.SetInt("rank", highscore.rank);
+        updatePlayerInfo();
     }
 
     public void loadMainMenu() {
