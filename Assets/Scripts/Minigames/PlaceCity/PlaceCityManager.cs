@@ -93,6 +93,6 @@ public class PlaceCityManager : MonoBehaviour, IMinigameEnder {
 
         targetCity.GetComponent<InformationDisplayer>().RevealOnMap(statusColor);
         yield return new WaitForSeconds(delayAfterMinigameEndsInSeconds);
-        GameManager.endMinigame(win, win ? 10 : 0);
+        GameManager.endMinigame(win);
     }
 } 

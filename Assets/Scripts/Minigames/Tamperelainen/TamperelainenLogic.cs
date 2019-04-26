@@ -38,7 +38,7 @@ public class TamperelainenLogic: MonoBehaviour, IMinigameEnder {
         timer.StopTimerProgression();
         await new WaitForSecondsRealtime(3);
         Time.timeScale = 1;
-        GameManager.endMinigame(win, win ? 10 : 0);
+        GameManager.endMinigame(win);
     }
 
     public void endGame() {
