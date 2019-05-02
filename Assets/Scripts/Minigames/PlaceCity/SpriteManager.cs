@@ -16,7 +16,6 @@ public class SpriteManager : MonoBehaviour {
     // map difficulty need not be the difficulty of the game
     // the decision will be made in the DifficultyAdjuster script
     public void ChangeSprite(int mapDifficulty) {
-
         int idx = Mathf.Min(mapSprites.Length - 1, mapDifficulty);
         finlandRenderer.sprite = mapSprites[idx];
     }
@@ -25,6 +24,7 @@ public class SpriteManager : MonoBehaviour {
     public void Flip(bool horizontally, bool vertically) {
         finlandRenderer.flipX = horizontally;
         finlandRenderer.flipY = vertically;
+
         FlipCities(horizontally, vertically);
     }
 
@@ -38,7 +38,7 @@ public class SpriteManager : MonoBehaviour {
                 continue;
             }
             Vector3 center = bounds.center;
-            Vector3 additionVector = new Vector3(0, 0, cityTransforms[i].position.z);
+            Vector3 additionVector = new Vector3(0, 0, 0);
             if (hor) {
                 // vektori (bounds.center.x - cityTransforms[i], 0) on vektori kaupungin sijainnista
                 // spriten pystysuuntaiseen halkaisijaan. Tämä kahdesti lisättynä antaa 
@@ -59,8 +59,8 @@ public class SpriteManager : MonoBehaviour {
     }
 
 
-    // Use with caution: parts of the map may end up outside the camera view, 
-    // e.g. with degrees = 90
+    // Currently never called
+    // Does hold the cities in correct positions...?
     public void Rotate(float degrees)
     {
         transform.Rotate(new Vector3(0, 0, degrees));
