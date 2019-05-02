@@ -64,8 +64,12 @@ public class BetweenScreenController : MonoBehaviour {
                 lostHeart = null;
             }
         }
-        if (scoreDifference > 0 && (Time.time - lastUpdate) >= 1f / scoreDifference) {
-            increasingScore++;
+        if (scoreDifference != 0 && (Time.time - lastUpdate) >= 1f / Mathf.Abs(scoreDifference)) {
+            if (scoreDifference > 0) {
+                increasingScore++;
+            } else {
+                increasingScore--;
+            }
             score.text = "" + increasingScore;
             lastUpdate = Time.time;
             if (increasingScore == DataController.GetCurrentScore()) {

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.3731196, g: 0.38074002, b: 0.35872707, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311992, g: 0.38074034, b: 0.35872713, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -325,7 +325,7 @@ GameObject:
   - component: {fileID: 78853744}
   - component: {fileID: 78853743}
   m_Layer: 5
-  m_Name: GravityScale Min Text
+  m_Name: GravityMultiplier Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -383,7 +383,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'GravityScale Min:'
+  m_Text: GravityMultiplier
 --- !u!222 &78853744
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -508,6 +508,7 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 1768948049}
   - {fileID: 1077783879}
   - {fileID: 2124997840}
   - {fileID: 440849462}
@@ -516,7 +517,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -5.3, y: -135}
+  m_AnchoredPosition: {x: -5.3, y: -232}
   m_SizeDelta: {x: 110.4, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &262672037
@@ -933,7 +934,7 @@ GameObject:
   - component: {fileID: 440849463}
   - component: {fileID: 440849464}
   m_Layer: 5
-  m_Name: Jump Force Slider
+  m_Name: JumpMultiplier Slider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -956,7 +957,7 @@ RectTransform:
   - {fileID: 1977712987}
   - {fileID: 1025598785}
   m_Father: {fileID: 152432464}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1004,9 +1005,9 @@ MonoBehaviour:
   m_HandleRect: {fileID: 602516084}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 20000
+  m_MaxValue: 500
   m_WholeNumbers: 0
-  m_Value: 12948
+  m_Value: 300
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -1025,7 +1026,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   valueText: {fileID: 1025598786}
-  parameterName: jumpForce
+  parameterName: jumpMultiplier
 --- !u!1 &470674479
 GameObject:
   m_ObjectHideFlags: 0
@@ -1573,7 +1574,7 @@ GameObject:
   - component: {fileID: 801752474}
   - component: {fileID: 801752473}
   m_Layer: 5
-  m_Name: GravityScale Max Text
+  m_Name: GravityStart Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1631,7 +1632,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'GravityScale Max:'
+  m_Text: 'GravityStart:'
 --- !u!222 &801752474
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2216,7 +2217,7 @@ GameObject:
   - component: {fileID: 1025598787}
   - component: {fileID: 1025598786}
   m_Layer: 5
-  m_Name: Jump Force Value
+  m_Name: JumpMultiplier Value
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2453,7 +2454,7 @@ GameObject:
   - component: {fileID: 1077783880}
   - component: {fileID: 1077783881}
   m_Layer: 5
-  m_Name: GravityScaleMaxSlider
+  m_Name: GravityStart Slider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2476,7 +2477,7 @@ RectTransform:
   - {fileID: 801752472}
   - {fileID: 2084891832}
   m_Father: {fileID: 152432464}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -2523,10 +2524,10 @@ MonoBehaviour:
   m_FillRect: {fileID: 849906998}
   m_HandleRect: {fileID: 1605501509}
   m_Direction: 0
-  m_MinValue: 0
-  m_MaxValue: 1500
+  m_MinValue: 1
+  m_MaxValue: 500
   m_WholeNumbers: 0
-  m_Value: 1009
+  m_Value: 200
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -2545,7 +2546,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   valueText: {fileID: 2084891833}
-  parameterName: gravityScaleMax
+  parameterName: gravityStart
 --- !u!1 &1121381937
 GameObject:
   m_ObjectHideFlags: 0
@@ -3417,7 +3418,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1121381938}
   m_Direction: 2
   m_Value: 1
-  m_Size: 0.9999994
+  m_Size: 0.9999996
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -3552,7 +3553,7 @@ GameObject:
   - component: {fileID: 1603568150}
   - component: {fileID: 1603568149}
   m_Layer: 5
-  m_Name: Gravity Min Value
+  m_Name: GravityMultiplier Value
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3808,6 +3809,85 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: -20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &1768948048
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1768948049}
+  - component: {fileID: 1768948051}
+  - component: {fileID: 1768948050}
+  m_Layer: 5
+  m_Name: Slider Info
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1768948049
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1768948048}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 152432464}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 17.7, y: 158}
+  m_SizeDelta: {x: 579.4, y: 29.6}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1768948050
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1768948048}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 22
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 1
+    m_MaxSize: 40
+    m_Alignment: 0
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: (Sliders to adjust elevatorgame physics for difficulty testing)
+--- !u!222 &1768948051
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1768948048}
+  m_CullTransparentMesh: 0
 --- !u!1 &1791186462
 GameObject:
   m_ObjectHideFlags: 0
@@ -4155,7 +4235,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -0.000061035156}
+  m_AnchoredPosition: {x: 0, y: -0.00005340576}
   m_SizeDelta: {x: 0, y: 28}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!1 &1923028449
@@ -4279,7 +4359,7 @@ GameObject:
   - component: {fileID: 1977712989}
   - component: {fileID: 1977712988}
   m_Layer: 5
-  m_Name: Jump Force Text
+  m_Name: JumpMultiplier Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4337,7 +4417,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Jump Force:'
+  m_Text: 'JumpMultiplier:'
 --- !u!222 &1977712989
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4437,7 +4517,7 @@ GameObject:
   - component: {fileID: 2084891834}
   - component: {fileID: 2084891833}
   m_Layer: 5
-  m_Name: Gravity Max Value
+  m_Name: GravityStart Value
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4713,7 +4793,7 @@ GameObject:
   - component: {fileID: 2124997841}
   - component: {fileID: 2124997842}
   m_Layer: 5
-  m_Name: GravityScale Min Slider
+  m_Name: GravityMultiplier Slider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4736,7 +4816,7 @@ RectTransform:
   - {fileID: 78853742}
   - {fileID: 1603568148}
   m_Father: {fileID: 152432464}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -4784,9 +4864,9 @@ MonoBehaviour:
   m_HandleRect: {fileID: 412239131}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 1500
+  m_MaxValue: 100
   m_WholeNumbers: 0
-  m_Value: 700
+  m_Value: 40
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -4805,7 +4885,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   valueText: {fileID: 1603568149}
-  parameterName: gravityScaleMin
+  parameterName: gravityMultiplier
 --- !u!1 &2125267292
 GameObject:
   m_ObjectHideFlags: 0

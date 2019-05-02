@@ -4,13 +4,13 @@
 TagManager:
   serializedVersion: 2
   tags:
+  - Escapee
   - Jumpman
-  - Collider
+  - Logic
+  - Star
+  - AddRigidBody
+  - Instructions
   - Border
-  - BrokenBorder
-  - SupportBorder
-  - InfoText
-  - ElevatorDoors
   layers:
   - Default
   - TransparentFX

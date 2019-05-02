@@ -20,6 +20,8 @@ public class JalluLogic : MinigameLogic
         base.Start();
         finishText.gameObject.SetActive(false);
         gameOver = false;
+        JalluState.startingDrops = FindObjectsOfType<LiquidState>().Length;
+        JalluState.remainingDrops = JalluState.startingDrops;
         JalluState.isHealthy = Random.Range(0f, 1f) < healthyProb;
         StartCoroutine(CORIntroduceGame());
     }
@@ -89,5 +91,7 @@ public class JalluLogic : MinigameLogic
 public static class JalluState
 {
     public static bool? isHealthy = null;
+    public static int startingDrops;
+    public static int remainingDrops; 
 
 }
