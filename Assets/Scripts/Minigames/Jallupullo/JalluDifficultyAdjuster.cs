@@ -32,11 +32,16 @@ public class JalluDifficultyAdjuster : MonoBehaviour
     }
 
     public void Configure(int difficulty) {
+        if (!initialized) {
+            Initialize();
+        }
         if (overrideDifficulty) {
             difficulty = forcedDifficulty;
         }
 
-        timer.SetTime(Mathf.Max(10f - difficulty, 4.5f));
+        timer.SetTime(60f);
+
+        //timer.SetTime(Mathf.Max(10f - difficulty, 4.5f));
 
     }
 }

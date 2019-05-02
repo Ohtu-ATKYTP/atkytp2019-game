@@ -16,8 +16,8 @@ public abstract class MinigameLogic : MonoBehaviour, IMinigameEnder
         ConfigureDifficulty(DataController.GetDifficulty());
     }
 
-
-    protected async void EndMinigameAsync(bool won) {
+    
+    protected  virtual async void EndMinigameAsync(bool won) {
         FindObjectOfType<TimeProgress>().StopTimerProgression();
 
         await DisplayEndingActions(won);

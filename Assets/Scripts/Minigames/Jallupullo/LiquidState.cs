@@ -13,7 +13,7 @@ public class LiquidState : MonoBehaviour
 
     public IEnumerator CORStartDestruction()
     {
-        float time = 5f;
+        float time = 2f;
         while(time > 0)
         {
             time -= Time.deltaTime;

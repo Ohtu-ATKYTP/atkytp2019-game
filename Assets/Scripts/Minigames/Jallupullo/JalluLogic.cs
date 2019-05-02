@@ -12,23 +12,40 @@ public class JalluLogic : MinigameLogic
     public Text finishText;
     public JalluDifficultyAdjuster difAdjuster;
     public bool gameOver;
+    [Tooltip("Probability of healthy drink that must be drunk")]
+    public float healthyProb = .7f;
 
 
     protected override void Start() {
         base.Start();
         finishText.gameObject.SetActive(false);
         gameOver = false;
+        JalluState.isHealthy = Random.Range(0f, 1f) < healthyProb;
         StartCoroutine(CORIntroduceGame());
     }
 
     protected override Task DisplayEndingActions(bool won) {
         finishText.gameObject.SetActive(true);
-        finishText.text = won ? "You drank a bottle of tasty refreshment!" : "You wasted too much time";
+        string messageToPlayer;
+        if (JalluState.isHealthy.Value) {
+            messageToPlayer =  won ? "Nautit raikkaan juoman!" : "Jano yltyi liian suureksi";
+        } else {
+            messageToPlayer = won ? "Tarkkaavainen valinta!" : "Ei kannata juoda kaikkea löytämäänsä...";
+        }
+        finishText.text = messageToPlayer;
         return base.DisplayEndingActions(won);
     }
 
 
-    protected override  void EndMinigameAsync(bool won) {
+    public override void OnTimerEnd() {
+        if (JalluState.isHealthy.Value) {
+            LoseMinigame();
+        } else {
+            WinMinigame();
+        }
+    }
+
+    protected override void EndMinigameAsync(bool won) {
         if (gameOver) {
             return;
         }
@@ -62,5 +79,11 @@ public class JalluLogic : MinigameLogic
         }
     }
 
+
+}
+
+public static class JalluState
+{
+    public static bool? isHealthy = null;
 
 }
