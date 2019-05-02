@@ -59,7 +59,6 @@ public class ElevatorRescueLogic : MonoBehaviour, IMinigameEnder {
             }
         }
         if (escaped) {
-            gameIsOver = true;
             WinMinigame();
         }
     }
@@ -70,6 +69,7 @@ public class ElevatorRescueLogic : MonoBehaviour, IMinigameEnder {
     }
 
     public async void EndMinigame(bool won) {
+        gameIsOver = true;
         // Ensuring that the timer is always stopped when the minigame ends
         FindObjectOfType<TimeProgress>().StopTimerProgression();
 

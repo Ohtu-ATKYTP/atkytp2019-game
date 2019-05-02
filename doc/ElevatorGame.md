@@ -4,7 +4,7 @@ Pelissä on tarkoituus klikkailla pelaajat tarpeeksi ylös, jolloin ilmestyy for
 
 ### Vaikeusaste:
 
-Vaikeusastetta säädetään JumpmanLogic -luokasta komennolla adjustDifficulty(). Perusideana on että painovoima nousee, jolloin pelaajat tulevat alas nopeammin. Hyppyvoimaa myös lisätään tasapainottamaan lisääntynyttä painovoimaa. Painovoima ja hyppyvoima nousevat lineaarisesti vaikeusasteen mukana.
+Vaikeusastetta säädetään JumpmanLogic -luokasta komennolla AdjustDifficulty(). Perusideana on että painovoima nousee, jolloin pelaajat tulevat alas nopeammin. Hyppyvoimaa myös lisätään tasapainottamaan lisääntynyttä painovoimaa. Painovoima ja hyppyvoima nousevat lineaarisesti vaikeusasteen mukana.
 
 ### Luokista
 
@@ -25,3 +25,7 @@ Vaikeusastetta säädetään JumpmanLogic -luokasta komennolla adjustDifficulty(
 - *Jumpmanlogic* hallitsee hyppääjien käyttäytymistä, kuten liikettä. Myös vaikeusaste laitetaan käytännössä täällä.
 
 - *ShakeBehavior* tärisyttää ruutua
+
+### Debug mode
+
+Jos peliä pelataan debug ruudusta, niin voidaan muuttaa fysiikan muuttujia debug modessa oleville slidereillä. Slidereillä voi testata suoraan buildissä eri konfiguraatioita vaikeusasteen säätämiseen. Sliderien arvot asetetaan JumpManLogic luokan initDebuggerParams -metodilla.
