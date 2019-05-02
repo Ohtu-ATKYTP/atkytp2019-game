@@ -8,21 +8,19 @@ public class FinlandPositioner : MonoBehaviour
     public float distanceFromBottom = .01f;
 
 
-    void Start()
-    {
+    void Start() {
         Transform t = GetComponent<Transform>();
         SpriteRenderer r = GetComponent<SpriteRenderer>();
-
-        int cameraWidth = Camera.main.pixelWidth;
-        int cameraHeight = Camera.main.pixelHeight;
+        Camera mainCamera = Camera.main;
+        int cameraWidth = mainCamera.pixelWidth;
+        int cameraHeight = mainCamera.pixelHeight;
         int cameraX = cameraWidth / 2;
         int cameraY = (int)(distanceFromBottom * cameraHeight);
 
-        Vector3 bottomCenterInWorld = Camera.main.ScreenToWorldPoint(new Vector2(cameraX, cameraY));
+        Vector3 bottomCenterInWorld = mainCamera.ScreenToWorldPoint(new Vector2(cameraX, cameraY));
 
         float x = bottomCenterInWorld.x;
         float y = bottomCenterInWorld.y + r.bounds.extents.y;
-
         t.position = new Vector3(x, y, t.position.z);
     }
 
