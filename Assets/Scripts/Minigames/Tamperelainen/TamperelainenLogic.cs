@@ -49,7 +49,6 @@ public class TamperelainenLogic: MonoBehaviour, IMinigameEnder {
         }
     }
     public async void timesUp() {
-        Debug.Log("TimesUp()");
         Time.timeScale = 0;
         EndGame(true);
     }
