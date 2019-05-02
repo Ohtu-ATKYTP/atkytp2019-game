@@ -266,7 +266,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   difficulty: 1
-  pointsForWinning: 10
   delayAfterMinigameEndsInSeconds: 2
   newGravity: {x: 0, y: 30, z: 0}
   escapeTrigger: {fileID: 1373219180}
@@ -830,7 +829,7 @@ PrefabInstance:
     - target: {fileID: 4852194920349946931, guid: 9c7d535631fdf4e3e8d80ed5cf29bf5c,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 943.9848
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4852194920349946931, guid: 9c7d535631fdf4e3e8d80ed5cf29bf5c,
         type: 3}
@@ -1629,7 +1628,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -351}
+  m_AnchoredPosition: {x: -17, y: -366}
   m_SizeDelta: {x: 300, y: 400}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!61 &1373219180
@@ -1639,7 +1638,7 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1373219178}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1
@@ -2695,16 +2694,6 @@ PrefabInstance:
       propertyPath: m_LocalScale.y
       value: 3
       objectReference: {fileID: 0}
-    - target: {fileID: 5411693183665686202, guid: 9c7d535631fdf4e3e8d80ed5cf29bf5c,
-        type: 3}
-      propertyPath: m_Mass
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 5411693183238900099, guid: 9c7d535631fdf4e3e8d80ed5cf29bf5c,
-        type: 3}
-      propertyPath: m_Mass
-      value: 100
-      objectReference: {fileID: 0}
     - target: {fileID: 5411693183238900096, guid: 9c7d535631fdf4e3e8d80ed5cf29bf5c,
         type: 3}
       propertyPath: m_ConnectedAnchor.x
@@ -2714,11 +2703,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_ConnectedAnchor.y
       value: 0.000042776635
-      objectReference: {fileID: 0}
-    - target: {fileID: 5411693183472450993, guid: 9c7d535631fdf4e3e8d80ed5cf29bf5c,
-        type: 3}
-      propertyPath: m_Mass
-      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 5411693183472450994, guid: 9c7d535631fdf4e3e8d80ed5cf29bf5c,
         type: 3}
@@ -2739,6 +2723,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_ConnectedAnchor.y
       value: 0.000010184914
+      objectReference: {fileID: 0}
+    - target: {fileID: 5411693183665686202, guid: 9c7d535631fdf4e3e8d80ed5cf29bf5c,
+        type: 3}
+      propertyPath: m_Mass
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 5411693183238900099, guid: 9c7d535631fdf4e3e8d80ed5cf29bf5c,
+        type: 3}
+      propertyPath: m_Mass
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 5411693183472450993, guid: 9c7d535631fdf4e3e8d80ed5cf29bf5c,
+        type: 3}
+      propertyPath: m_Mass
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 5411693184389904718, guid: 9c7d535631fdf4e3e8d80ed5cf29bf5c,
         type: 3}
@@ -3176,7 +3175,7 @@ PrefabInstance:
     - target: {fileID: 2373825413886070461, guid: 429ac7998153b6f43bf9d92cb21957bf,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0.000032425
+      value: 0.000032424927
       objectReference: {fileID: 0}
     - target: {fileID: 2373825413886070461, guid: 429ac7998153b6f43bf9d92cb21957bf,
         type: 3}
