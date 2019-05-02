@@ -28,7 +28,7 @@ public class JalluLogic : MinigameLogic
         finishText.gameObject.SetActive(true);
         string messageToPlayer;
         if (JalluState.isHealthy.Value) {
-            messageToPlayer =  won ? "Nautit raikkaan juoman!" : "Jano yltyi liian suureksi";
+            messageToPlayer = won ? "Nautit raikkaan juoman!" : "Jano yltyi liian suureksi";
         } else {
             messageToPlayer = won ? "Tarkkaavainen valinta!" : "Ei kannata juoda kaikkea löytämäänsä...";
         }
@@ -64,7 +64,11 @@ public class JalluLogic : MinigameLogic
     public void RemoveLiquid() {
         remainingLiquid--;
         if (remainingLiquid <= 0) {
-            this.WinMinigame();
+            if (JalluState.isHealthy.Value) {
+                this.WinMinigame();
+            } else {
+                this.LoseMinigame(); 
+            }
         }
     }
 
