@@ -80,6 +80,7 @@ public class ElevatorRescueLogic : MonoBehaviour, IMinigameEnder {
 
         Debug.Log("The scene is ready to be changed.");
         GameManager.endMinigame(won);
+        Physics.gravity = originalGravity;
     }
 
     public void LoseMinigame() {

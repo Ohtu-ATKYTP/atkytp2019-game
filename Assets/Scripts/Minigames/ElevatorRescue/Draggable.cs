@@ -10,8 +10,8 @@ public class Draggable : MonoBehaviour {
     private Rigidbody2D rbody;
     
     public float magnetMultiplier = .6f;
-    private readonly float cursorDeltaMultiplier = 2000.0f;
-    public float maxAccelerationIndex = 200000f;
+    private readonly float cursorDeltaMultiplier = 3000.0f;
+    public float maxAccelerationIndex = 400000f;
     private Vector3 prevCursorPosition;
 
     private void Start() {
