@@ -16,6 +16,13 @@ public class BetweenScreenController : MonoBehaviour {
     private int increasingScore;
     private int scoreDifference;
     private float lastUpdate;
+
+    //These are additions for the audio system
+    private AudioSource audioSource;
+    public AudioClip[] winSounds;
+    public AudioClip[] loseSounds;
+    private AudioClip playClip;
+
     // Start is called before the first frame update
     void Start() {
         active = true;
@@ -53,6 +60,8 @@ public class BetweenScreenController : MonoBehaviour {
             startScale = lostHeart.transform.localScale;
 
         }
+
+        PlayAudio();
     }
 
     // Update is called once per frame
@@ -81,4 +90,20 @@ public class BetweenScreenController : MonoBehaviour {
         }
     }
 
+    //Plays a random victory/lose sound
+    private void PlayAudio() {
+
+        //Fetch audio source
+        audioSource = gameObject.GetComponent<AudioSource>();
+
+        if (DataController.GetWinStatus()) {
+            this.playClip = winSounds[Random.Range(0, winSounds.Length)];
+        } else {
+            this.playClip = loseSounds[Random.Range(0, loseSounds.Length)];
+        }
+
+        audioSource.clip = playClip;
+        Debug.Log("Playing audio");
+        audioSource.Play();
+    }
 }
