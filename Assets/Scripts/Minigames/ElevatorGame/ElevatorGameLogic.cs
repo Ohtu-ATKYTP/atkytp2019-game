@@ -36,19 +36,6 @@ public class ElevatorGameLogic : MonoBehaviour, IMinigameEnder {
         
         timer = FindObjectOfType<TimeProgress>();
         timer.SetTime(15);
-
-        instructions = GameObject.FindGameObjectWithTag("Instructions");
-        instructions.SetActive(false);
-        if(DataController.GetDifficulty() == 1){
-            DisplayInstructions();
-        }
-    }
-
-    public async void DisplayInstructions(){
-        instructions.SetActive(true);
-        await new WaitForSecondsRealtime(5);
-        instructions.SetActive(false);
-        timer.SetTime(15);
     }
 
     //Win with one damage (one forcedown), but option to add more.
