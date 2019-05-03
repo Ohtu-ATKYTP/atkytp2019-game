@@ -8,7 +8,7 @@ public static class GameManager
 {
     private static string currentGame;
 
-    private static string[] games = {"PlaceCity", "TurkuGame", "LogoHaalariin", "ElevatorGame", "ElevatorRescue", "MetroGame", "Tamperelainen"};
+    private static string[] games = {"PlaceCity", "TurkuGame", "LogoHaalariin", "ElevatorGame", "ElevatorRescue", "MetroGame", "Tamperelainen", "Jallupullo"};
     private static string betweenGameScreen = "BetweenGameScreen";
     private static string mainMenu = "MainMenu";
 
