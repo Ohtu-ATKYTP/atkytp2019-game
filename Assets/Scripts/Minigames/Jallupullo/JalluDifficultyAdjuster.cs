@@ -2,15 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-
-
-/*
- * Mitäs vaikeutta tässä voisi olla?
- *  - lyhyempi aika
- *  - eri asiat jotka kertovat mitä pullossa on
- *  - flashing efektejä tai kameran huojuntaa
- *  - 
- */
 public class JalluDifficultyAdjuster : MonoBehaviour
 {
 
@@ -39,9 +30,7 @@ public class JalluDifficultyAdjuster : MonoBehaviour
             difficulty = forcedDifficulty;
         }
 
-        timer.SetTime(60f);
-
-        //timer.SetTime(Mathf.Max(10f - difficulty, 4.5f));
+        timer.SetTime(Mathf.Max(12f - difficulty * 2f, 4.5f));
 
     }
 }

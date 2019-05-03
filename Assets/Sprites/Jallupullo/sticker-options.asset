@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: sticker-options
   m_EditorClassIdentifier: 
   healthyStickers:
-  - {fileID: 21300000, guid: 8c7508e35626da1429286b3e13694277, type: 3}
+  - {fileID: 21300000, guid: caab7a4e8baa26044b132c92362d922e, type: 3}
   deadlyStickers:
-  - {fileID: 21300000, guid: 1cf78384262f1ab4888b26c70772be53, type: 3}
+  - {fileID: 21300000, guid: a58a7b8b1bc50ca4cb779cf9ef1f2e44, type: 3}
