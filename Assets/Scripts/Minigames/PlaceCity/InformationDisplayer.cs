@@ -4,19 +4,16 @@ using UnityEngine;
 
 
 
-public class InformationDisplayer : MonoBehaviour {
+public class InformationDisplayer : MonoBehaviour
+{
     public int scaleFactor = 80;
-    public bool displayCollider = true; 
+    public bool displayPosition = true;
     private SpriteRenderer spriteRenderer;
-    private CircleCollider2D collider;
-
-
-
+    public GameObject finishPrefab;
 
     void Awake() {
         spriteRenderer = GetComponent<SpriteRenderer>();
-        collider = GetComponent<CircleCollider2D>();
-        if (!Application.isEditor) {
+        if (!Application.isEditor || !displayPosition) {
             spriteRenderer.enabled = false;
         }
     }
@@ -24,15 +21,35 @@ public class InformationDisplayer : MonoBehaviour {
 
 
     public void DisplayOnMap() {
-        spriteRenderer.enabled = true; 
+        spriteRenderer.enabled = true;
+    }
+
+    public void DisplayOnMap(bool correctCity) {
+
+        GameObject go = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+        go.transform.parent = this.transform;
+        go.transform.localPosition = new Vector3(0, 0, 0);
+        go.transform.localScale = new Vector3(10, 10, 1);
+
+        // Color color = correctCity ? Color.green : Color.red;
+        // spriteRenderer.color = color;
+        // DisplayOnMap();
     }
 
 
-    
 
-    public void RevealOnMap(Color color){
-        spriteRenderer.enabled = true;
-        spriteRenderer.color = color;
-        this.transform.localScale += new Vector3(scaleFactor, scaleFactor, 0);
+
+    public void RevealOnMap(Color color) {
+
+
+        GameObject go = Instantiate(finishPrefab);
+        go.transform.parent = this.transform;
+        go.transform.localPosition = new Vector3(0, 0, 0);
+        go.GetComponent<SpriteRenderer>().color = color;
+        go.transform.localScale = new Vector3(1.5f, 1.5f, .1f);
+
+        spriteRenderer.enabled = false;
+
+
     }
 }
