@@ -11,6 +11,7 @@ TagManager:
   - AddRigidBody
   - Instructions
   - Border
+  - Metaball_liquid
   layers:
   - Default
   - TransparentFX
@@ -21,7 +22,7 @@ TagManager:
   - 
   - 
   - PostProcessing
-  - 
+  - Topmost
   - 
   - 
   - 
