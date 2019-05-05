@@ -16,15 +16,13 @@ public class WorldCanvasScaler : MonoBehaviour {
     void OnEnable() {
         Camera relatedCamera = Camera.main;
         if (!relatedCamera.orthographic) {
-            Debug.LogError("Only ortographic cameras supported at the moment");
-            return;
+            throw new UnityException("Only ortographic cameras supported at the moment");
         }
         float halfSize = relatedCamera.orthographicSize;
         RectTransform rt = GetComponent<RectTransform>();
         float canvasHeight = 2 * halfSize * 100;
         float canvasWidth = relatedCamera.aspect * canvasHeight;
         rt.sizeDelta = new Vector2(canvasWidth, canvasHeight);
-        Debug.Log(rt.sizeDelta);
     }
 
     private void Initialize() {

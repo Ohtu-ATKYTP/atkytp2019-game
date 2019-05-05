@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class DebugBetweenScreenController : MonoBehaviour
@@ -30,7 +28,7 @@ public class DebugBetweenScreenController : MonoBehaviour
 	}
 
 	public void EndDebugScreen() {
-		GameManager.nextGame(nextGame);
+		GameManager.NextGame(nextGame);
 		DataController.SetDifficulty(int.Parse(difficultySelect.text));
 	}
 

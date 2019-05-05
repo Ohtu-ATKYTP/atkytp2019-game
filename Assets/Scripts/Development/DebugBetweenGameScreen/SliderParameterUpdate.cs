@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class SliderParameterUpdate : MonoBehaviour {
@@ -12,19 +10,19 @@ public class SliderParameterUpdate : MonoBehaviour {
     void Start()    {
         this.slider = GetComponent<Slider>();
         slider.onValueChanged.AddListener(delegate {ValueChangeCheck(); });
-        this.initSliderValue();
+        this.InitSliderValue();
     }
 
     public void ValueChangeCheck() {
-        DataController.setGameParameter(parameterName, slider.value);
-        valueText.text = DataController.getGameParameter(parameterName).ToString();
+        DataController.SetGameParameter(parameterName, slider.value);
+        valueText.text = DataController.GetGameParameter(parameterName).ToString();
     }
 
-    public void initSliderValue() {
-        if(DataController.hasGameParameter(parameterName)){
-            slider.value = DataController.getGameParameter(parameterName);
+    public void InitSliderValue() {
+        if(DataController.HasGameParameter(parameterName)){
+            slider.value = DataController.GetGameParameter(parameterName);
         }else{
-            DataController.setGameParameter(parameterName, slider.value);
+            DataController.SetGameParameter(parameterName, slider.value);
         }
     }
 

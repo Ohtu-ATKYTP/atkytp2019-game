@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
@@ -25,7 +23,7 @@ public class RegistrationManager : MonoBehaviour {
             PlayerPrefs.SetInt ("highScore", highscore.score);
             PlayerPrefs.SetInt ("rank", highscore.rank);
             PlayerPrefs.SetInt ("registered", 1);
-            loadMainMenu();
+            LoadMainMenu();
         } else {
             HandleError();
         }
@@ -45,7 +43,7 @@ public class RegistrationManager : MonoBehaviour {
         statusMessage.text = message;
     }
 
-    public void loadMainMenu() {
+    public void LoadMainMenu() {
         SceneManager.LoadScene ("MainMenu");
     }
 

@@ -7,28 +7,28 @@ using System.Linq;
 public static class GameManager
 {
     private static string currentGame;
-
+    
     private static string[] games = {"PlaceCity", "TurkuGame", "LogoHaalariin", "ElevatorGame", "ElevatorRescue", "MetroGame", "Tamperelainen", "Jallupullo"};
     private static string betweenGameScreen = "BetweenGameScreen";
     private static string mainMenu = "MainMenu";
 
-    public static void startGame()
+    public static void StartGame()
     {
         DataController.Init();
-        nextGame();
+        NextGame();
     }
 
-    public static void nextGame(string game = "Random")
+    public static void NextGame(string game = "Random")
     {
         if (game == "Random")
         {
-            game = getRandomGame();
+            game = GetRandomGame();
         }
         SceneManager.LoadScene(game);
         currentGame = game;
     }
 
-    public static void endMinigame(bool win)
+    public static void EndMinigame(bool win)
     {
         DataController.SetWinStatus(win);
         if (!win)
@@ -52,29 +52,29 @@ public static class GameManager
         // Debug mode checker
         if (!DataController.GetDebugMode())
         {
-            betweenGame();
+            BetweenGame();
         }
         else
         {
-            debugBetweenGame();
+            DebugBetweenGame();
         }
     }
 
-    private static async void betweenGame()
+    private static async void BetweenGame()
     {
         SceneManager.LoadScene(betweenGameScreen);
         await new WaitForSecondsRealtime(3);
         if (DataController.GetLives() == 0)
         {
-            endGame();
+            EndGame();
         }
         else
         {
-            nextGame();
+            NextGame();
         }
     }
 
-    public static async void endGame()
+    public static async void EndGame()
     {
         SceneManager.LoadScene(mainMenu);
 
@@ -95,7 +95,7 @@ public static class GameManager
     }
 
     // Helper functions
-    private static string getRandomGame()
+    private static string GetRandomGame()
     {
         string[] filteredGames = games.Where(game => game != currentGame).ToArray();
         return filteredGames[Random.Range(0, filteredGames.Length)];
@@ -108,17 +108,18 @@ public static class GameManager
 
     // Debugging functions
 
-    public static void startDebugGame()
+
+    public static void StartDebugGame()
     {
         DataController.SetDebugMode(true);
         SceneManager.LoadScene("DebugBetweenGameScreen");
     }
 
-    private static void debugBetweenGame()
+    private static void DebugBetweenGame()
     {
         if (DataController.GetLives() == 0)
         {
-            endGame();
+            EndGame();
         }
         else
         {

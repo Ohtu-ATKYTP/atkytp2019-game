@@ -97,7 +97,7 @@ public static class DataController
 	}
 
 	//Used to adjust Game Parameters from debug play Screen
-	public static void setGameParameter(string key, float value) {
+	public static void SetGameParameter(string key, float value) {
 		if(gameParameters.ContainsKey(key)){
 			gameParameters[key] = value;
 		}else{
@@ -105,11 +105,11 @@ public static class DataController
 		}
 	}
 
-	public static float getGameParameter(string key) {
+	public static float GetGameParameter(string key) {
 		return gameParameters[key];
 	}
 
-	public static bool hasGameParameter(string key) {
+	public static bool HasGameParameter(string key) {
 		return gameParameters.ContainsKey(key);
 	}
 }

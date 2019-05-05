@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityAsyncAwaitUtil;
 
 public class PlaceCityManager : MonoBehaviour, IMinigameEnder
 {
@@ -99,6 +98,6 @@ public class PlaceCityManager : MonoBehaviour, IMinigameEnder
             : Color.red;
         targetCity.GetComponent<InformationDisplayer>().RevealOnMap(statusColor);
         yield return new WaitForSeconds(delayAfterMinigameEndsInSeconds);
-        GameManager.endMinigame(win);
+        GameManager.EndMinigame(win);
     }
 }

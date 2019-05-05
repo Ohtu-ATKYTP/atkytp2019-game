@@ -72,14 +72,8 @@ public class ElevatorRescueLogic : MonoBehaviour, IMinigameEnder {
         gameIsOver = true;
         // Ensuring that the timer is always stopped when the minigame ends
         FindObjectOfType<TimeProgress>().StopTimerProgression();
-
-        // Here: actions that are made in the minigame once the result is certain, e.g. text of success, starting ending animation 
-        Debug.Log("The scene adapts to ending");
-
         await Task.Delay(1000 * delayAfterMinigameEndsInSeconds);
-
-        Debug.Log("The scene is ready to be changed.");
-        GameManager.endMinigame(won);
+        GameManager.EndMinigame(won);
     }
 
     public void LoseMinigame() {

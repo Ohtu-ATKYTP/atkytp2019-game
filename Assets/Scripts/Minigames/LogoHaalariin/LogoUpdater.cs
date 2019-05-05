@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class LogoUpdater : MonoBehaviour {
@@ -18,11 +16,10 @@ public class LogoUpdater : MonoBehaviour {
 
     void Start () {
         logoImage = GetComponent<Image> ();
-
-        initializeFadeTime();
+        InitializeFadeTime();
     }
 
-    private void initializeFadeTime() {
+    private void InitializeFadeTime() {
         int difficulty = DataController.GetDifficulty();
         if (difficulty <= 3) {
             logoFadeTime = 0f;
@@ -36,7 +33,7 @@ public class LogoUpdater : MonoBehaviour {
             logoFadeTime = 0.25f;
         }
     }
-    public void changeImage (int logo) {
+    public void ChangeImage (int logo) {
         switch (logo) {
             case 0:
                 logoImage.sprite = tkoalyLogo;
@@ -63,7 +60,7 @@ public class LogoUpdater : MonoBehaviour {
         startfadeLogoAnimation();
     }
 
-    public void startDropLogoAnimation () {
+    public void StartDropLogoAnimation () {
         setLogoVisible();
         this.dropLogoAnimation = true;
     }

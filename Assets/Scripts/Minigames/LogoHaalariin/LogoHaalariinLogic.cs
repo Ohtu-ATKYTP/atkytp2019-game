@@ -14,14 +14,14 @@ public class LogoHaalariinLogic : MonoBehaviour {
 
     void Start() {
         timer = FindObjectOfType<TimeProgress>();
-        initializeGame();
+        InitializeGame();
     }
-    private void initializeGame() {
+    private void InitializeGame() {
         //Setting initial haalari and logo
         this.haalari = Random.Range(0, associationAmount);
-        haalariUpdater.changeImage(this.haalari);
+        haalariUpdater.ChangeImage(this.haalari);
         this.logo = Random.Range(0, associationAmount);
-        logoUpdater.changeImage(this.logo);
+        logoUpdater.ChangeImage(this.logo);
         
         int time = 12 - DataController.GetDifficulty();
         if (time < 3) {
@@ -31,24 +31,24 @@ public class LogoHaalariinLogic : MonoBehaviour {
         timer.SetTime(time);
     }
 
-    public void nextLogo() {
+    public void NextLogo() {
         this.logo++;
 
         if (this.logo > associationAmount - 1) {
             this.logo = 0;
         }
-        logoUpdater.changeImage(this.logo);
+        logoUpdater.ChangeImage(this.logo);
     }
-    public void prevLogo() {
+    public void PrevLogo() {
         this.logo--;
         if (this.logo < 0) {
             this.logo = associationAmount - 1;
         }
-        logoUpdater.changeImage(this.logo);
+        logoUpdater.ChangeImage(this.logo);
     }
 
     // win / lose in other cases except time running out 
-    public async void endGame() {
+    public async void EndGame() {
         if (this.gameOver) {
             return;
         }
@@ -60,18 +60,18 @@ public class LogoHaalariinLogic : MonoBehaviour {
         if (win) {
             logoUpdater.startRotateLogoAnimation();
         } else {
-            logoUpdater.startDropLogoAnimation();
+            logoUpdater.StartDropLogoAnimation();
         }
 
         await new WaitForSecondsRealtime(3);
 
-        GameManager.endMinigame(win);
+        GameManager.EndMinigame(win);
     }
 
-    public async void timesUp() {
+    public async void TimesUp() {
         this.gameOver = true;
-        logoUpdater.startDropLogoAnimation();
+        logoUpdater.StartDropLogoAnimation();
         await new WaitForSecondsRealtime(3);
-        GameManager.endMinigame(false);
+        GameManager.EndMinigame(false);
     }
 }

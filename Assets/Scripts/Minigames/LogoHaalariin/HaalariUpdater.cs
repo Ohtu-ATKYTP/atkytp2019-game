@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class HaalariUpdater : MonoBehaviour {
@@ -15,7 +13,7 @@ public class HaalariUpdater : MonoBehaviour {
     void Start () {
         haalariImage = GetComponent<Image> ();
     }
-    public void changeImage (int haalari) {
+    public void ChangeImage (int haalari) {
         switch (haalari) {
             case 0:
                 haalariImage.sprite = tkoalyHaalari;

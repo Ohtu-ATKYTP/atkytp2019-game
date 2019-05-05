@@ -1,7 +1,5 @@
 ﻿using UnityEngine;
 
-
-
 public class SpriteManager : MonoBehaviour {
     // in order of ascending difficulty
     public Sprite[] mapSprites;

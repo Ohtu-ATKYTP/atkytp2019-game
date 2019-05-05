@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using Image = UnityEngine.UI.Image;
 
 public class DamageVisuals : MonoBehaviour {

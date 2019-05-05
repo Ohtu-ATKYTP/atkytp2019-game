@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class HitboxManager : MonoBehaviour { 
 
@@ -25,7 +23,7 @@ public class HitboxManager : MonoBehaviour {
         int i = 0;
         foreach(Hitbox h in this.hitboxes)
         {
-            if (h.getActive()) i++;
+            if (h.GetActive()) i++;
         }
         return i;
     }

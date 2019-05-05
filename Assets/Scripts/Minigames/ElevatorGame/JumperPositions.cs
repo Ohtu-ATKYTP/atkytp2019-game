@@ -17,18 +17,18 @@ public class JumperPositions : MonoBehaviour {
 
 
     void Update() {
-        this.checkJumpmenHighEnough();
+        this.CheckJumpmenHighEnough();
     }
 
-    public void increaseJumpmenHighEnough(){
+    public void IncreaseJumpmenHighEnough(){
         this.jumpmenHighEnough++;
     }
 
-    public void decreaseJumpmenHighEnough(){
+    public void DecreaseJumpmenHighEnough(){
         this.jumpmenHighEnough--;
     }
 
-    private void checkJumpmenHighEnough(){
+    private void CheckJumpmenHighEnough(){
         if (jumpmenHighEnough==3){
             this.DisplayForceDownButton(true);
         }else{

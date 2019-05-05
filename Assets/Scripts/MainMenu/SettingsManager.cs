@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
@@ -13,10 +11,10 @@ public class SettingsManager : MonoBehaviour {
     void Start() {
         playerInfo = GameObject.Find("PlayerInfo").GetComponent<Text>();
         score = PlayerPrefs.GetInt("highScore");
-        updatePlayerInfo();
+        UpdatePlayerInfo();
     }
 
-    private void updatePlayerInfo() {
+    private void UpdatePlayerInfo() {
         string info = "Username: "+ PlayerPrefs.GetString("username")+"\n";
         info += "ID: " + PlayerPrefs.GetString("_id") + "\n";
         info += "Token: " + PlayerPrefs.GetString("token") + "\n";
@@ -30,52 +28,52 @@ public class SettingsManager : MonoBehaviour {
     public void DeleteAllPlayerPrefs() {
         PlayerPrefs.DeleteAll();
         score = 0;
-        updatePlayerInfo();
+        UpdatePlayerInfo();
     }
 
     public void DeleteID() {
         PlayerPrefs.DeleteKey("_id");
-        updatePlayerInfo();
+        UpdatePlayerInfo();
     }
 
     public void DeleteUsername() {
         PlayerPrefs.DeleteKey("username");
-        updatePlayerInfo();
+        UpdatePlayerInfo();
     }
 
     public void DeleteToken() {
         PlayerPrefs.DeleteKey("token");
-        updatePlayerInfo();
+        UpdatePlayerInfo();
     }
 
     public void DeleteHighscore() {
         PlayerPrefs.DeleteKey("highScore");
-        updatePlayerInfo();
+        UpdatePlayerInfo();
     }
 
     public void DeleteRegistered() {
         PlayerPrefs.DeleteKey("registered");
-        updatePlayerInfo();
+        UpdatePlayerInfo();
     }
 
-    public void increaseHighscore() {
+    public void IncreaseHighscore() {
         score += 10;
-        updatePlayerInfo();
+        UpdatePlayerInfo();
     }
 
-    public void decreaseHighscore() {
+    public void DecreaseHighscore() {
         score -= 10;
-        updatePlayerInfo();
+        UpdatePlayerInfo();
     }
     
-    public async void syncHS() {
+    public async void SyncHS() {
         Highscore highscore = await Highscores.Update (PlayerPrefs.GetString("_id"), score);
         PlayerPrefs.SetInt("highScore", highscore.score);
         PlayerPrefs.SetInt("rank", highscore.rank);
-        updatePlayerInfo();
+        UpdatePlayerInfo();
     }
 
-    public void loadMainMenu() {
+    public void LoadMainMenu() {
         SceneManager.LoadScene ("MainMenu");
     }
 
