@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Hitbox : MonoBehaviour
 {
@@ -11,7 +9,7 @@ public class Hitbox : MonoBehaviour
         this.activated = true;
     }
 
-    public bool getActive() {
+    public bool GetActive() {
         return this.activated;
     }
 }

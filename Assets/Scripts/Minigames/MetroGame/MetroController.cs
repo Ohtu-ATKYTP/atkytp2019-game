@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 public class MetroController : MonoBehaviour, IMinigameEnder
 {
     public Transform metroPos;
@@ -18,13 +16,13 @@ public class MetroController : MonoBehaviour, IMinigameEnder
     public void WinMinigame() {
         this.gameOver = true;
         FindObjectOfType<TimeProgress>().StopTimerProgression();
-        GameManager.endMinigame(true);
+        GameManager.EndMinigame(true);
     }
     
     public void LoseMinigame() {
         gameOver = true;
         FindObjectOfType<TimeProgress>().StopTimerProgression();
-        GameManager.endMinigame(false);
+        GameManager.EndMinigame(false);
     }
 
     void Update()

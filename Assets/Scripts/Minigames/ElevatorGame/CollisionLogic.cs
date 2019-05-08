@@ -1,7 +1,4 @@
 ﻿//Controls what happens when jumpers collide with bottom border
-
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CollisionLogic : MonoBehaviour

@@ -53,7 +53,7 @@ public class JumpmanLogic : MonoBehaviour {
         RB = GetComponent<Rigidbody2D>();
 
         if(DataController.GetDebugMode()){
-            this.initDebuggerParams();
+            this.InitDebuggerParams();
         }
 
         this.AdjustDifficulty(DataController.GetDifficulty());
@@ -65,10 +65,10 @@ public class JumpmanLogic : MonoBehaviour {
 
 
     //If debugger screen is used, you can adjust parameters with sliders.
-    private void initDebuggerParams(){
-        gravScaleStart = DataController.getGameParameter("gravityStart");
-        gravMultiplier = DataController.getGameParameter("gravityMultiplier");
-        jumpMultiplier = DataController.getGameParameter("jumpMultiplier");
+    private void InitDebuggerParams(){
+        gravScaleStart = DataController.GetGameParameter("gravityStart");
+        gravMultiplier = DataController.GetGameParameter("gravityMultiplier");
+        jumpMultiplier = DataController.GetGameParameter("jumpMultiplier");
     }
     
     //Adjusts jumpforce and gravity scale based on difficulty;
@@ -82,14 +82,14 @@ public class JumpmanLogic : MonoBehaviour {
         if(transform.position.y > heightLine.transform.position.y){
             if(highEnough == false){
                 highEnough = true;
-                jumperPositions.increaseJumpmenHighEnough();
+                jumperPositions.IncreaseJumpmenHighEnough();
                 GetComponent<Image>().color = Color.red;
             }
         }else{
             if(highEnough == true){
                 highEnough = false;
                 GetComponent<Image>().color = Color.white;
-                jumperPositions.decreaseJumpmenHighEnough();
+                jumperPositions.DecreaseJumpmenHighEnough();
             }
         }
     }

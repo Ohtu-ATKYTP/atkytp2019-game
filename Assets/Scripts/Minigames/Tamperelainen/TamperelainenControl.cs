@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 public class TamperelainenControl : MonoBehaviour
 
@@ -54,7 +52,6 @@ public class TamperelainenControl : MonoBehaviour
     /// <param name="other">The Collision data associated with this collision.</param>
     void OnCollisionEnter2D(Collision2D other)
     {
-        Debug.Log("Hit!");
         if (other.gameObject.name == "Hitbox_left")
         {
             BreakWindow();

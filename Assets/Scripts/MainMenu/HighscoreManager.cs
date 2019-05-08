@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
@@ -70,7 +68,7 @@ public class HighscoreManager : MonoBehaviour {
         PlayerPrefs.SetString("scoreInfo", scoreInfo);
     }
 
-    public void loadMainMenu() {
+    public void LoadMainMenu() {
         SceneManager.LoadScene ("MainMenu");
     }
 }

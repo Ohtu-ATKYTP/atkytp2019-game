@@ -1,7 +1,4 @@
 ﻿//Moves elevator shaft
-
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ElevatorShaftMove : MonoBehaviour

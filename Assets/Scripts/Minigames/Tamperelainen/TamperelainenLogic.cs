@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UI;
+﻿using UnityEngine;
 using System;
 
 public class TamperelainenLogic: MonoBehaviour, IMinigameEnder {
@@ -11,9 +8,9 @@ public class TamperelainenLogic: MonoBehaviour, IMinigameEnder {
 
     void Start() {
         timer = FindObjectOfType<TimeProgress>();
-        initializeGame();
+        InitializeGame();
     }
-    private void initializeGame() {
+    private void InitializeGame() {
 
         difficulty = DataController.GetDifficulty();
 
@@ -38,17 +35,17 @@ public class TamperelainenLogic: MonoBehaviour, IMinigameEnder {
         timer.StopTimerProgression();
         await new WaitForSecondsRealtime(3);
         Time.timeScale = 1;
-        GameManager.endMinigame(win);
+        GameManager.EndMinigame(win);
     }
 
-    public void endGame() {
+    public void EndGame() {
         if (false) {
             EndGame(true);
         } else {
             EndGame(false);
         }
     }
-    public async void timesUp() {
+    public async void TimesUp() {
         Time.timeScale = 0;
         EndGame(true);
     }

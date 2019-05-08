@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class DisplayInEditor : MonoBehaviour {
     public Color drawColor = Color.cyan;
@@ -14,7 +12,7 @@ public class DisplayInEditor : MonoBehaviour {
 
 
 
-    private void initializePoints(){
+    private void InitializePoints(){
         
         leftBottom = camera.ScreenToWorldPoint(new Vector3(0, 0, 0));
         rightTop = camera.ScreenToWorldPoint(new Vector3(camera.pixelWidth, camera.pixelHeight, 0));
@@ -23,14 +21,14 @@ public class DisplayInEditor : MonoBehaviour {
       }
 
     private void OnBeforeTransformParentChanged() {
-        initializePoints();
+        InitializePoints();
     }
 
     void OnDrawGizmos() {
         if(!drawGizmos){
             return;
         }
-        initializePoints();
+        InitializePoints();
 
 
         Gizmos.color = Color.cyan;

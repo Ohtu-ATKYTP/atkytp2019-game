@@ -1,7 +1,5 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class TurkuManager : MonoBehaviour, IMinigameEnder {
     public HitboxManager hitboxes;
@@ -46,13 +44,13 @@ public class TurkuManager : MonoBehaviour, IMinigameEnder {
     IEnumerator RunLoseAnimation() {
         flood.StartAnimation();
         yield return new WaitForSecondsRealtime(4);
-        GameManager.endMinigame(false);
+        GameManager.EndMinigame(false);
     }
 
     IEnumerator RunWinAnimation() {
         turkuAnimation.StartAnimation();
         yield return new WaitForSecondsRealtime(3);
-        GameManager.endMinigame(true);
+        GameManager.EndMinigame(true);
     }
 
 

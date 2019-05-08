@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine.UI;
-using System.Timers;
+﻿using UnityEngine.UI;
 using UnityEngine;
 
 public class TimeProgress : MonoBehaviour {
@@ -30,7 +27,7 @@ public class TimeProgress : MonoBehaviour {
         timerSlider.value = this.timer / seconds;
         if (this.timer <= 0.0f && this.timerPaused == false) {
             this.timerPaused = true;
-            timerEnd();
+            TimerEnd();
         }
     }
 
@@ -46,7 +43,7 @@ public class TimeProgress : MonoBehaviour {
         timerStopped = true;
     }
 
-    private void timerEnd() {
+    private void TimerEnd() {
         TimerReadyMethods.Invoke();
     }
 

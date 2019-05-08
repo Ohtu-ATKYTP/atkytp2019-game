@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class MoveMetro : MonoBehaviour
 {   
@@ -9,7 +7,6 @@ public class MoveMetro : MonoBehaviour
     Vector3 swipeStartLocation;
     bool newSwipe = true;
 
-    // Update is called once per frame
     void Update()
     {
         if(newSwipe && Input.GetMouseButton(0)){

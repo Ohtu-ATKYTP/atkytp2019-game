@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
@@ -85,7 +83,7 @@ public class ElevatorGameLogic : MonoBehaviour, IMinigameEnder {
     public async void EndGame(bool won) {
         timer.StopTimerProgression();
         await new WaitForSecondsRealtime(3);
-        GameManager.endMinigame(won);
+        GameManager.EndMinigame(won);
     }
 
     public void PressForceDownButton(){
