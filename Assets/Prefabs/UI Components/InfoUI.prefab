@@ -169,9 +169,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85e2d0a17fc861ecd8064928b36c9ed4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hearth_1: {fileID: 8137318997776545437}
-  hearth_2: {fileID: 8137318998314558912}
-  hearth_3: {fileID: 8137318997638346828}
+  heart_1: {fileID: 8137318997776545437}
+  heart_2: {fileID: 8137318998314558912}
+  heart_3: {fileID: 8137318997638346828}
 --- !u!1 &8137318996837176790
 GameObject:
   m_ObjectHideFlags: 0
