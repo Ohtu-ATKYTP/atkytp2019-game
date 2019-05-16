@@ -10,12 +10,13 @@ public class JalluRotator : MonoBehaviour
             Input.gyro.enabled = true;
         }
         Input.compensateSensors = true;
-
-
     }
 
     public void Initialize() {
-        StartCoroutine(CORUpdateRotation());
+        if(SystemInfo.deviceType == DeviceType.Handheld)
+        {
+            StartCoroutine(CORUpdateRotation());
+        }
     }
 
     public void SetCameraRotationTo(float angle) {
